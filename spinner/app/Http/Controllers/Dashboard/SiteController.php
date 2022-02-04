@@ -4,22 +4,24 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\SiteRequest;
-use App\Http\Resources\UserResource;
-use App\Models\User;
+use App\Http\Resources\SiteResource;
+use App\Jobs\StopSite;
+use App\Models\Site;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class UserController extends Controller
+class SiteController extends Controller
 {
     public function index(Request $request)
     {
-        $users = \App\Models\User::query()
-                                 ->when($request->input('search'), fn ($query, $search) => $query->where('name', 'LIKE', '%'.$search.'%'))
-                                 ->paginate()
-                                 ->withQueryString();
+        $sites = Site::query()
+                     ->when($request->input('search'), fn ($query, $search) => $query->where('name', 'LIKE', '%'.$search.'%'))
+                     ->paginate()
+                     ->withQueryString();
 
-        return Inertia::render('Dashboard/Users/Index', [
-            'records' => UserResource::collection($users),
+        return Inertia::render('Dashboard/Sites/Index', [
+            'records' => SiteResource::collection($sites),
             'filters' => $request->only('search'),
             'table' => [
                 'fields' => [
@@ -28,13 +30,9 @@ class UserController extends Controller
                         'label' => 'name',
                     ],
                     [
-                        'name' => 'email',
-                        'label' => 'Email',
+                        'name' => 'host',
+                        'label' => 'Host',
                     ],
-                    [
-                        'name' => 'email_verified_at',
-                        'label' => 'email_verified_at',
-                    ]
                 ],
                 'actions' => [
                     [
@@ -59,14 +57,14 @@ class UserController extends Controller
 
     public function create()
     {
-        return Inertia::render('Dashboard/Users/Create');
+        return Inertia::render('Dashboard/Sites/Create');
     }
 
     public function store(SiteRequest $request): \Illuminate\Http\RedirectResponse
     {
-        User::create($request->validated());
+        Auth::user()->sites()->create($request->validated());
 
-        return redirect()->to('/dashboard/users');
+        return redirect()->to('/dashboard/sites');
     }
 
     public function show($id)
@@ -74,22 +72,24 @@ class UserController extends Controller
         //
     }
 
-    public function edit(User $user)
+    public function edit(Site $site)
     {
-        return Inertia::render('Dashboard/Users/Edit', [
-            'resource' => new UserResource($user),
+        return Inertia::render('Dashboard/Sites/Edit', [
+            'resource' => new SiteResource($site),
         ]);
     }
 
-    public function update(User $user, SiteRequest $request)
+    public function update(Site $site, SiteRequest $request)
     {
-        $user->update($request->validated());
+        $site->update($request->validated());
 
-        return redirect()->to('/dashboard/users');
+        return redirect()->to('/dashboard/sites');
     }
 
-    public function destroy(User $user)
+    public function destroy(Site $site)
     {
-        $user->delete();
+        $site->delete();
+
+        return redirect()->back();
     }
 }

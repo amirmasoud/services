@@ -6,7 +6,7 @@
   <Link :href="table.actions[2].link" method="get" class="text-indigo-600 hover:text-indigo-900">Create</Link>
 
   <Table
-    :records="users"
+    :records="records"
     :filters="filters"
     endpoint="/dashboard/users"
     :fields="table.fields"
@@ -17,5 +17,5 @@
 <script setup>
 import Table from "@/Components/Table";
 
-defineProps({ users: Object, filters: Object, table: Object });
+defineProps({ records: Object, filters: Object, table: Object });
 </script>

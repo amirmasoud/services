@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard\SiteController;
+use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\OauthController;
 use App\Models\User;
 use App\UI\DashboardHeading\Button as DashboardHeadingButton;
@@ -23,92 +25,28 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         return Inertia::render('Dashboard/Home');
     });
 
-    Route::get('/users', function () {
-        $users = \App\Models\User::query()
-                                 ->when(Request::input('search'), fn ($query, $search) => $query->where('name', 'LIKE', '%'.$search.'%'))
-                                 ->paginate()
-                                 ->withQueryString();
-
-        return Inertia::render('Dashboard/Users/Index', [
-            'users' => \App\Http\Resources\UserResource::collection($users),
-            'filters' => Request::only('search'),
-            'table' => [
-                'fields' => [
-                    [
-                        'name' => 'name',
-                        'label' => 'name',
-                    ],
-                    [
-                        'name' => 'email',
-                        'label' => 'Email',
-                    ],
-                    [
-                        'name' => 'email_verified_at',
-                        'label' => 'email_verified_at',
-                    ]
-                ],
-                'actions' => [
-                    [
-                        'name' => 'edit',
-                        'label' => 'Edit',
-                        'link' => '/dashboard/users/{user}/edit'
-                    ],
-                    [
-                        'name' => 'delete',
-                        'label' => 'Delete',
-                        'link' => '/dashboard/users/{user}/delete',
-                    ],
-                    [
-                        'name' => 'create',
-                        'label' => 'Create',
-                        'link' => '/dashboard/users/create',
-                    ],
-                ],
-            ],
-        ]);
-    });
-
-    Route::post('/users', [\App\Http\Controllers\Dashboard\UserController::class, 'store']);
-    Route::post('/users/{user}/update', [\App\Http\Controllers\Dashboard\UserController::class, 'update']);
-
-    Route::get('/users/create', function () {
-        return Inertia::render('Dashboard/Users/Create');
-    });
-
-    Route::get('/users/{user}/edit', function (User $user) {
-        return Inertia::render('Dashboard/Users/Edit', [
-            'resource' => new \App\Http\Resources\UserResource($user),
-        ]);
-    });
-
-    Route::delete('/users/{user}/delete', function (User $user) {
-        $user->delete();
-
-        return redirect()->back();
-    });
-
     Route::get('/settings', function () {
-        shell_exec('cd ' . env('SITES_PATH') . '/cloud && docker-compose up -d');
-        unlink(env('SITES_PATH') . '/amirmasoud/docker-compose.yml');
-        unlink(env('SITES_PATH') . '/amirmasoud/.env');
-        \Touhidurabir\StubGenerator\Facades\StubGenerator::from(app_path('Stubs/wordpress.stub'), asFullPath: true) // the stub file path
-                                                         ->to(env('SITES_PATH') . '/amirmasoud', createIfNotExist: true, asFullPath: true) // the store directory path
-                                                         ->as('docker-compose') // the generatable file name without extension
-                                                         ->ext('yml')
-                                                         ->withReplacers([
-                                                             'version' => '3.7',
-                                                             'name' => 'amirmasoud',
-                                                         ]) // the stub replacing params
-                                                         ->save(); // save the file
-        \Touhidurabir\StubGenerator\Facades\StubGenerator::from(app_path('Stubs/wordpress.env.stub'), asFullPath: true) // the stub file path
-                                                         ->to(env('SITES_PATH') . '/amirmasoud', createIfNotExist: true, asFullPath: true) // the store directory path
-                                                         ->as('.env', hasExtension: false) // the generatable file name without extension
-                                                         ->withReplacers([
-                                                            'name' => 'amirmasoud',
-                                                            'site_url' => 'https://amirmasoud.test',
-                                                            'host' => 'amirmasoud.test',
-                                                         ]) // the stub replacing params
-                                                         ->save(); // save the file
+        // shell_exec('cd ' . env('SITES_PATH') . '/cloud && docker-compose up -d');
+        // unlink(env('SITES_PATH') . '/amirmasoud/docker-compose.yml');
+        // unlink(env('SITES_PATH') . '/amirmasoud/.env');
+        // \Touhidurabir\StubGenerator\Facades\StubGenerator::from(app_path('Stubs/wordpress.stub'), asFullPath: true) // the stub file path
+        //                                                  ->to(env('SITES_PATH') . '/amirmasoud', createIfNotExist: true, asFullPath: true) // the store directory path
+        //                                                  ->as('docker-compose') // the generatable file name without extension
+        //                                                  ->ext('yml')
+        //                                                  ->withReplacers([
+        //                                                      'version' => '3.7',
+        //                                                      'name' => 'amirmasoud',
+        //                                                  ]) // the stub replacing params
+        //                                                  ->save(); // save the file
+        // \Touhidurabir\StubGenerator\Facades\StubGenerator::from(app_path('Stubs/wordpress.env.stub'), asFullPath: true) // the stub file path
+        //                                                  ->to(env('SITES_PATH') . '/amirmasoud', createIfNotExist: true, asFullPath: true) // the store directory path
+        //                                                  ->as('.env', hasExtension: false) // the generatable file name without extension
+        //                                                  ->withReplacers([
+        //                                                     'name' => 'amirmasoud',
+        //                                                     'site_url' => 'https://amirmasoud.test',
+        //                                                     'host' => 'amirmasoud.test',
+        //                                                  ]) // the stub replacing params
+        //                                                  ->save(); // save the file
 
         shell_exec('cd ' . env('SITES_PATH') . '/amirmasoud && docker-compose up -d');
 
@@ -119,102 +57,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         ]);
     });
 
-    Route::get('/sites', function () {
-        $sites = \App\Models\Site::query()
-                                 ->when(Request::input('search'), fn ($query, $search) => $query->where('name', 'LIKE', '%'.$search.'%'))
-                                 ->paginate()
-                                 ->withQueryString();
-
-        return Inertia::render('Dashboard/Sites/Index', [
-            'sites' => \App\Http\Resources\SiteResource::collection($sites),
-            'filters' => Request::only('search'),
-            'table' => [
-                'fields' => [
-                    [
-                        'name' => 'name',
-                        'label' => 'name',
-                    ],
-                    [
-                        'name' => 'host',
-                        'label' => 'Host',
-                    ],
-                ],
-                'actions' => [
-                    [
-                        'name' => 'edit',
-                        'label' => 'Edit',
-                        'dialog' => [
-                            'title' => 'Deactivate account',
-                            'body' => 'Are you sure you want to deactivate your account? All of your data will be permanently removed from our servers forever. This action cannot be undone.',
-                            'buttons' => DashboardHeadingButton::collection([
-                                [
-                                    'link' => '/dashboard/users/{user}/edit',
-                                    'label' => 'Deactivate',
-                                ],
-                                [
-                                    'label' => 'Cancel',
-                                ]
-                            ])
-                        ]
-                    ],
-                    [
-                        'name' => 'delete',
-                        'label' => 'Delete',
-                        // 'link' => '/dashboard/users/{user}/delete',
-                        'buttons' => DashboardHeadingButton::collection([
-                            [
-                                'link' => '/dashboard/users/{user}/edit',
-                                'label' => 'Deactivate',
-                            ],
-                            [
-                                'label' => 'Cancel',
-                            ]
-                        ])
-                    ],
-                ],
-            ],
-            'dashboardHeadings' => [
-                'items' => DashboardHeadingItem::collection([
-                    [
-                        'link' => '/dashboard',
-                        'label' => 'Dashboard',
-                    ],
-                    [
-                        'link' => '/dashboard/users',
-                        'label' => 'Users',
-                    ],
-                    [
-                        'link' => '#',
-                        'label' => 'List',
-                    ],
-                ]),
-                'buttons' => DashboardHeadingButton::collection([
-                    [
-                        'link' => '/dashboard/users/create',
-                        'label' => 'Create a New User',
-                    ]
-                ])
-            ]
-        ]);
-    });
-
-    Route::post('/users', [\App\Http\Controllers\Dashboard\UserController::class, 'store']);
-
-    Route::get('/users/create', function () {
-        return Inertia::render('Dashboard/Users/Create');
-    });
-
-    Route::get('/users/{user}/edit', function (User $user) {
-        return Inertia::render('Dashboard/Users/Edit', [
-            'resource' => new \App\Http\Resources\UserResource($user),
-        ]);
-    });
-
-    Route::get('/users/{user}/delete', function (User $user) {
-        $user->delete();
-
-        return redirect()->back();
-    });
+    Route::resource('sites', SiteController::class)->except('show');
+    Route::resource('users', UserController::class)->except('show');
 });
 
 Route::get('/', function () {

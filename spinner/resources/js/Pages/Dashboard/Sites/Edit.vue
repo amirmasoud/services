@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="form.post('/dashboard/users')">
+  <form @submit.prevent="form.post(`/dashboard/sites/${resource.data.id}/update`)">
     <div class="overflow-hidden sm:rounded-md shadow">
       <div class="sm:p-6 py-5 px-4 bg-white">
         <div class="grid grid-cols-6 gap-6">
@@ -14,20 +14,9 @@
 
           <div class="col-span-6 sm:col-span-4">
             <Input
-              v-model="form.email"
-              label="Email"
-              name="email"
-              type="email"
-              :form="form"
-            />
-          </div>
-
-          <div class="col-span-6 sm:col-span-4">
-            <Input
-              v-model="form.password"
-              label="Password"
-              name="password"
-              type="password"
+              v-model="form.host"
+              label="Host"
+              name="host"
               :form="form"
             />
           </div>
@@ -55,5 +44,5 @@ let props = defineProps({
   resource: Object,
 });
 
-let form = useForm(`EditUser:${props.resource.id}`, props.resource);
+let form = useForm(`EditSite: ${props.resource.id}`, props.resource.data);
 </script>

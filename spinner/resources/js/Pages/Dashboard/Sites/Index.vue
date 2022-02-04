@@ -1,9 +1,12 @@
 <template>
   <Head>
-    <title>Media - Users</title>
+    <title>Users</title>
   </Head>
+
+  <Link :href="table.actions[2].link" method="get" class="text-indigo-600 hover:text-indigo-900">Create</Link>
+
   <Table
-    :records="sites"
+    :records="records"
     :filters="filters"
     endpoint="/dashboard/sites"
     :fields="table.fields"
@@ -14,5 +17,5 @@
 <script setup>
 import Table from "@/Components/Table";
 
-defineProps({ sites: Object, filters: Object, table: Object });
+defineProps({ records: Object, filters: Object, table: Object });
 </script>
