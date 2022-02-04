@@ -1,0 +1,45 @@
+version: "{{ version }}"
+services:
+    mysql:
+        image: mysql:8.0
+        container_name: {{ name }}-mysql
+        restart: unless-stopped
+        volumes:
+            - mysql:/var/lib/mysql
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+        command: --default-authentication-plugin=mysql_native_password
+    wordpress:
+        image: jamesgreenaway/wordpress:latest
+        container_name: {{ name }}-wordpress
+        restart: unless-stopped
+        environment:
+            WORDPRESS_DB_USER: root
+            WORDPRESS_DB_PASSWORD: ""
+            WORDPRESS_DB_NAME: ${NAME}
+            SITE_URL: ${URL}
+        volumes:
+            - ./wordpress:/var/www/html/
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.${NAME}.entrypoints=http"
+            - "traefik.http.routers.${NAME}.rule=Host(`${HOST}`, `www.${HOST}`)"
+            - "traefik.http.middlewares.${NAME}-https-redirect.redirectscheme.scheme=https"
+            - "traefik.http.routers.${NAME}.middlewares=${NAME}-https-redirect"
+            - "traefik.http.routers.${NAME}-secure.entrypoints=https"
+            - "traefik.http.routers.${NAME}-secure.rule=Host(`${HOST}`, `www.${HOST}`)"
+            - "traefik.http.routers.${NAME}-secure.tls=true"
+            - "traefik.http.routers.${NAME}-secure.tls.certresolver=http"
+            - "traefik.http.routers.${NAME}-secure.service=${NAME}"
+            - "traefik.http.services.${NAME}.loadbalancer.server.port=5000"
+            - "traefik.docker.network=proxy"
+        depends_on:
+            - mysql
+        networks:
+            - default
+            - proxy
+volumes:
+    mysql: {}
+networks:
+    proxy:
+        external: true

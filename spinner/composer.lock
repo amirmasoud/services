@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63c410dfb350fcf38a42106b3048b5ef",
+    "content-hash": "2b2a7dc2f904b0d1daf5c4ec5381296c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5459,6 +5459,58 @@
             "time": "2021-12-08T09:12:39+00:00"
         },
         {
+            "name": "touhidurabir/laravel-stub-generator",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../../laravel-stub-generator",
+                "reference": "7986e73cbd3bb193f66367c319cf5ec7cd96584b"
+            },
+            "require": {
+                "illuminate/support": "^8.57",
+                "php": ">=7.2.0"
+            },
+            "require-dev": {
+                "illuminate/container": "^8.57",
+                "orchestra/testbench": "^6.20",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Touhidurabir\\StubGenerator\\StubGeneratorServiceProvider"
+                    ],
+                    "aliases": {
+                        "ModelRepository": "Touhidurabir\\StubGenerator\\Facades\\StubGenerator"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Touhidurabir\\StubGenerator\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Touhidurabir\\StubGenerator\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Touhidur Rahman",
+                    "email": "abircse06@gmail.com"
+                }
+            ],
+            "description": "A laravel package to generate class files from stub files.",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v5.4.1",
             "source": {
@@ -8177,7 +8229,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "touhidurabir/laravel-stub-generator": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

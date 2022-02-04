@@ -257,6 +257,7 @@ import { Head } from "@inertiajs/inertia-vue3";
 const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
     { name: 'Users', href: '/dashboard/users', icon: UsersIcon },
+    { name: 'Sites', href: '/dashboard/sites', icon: CogIcon },
     { name: 'Settings', href: '/dashboard/settings', icon: CogIcon },
 ];
 const userNavigation = [
