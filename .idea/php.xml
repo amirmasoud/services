@@ -117,6 +117,19 @@
       <path value="$PROJECT_DIR$/spinner/vendor/psy/psysh" />
       <path value="$PROJECT_DIR$/spinner/vendor/league/oauth1-client" />
       <path value="$PROJECT_DIR$/spinner/vendor/laravel/socialite" />
+      <path value="$PROJECT_DIR$/spinner/vendor/touhidurabir/laravel-stub-generator" />
+      <path value="$PROJECT_DIR$/spinner/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/spinner/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/spinner/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/spinner/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/spinner/vendor/seld/jsonlint" />
+      <path value="$PROJECT_DIR$/spinner/vendor/seld/phar-utils" />
+      <path value="$PROJECT_DIR$/spinner/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/spinner/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/spinner/vendor/barryvdh/laravel-ide-helper" />
+      <path value="$PROJECT_DIR$/spinner/vendor/barryvdh/reflection-docblock" />
+      <path value="$PROJECT_DIR$/spinner/vendor/justinrainbow/json-schema" />
+      <path value="$PROJECT_DIR$/spinner/vendor/react/promise" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

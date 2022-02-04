@@ -123,6 +123,19 @@
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/psy/psysh" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/league/oauth1-client" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/laravel/socialite" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/touhidurabir/laravel-stub-generator" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/doctrine/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/doctrine/event-manager" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/doctrine/dbal" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/doctrine/deprecations" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/seld/jsonlint" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/seld/phar-utils" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/psr/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/symfony/filesystem" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/barryvdh/laravel-ide-helper" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/barryvdh/reflection-docblock" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/justinrainbow/json-schema" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/react/promise" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
