@@ -9,13 +9,6 @@ use App\Models\Site;
 class SiteObserver
 {
     /**
-     * Handle events after all transactions are committed.
-     *
-     * @var bool
-     */
-    public $afterCommit = true;
-
-    /**
      * Handle the Site "created" event.
      *
      * @param  \App\Models\Site  $site
@@ -45,6 +38,7 @@ class SiteObserver
      */
     public function deleted(Site $site)
     {
+        // Not working?
         StopSite::dispatch($site);
     }
 

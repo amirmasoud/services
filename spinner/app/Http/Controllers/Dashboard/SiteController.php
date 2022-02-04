@@ -86,8 +86,10 @@ class SiteController extends Controller
         return redirect()->to('/dashboard/sites');
     }
 
-    public function destroy(Site $site)
+    public function destroy(Site $site): \Illuminate\Http\RedirectResponse
     {
+        StopSite::dispatchAfterResponse($site);
+
         $site->delete();
 
         return redirect()->back();

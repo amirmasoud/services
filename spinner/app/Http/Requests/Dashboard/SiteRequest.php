@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 /**
- * @property mixed $user
+ * @property mixed $site
  */
 class SiteRequest extends FormRequest
 {
@@ -28,8 +28,8 @@ class SiteRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required'],
-            'host' => ['required'],
+            'name' => ['required', 'unique:sites,name,' . $this->site?->id],
+            'host' => ['required', 'unique:sites,host,' . $this->site?->id],
         ];
     }
 }

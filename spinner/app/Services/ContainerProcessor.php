@@ -17,8 +17,10 @@ class ContainerProcessor
 
     public function init()
     {
+        $this->startTraefikContainer();
         $this->createDockerComposeFile();
         $this->createDotEnvFile();
+        $this->generateSelfSignedCertificate();
 
         return $this;
     }
@@ -96,5 +98,18 @@ class ContainerProcessor
                 'host' => static::$site->host,
             ])
             ->save();
+    }
+
+    protected function startTraefikContainer(): void
+    {
+        shell_exec('cd ' . env('PROXY_PATH') . ' && docker-compose up -d');
+
+        shell_exec('cd ' . env('PROXY_PATH') . ' && docker-compose up -d traefik');
+    }
+
+    protected function generateSelfSignedCertificate()
+    {
+        $site = static::$site->name;
+        shell_exec('cd ' . env('PROXY_PATH') . " && mkcert -cert-file certificates/{$site}-cert.pem -key-file certificates/{$site}-key.pem \"{$site}.test\" \"*.{$site}.test\"");
     }
 }
