@@ -54,12 +54,8 @@
                                 </button>
                             </div>
                         </TransitionChild>
-                        <div class="flex flex-shrink-0 items-center px-4">
-                            <img
-                                class="w-auto h-8"
-                                src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
-                                alt="Workflow"
-                            >
+                        <div class="flex flex-shrink-0 items-center px-4 text-white">
+                            <Logo class="w-auto h-8" /><span class="pl-4">WordPress Cloud</span>
                         </div>
                         <div class="overflow-y-auto flex-1 mt-5 h-0">
                             <nav class="px-2 space-y-1">
@@ -94,12 +90,8 @@
             <div class="flex flex-col w-64">
                 <!-- Sidebar component, swap this element with another sidebar if you like -->
                 <div class="flex overflow-y-auto flex-col flex-grow pt-5 pb-4">
-                    <div class="flex flex-shrink-0 items-center px-4">
-                        <img
-                            class="w-auto h-8"
-                            src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
-                            alt="Workflow"
-                        >
+                    <div class="flex flex-shrink-0 items-center px-4 text-white">
+                        <Logo class="w-auto h-8" /><span class="pl-4">WordPress Cloud</span>
                     </div>
                     <div class="flex flex-col flex-1 mt-5">
                         <nav class="flex-1 px-2 space-y-1">
@@ -253,6 +245,7 @@ import {
 import { SearchIcon } from '@heroicons/vue/solid';
 import { Link } from "@inertiajs/inertia-vue3";
 import { Head } from "@inertiajs/inertia-vue3";
+import Logo from "@/Shared/Logo";
 
 const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
@@ -268,6 +261,7 @@ const userNavigation = [
 
 export default {
     components: {
+        Logo,
         Dialog,
         DialogOverlay,
         Menu,

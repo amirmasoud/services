@@ -1,28 +1,4 @@
 <template>
-  <DashboardHeading
-    class="mb-6"
-    :items="[
-      {
-        link: '/dashboard',
-        label: 'Dashboard',
-      },
-      {
-        link: '/dashboard/users',
-        label: 'Users',
-      },
-      {
-        link: '#',
-        label: 'Create'
-      }
-    ]"
-    header="Create a new user"
-    :buttons="[
-      {
-        link: '/dashboard/users',
-        label: 'List of Users',
-      },
-    ]"
-  />
 
   <form @submit.prevent="form.post('/dashboard/users')">
     <div class="overflow-hidden sm:rounded-md shadow">
@@ -75,7 +51,6 @@
 import { useForm } from '@inertiajs/inertia-vue3';
 import Input from "@/Components/Forms/Inputs/Input";
 import Button from "@/Components/Forms/Buttons/Button";
-import DashboardHeading from "@/Components/DashboardHeading";
 
 let form = useForm({
   email: null,

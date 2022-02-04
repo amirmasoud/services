@@ -51,62 +51,25 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
                     [
                         'name' => 'edit',
                         'label' => 'Edit',
-                        'dialog' => [
-                            'title' => 'Deactivate account',
-                            'body' => 'Are you sure you want to deactivate your account? All of your data will be permanently removed from our servers forever. This action cannot be undone.',
-                            'buttons' => DashboardHeadingButton::collection([
-                                [
-                                    'link' => '/dashboard/users/{user}/edit',
-                                    'label' => 'Deactivate',
-                                ],
-                                [
-                                    'label' => 'Cancel',
-                                ]
-                            ])
-                        ]
+                        'link' => '/dashboard/users/{user}/edit'
                     ],
                     [
                         'name' => 'delete',
                         'label' => 'Delete',
-                        // 'link' => '/dashboard/users/{user}/delete',
-                        'buttons' => DashboardHeadingButton::collection([
-                            [
-                                'link' => '/dashboard/users/{user}/edit',
-                                'label' => 'Deactivate',
-                            ],
-                            [
-                                'label' => 'Cancel',
-                            ]
-                        ])
+                        'link' => '/dashboard/users/{user}/delete',
+                    ],
+                    [
+                        'name' => 'create',
+                        'label' => 'Create',
+                        'link' => '/dashboard/users/create',
                     ],
                 ],
             ],
-            'dashboardHeadings' => [
-                'items' => DashboardHeadingItem::collection([
-                    [
-                        'link' => '/dashboard',
-                        'label' => 'Dashboard',
-                    ],
-                    [
-                        'link' => '/dashboard/users',
-                        'label' => 'Users',
-                    ],
-                    [
-                        'link' => '#',
-                        'label' => 'List',
-                    ],
-                ]),
-                'buttons' => DashboardHeadingButton::collection([
-                    [
-                        'link' => '/dashboard/users/create',
-                        'label' => 'Create a New User',
-                    ]
-                ])
-            ]
         ]);
     });
 
     Route::post('/users', [\App\Http\Controllers\Dashboard\UserController::class, 'store']);
+    Route::post('/users/{user}/update', [\App\Http\Controllers\Dashboard\UserController::class, 'update']);
 
     Route::get('/users/create', function () {
         return Inertia::render('Dashboard/Users/Create');
@@ -118,7 +81,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         ]);
     });
 
-    Route::get('/users/{user}/delete', function (User $user) {
+    Route::delete('/users/{user}/delete', function (User $user) {
         $user->delete();
 
         return redirect()->back();

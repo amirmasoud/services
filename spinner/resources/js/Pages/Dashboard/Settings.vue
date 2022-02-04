@@ -10,7 +10,5 @@
 </template>
 
 <script setup>
-import DashboardHeading from "@/Components/DashboardHeading";
-
 defineProps({ test: String });
 </script>

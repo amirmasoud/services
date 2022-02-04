@@ -1,30 +1,6 @@
 <template>
-  <DashboardHeading
-    class="mb-6"
-    :items="[
-      {
-        link: '/dashboard',
-        label: 'Dashboard',
-      },
-      {
-        link: '/dashboard/users',
-        label: 'Users',
-      },
-      {
-        link: '#',
-        label: 'Edit'
-      }
-    ]"
-    header="Edit user"
-    :buttons="[
-      {
-        link: '/dashboard/users',
-        label: 'List of Users',
-      },
-    ]"
-  />
 
-  <form @submit.prevent="form.post('/dashboard/users')">
+  <form @submit.prevent="form.post(`/dashboard/users/${resource.data.id}/update`)">
     <div class="overflow-hidden sm:rounded-md shadow">
       <div class="sm:p-6 py-5 px-4 bg-white">
         <div class="grid grid-cols-6 gap-6">
@@ -75,11 +51,10 @@
 import { useForm } from '@inertiajs/inertia-vue3';
 import Input from "@/Components/Forms/Inputs/Input";
 import Button from "@/Components/Forms/Buttons/Button";
-import DashboardHeading from "@/Components/DashboardHeading";
 
 let props = defineProps({
   resource: Object,
 });
-
-let form = useForm(`EditUser:${props.resource.id}`, props.resource);
+//
+let form = useForm(`EditUser: ${props.resource.id}`, props.resource.data);
 </script>

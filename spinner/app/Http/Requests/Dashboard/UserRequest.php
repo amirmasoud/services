@@ -30,7 +30,7 @@ class UserRequest extends FormRequest
         return [
             'name' => ['required'],
             'email' => ['required', 'email', Rule::unique('users')->ignore($this->user?->id, 'id')],
-            'password' => ['required', 'min:6'],
+            'password' => [Rule::requiredIf(! $this->user), 'min:6']
         ];
     }
 }

@@ -31,27 +31,8 @@
           {{ record[field.name] }}
         </td>
         <td class="py-4 px-6 space-x-6 text-sm font-medium text-right whitespace-nowrap">
-          <button
-            v-for="action in actions"
-            :key="action.name"
-            class="text-indigo-600 hover:text-indigo-900"
-            @click="confirmDialog = ! confirmDialog"
-          >
-            {{ action.label }}
-            {{ confirmDialog }}
-            <Dialog
-              :dialog="action.dialog"
-              :confirm-dialog="confirmDialog"
-            />
-          </button>
-          <!--          <Link-->
-          <!--            v-for="action in actions"-->
-          <!--            :key="action.name"-->
-          <!--            :href="action.link.replace('{user}', record.id)"-->
-          <!--            class="text-indigo-600 hover:text-indigo-900"-->
-          <!--          >-->
-          <!--            {{ action.label }}-->
-          <!--          </Link>-->
+          <Link :href="actions[0].link.replace('{user}', record.id)" method="get" as="button" class="text-indigo-600 hover:text-indigo-900">Edit</Link>
+          <Link :href="actions[1].link.replace('{user}', record.id)" method="delete" as="button" type="button" class="text-indigo-600 hover:text-indigo-900">Delete</Link>
         </td>
       </tr>
     </tbody>
