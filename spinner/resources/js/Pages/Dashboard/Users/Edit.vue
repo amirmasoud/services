@@ -1,4 +1,5 @@
 <template>
+  <AppHead :title="`Edit ${ form.name } user`" />
 
   <form @submit.prevent="form.post(`/dashboard/users/${resource.data.id}/update`)">
     <div class="overflow-hidden sm:rounded-md shadow">
@@ -51,6 +52,7 @@
 import { useForm } from '@inertiajs/inertia-vue3';
 import Input from "@/Components/Forms/Inputs/Input";
 import Button from "@/Components/Forms/Buttons/Button";
+import AppHead from "@/Components/AppHead";
 
 let props = defineProps({
   resource: Object,

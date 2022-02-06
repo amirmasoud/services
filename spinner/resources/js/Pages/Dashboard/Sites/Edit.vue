@@ -1,4 +1,6 @@
 <template>
+  <AppHead :title="`Edit ${ form.name } site`" />
+
   <form @submit.prevent="form.post(`/dashboard/sites/${resource.data.id}/update`)">
     <div class="overflow-hidden sm:rounded-md shadow">
       <div class="sm:p-6 py-5 px-4 bg-white">
@@ -39,6 +41,7 @@
 import { useForm } from '@inertiajs/inertia-vue3';
 import Input from "@/Components/Forms/Inputs/Input";
 import Button from "@/Components/Forms/Buttons/Button";
+import AppHead from "@/Components/AppHead";
 
 let props = defineProps({
   resource: Object,

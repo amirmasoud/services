@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\SiteRequest;
 use App\Http\Resources\SiteResource;
+use App\Jobs\StartSite;
 use App\Jobs\StopSite;
 use App\Models\Site;
+use App\Services\ContainerProcessor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -62,7 +64,7 @@ class SiteController extends Controller
 
     public function store(SiteRequest $request): \Illuminate\Http\RedirectResponse
     {
-        Auth::user()->sites()->create($request->validated());
+        $site = Auth::user()->sites()->create($request->validated());
 
         return redirect()->to('/dashboard/sites');
     }
@@ -93,5 +95,10 @@ class SiteController extends Controller
         $site->delete();
 
         return redirect()->back();
+    }
+
+    public function wpCli(Site $site)
+    {
+        ContainerProcessor::for($site)->installWPCli();
     }
 }

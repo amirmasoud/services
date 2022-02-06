@@ -1,7 +1,5 @@
 <template>
-  <Head>
-    <title>Users</title>
-  </Head>
+  <AppHead title="Sites" />
 
   <Link :href="table.actions[2].link" method="get" class="text-indigo-600 hover:text-indigo-900">Create</Link>
 
@@ -16,6 +14,7 @@
 
 <script setup>
 import Table from "@/Components/Table";
+import AppHead from "@/Components/AppHead";
 
 defineProps({ records: Object, filters: Object, table: Object });
 </script>

@@ -25,6 +25,7 @@ class ContainerProcessor
         return $this;
     }
 
+
     public function start(): static
     {
         shell_exec('cd ' . env('SITES_PATH') . '/' . static::$site->name . ' && docker-compose up -d');
@@ -69,47 +70,51 @@ class ContainerProcessor
 
     public function exec(string $command): static
     {
-        shell_exec('cd ' . env('SITES_PATH') . '/' . static::$site->name . ' && docker-compose exec ' . static::$site->name . ' ' . $command);
+        shell_exec('cd ' . env('SITES_PATH') . '/' . static::$site->name . ' && docker-compose exec wordpress bash"' . $command . '"');
 
         return $this;
     }
 
     protected function createDotEnvFile(): void
     {
-        StubGenerator::from(app_path('Stubs/wordpress.stub'), asFullPath: true)
-            ->to(env('SITES_PATH') . '/' . static::$site->name, createIfNotExist: true, asFullPath: true)
-            ->as('docker-compose')
-            ->ext('yml')
-            ->withReplacers([
-                'version' => '3.7',
-                'name' => static::$site->name,
-            ])
-            ->save();
+        StubGenerator::from(app_path('Stubs/wordpress.env.stub'), asFullPath: true)
+                     ->to(env('SITES_PATH') . '/' . static::$site->name, createIfNotExist: true, asFullPath: true)
+                     ->as('.env', hasExtension: false)
+                     ->withReplacers([
+                         'name' => static::$site->name,
+                         'site_url' => 'https://' . static::$site->host,
+                         'host' => static::$site->host,
+                     ])
+                     ->save();
     }
 
     protected function createDockerComposeFile(): void
     {
-        StubGenerator::from(app_path('Stubs/wordpress.env.stub'), asFullPath: true)
-            ->to(env('SITES_PATH') . '/' . static::$site->name, createIfNotExist: true, asFullPath: true)
-            ->as('.env', hasExtension: false)
-            ->withReplacers([
-                'name' => static::$site->name,
-                'site_url' => 'https://' . static::$site->host,
-                'host' => static::$site->host,
-            ])
-            ->save();
+        StubGenerator::from(app_path('Stubs/wordpress.stub'), asFullPath: true)
+                     ->to(env('SITES_PATH') . '/' . static::$site->name, createIfNotExist: true, asFullPath: true)
+                     ->as('docker-compose')
+                     ->ext('yml')
+                     ->withReplacers([
+                         'version' => '3.7',
+                         'name' => static::$site->name,
+                     ])
+                     ->save();
     }
 
     protected function startTraefikContainer(): void
     {
+        shell_exec('docker network create proxy');
         shell_exec('cd ' . env('PROXY_PATH') . ' && docker-compose up -d');
-
-        shell_exec('cd ' . env('PROXY_PATH') . ' && docker-compose up -d traefik');
     }
 
     protected function generateSelfSignedCertificate()
     {
         $site = static::$site->name;
         shell_exec('cd ' . env('PROXY_PATH') . " && mkcert -cert-file certificates/{$site}-cert.pem -key-file certificates/{$site}-key.pem \"{$site}.test\" \"*.{$site}.test\"");
+    }
+
+    public function installWPCli(): void
+    {
+        $this->exec('curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar && sudo mv wp-cli.phar /usr/local/bin/wp');
     }
 }

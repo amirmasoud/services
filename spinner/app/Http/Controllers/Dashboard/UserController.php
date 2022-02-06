@@ -40,17 +40,17 @@ class UserController extends Controller
                     [
                         'name' => 'edit',
                         'label' => 'Edit',
-                        'link' => '/dashboard/sites/{record_id}/edit'
+                        'link' => '/dashboard/user/{record_id}/edit'
                     ],
                     [
                         'name' => 'delete',
                         'label' => 'Delete',
-                        'link' => '/dashboard/sites/{record_id}',
+                        'link' => '/dashboard/user/{record_id}',
                     ],
                     [
                         'name' => 'create',
                         'label' => 'Create',
-                        'link' => '/dashboard/sites/create',
+                        'link' => '/dashboard/user/create',
                     ],
                 ],
             ],

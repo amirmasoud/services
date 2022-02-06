@@ -1,5 +1,5 @@
 <template>
-  <Head title="Login" />
+  <AppHead title="Login" />
   <div class="flex flex-col justify-center py-12 sm:px-6 lg:px-8 min-h-screen bg-gray-50">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <img
@@ -154,6 +154,7 @@ import Google from "@/Components/Icons/Google";
 import { useForm } from "@inertiajs/inertia-vue3";
 import Input from "@/Components/Forms/Inputs/Input";
 import Button from "@/Components/Forms/Buttons/Button";
+import AppHead from "@/Components/AppHead";
 
 defineProps({
   'github': String,

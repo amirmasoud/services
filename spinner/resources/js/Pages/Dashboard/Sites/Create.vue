@@ -1,4 +1,6 @@
 <template>
+  <AppHead title="Create new site" />
+
   <form @submit.prevent="form.post('/dashboard/sites')">
     <div class="overflow-hidden sm:rounded-md shadow">
       <div class="sm:p-6 py-5 px-4 bg-white">
@@ -39,6 +41,7 @@
 import { useForm } from '@inertiajs/inertia-vue3';
 import Input from "@/Components/Forms/Inputs/Input";
 import Button from "@/Components/Forms/Buttons/Button";
+import AppHead from "@/Components/AppHead";
 
 let form = useForm({
   name: null,
