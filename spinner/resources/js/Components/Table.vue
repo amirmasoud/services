@@ -75,7 +75,6 @@
 import { ref, watch } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 import Paginator from '@/Components/Paginator';
-import Dialog from '@/Components/Dialog';
 import debounce from "lodash/debounce";
 
 let props = defineProps({

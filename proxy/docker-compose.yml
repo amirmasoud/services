@@ -16,13 +16,6 @@ services:
       - ./dynamic_conf.yml:/config/dynamic_conf.yml:ro
       - ./certificates:/certificates:ro
       - ./traefik.yml:/traefik.yml:ro
-    # command:
-    #   --entrypoints.web.address=:5000
-    #   --providers.docker=true
-    #   --providers.docker.network=proxy
-    #   --entrypoints.web-secure.address=:443
-    #   --providers.file.filename=/config/dynamic_conf.yml
-    #   --providers.file.watch=true
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=http"
