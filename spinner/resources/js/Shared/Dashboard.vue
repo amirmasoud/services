@@ -62,7 +62,7 @@
                   v-for="item in navigation"
                   :key="item.name"
                   :href="item.href"
-                  :class="[$page.url.startsWith(item.href) ? 'bg-indigo-800 text-white' : 'text-indigo-100 hover:bg-indigo-600', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']"
+                  :class="[$page.component.startsWith(item.component) ? 'bg-indigo-800 text-white' : 'text-indigo-100 hover:bg-indigo-600', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']"
                 >
                   <component
                     :is="item.icon"
@@ -98,7 +98,7 @@
                 v-for="item in navigation"
                 :key="item.name"
                 :href="item.href"
-                :class="[$page.url.startsWith(item.href) ? 'bg-indigo-800 text-white' : 'text-indigo-100 hover:bg-indigo-600', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']"
+                :class="[$page.component.startsWith(item.component) ? 'bg-indigo-800 text-white' : 'text-indigo-100 hover:bg-indigo-600', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']"
               >
                 <component
                   :is="item.icon"
@@ -247,10 +247,10 @@ import { Head } from "@inertiajs/inertia-vue3";
 import Logo from "@/Shared/Logo";
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
-  { name: 'Users', href: '/dashboard/users', icon: UsersIcon },
-  { name: 'Sites', href: '/dashboard/sites', icon: CogIcon },
-  { name: 'Settings', href: '/dashboard/settings', icon: CogIcon },
+  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, component: 'Dashboard/Home' },
+  { name: 'Users', href: '/dashboard/users', icon: UsersIcon, component: 'Dashboard/Users' },
+  { name: 'Sites', href: '/dashboard/sites', icon: CogIcon, component: 'Dashboard/Sites' },
+  { name: 'Settings', href: '/dashboard/settings', icon: CogIcon, component: 'Dashboard/Settings' },
 ];
 const userNavigation = [
   // { name: 'Your Profile', href: '#' },
