@@ -136,6 +136,8 @@
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/barryvdh/reflection-docblock" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/justinrainbow/json-schema" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/react/promise" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/spatie/laravel-activitylog" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/spatie/laravel-package-tools" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

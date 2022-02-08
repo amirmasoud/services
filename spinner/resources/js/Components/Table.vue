@@ -1,6 +1,7 @@
 <template>
-  <table class="min-w-full divide-y divide-gray-200">
-    <thead class="bg-gray-50">
+  <div class="rounded-lg bg-white overflow-hidden shadow">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
       <tr>
         <th
           v-for="field in fields"
@@ -17,8 +18,8 @@
           <span class="sr-only">Actions</span>
         </th>
       </tr>
-    </thead>
-    <tbody class="bg-white divide-y divide-gray-200">
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
       <tr
         v-for="record in records.data"
         :key="record.id"
@@ -35,38 +36,39 @@
           <Link :href="actions[1].link.replace('{record_id}', record.id)" method="delete" as="button" type="button" class="text-indigo-600 hover:text-indigo-900">Delete</Link>
         </td>
       </tr>
-    </tbody>
-  </table>
-  <div class="flex justify-between items-center py-3 px-4 sm:px-6 bg-white border-t border-gray-200">
-    <div class="flex sm:hidden flex-1 justify-between">
-      <Component
-        :is="records.links.prev ? 'Link' : 'span'"
-        :href="records.links.prev"
-        class="inline-flex relative items-center py-2 px-4 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300 cursor-pointer"
-      >
-        Previous
-      </Component>
-      <Component
-        :is="records.links.next ? 'Link' : 'span'"
-        :href="records.links.next"
-        class="inline-flex relative items-center py-2 px-4 ml-3 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300 cursor-pointer"
-      >
-        Next
-      </Component>
-    </div>
-    <div class="hidden sm:flex sm:flex-1 sm:justify-between sm:items-center">
-      <div>
-        <p class="text-sm text-gray-700">
-          Showing
-          <span class="font-medium">{{ records.meta.from }}</span>
-          to
-          <span class="font-medium">{{ records.meta.to }}</span>
-          of
-          <span class="font-medium">{{ records.meta.total }}</span>
-          results
-        </p>
+      </tbody>
+    </table>
+    <div class="flex justify-between items-center py-3 px-4 sm:px-6 bg-white border-t border-gray-200">
+      <div class="flex sm:hidden flex-1 justify-between">
+        <Component
+          :is="records.links.prev ? 'Link' : 'span'"
+          :href="records.links.prev"
+          class="inline-flex relative items-center py-2 px-4 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300 cursor-pointer"
+        >
+          Previous
+        </Component>
+        <Component
+          :is="records.links.next ? 'Link' : 'span'"
+          :href="records.links.next"
+          class="inline-flex relative items-center py-2 px-4 ml-3 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300 cursor-pointer"
+        >
+          Next
+        </Component>
       </div>
-      <Paginator :links="records.meta.links" />
+      <div class="hidden sm:flex sm:flex-1 sm:justify-between sm:items-center">
+        <div>
+          <p class="text-sm text-gray-700">
+            Showing
+            <span class="font-medium">{{ records.meta.from }}</span>
+            to
+            <span class="font-medium">{{ records.meta.to }}</span>
+            of
+            <span class="font-medium">{{ records.meta.total }}</span>
+            results
+          </p>
+        </div>
+        <Paginator :links="records.meta.links" />
+      </div>
     </div>
   </div>
 </template>

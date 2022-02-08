@@ -130,9 +130,11 @@
       <path value="$PROJECT_DIR$/spinner/vendor/barryvdh/reflection-docblock" />
       <path value="$PROJECT_DIR$/spinner/vendor/justinrainbow/json-schema" />
       <path value="$PROJECT_DIR$/spinner/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/spinner/vendor/spatie/laravel-activitylog" />
+      <path value="$PROJECT_DIR$/spinner/vendor/spatie/laravel-package-tools" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/spinner/vendor/autoload.php" />

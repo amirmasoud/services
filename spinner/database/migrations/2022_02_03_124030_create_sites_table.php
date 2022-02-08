@@ -19,6 +19,7 @@ class CreateSitesTable extends Migration
             $table->foreignIdFor(User::class);
             $table->string('name');
             $table->string('host');
+            $table->string('status');
             $table->softDeletes();
             $table->timestamps();
         });
