@@ -6,11 +6,11 @@ The proxy is where Traefik docker container will be along with the certificates 
 ## Sites
 The `sites` is the home of WordPress sites along with their individual configurations.
 
-![Sites - Index Page](spinner/screenshots/Sites_Index.png)
-![Sites - Index Page](spinner/screenshots/Sites_Create.png)
-
 ## Spinner
 The `spinner` is the Laravel application responsible to create, monitor and edit the WordPress sites. 
+
+![Sites - Index Page](spinner/screenshots/Sites_Index.png)
+![Sites - Index Page](spinner/screenshots/Sites_Create.png)
 
 ### Roadmap
 
