@@ -14,30 +14,18 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $users = \App\Models\User::query()
-                                 ->when($request->input('search'), fn ($query, $search) => $query->where('name', 'LIKE', '%'.$search.'%'))
-                                 ->paginate()
-                                 ->withQueryString();
-        $stat = number_format(User::whereBetween('created_at', [Carbon::now()->subDays(30), Carbon::now()])->count());
-        $previousStat = number_format(User::whereBetween('created_at', [Carbon::now()->subDays(60), Carbon::now()->subDays(30)])->count());
-        dd($previousStat);
+        $users = User::query()
+                     ->when($request->input('search'), fn ($query, $search) => $query->where('name', 'LIKE', '%'.$search.'%'))
+                     ->paginate()
+                     ->withQueryString();
         return Inertia::render('Dashboard/Users/Index', [
             'records' => UserResource::collection($users),
             'filters' => $request->only('search'),
             'stats' => [
-                [
-                    'name' => 'Total Users',
-                    'stats' => $stat = number_format(User::whereBetween('created_at', [Carbon::now()->subDays(30), Carbon::now()])->count()),
-                    'previousStat' => $previousStat = number_format(User::whereBetween('created_at', [Carbon::now()->subDays(60), Carbon::now()->subDays(30)])->count()),
-                    'change' => $change = round(($stat - $previousStat) / 100, 2),
-                    'changeType' => $change >= 0 ? 'increase' : 'decrease',
-                ]
+                [ 'name' => 'Total users', 'stat' => '71,897', 'previousStat' => '70,946', 'change' => '12%', 'changeType' => 'increase' ],
+                [ 'name' => 'Active users', 'stat' => '58.16%', 'previousStat' => '56.14%', 'change' => '2.02%', 'changeType' => 'increase' ],
+                [ 'name' => 'Active Sites', 'stat' => '24.57%', 'previousStat' => '28.62%', 'change' => '4.05%', 'changeType' => 'decrease' ],
             ],
-// [
-//   { name: 'Total Subscribers', stat: '71,897', previousStat: '70,946', change: '12%', changeType: 'increase' },
-//   { name: 'Avg. Open Rate', stat: '58.16%', previousStat: '56.14%', change: '2.02%', changeType: 'increase' },
-//   { name: 'Avg. Click Rate', stat: '24.57%', previousStat: '28.62%', change: '4.05%', changeType: 'decrease' },
-// ]
             'table' => [
                 'fields' => [
                     [

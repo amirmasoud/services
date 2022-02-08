@@ -64,7 +64,11 @@
 <!--    </ul>-->
   </div>
 
-  <slot />
+  <div class="px-4 mt-6 sm:px-6 lg:px-8">
+    <div class="align-middle inline-block min-w-full">
+      <slot />
+    </div>
+  </div>
   <!-- Projects list (only on smallest breakpoint) -->
 <!--  <div class="mt-10 sm:hidden">-->
 <!--    <div class="px-4 sm:px-6">-->

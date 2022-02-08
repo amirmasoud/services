@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Enums\ContainerStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\SiteRequest;
 use App\Http\Resources\SiteResource;
@@ -24,6 +25,11 @@ class SiteController extends Controller
 
         return Inertia::render('Dashboard/Sites/Index', [
             'records' => SiteResource::collection($sites),
+            'stats' => [
+                [ 'name' => 'Total Subscribers', 'stat' => '71,897', 'previousStat' => '70,946', 'change' => '12%', 'changeType' => 'increase' ],
+                [ 'name' => 'Avg. Open Rate', 'stat' => '58.16%', 'previousStat' => '56.14%', 'change' => '2.02%', 'changeType' => 'increase' ],
+                [ 'name' => 'Avg. Click Rate', 'stat' => '24.57%', 'previousStat' => '28.62%', 'change' => '4.05%', 'changeType' => 'decrease' ],
+            ],
             'filters' => $request->only('search'),
             'table' => [
                 'fields' => [
@@ -64,7 +70,12 @@ class SiteController extends Controller
 
     public function store(SiteRequest $request): \Illuminate\Http\RedirectResponse
     {
-        $site = Auth::user()->sites()->create($request->validated());
+        $site = Auth::user()->sites()->create(
+            array_merge(
+                $request->validated(),
+                ['status' => ContainerStatus::STARTING]
+            )
+        );
 
         return redirect()->to('/dashboard/sites');
     }

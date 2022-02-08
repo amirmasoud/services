@@ -1,11 +1,20 @@
 <template>
   <AppHead title="Home" />
 
-  <h1 class="text-2xl font-semibold text-gray-900 mb-6">
-    Home
-  </h1>
+  <DashboardMain>
+    <template #header>Home</template>
+    <template #sub-header-content>
+      <Stats :stats="stats" />
+    </template>
+  </DashboardMain>
 </template>
 
 <script setup>
 import AppHead from "@/Components/AppHead";
+import DashboardMain from "@/Components/DashboardMain";
+import Stats from "@/Components/stats";
+
+defineProps({
+  stats: Object,
+})
 </script>

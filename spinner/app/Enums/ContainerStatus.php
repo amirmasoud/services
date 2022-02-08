@@ -8,6 +8,7 @@ enum ContainerStatus: string
     case STARTED = 'started';
     case RESTARTING = 'restarting';
     case DELETED = 'deleted';
+    case STARTING = 'starting';
 
     public function label(): string
     {
@@ -16,6 +17,7 @@ enum ContainerStatus: string
             self::STARTED => 'Started',
             self::RESTARTING => 'Restarting',
             self::DELETED => 'Deleted',
+            self::STARTING => 'Starting',
         };
     }
 }

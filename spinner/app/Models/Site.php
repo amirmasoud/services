@@ -28,6 +28,16 @@ use Spatie\Activitylog\LogOptions;
  * @method static \Illuminate\Database\Eloquent\Builder|Site whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Site whereUserId($value)
  * @mixin \Eloquent
+ * @property ContainerStatus $status
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Query\Builder|Site onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Site whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Site whereStatus($value)
+ * @method static \Illuminate\Database\Query\Builder|Site withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Site withoutTrashed()
  */
 class Site extends Model
 {

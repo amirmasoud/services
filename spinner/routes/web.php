@@ -1,8 +1,10 @@
 <?php
 
+use App\Enums\ContainerStatus;
 use App\Http\Controllers\Dashboard\SiteController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\OauthController;
+use App\Models\Site;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -18,7 +20,13 @@ Route::post('logout', [OauthController::class, 'logout'])->middleware('auth')->n
 
 Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', function () {
-        return Inertia::render('Dashboard/Home');
+        return Inertia::render('Dashboard/Home', [
+            'stats' => [
+                [ 'name' => 'Total Sites', 'stat' => Site::count(), 'previousStat' => '70,946', 'change' => '12%', 'changeType' => 'increase' ],
+                [ 'name' => 'Running Sites', 'stat' => Site::whereStatus(ContainerStatus::STARTED)->count(), 'previousStat' => '56.14%', 'change' => '2.02%', 'changeType' => 'increase' ],
+                [ 'name' => 'Stopped Sites', 'stat' => Site::whereStatus(ContainerStatus::STOPPED)->count(), 'previousStat' => '28.62%', 'change' => '4.05%', 'changeType' => 'decrease' ],
+            ],
+        ]);
     });
 
     Route::get('/settings', function () {
@@ -35,5 +43,5 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'WIP - Cloud';
 });
