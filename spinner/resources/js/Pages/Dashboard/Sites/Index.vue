@@ -19,20 +19,11 @@
     </template>
 
     <Table
-      v-if="records.data.length"
       :records="records"
       :filters="filters"
       endpoint="/dashboard/sites"
       :fields="table.fields"
       :actions="table.actions"
-    />
-    <Empty
-      v-else
-      class="mt-20"
-      title="No sites"
-      description="Get started by creating a new site"
-      button="New Site"
-      :link="table.actions[2].link"
     />
   </DashboardMain>
 </template>

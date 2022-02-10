@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\SiteRequest;
+use App\Http\Resources\UI\UserTableResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Carbon\Carbon;
@@ -26,39 +27,7 @@ class UserController extends Controller
                 [ 'name' => 'Active users', 'stat' => '58.16%', 'previousStat' => '56.14%', 'change' => '2.02%', 'changeType' => 'increase' ],
                 [ 'name' => 'Active Sites', 'stat' => '24.57%', 'previousStat' => '28.62%', 'change' => '4.05%', 'changeType' => 'decrease' ],
             ],
-            'table' => [
-                'fields' => [
-                    [
-                        'name' => 'name',
-                        'label' => 'name',
-                    ],
-                    [
-                        'name' => 'email',
-                        'label' => 'Email',
-                    ],
-                    [
-                        'name' => 'email_verified_at',
-                        'label' => 'email_verified_at',
-                    ]
-                ],
-                'actions' => [
-                    [
-                        'name' => 'edit',
-                        'label' => 'Edit',
-                        'link' => '/dashboard/users/{record_id}/edit'
-                    ],
-                    [
-                        'name' => 'delete',
-                        'label' => 'Delete',
-                        'link' => '/dashboard/users/{record_id}',
-                    ],
-                    [
-                        'name' => 'create',
-                        'label' => 'Create',
-                        'link' => '/dashboard/users/create',
-                    ],
-                ],
-            ],
+            'table' => new UserTableResource(),
         ]);
     }
 

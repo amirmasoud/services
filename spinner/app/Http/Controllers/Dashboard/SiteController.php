@@ -6,7 +6,9 @@ use App\Enums\ContainerStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\SiteRequest;
 use App\Http\Resources\SiteResource;
-use App\Jobs\StartSite;
+use App\Http\Resources\UI\SiteStatResource;
+use App\Http\Resources\UI\SiteTableResource;
+use App\Http\Resources\UI\UserTableResource;
 use App\Jobs\StopSite;
 use App\Models\Site;
 use App\Services\ContainerProcessor;
@@ -24,42 +26,10 @@ class SiteController extends Controller
                      ->withQueryString();
 
         return Inertia::render('Dashboard/Sites/Index', [
-            'records' => SiteResource::collection($sites),
-            'stats' => [
-                [ 'name' => 'Total Subscribers', 'stat' => '71,897', 'previousStat' => '70,946', 'change' => '12%', 'changeType' => 'increase' ],
-                [ 'name' => 'Avg. Open Rate', 'stat' => '58.16%', 'previousStat' => '56.14%', 'change' => '2.02%', 'changeType' => 'increase' ],
-                [ 'name' => 'Avg. Click Rate', 'stat' => '24.57%', 'previousStat' => '28.62%', 'change' => '4.05%', 'changeType' => 'decrease' ],
-            ],
             'filters' => $request->only('search'),
-            'table' => [
-                'fields' => [
-                    [
-                        'name' => 'name',
-                        'label' => 'name',
-                    ],
-                    [
-                        'name' => 'host',
-                        'label' => 'Host',
-                    ],
-                ],
-                'actions' => [
-                    [
-                        'name' => 'edit',
-                        'label' => 'Edit',
-                        'link' => '/dashboard/sites/{record_id}/edit'
-                    ],
-                    [
-                        'name' => 'delete',
-                        'label' => 'Delete',
-                        'link' => '/dashboard/sites/{record_id}',
-                    ],
-                    [
-                        'name' => 'create',
-                        'label' => 'Create',
-                        'link' => '/dashboard/sites/create',
-                    ],
-                ],
-            ],
+            'records' => SiteResource::collection($sites),
+            'stats' => new SiteStatResource(),
+            'table' => new SiteTableResource(),
         ]);
     }
 

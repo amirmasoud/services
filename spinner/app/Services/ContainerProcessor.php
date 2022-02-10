@@ -15,7 +15,7 @@ class ContainerProcessor
         return new static();
     }
 
-    public function init()
+    public function init(): static
     {
         $this->startTraefikContainer();
         $this->createDockerComposeFile();
