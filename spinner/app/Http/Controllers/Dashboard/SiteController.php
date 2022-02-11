@@ -9,7 +9,6 @@ use App\Http\Resources\SiteResource;
 use App\Http\Resources\UI\SiteFilterResource;
 use App\Http\Resources\UI\SiteStatResource;
 use App\Http\Resources\UI\SiteTableResource;
-use App\Http\Resources\UI\UserTableResource;
 use App\Jobs\StopSite;
 use App\Models\Site;
 use App\Services\ContainerProcessor;
@@ -19,11 +18,11 @@ use Inertia\Inertia;
 
 class SiteController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): \Inertia\Response
     {
         $sites = Site::query()
                      ->when($request->input('search'), fn ($query, $search) => $query->where('name', 'LIKE', '%'.$search.'%'))
-                     ->paginate()
+                     ->paginate($request->input('per_page', 25))
                      ->withQueryString();
 
         return Inertia::render('Dashboard/Sites/Index', [

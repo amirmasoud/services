@@ -31,7 +31,6 @@
 <script setup>
 import Table from "@/Components/Table";
 import AppHead from "@/Components/AppHead";
-import Empty from "@/Components/Empty";
 import { PlusIcon } from '@heroicons/vue/solid';
 import DashboardMain from "@/Components/DashboardMain";
 import Stats from "@/Components/stats";

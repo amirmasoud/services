@@ -4,6 +4,12 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\SiteRequest;
+use App\Http\Resources\SiteResource;
+use App\Http\Resources\UI\SiteFilterResource;
+use App\Http\Resources\UI\SiteStatResource;
+use App\Http\Resources\UI\SiteTableResource;
+use App\Http\Resources\UI\UserFilterResource;
+use App\Http\Resources\UI\UserStatResource;
 use App\Http\Resources\UI\UserTableResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -19,15 +25,12 @@ class UserController extends Controller
                      ->when($request->input('search'), fn ($query, $search) => $query->where('name', 'LIKE', '%'.$search.'%'))
                      ->paginate()
                      ->withQueryString();
+
         return Inertia::render('Dashboard/Users/Index', [
             'records' => UserResource::collection($users),
-            'filters' => $request->only('search'),
-            'stats' => [
-                [ 'name' => 'Total users', 'stat' => '71,897', 'previousStat' => '70,946', 'change' => '12%', 'changeType' => 'increase' ],
-                [ 'name' => 'Active users', 'stat' => '58.16%', 'previousStat' => '56.14%', 'change' => '2.02%', 'changeType' => 'increase' ],
-                [ 'name' => 'Active Sites', 'stat' => '24.57%', 'previousStat' => '28.62%', 'change' => '4.05%', 'changeType' => 'decrease' ],
-            ],
-            'table' => new UserTableResource(),
+            'filters' => fn () => new UserFilterResource(),
+            'stats'   => fn () => new UserStatResource(),
+            'table'   => fn () => new UserTableResource(),
         ]);
     }
 

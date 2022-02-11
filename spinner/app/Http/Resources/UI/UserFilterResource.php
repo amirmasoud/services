@@ -2,15 +2,15 @@
 
 namespace App\Http\Resources\UI;
 
-use App\Models\Site;
+use App\Models\User;
 use App\UI\Filter\InputFilterUI;
 use App\UI\Filter\ListFilterUI;
 
-class SiteFilterResource extends BaseUI
+class UserFilterResource extends BaseUI
 {
-    public function __construct(public Site $site = new Site)
+    public function __construct(public User $user = new User)
     {
-        parent::__construct($site);
+        parent::__construct($user);
     }
 
     /**

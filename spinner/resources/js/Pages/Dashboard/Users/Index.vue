@@ -1,5 +1,5 @@
 <template>
-  <AppHead title="Home" />
+  <AppHead title="Users" />
 
   <DashboardMain>
     <template #header>Users</template>
@@ -19,20 +19,11 @@
     </template>
 
     <Table
-      v-if="records.data.length"
       :records="records"
       :filters="filters"
       endpoint="/dashboard/users"
       :fields="table.fields"
       :actions="table.actions"
-    />
-    <Empty
-      v-else
-      class="mt-20"
-      title="No sites"
-      description="Get started by creating a new user"
-      button="New User"
-      :link="table.actions[2].link"
     />
   </DashboardMain>
 </template>
@@ -40,7 +31,6 @@
 <script setup>
 import Table from "@/Components/Table";
 import AppHead from "@/Components/AppHead";
-import Empty from "@/Components/Empty";
 import { PlusIcon } from '@heroicons/vue/solid';
 import DashboardMain from "@/Components/DashboardMain";
 import Stats from "@/Components/stats";

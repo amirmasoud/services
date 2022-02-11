@@ -2,14 +2,14 @@
 
 namespace App\Http\Resources\UI;
 
-use App\Models\Site;
+use App\Models\User;
 use App\UI\StatUI;
 
-class SiteStatResource extends BaseUI
+class UserStatResource extends BaseUI
 {
-    public function __construct(public Site $site = new Site)
+    public function __construct(public User $user = new User)
     {
-        parent::__construct($site);
+        parent::__construct($user);
     }
 
     /**
