@@ -1,11 +1,18 @@
 <template>
   <div class="flex justify-between mb-4">
-    <div>
-      <label for="search" class="block text-sm font-medium text-gray-700">Search</label>
+    <div v-for="filter in props.filters">
+      {{ filter.value }}
+      <label :for="filter.name" class="block text-sm font-medium text-gray-700">{{ filter.label }}</label>
       <div class="relative rounded-md shadow-sm">
-        <input type="text" name="search" id="search" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full px-2 sm:text-sm border-gray-300 rounded-md" placeholder="Search..." v-model="search">
+        <input type="text" name="search" :id="filter.name" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full px-2 sm:text-sm border-gray-300 rounded-md" placeholder="Search..." v-model="filter.value">
       </div>
     </div>
+<!--    <div>-->
+<!--      <label for="search" class="block text-sm font-medium text-gray-700">Search</label>-->
+<!--      <div class="relative rounded-md shadow-sm">-->
+<!--        <input type="text" name="search" id="search" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full px-2 sm:text-sm border-gray-300 rounded-md" placeholder="Search..." v-model="search">-->
+<!--      </div>-->
+<!--    </div>-->
     <Listbox as="div" v-model="selected">
       <ListboxLabel class="block text-sm font-medium text-gray-700"> Per page </ListboxLabel>
       <div class="mt-1 relative">
@@ -134,12 +141,7 @@ import { replaceRoute } from '@/Services/route'
 
 let props = defineProps({
   records: Object,
-  filters: {
-    type: Object,
-    default() {
-      return { search: '' };
-    }
-  },
+  filters: Object,
   endpoint: String,
   fields: Object,
   actions: Object,
@@ -208,11 +210,9 @@ const people = [
   },
 ]
 
-let search = ref(props.filters.search);
-let confirmDialog = ref(false);
 const selected = ref(people[3]);
 
-watch(search, debounce(function (value) {
-  Inertia.get(props.endpoint, { ...(value !== '' && { search : value }) }, { preserveState: true, replace: true });
+watch(props.filters, debounce(function (value) {
+  Inertia.get(props.endpoint, { [value[0].name]: value[0].value }, { preserveState: true, replace: true, only: ['records'] });
 }, 300));
 </script>

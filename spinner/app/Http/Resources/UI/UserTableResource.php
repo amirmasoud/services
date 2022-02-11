@@ -3,8 +3,8 @@
 namespace App\Http\Resources\UI;
 
 use App\Models\User;
-use App\UI\Table\ActionUI;
-use App\UI\Table\FieldUI;
+use App\UI\Table\ActionTableUI;
+use App\UI\Table\FieldTableUI;
 
 class UserTableResource extends BaseUI
 {
@@ -23,14 +23,14 @@ class UserTableResource extends BaseUI
     {
         return [
             'fields' => [
-                new FieldUI('name', 'Name'),
-                new FieldUI('email', 'Email'),
-                new FieldUI('email_verified_at', 'Email Verified At')
+                new FieldTableUI('name', 'Name'),
+                new FieldTableUI('email', 'Email'),
+                new FieldTableUI('email_verified_at', 'Email Verified At')
             ],
             'actions' => [
-                new ActionUI('edit', 'Edit', '/dashboard/users/{id}/edit'),
-                new ActionUI('delete', 'Delete', '/dashboard/users/{id}'),
-                new ActionUI('create', 'Create', '/dashboard/users/create'),
+                new ActionTableUI('edit', 'Edit', '/dashboard/users/{id}/edit'),
+                new ActionTableUI('delete', 'Delete', '/dashboard/users/{id}'),
+                new ActionTableUI('create', 'Create', '/dashboard/users/create'),
             ],
         ];
     }

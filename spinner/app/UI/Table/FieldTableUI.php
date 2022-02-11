@@ -2,7 +2,7 @@
 
 namespace App\UI\Table;
 
-class FieldUI
+class FieldTableUI
 {
     public function __construct(public string $name, public string $label)
     {

@@ -2,7 +2,7 @@
 
 namespace App\UI\Table;
 
-class ActionUI
+class ActionTableUI
 {
     public function __construct(public string $name, public string $label, public string $link)
     {

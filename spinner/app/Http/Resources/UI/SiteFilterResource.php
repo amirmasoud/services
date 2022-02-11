@@ -3,11 +3,9 @@
 namespace App\Http\Resources\UI;
 
 use App\Models\Site;
-use App\UI\StatUI;
-use App\UI\Table\ActionTableUI;
-use App\UI\Table\FieldTableUI;
+use App\UI\Filter\InputFilterUI;
 
-class SiteStatResource extends BaseUI
+class SiteFilterResource extends BaseUI
 {
     public function __construct(public Site $site = new Site)
     {
@@ -23,9 +21,7 @@ class SiteStatResource extends BaseUI
     public function toArray($request)
     {
         return [
-            new StatUI('Total Subscribers', '71,897', '70,946', '12%', 'increase'),
-            new StatUI('Total Subscribers', '71,897', '70,946', '12%', 'decrease'),
-            new StatUI('Total Subscribers', '71,897', '70,946', '12%', 'decrease'),
+            new InputFilterUI('search', 'Search', $request->input('search')),
         ];
     }
 }

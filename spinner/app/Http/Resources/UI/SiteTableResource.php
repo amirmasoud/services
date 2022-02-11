@@ -3,8 +3,8 @@
 namespace App\Http\Resources\UI;
 
 use App\Models\Site;
-use App\UI\Table\ActionUI;
-use App\UI\Table\FieldUI;
+use App\UI\Table\ActionTableUI;
+use App\UI\Table\FieldTableUI;
 
 class SiteTableResource extends BaseUI
 {
@@ -23,13 +23,13 @@ class SiteTableResource extends BaseUI
     {
         return [
             'fields' => [
-                new FieldUI('name', 'Name'),
-                new FieldUI('host', 'Host'),
+                new FieldTableUI('name', 'Name'),
+                new FieldTableUI('host', 'Host'),
             ],
             'actions' => [
-                new ActionUI('edit', 'Edit', '/dashboard/sites/{id}/edit'),
-                new ActionUI('delete', 'Delete', '/dashboard/sites/{id}'),
-                new ActionUI('create', 'Create', '/dashboard/sites/create'),
+                new ActionTableUI('edit', 'Edit', '/dashboard/sites/{id}/edit'),
+                new ActionTableUI('delete', 'Delete', '/dashboard/sites/{id}'),
+                new ActionTableUI('create', 'Create', '/dashboard/sites/create'),
             ],
         ];
     }

@@ -6,6 +6,7 @@ use App\Enums\ContainerStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\SiteRequest;
 use App\Http\Resources\SiteResource;
+use App\Http\Resources\UI\SiteFilterResource;
 use App\Http\Resources\UI\SiteStatResource;
 use App\Http\Resources\UI\SiteTableResource;
 use App\Http\Resources\UI\UserTableResource;
@@ -26,10 +27,10 @@ class SiteController extends Controller
                      ->withQueryString();
 
         return Inertia::render('Dashboard/Sites/Index', [
-            'filters' => $request->only('search'),
             'records' => SiteResource::collection($sites),
-            'stats' => new SiteStatResource(),
-            'table' => new SiteTableResource(),
+            'filters' => fn () => new SiteFilterResource(),
+            'stats'   => fn () => new SiteStatResource(),
+            'table'   => fn () => new SiteTableResource(),
         ]);
     }
 
