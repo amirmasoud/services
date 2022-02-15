@@ -5,6 +5,7 @@ namespace App\Http\Resources\UI;
 use App\Models\User;
 use App\UI\Table\ActionTableUI;
 use App\UI\Table\FieldTableUI;
+use Illuminate\Support\Arr;
 
 class UserTableResource extends BaseUI
 {
@@ -27,11 +28,12 @@ class UserTableResource extends BaseUI
                 new FieldTableUI('email', 'Email'),
                 new FieldTableUI('email_verified_at', 'Email Verified At')
             ],
-            'actions' => [
+            'actions' => collect([
                 new ActionTableUI('edit', 'Edit', '/dashboard/users/{id}/edit'),
-                new ActionTableUI('delete', 'Delete', '/dashboard/users/{id}'),
-                new ActionTableUI('create', 'Create', '/dashboard/users/create'),
-            ],
+                // new ActionTableUI('create', 'Create', '/dashboard/users/create'),
+            ])->concat([new ActionTableUI('delete', 'Delete', '/dashboard/users/{id}')])
+                ->flatten()
+            ->dump()
         ];
     }
 }

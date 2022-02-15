@@ -2,14 +2,19 @@
 
 namespace App\UI\Table;
 
-class ActionTableUI
+use JsonSerializable;
+
+class ActionTableUI implements JsonSerializable
 {
     public function __construct(public string $name, public string $label, public string $link)
     {
+    }
+
+    public function jsonSerialize(): array
+    {
         return [
-            'name'  => $this->name,
             'label' => $this->label,
-            'link'  => $this->link
+            'link'  => $this->link,
         ];
     }
 }

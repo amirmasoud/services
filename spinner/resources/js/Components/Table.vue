@@ -38,8 +38,9 @@
           {{ record[field.name] }}
         </td>
         <td class="py-4 px-6 space-x-6 text-sm font-medium text-right whitespace-nowrap">
-          <Link :href="replaceRoute(actions[0].link, record)" method="get" as="button" class="text-indigo-600 hover:text-indigo-900">Edit</Link>
-          <Link :href="replaceRoute(actions[1].link, record)" method="delete" as="button" type="button" class="text-indigo-600 hover:text-indigo-900">Delete</Link>
+          {{actions}}
+<!--          <Link :href="replaceRoute(actions[0].link, record)" method="get" as="button" class="text-indigo-600 hover:text-indigo-900">Edit</Link>-->
+<!--          <Link :href="replaceRoute(actions[1].link, record)" method="delete" as="button" type="button" class="text-indigo-600 hover:text-indigo-900">Delete</Link>-->
         </td>
       </tr>
       </tbody>
@@ -85,14 +86,14 @@
 <!--    button="Remove filters"-->
 <!--    @remove-filters="removeFilters"-->
 <!--  />-->
-  <Empty
-    v-else
-    class="mt-20"
-    title="No records"
-    description="Get started by creating a new record"
-    button="New Record"
-    :link="actions[2].link"
-  />
+<!--  <Empty-->
+<!--    v-else-->
+<!--    class="mt-20"-->
+<!--    title="No records"-->
+<!--    description="Get started by creating a new record"-->
+<!--    button="New Record"-->
+<!--    :link="actions[2].link"-->
+<!--  />-->
 </template>
 
 <script setup>
