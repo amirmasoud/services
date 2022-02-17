@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Models\Site;
+use Illuminate\Support\Facades\Http;
 use Touhidurabir\StubGenerator\Facades\StubGenerator;
 
 class ContainerProcessor
@@ -116,5 +117,16 @@ class ContainerProcessor
     public function installWPCli(): void
     {
         $this->exec('curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar && sudo mv wp-cli.phar /usr/local/bin/wp');
+    }
+
+    public static function dockerIsRunning(): bool
+    {
+        try {
+            Http::get('http://localhost:2375/info');
+
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 }

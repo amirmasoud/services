@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\ContainerStatus;
+use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\SiteController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\OauthController;
@@ -29,9 +30,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         ]);
     });
 
-    Route::get('/settings', function () {
-        return Inertia::render('Dashboard/Settings');
-    });
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
 
     Route::resource('sites', SiteController::class)->except('show');
     Route::get('sites/{site}/wp-cli', [SiteController::class, 'wpCli'])->name('sites.wp-cli');
