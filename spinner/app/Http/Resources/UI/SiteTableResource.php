@@ -26,11 +26,14 @@ class SiteTableResource extends BaseUI
                 new FieldTableUI('name', 'Name'),
                 new FieldTableUI('host', 'Host'),
             ],
-            'actions' => [
-                new ActionTableUI('edit', 'Edit', '/dashboard/sites/{id}/edit'),
-                new ActionTableUI('delete', 'Delete', '/dashboard/sites/{id}'),
-                new ActionTableUI('create', 'Create', '/dashboard/sites/create'),
-            ],
+            'actions' => array_combine(
+                ['edit', 'delete', 'create'],
+                [
+                    new ActionTableUI('edit', 'Edit', '/dashboard/sites/{id}/edit'),
+                    new ActionTableUI('delete', 'Delete', '/dashboard/sites/{id}'),
+                    new ActionTableUI('create', 'Create', '/dashboard/sites/create'),
+                ]
+            ),
         ];
     }
 }

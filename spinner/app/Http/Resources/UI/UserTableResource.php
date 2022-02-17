@@ -28,12 +28,14 @@ class UserTableResource extends BaseUI
                 new FieldTableUI('email', 'Email'),
                 new FieldTableUI('email_verified_at', 'Email Verified At')
             ],
-            'actions' => collect([
-                new ActionTableUI('edit', 'Edit', '/dashboard/users/{id}/edit'),
-                // new ActionTableUI('create', 'Create', '/dashboard/users/create'),
-            ])->concat([new ActionTableUI('delete', 'Delete', '/dashboard/users/{id}')])
-                ->flatten()
-            ->dump()
+            'actions' => array_combine(
+                ['edit', 'delete', 'create'],
+                [
+                    new ActionTableUI('edit', 'Edit', '/dashboard/users/{id}/edit'),
+                    new ActionTableUI('delete', 'Delete', '/dashboard/users/delete/{id}'),
+                    new ActionTableUI('create', 'Create', '/dashboard/users/create'),
+                ]
+            )
         ];
     }
 }

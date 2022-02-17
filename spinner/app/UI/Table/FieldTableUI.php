@@ -2,9 +2,15 @@
 
 namespace App\UI\Table;
 
-class FieldTableUI
+use JsonSerializable;
+
+class FieldTableUI implements JsonSerializable
 {
     public function __construct(public string $name, public string $label)
+    {
+    }
+
+    public function jsonSerialize(): array
     {
         return [
             'name'  => $this->name,
