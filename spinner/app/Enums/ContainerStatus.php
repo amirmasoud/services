@@ -9,6 +9,7 @@ enum ContainerStatus: string
     case RESTARTING = 'restarting';
     case DELETED = 'deleted';
     case STARTING = 'starting';
+    case RUNNING = 'running';
 
     public function label(): string
     {

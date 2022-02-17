@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Enums\ContainerStatus;
 use App\Models\Site;
 use Illuminate\Support\Facades\Http;
 use Touhidurabir\StubGenerator\Facades\StubGenerator;
@@ -125,6 +126,26 @@ class ContainerProcessor
             Http::get('http://localhost:2375/info');
 
             return true;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    public static function containers(): array
+    {
+        try {
+            return Http::get('http://localhost:2375/containers/json')->json();
+        } catch (\Exception $e) {
+            return [];
+        }
+    }
+
+    public static function hasStatus(string $container, ContainerStatus $status): bool
+    {
+        try {
+            $response = Http::get('http://localhost:2375/containers/json?filters={"name": ["' . $container . '"]}')->collect()->first();
+
+            return ContainerStatus::tryFrom($response['State']) === $status;
         } catch (\Exception $e) {
             return false;
         }
