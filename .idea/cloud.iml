@@ -21,10 +21,8 @@
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/symfony/polyfill-php72" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/symfony/error-handler" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/symfony/event-dispatcher-contracts" />
-      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/symfony/polyfill-php73" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/symfony/polyfill-intl-idn" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/symfony/console" />
-      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/symfony/polyfill-iconv" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/symfony/event-dispatcher" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/symfony/http-foundation" />
@@ -46,8 +44,6 @@
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/fakerphp/faker" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/fruitcake/laravel-cors" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/facade/ignition-contracts" />
-      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/facade/flare-client-php" />
-      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/facade/ignition" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/inertiajs/inertia-laravel" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/phpoption/phpoption" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/webmozart/assert" />
@@ -111,7 +107,6 @@
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/nesbot/carbon" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/phar-io/version" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/phar-io/manifest" />
-      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/opis/closure" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/dragonmantank/cron-expression" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/nette/schema" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/nette/utils" />
@@ -119,25 +114,24 @@
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/phpdocumentor/reflection-docblock" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/phpdocumentor/type-resolver" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/phpdocumentor/reflection-common" />
-      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/swiftmailer/swiftmailer" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/psy/psysh" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/league/oauth1-client" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/laravel/socialite" />
-      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/touhidurabir/laravel-stub-generator" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/doctrine/cache" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/doctrine/event-manager" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/doctrine/dbal" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/doctrine/deprecations" />
-      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/seld/jsonlint" />
-      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/seld/phar-utils" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/psr/cache" />
-      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/symfony/filesystem" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/barryvdh/laravel-ide-helper" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/barryvdh/reflection-docblock" />
-      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/justinrainbow/json-schema" />
-      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/react/promise" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/spatie/laravel-activitylog" />
       <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/spatie/laravel-package-tools" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/spatie/ignition" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/spatie/laravel-ignition" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/spatie/backtrace" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/spatie/flare-client-php" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/symfony/mailer" />
+      <excludeFolder url="file://$MODULE_DIR$/spinner/vendor/touhidurabir/laravel-stub-generator" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

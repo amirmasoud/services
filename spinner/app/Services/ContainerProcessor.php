@@ -81,7 +81,8 @@ class ContainerProcessor
     {
         StubGenerator::from(app_path('Stubs/wordpress.env.stub'), asFullPath: true)
                      ->to(env('SITES_PATH') . '/' . static::$site->name, createIfNotExist: true, asFullPath: true)
-                     ->as('.env', hasExtension: false)
+                     ->as('.env')
+                    ->noExt()
                      ->withReplacers([
                          'name' => static::$site->name,
                          'site_url' => 'https://' . static::$site->host,

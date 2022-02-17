@@ -15,10 +15,8 @@
       <path value="$PROJECT_DIR$/spinner/vendor/symfony/polyfill-php72" />
       <path value="$PROJECT_DIR$/spinner/vendor/symfony/error-handler" />
       <path value="$PROJECT_DIR$/spinner/vendor/symfony/event-dispatcher-contracts" />
-      <path value="$PROJECT_DIR$/spinner/vendor/symfony/polyfill-php73" />
       <path value="$PROJECT_DIR$/spinner/vendor/symfony/polyfill-intl-idn" />
       <path value="$PROJECT_DIR$/spinner/vendor/symfony/console" />
-      <path value="$PROJECT_DIR$/spinner/vendor/symfony/polyfill-iconv" />
       <path value="$PROJECT_DIR$/spinner/vendor/symfony/event-dispatcher" />
       <path value="$PROJECT_DIR$/spinner/vendor/symfony/var-dumper" />
       <path value="$PROJECT_DIR$/spinner/vendor/symfony/http-foundation" />
@@ -40,8 +38,6 @@
       <path value="$PROJECT_DIR$/spinner/vendor/fakerphp/faker" />
       <path value="$PROJECT_DIR$/spinner/vendor/fruitcake/laravel-cors" />
       <path value="$PROJECT_DIR$/spinner/vendor/facade/ignition-contracts" />
-      <path value="$PROJECT_DIR$/spinner/vendor/facade/flare-client-php" />
-      <path value="$PROJECT_DIR$/spinner/vendor/facade/ignition" />
       <path value="$PROJECT_DIR$/spinner/vendor/inertiajs/inertia-laravel" />
       <path value="$PROJECT_DIR$/spinner/vendor/phpoption/phpoption" />
       <path value="$PROJECT_DIR$/spinner/vendor/webmozart/assert" />
@@ -105,7 +101,6 @@
       <path value="$PROJECT_DIR$/spinner/vendor/nesbot/carbon" />
       <path value="$PROJECT_DIR$/spinner/vendor/phar-io/version" />
       <path value="$PROJECT_DIR$/spinner/vendor/phar-io/manifest" />
-      <path value="$PROJECT_DIR$/spinner/vendor/opis/closure" />
       <path value="$PROJECT_DIR$/spinner/vendor/dragonmantank/cron-expression" />
       <path value="$PROJECT_DIR$/spinner/vendor/nette/schema" />
       <path value="$PROJECT_DIR$/spinner/vendor/nette/utils" />
@@ -113,25 +108,24 @@
       <path value="$PROJECT_DIR$/spinner/vendor/phpdocumentor/reflection-docblock" />
       <path value="$PROJECT_DIR$/spinner/vendor/phpdocumentor/type-resolver" />
       <path value="$PROJECT_DIR$/spinner/vendor/phpdocumentor/reflection-common" />
-      <path value="$PROJECT_DIR$/spinner/vendor/swiftmailer/swiftmailer" />
       <path value="$PROJECT_DIR$/spinner/vendor/psy/psysh" />
       <path value="$PROJECT_DIR$/spinner/vendor/league/oauth1-client" />
       <path value="$PROJECT_DIR$/spinner/vendor/laravel/socialite" />
-      <path value="$PROJECT_DIR$/spinner/vendor/touhidurabir/laravel-stub-generator" />
       <path value="$PROJECT_DIR$/spinner/vendor/doctrine/cache" />
       <path value="$PROJECT_DIR$/spinner/vendor/doctrine/event-manager" />
       <path value="$PROJECT_DIR$/spinner/vendor/doctrine/dbal" />
       <path value="$PROJECT_DIR$/spinner/vendor/doctrine/deprecations" />
-      <path value="$PROJECT_DIR$/spinner/vendor/seld/jsonlint" />
-      <path value="$PROJECT_DIR$/spinner/vendor/seld/phar-utils" />
       <path value="$PROJECT_DIR$/spinner/vendor/psr/cache" />
-      <path value="$PROJECT_DIR$/spinner/vendor/symfony/filesystem" />
       <path value="$PROJECT_DIR$/spinner/vendor/barryvdh/laravel-ide-helper" />
       <path value="$PROJECT_DIR$/spinner/vendor/barryvdh/reflection-docblock" />
-      <path value="$PROJECT_DIR$/spinner/vendor/justinrainbow/json-schema" />
-      <path value="$PROJECT_DIR$/spinner/vendor/react/promise" />
       <path value="$PROJECT_DIR$/spinner/vendor/spatie/laravel-activitylog" />
       <path value="$PROJECT_DIR$/spinner/vendor/spatie/laravel-package-tools" />
+      <path value="$PROJECT_DIR$/spinner/vendor/spatie/ignition" />
+      <path value="$PROJECT_DIR$/spinner/vendor/spatie/laravel-ignition" />
+      <path value="$PROJECT_DIR$/spinner/vendor/spatie/backtrace" />
+      <path value="$PROJECT_DIR$/spinner/vendor/spatie/flare-client-php" />
+      <path value="$PROJECT_DIR$/spinner/vendor/symfony/mailer" />
+      <path value="$PROJECT_DIR$/spinner/vendor/touhidurabir/laravel-stub-generator" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
