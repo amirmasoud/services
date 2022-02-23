@@ -27,10 +27,11 @@ class SiteTableResource extends BaseUI
                 new FieldTableUI('host', 'Host'),
             ],
             'actions' => array_combine(
-                ['edit', 'delete', 'create'],
+                ['edit', 'delete', 'details', 'create'],
                 [
                     new ActionTableUI('edit', 'Edit', '/dashboard/sites/{id}/edit'),
                     new ActionTableUI('delete', 'Delete', '/dashboard/sites/{id}'),
+                    new ActionTableUI('details', 'Details', '/dashboard/sites/{id}'),
                     new ActionTableUI('create', 'Create', '/dashboard/sites/create'),
                 ]
             ),

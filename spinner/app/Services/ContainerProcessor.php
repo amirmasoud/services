@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\DTOs\RunningContainerDTO;
 use App\Enums\ContainerStatus;
 use App\Models\Site;
 use Illuminate\Support\Facades\Http;
@@ -149,6 +150,17 @@ class ContainerProcessor
             return ContainerStatus::tryFrom($response['State']) === $status;
         } catch (\Exception $e) {
             return false;
+        }
+    }
+
+    public static function details(string $container)
+    {
+        try {
+            $response = Http::get('http://localhost:2375/containers/json?limit=1&filters={"name": ["' . $container . '"]}');
+
+            return new RunningContainerDTO($response->json()[0]);
+        } catch (\Exception $e) {
+            return [];
         }
     }
 }

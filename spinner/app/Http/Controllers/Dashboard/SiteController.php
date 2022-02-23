@@ -50,9 +50,13 @@ class SiteController extends Controller
         return redirect()->to('/dashboard/sites');
     }
 
-    public function show($id)
+    public function show(Site $site): \Inertia\Response
     {
-        //
+        return Inertia::render('Dashboard/Sites/Show', [
+            'record' => new SiteResource($site),
+            'wordpress' => fn () => ContainerProcessor::details("$site->name-wordpress"),
+            'database' => fn () => ContainerProcessor::details("$site->name-mysql"),
+        ]);
     }
 
     public function edit(Site $site)

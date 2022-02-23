@@ -126,6 +126,7 @@
       <path value="$PROJECT_DIR$/spinner/vendor/spatie/flare-client-php" />
       <path value="$PROJECT_DIR$/spinner/vendor/symfony/mailer" />
       <path value="$PROJECT_DIR$/spinner/vendor/touhidurabir/laravel-stub-generator" />
+      <path value="$PROJECT_DIR$/spinner/vendor/spatie/data-transfer-object" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

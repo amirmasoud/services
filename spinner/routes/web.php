@@ -32,9 +32,12 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
 
-    Route::resource('sites', SiteController::class)->except('show');
-    Route::get('sites/{site}/wp-cli', [SiteController::class, 'wpCli'])->name('sites.wp-cli');
     Route::resource('users', UserController::class)->except('show');
+
+    Route::resource('sites', SiteController::class);
+    Route::controller(SiteController::class)->group(function () {
+        Route::get('sites/{site}/wp-cli');
+    });
 
     Route::get('/wp-cli', function () {
 

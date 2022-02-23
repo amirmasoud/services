@@ -38,8 +38,9 @@
           {{ record[field.name] }}
         </td>
         <td class="py-4 px-6 space-x-6 text-sm font-medium text-right whitespace-nowrap">
-          <Link :href="replaceRoute(actions.edit.link, record)" method="get" as="button" class="text-indigo-600 hover:text-indigo-900">Edit</Link>
-          <Link :href="replaceRoute(actions.delete.link, record)" method="delete" as="button" type="button" class="text-indigo-600 hover:text-indigo-900">Delete</Link>
+          <Link v-if="actions.hasOwnProperty('details')" :href="replaceRoute(actions.details.link, record)" method="get" as="button" class="text-indigo-600 hover:text-indigo-900">Details</Link>
+          <Link v-if="actions.hasOwnProperty('edit')" :href="replaceRoute(actions.edit.link, record)" method="get" as="button" class="text-indigo-600 hover:text-indigo-900">Edit</Link>
+          <Link v-if="actions.hasOwnProperty('delete')" :href="replaceRoute(actions.delete.link, record)" method="delete" as="button" type="button" class="text-indigo-600 hover:text-indigo-900">Delete</Link>
         </td>
       </tr>
       </tbody>
