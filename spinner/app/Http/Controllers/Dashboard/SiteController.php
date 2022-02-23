@@ -86,4 +86,25 @@ class SiteController extends Controller
     {
         ContainerProcessor::for($site)->installWPCli();
     }
+
+    public function start(Site $site): \Illuminate\Http\RedirectResponse
+    {
+        ContainerProcessor::for($site)->start();
+
+        return redirect()->back();
+    }
+
+    public function stop(Site $site): \Illuminate\Http\RedirectResponse
+    {
+        ContainerProcessor::for($site)->stop();
+
+        return redirect()->back();
+    }
+
+    public function restart(Site $site): \Illuminate\Http\RedirectResponse
+    {
+        ContainerProcessor::for($site)->restart();
+
+        return redirect()->back();
+    }
 }

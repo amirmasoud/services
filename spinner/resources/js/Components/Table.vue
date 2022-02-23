@@ -86,14 +86,14 @@
 <!--    button="Remove filters"-->
 <!--    @remove-filters="removeFilters"-->
 <!--  />-->
-<!--  <Empty-->
-<!--    v-else-->
-<!--    class="mt-20"-->
-<!--    title="No records"-->
-<!--    description="Get started by creating a new record"-->
-<!--    button="New Record"-->
-<!--    :link="actions[2].link"-->
-<!--  />-->
+  <Empty
+    v-else
+    class="mt-20"
+    title="No records"
+    description="Get started by creating a new record"
+    button="New Record"
+    :link="actions.create.link"
+  />
 </template>
 
 <script setup>
