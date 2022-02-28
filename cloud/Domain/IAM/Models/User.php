@@ -2,6 +2,8 @@
 
 namespace Domain\IAM\Models;
 
+use Domain\IAM\QueryBuilders\UserQueryBuilder;
+use Domain\Sites\Models\Site;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -43,8 +45,9 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereProviderRefreshToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User search($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Site[] $sites
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Domain\Sites\Models\Site[] $sites
  * @property-read int|null $sites_count
  */
 class User extends Authenticatable
@@ -88,5 +91,10 @@ class User extends Authenticatable
     public function sites(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Site::class);
+    }
+
+    public function newEloquentBuilder($query): UserQueryBuilder
+    {
+        return new UserQueryBuilder($query);
     }
 }

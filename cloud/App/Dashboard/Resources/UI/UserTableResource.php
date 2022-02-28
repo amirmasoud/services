@@ -31,7 +31,7 @@ class UserTableResource extends BaseUI
                 ['edit', 'delete', 'create'],
                 [
                     new ActionTableUI('edit', 'Edit', '/dashboard/users/{id}/edit'),
-                    new ActionTableUI('delete', 'Delete', '/dashboard/users/delete/{id}'),
+                    new ActionTableUI('delete', 'Delete', '/dashboard/users/{id}'),
                     new ActionTableUI('create', 'Create', '/dashboard/users/create'),
                 ]
             )
