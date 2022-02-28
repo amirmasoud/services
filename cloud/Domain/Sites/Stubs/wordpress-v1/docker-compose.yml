@@ -1,0 +1,80 @@
+version: "3.3"
+services:
+  database:
+    container_name: "${DATABASE_CONTAINER_NAME}"
+    image: "${DATABASE_VERSION}"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT}
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_USER: ${DATABASE_USER}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+    networks:
+      - default
+  wordpress:
+    container_name: "${WORDPRESS_NAME}"
+    depends_on:
+      - database
+    image: "wordpress:${WORDPRESS_VERSION}"
+    environment:
+      WORDPRESS_DB_HOST: "database:3306"
+      WORDPRESS_DB_USER: ${DATABASE_USER}
+      WORDPRESS_DB_PASSWORD: ${DATABASE_PASSWORD}
+      WORDPRESS_DB_NAME: ${DATABASE_NAME}
+      WORDPRESS_DEBUG: ${WORDPRESS_DEBUG}
+    volumes:
+      - ./deploy/wordpress/www.conf:/usr/local/etc/php-fpm.d/www.conf
+      - ./deploy/wordpress/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - wordpress-data:/var/www/html
+    networks:
+      - default
+  wordpress-cli:
+    container_name: "${WORDPRESS_CLI_NAME}"
+    depends_on:
+      - database
+      - wordpress
+    image: "wordpress:${WORDPRESS_CLI_VERSION}"
+    environment:
+      WORDPRESS_DB_HOST: "database:3306"
+      WORDPRESS_DB_USER: ${DATABASE_USER}
+      WORDPRESS_DB_PASSWORD: ${DATABASE_PASSWORD}
+      WORDPRESS_DB_NAME: ${DATABASE_NAME}
+      WORDPRESS_DEBUG: ${WORDPRESS_DEBUG}
+      HOME: /tmp
+    command: "tail -f /dev/null"
+    volumes:
+      - wordpress-data:/var/www/html
+    networks:
+      - default
+  proxy:
+    container_name: "${PROXY_NAME}"
+    depends_on:
+      - wordpress
+    image: "nginx:${NGINX_VERSION}"
+    volumes:
+      - ./deploy/proxy/conf.d:/etc/nginx/conf.d
+      - ./deploy/proxy/logs:/var/log/nginx
+      - wordpress-data:/var/www/html
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${NAME}.entrypoints=http"
+      - "traefik.http.routers.${NAME}.rule=Host(`${HOST}`, `www.${HOST}`)"
+      - "traefik.http.middlewares.${NAME}-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.${NAME}.middlewares=${NAME}-https-redirect"
+      - "traefik.http.routers.${NAME}-secure.entrypoints=https"
+      - "traefik.http.routers.${NAME}-secure.rule=Host(`${HOST}`, `www.${HOST}`)"
+      - "traefik.http.routers.${NAME}-secure.tls=true"
+      - "traefik.http.routers.${NAME}-secure.tls.certresolver=http"
+      - "traefik.http.routers.${NAME}-secure.service=${NAME}"
+      - "traefik.http.services.${NAME}.loadbalancer.server.port=80"
+      - "traefik.docker.network=proxy"
+    networks:
+      - proxy
+      - default
+volumes:
+  wordpress-data:
+networks:
+  proxy:
+    external: true
+  default:
