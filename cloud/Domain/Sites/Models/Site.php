@@ -3,6 +3,7 @@
 namespace Domain\Sites\Models;
 
 use Domain\IAM\Models\User;
+use Domain\Sites\QueryBuilders\SiteQueryBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -39,6 +40,7 @@ use Support\Containers\Enums\ContainerState;
  * @method static \Illuminate\Database\Eloquent\Builder|Site whereStatus($value)
  * @method static \Illuminate\Database\Query\Builder|Site withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Site withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|User search($value)
  */
 class Site extends Model
 {
@@ -65,5 +67,10 @@ class Site extends Model
     {
         return LogOptions::defaults()
                          ->logOnlyDirty();
+    }
+
+    public function newEloquentBuilder($query): SiteQueryBuilder
+    {
+        return new SiteQueryBuilder($query);
     }
 }

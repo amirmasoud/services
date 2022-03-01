@@ -1,0 +1,17 @@
+<?php
+
+namespace Domain\Sites\QueryBuilders;
+
+use Illuminate\Database\Eloquent\Builder;
+
+class SiteQueryBuilder extends Builder
+{
+    public function search(?string $search)
+    {
+        return $this->when($search,
+            fn ($query, $search) => $query->where(
+                fn ($query) => $query->where('name', 'like', "%{$search}%")->orWhere('host', 'like', "%{$search}%")
+            )
+        );
+    }
+}

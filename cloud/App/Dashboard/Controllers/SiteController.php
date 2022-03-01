@@ -2,28 +2,27 @@
 
 namespace App\Dashboard\Controllers;
 
+use App\Dashboard\Jobs\StopSite;
 use App\Dashboard\Requests\SiteRequest;
+use App\Dashboard\Requests\SiteSearchRequest;
 use App\Dashboard\Resources\SiteResource;
 use App\Dashboard\Resources\UI\SiteFilterResource;
 use App\Dashboard\Resources\UI\SiteStatResource;
 use App\Dashboard\Resources\UI\SiteTableResource;
 use App\Http\Controllers\Controller;
-use App\Jobs\StopSite;
+use Illuminate\Http\RedirectResponse;
+use Inertia\Response;
 use Support\Containers\ProcessContainer;
 use Domain\Sites\Models\Site;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Support\Containers\Enums\ContainerState;
 
 class SiteController extends Controller
 {
-    public function index(Request $request): \Inertia\Response
+    public function index(SiteSearchRequest $request): Response
     {
-        $sites = Site::query()
-                     ->when($request->input('search'), fn ($query, $search) => $query->where('name', 'LIKE', '%'.$search.'%'))
-                     ->paginate($request->input('per_page', 25))
-                     ->withQueryString();
+        $sites = Site::search($request->validated('search'))->paginate($request->input('per_page'))->withQueryString();
 
         return Inertia::render('Dashboard/Sites/Index', [
             'records' => SiteResource::collection($sites),
@@ -33,14 +32,14 @@ class SiteController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(): Response
     {
         return Inertia::render('Dashboard/Sites/Create');
     }
 
-    public function store(SiteRequest $request): \Illuminate\Http\RedirectResponse
+    public function store(SiteRequest $request): RedirectResponse
     {
-        $site = Auth::user()->sites()->create(
+        Auth::user()->sites()->create(
             array_merge(
                 $request->validated(),
                 ['status' => ContainerState::STARTING]
@@ -50,7 +49,7 @@ class SiteController extends Controller
         return redirect()->to('/dashboard/sites');
     }
 
-    public function show(Site $site): \Inertia\Response
+    public function show(Site $site): Response
     {
         return Inertia::render('Dashboard/Sites/Show', [
             'record' => new SiteResource($site),
@@ -59,21 +58,21 @@ class SiteController extends Controller
         ]);
     }
 
-    public function edit(Site $site)
+    public function edit(Site $site): Response
     {
         return Inertia::render('Dashboard/Sites/Edit', [
             'resource' => new SiteResource($site),
         ]);
     }
 
-    public function update(Site $site, SiteRequest $request)
+    public function update(Site $site, SiteRequest $request): RedirectResponse
     {
         $site->update($request->validated());
 
         return redirect()->to('/dashboard/sites');
     }
 
-    public function destroy(Site $site): \Illuminate\Http\RedirectResponse
+    public function destroy(Site $site): RedirectResponse
     {
         StopSite::dispatchAfterResponse($site);
 
@@ -89,21 +88,21 @@ class SiteController extends Controller
         return redirect()->back();
     }
 
-    public function start(Site $site): \Illuminate\Http\RedirectResponse
+    public function start(Site $site): RedirectResponse
     {
         ProcessContainer::for($site)->start();
 
         return redirect()->back();
     }
 
-    public function stop(Site $site): \Illuminate\Http\RedirectResponse
+    public function stop(Site $site): RedirectResponse
     {
         ProcessContainer::for($site)->stop();
 
         return redirect()->back();
     }
 
-    public function restart(Site $site): \Illuminate\Http\RedirectResponse
+    public function restart(Site $site): RedirectResponse
     {
         ProcessContainer::for($site)->restart();
 

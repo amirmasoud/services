@@ -2,28 +2,21 @@
 
 namespace Domain\Sites\Subscribers;
 
-class SiteSubscriber
+use Domain\Sites\Models\Site;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Support\Containers\ProcessContainer;
+
+class SiteSubscriber implements ShouldQueue
 {
-    /**
-     * Handle user login events.
-     */
-    public function handleSiteCreated($event) {}
+    public function handleSiteCreated(Site $site)
+    {
+        ProcessContainer::for($site)->init()->start();
+    }
 
-    /**
-     * Handle user logout events.
-     */
-    public function handleUserLogout($event) {}
-
-    /**
-     * Register the listeners for the subscriber.
-     *
-     * @param  \Illuminate\Events\Dispatcher  $events
-     * @return array
-     */
     public function subscribe($events)
     {
         return [
-            //
+            'eloquent.created: Domain\Sites\Models\Site' => 'handleSiteCreated',
         ];
     }
 }

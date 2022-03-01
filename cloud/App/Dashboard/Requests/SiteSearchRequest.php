@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * @property mixed $user
  */
-class UserSearchRequest extends FormRequest
+class SiteSearchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

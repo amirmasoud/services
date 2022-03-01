@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.9"
 services:
   database:
     container_name: "${DATABASE_CONTAINER_NAME}"
@@ -24,8 +24,8 @@ services:
       WORDPRESS_DB_NAME: ${DATABASE_NAME}
       WORDPRESS_DEBUG: ${WORDPRESS_DEBUG}
     volumes:
-      - ./deploy/wordpress/www.conf:/usr/local/etc/php-fpm.d/www.conf
-      - ./deploy/wordpress/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ./config/wordpress/www.conf:/usr/local/etc/php-fpm.d/www.conf
+      - ./config/wordpress/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
       - wordpress-data:/var/www/html
     networks:
       - default
@@ -53,8 +53,8 @@ services:
       - wordpress
     image: "nginx:${NGINX_VERSION}"
     volumes:
-      - ./deploy/proxy/conf.d:/etc/nginx/conf.d
-      - ./deploy/proxy/logs:/var/log/nginx
+      - ./config/proxy/conf.d:/etc/nginx/conf.d
+      - ./config/proxy/logs:/var/log/nginx
       - wordpress-data:/var/www/html
     labels:
       - "traefik.enable=true"
