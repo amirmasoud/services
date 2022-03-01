@@ -74,8 +74,6 @@ class SiteController extends Controller
 
     public function destroy(Site $site): RedirectResponse
     {
-        StopSite::dispatchAfterResponse($site);
-
         $site->delete();
 
         return redirect()->back();

@@ -13,10 +13,16 @@ class SiteSubscriber implements ShouldQueue
         ProcessContainer::for($site)->init()->start();
     }
 
-    public function subscribe($events)
+    public function handleSiteDeleted(Site $site)
+    {
+        ProcessContainer::for($site)->stop();
+    }
+
+    public function subscribe($events): array
     {
         return [
             'eloquent.created: Domain\Sites\Models\Site' => 'handleSiteCreated',
+            'eloquent.deleted: Domain\Sites\Models\Site' => 'handleSiteDeleted',
         ];
     }
 }
