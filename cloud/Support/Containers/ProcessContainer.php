@@ -4,7 +4,6 @@ namespace Support\Containers;
 use Domain\Sites\Models\Site;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
-use Storage;
 use Support\Containers\DataTransferObjects\RunningContainerData;
 use Support\Containers\Enums\ContainerState;
 use Touhidurabir\StubGenerator\Facades\StubGenerator;
@@ -16,6 +15,8 @@ class ProcessContainer
     public static function for(Site $site): static
     {
         static::$site = $site;
+
+        exec('cd ' . realpath(storage_path('app/sites/' . $site->name)));
 
         return new static();
     }
@@ -40,14 +41,14 @@ class ProcessContainer
 
     public function stop(): static
     {
-        shell_exec('cd ' . env('SITES_PATH') . '/' . static::$site->name . ' && docker-compose stop');
+        shell_exec('cd ' . storage_path('app/sites') . '/' . static::$site->name . ' && docker-compose stop');
 
         return $this;
     }
 
     public function restart(): static
     {
-        shell_exec('cd ' . env('SITES_PATH') . '/' . static::$site->name . ' && docker-compose restart');
+        shell_exec('cd ' . storage_path('app/sites') . '/' . static::$site->name . ' && docker-compose restart');
 
         return $this;
     }
@@ -73,12 +74,9 @@ class ProcessContainer
         return $this;
     }
 
-    public function exec(string $command): static
+    public function exec(string $command)
     {
-
-        dd(exec('cd ' . env('SITES_PATH') . '/' . static::$site->name . ' && docker-compose exec wordpress bash"' . $command . '"'));
-
-        return $this;
+        return shell_exec('cd ' . storage_path('app/sites') . '/' . static::$site->name . ' && docker-compose exec -T ' . $command);
     }
 
     protected function createDotEnvFile(): void
@@ -121,12 +119,6 @@ class ProcessContainer
     {
         // @todo
         File::copyDirectory(domain_path('Sites/Stubs/wordpress-nginx-fpm/config'), storage_path('app/sites/' . static::$site->name . '/config'));
-    }
-
-    public function installWPCli(): void
-    {
-        // && chmod +x wp-cli.phar && sudo mv wp-cli.phar /usr/local/bin/wp
-        $this->exec('curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar');
     }
 
     public static function dockerIsRunning(): bool

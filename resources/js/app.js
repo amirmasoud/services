@@ -1,8 +1,15 @@
+// Application
 import { createApp, h } from 'vue';
 import { createInertiaApp, Link } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import Dashboard from '@/Shared/Dashboard';
 import Empty from '@/Shared/Empty';
+
+// Highlight.js Vue plugin
+import 'highlight.js/styles/stackoverflow-light.css';
+import hljs from 'highlight.js/lib/core';
+import bash from 'highlight.js/lib/languages/bash';
+import hljsVuePlugin from "@highlightjs/vue-plugin";
 
 createInertiaApp({
     resolve: async name => {
@@ -12,8 +19,10 @@ createInertiaApp({
     },
 
     setup({ el, App, props, plugin }) {
+        hljs.registerLanguage('bash', bash);
         createApp({ render: () => h(App, props) })
             .use(plugin)
+            .use(hljsVuePlugin)
             .component("Link", Link)
             .mount(el);
     },

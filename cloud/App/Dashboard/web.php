@@ -34,7 +34,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
     Route::resource('sites', SiteController::class);
     Route::controller(SiteController::class)->group(function () {
-        Route::post('sites/{site}/wpcli', 'wpcli');
+        Route::get('sites/{site}/cli/{command?}', 'cli');
         Route::post('sites/{site}/start', 'start');
         Route::post('sites/{site}/stop', 'stop');
         Route::post('sites/{site}/restart', 'restart');

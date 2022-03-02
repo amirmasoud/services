@@ -58,6 +58,12 @@ class Site extends Model
         'status' => ContainerState::class,
     ];
 
+    protected $observables = [
+        'started',
+        'stopped',
+        'restarted',
+    ];
+
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);

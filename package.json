@@ -19,10 +19,12 @@
     "dependencies": {
         "@headlessui/vue": "^1.4.3",
         "@heroicons/vue": "^1.0.5",
+        "@highlightjs/vue-plugin": "^2.1.0",
         "@inertiajs/inertia": "^0.11.0",
         "@inertiajs/inertia-vue3": "^0.6.0",
         "@inertiajs/progress": "^0.2.7",
         "@tailwindcss/forms": "^0.4.0",
+        "highlight.js": "^11.4.0",
         "tailwindcss": "^3.0.18",
         "underscore": "^1.13.2",
         "vue": "^3.2.29"

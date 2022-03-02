@@ -28,9 +28,9 @@
             <button @click.prevent="restart" type="button" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-orange-500">
               <RefreshIcon class="w-4 h-4" /><span class="pl-2">Restart</span>
             </button>
-            <button @click.prevent="wpcli" type="button" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500">
+            <Link as="button" :href="`/dashboard/sites/${record.data.id}/cli`" type="button" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500">
               <WPTerminalIcon class="w-4 h-4" /><span class="pl-2">WP CLI</span>
-            </button>
+            </Link>
             <button @click.prevent="backup" type="button" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500">
               <DatabaseIcon class="w-4 h-4" /><span class="pl-2">Backup</span>
             </button>
@@ -627,10 +627,6 @@ const stop = () => {
 
 const restart = () => {
   Inertia.post(`/dashboard/sites/${props.record.data.id}/restart`);
-};
-
-const wpcli = () => {
-  Inertia.post(`/dashboard/sites/${props.record.data.id}/wpcli`);
 };
 
 const reloadInterval = setInterval(() => {

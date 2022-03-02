@@ -79,30 +79,31 @@ class SiteController extends Controller
         return redirect()->back();
     }
 
-    public function wpcli(Site $site)
+    public function cli(Site $site, ?string $command = null)
     {
-        ProcessContainer::for($site)->installWPCli();
-
-        return redirect()->back();
+        return Inertia::render('Dashboard/Sites/Cli', [
+            'record' => new SiteResource($site),
+            'output' => ProcessContainer::for($site)->exec($command ?? 'wordpress-cli wp core update'),
+        ]);
     }
 
     public function start(Site $site): RedirectResponse
     {
-        ProcessContainer::for($site)->start();
+        event("eloquent.started: ".Site::class, $site);
 
         return redirect()->back();
     }
 
     public function stop(Site $site): RedirectResponse
     {
-        ProcessContainer::for($site)->stop();
+        event("eloquent.stopped: ".Site::class, $site);
 
         return redirect()->back();
     }
 
     public function restart(Site $site): RedirectResponse
     {
-        ProcessContainer::for($site)->restart();
+        event("eloquent.restarted: ".Site::class, $site);
 
         return redirect()->back();
     }
