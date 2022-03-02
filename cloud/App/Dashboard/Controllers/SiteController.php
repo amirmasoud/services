@@ -55,6 +55,7 @@ class SiteController extends Controller
             'record' => new SiteResource($site),
             'wordpress' => fn () => ProcessContainer::details("$site->name-wordpress"),
             'database' => fn () => ProcessContainer::details("$site->name-mysql"),
+            'state' => fn () => ProcessContainer::state("$site->name-wordpress"),
         ]);
     }
 

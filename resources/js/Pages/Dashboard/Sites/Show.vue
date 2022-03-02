@@ -19,15 +19,9 @@
             </div>
           </div>
           <div class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
-            <button @click.prevent="start" type="button" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-green-500">
-              <PlayIcon class="w-4 h-4" /><span class="pl-2">Start</span>
-            </button>
-            <button @click.prevent="stop" type="button" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-red-500">
-              <StopIcon class="w-4 h-4" /><span class="pl-2">Stop</span>
-            </button>
-            <button @click.prevent="restart" type="button" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-orange-500">
-              <RefreshIcon class="w-4 h-4" /><span class="pl-2">Restart</span>
-            </button>
+            <Button v-if="state !== 'running'" @click.prevent="start" :processing="processing" color="green"><PlayIcon class="w-4 h-4" /><span class="pl-2">Start</span></Button>
+            <Button v-if="state === 'running'" @click.prevent="stop" :processing="processing" color="red"><StopIcon class="w-4 h-4" /><span class="pl-2">Stop</span></Button>
+            <Button @click.prevent="restart" :processing="false" color="orange"><RefreshIcon class="w-4 h-4" /><span class="pl-2">Restart</span></Button>
             <Link as="button" :href="`/dashboard/sites/${record.data.id}/cli`" type="button" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500">
               <WPTerminalIcon class="w-4 h-4" /><span class="pl-2">WP CLI</span>
             </Link>
@@ -504,6 +498,7 @@
 <script setup>
 import AppHead from "@/Components/AppHead";
 import DashboardMain from "@/Components/DashboardMain";
+import Button from "@/Components/Button";
 import {
   CheckIcon,
   ThumbUpIcon,
@@ -522,7 +517,7 @@ import {
   TerminalIcon as WPTerminalIcon,
 } from '@heroicons/vue/outline'
 import {Inertia} from "@inertiajs/inertia";
-import {onBeforeUnmount} from "vue";
+import {onBeforeUnmount, reactive, ref} from "vue";
 
 const user = {
   name: 'Whitney Francis',
@@ -608,20 +603,33 @@ const comments = [
   },
 ]
 
-let props = defineProps({ record: Object, wordpress: Object, database: Object });
+let props = defineProps({ record: Object, wordpress: Object, database: Object, state: String });
+
+let currentState = props.state;
+const processing = ref(false);
 
 const fetchData = () => {
   Inertia.reload({
     preserveState: true,
     preserveScroll: true,
+    onSuccess: (page) => {
+      if (processing.value && page.props.state !== currentState) {
+        processing.value = false;
+        currentState = page.props.state;
+      }
+    },
   });
 };
 
 const start = () => {
+  processing.value = true;
   Inertia.post(`/dashboard/sites/${props.record.data.id}/start`);
 };
 
 const stop = () => {
+  processing.value = true;
+  console.log(processing);
+
   Inertia.post(`/dashboard/sites/${props.record.data.id}/stop`);
 };
 

@@ -4,6 +4,7 @@ namespace Support\Containers;
 use Domain\Sites\Models\Site;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
+use Mockery\Container;
 use Support\Containers\DataTransferObjects\RunningContainerData;
 use Support\Containers\Enums\ContainerState;
 use Touhidurabir\StubGenerator\Facades\StubGenerator;
@@ -15,8 +16,6 @@ class ProcessContainer
     public static function for(Site $site): static
     {
         static::$site = $site;
-
-        exec('cd ' . realpath(storage_path('app/sites/' . $site->name)));
 
         return new static();
     }
@@ -156,7 +155,7 @@ class ProcessContainer
     {
         $response = Http::get("http://localhost:2375/containers/json?filters={\"name\": [\"^$container$\"]}")->collect()->first();
 
-        return ContainerState::tryFrom($response['State']);
+        return ContainerState::tryFrom($response['State'] ?? ContainerState::EXITED->value);
     }
 
     public static function details(string $container)

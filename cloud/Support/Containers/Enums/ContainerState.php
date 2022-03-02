@@ -10,6 +10,7 @@ enum ContainerState: string
     case DELETED = 'deleted';
     case STARTING = 'starting';
     case RUNNING = 'running';
+    case EXITED = 'exited';
 
     public function label(): string
     {
@@ -20,6 +21,8 @@ enum ContainerState: string
             self::DELETED => 'Deleted',
             self::STARTING => 'Starting',
             self::RUNNING => 'Running',
+            self::EXITED => 'Exited',
+            default => 'Unknown',
         };
     }
 }
