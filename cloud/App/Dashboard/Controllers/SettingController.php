@@ -13,7 +13,7 @@ class SettingController extends Controller
     {
         return Inertia::render('Dashboard/Settings', [
             'info' => Inertia::lazy(fn () => ProcessContainer::dockerIsRunning()),
-            'proxy' => Inertia::lazy(fn () => ProcessContainer::hasStatus('traefik', ContainerState::RUNNING)),
+            'proxy' => Inertia::lazy(fn () => ProcessContainer::hasState('traefik', ContainerState::RUNNING)),
         ]);
     }
 }

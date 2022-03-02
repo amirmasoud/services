@@ -141,15 +141,22 @@ class ProcessContainer
         }
     }
 
-    public static function hasStatus(string $container, ContainerState $status): bool
+    public static function hasState(string $container, ContainerState $status): bool
     {
         try {
-            $response = Http::get('http://localhost:2375/containers/json?filters={"name": ["' . $container . '"]}')->collect()->first();
+            $response = Http::get("http://localhost:2375/containers/json?filters={\"name\": [\"^$container$\"]}")->collect()->first();
 
             return ContainerState::tryFrom($response['State']) === $status;
         } catch (\Exception $e) {
             return false;
         }
+    }
+
+    public static function state(string $container): ?ContainerState
+    {
+        $response = Http::get("http://localhost:2375/containers/json?filters={\"name\": [\"^$container$\"]}")->collect()->first();
+
+        return ContainerState::tryFrom($response['State']);
     }
 
     public static function details(string $container)
