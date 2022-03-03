@@ -54,7 +54,7 @@ class SiteController extends Controller
         return Inertia::render('Dashboard/Sites/Show', [
             'record' => new SiteResource($site),
             'wordpress' => fn () => ProcessContainer::details("$site->name-wordpress"),
-            'database' => fn () => ProcessContainer::details("$site->name-mysql"),
+            'database' => fn () => ProcessContainer::details("$site->name-database"),
             'state' => fn () => ProcessContainer::state("$site->name-wordpress"),
         ]);
     }

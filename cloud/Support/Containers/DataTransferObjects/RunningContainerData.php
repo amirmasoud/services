@@ -29,10 +29,10 @@ class RunningContainerData extends DataTransferObject
     public string $created;
 
     #[MapFrom('Ports.0')]
-    public ?PortDTO $publicPort;
+    public ?PortData $publicPort;
 
     #[MapFrom('Ports.1')]
-    public ?PortDTO $privatePort;
+    public ?PortData $privatePort;
 
     #[MapFrom('Labels')]
     public $labels;
@@ -42,8 +42,4 @@ class RunningContainerData extends DataTransferObject
 
     #[MapFrom('Status')]
     public string $status;
-
-    // public $HostConfig;
-    // public $NetworkSettings;
-    // public $Mounts;
 }

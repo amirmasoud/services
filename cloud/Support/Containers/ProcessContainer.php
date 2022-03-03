@@ -161,9 +161,9 @@ class ProcessContainer
     public static function details(string $container)
     {
         try {
-            $response = Http::get('http://localhost:2375/containers/json?limit=1&filters={"name": ["' . $container . '"]}');
+            $response = Http::get('http://localhost:2375/containers/json?limit=1&filters={"name": ["^' . $container . '$"]}')->collect()->first();;
 
-            return new RunningContainerData($response->json()[0]);
+            return new RunningContainerData($response);
         } catch (\Exception $e) {
             return [];
         }
