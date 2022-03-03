@@ -4,7 +4,6 @@ namespace Support\Containers;
 use Domain\Sites\Models\Site;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
-use Mockery\Container;
 use Support\Containers\DataTransferObjects\RunningContainerData;
 use Support\Containers\Enums\ContainerState;
 use Touhidurabir\StubGenerator\Facades\StubGenerator;
