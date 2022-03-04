@@ -13,7 +13,7 @@
     </div>
 
     <ul role="list" class="mb-10 columns-1 sm:columns-2 xl:columns-3 max-w-screen-xl gap-3">
-      <li v-for="(plugin, index) in data.plugins" :key="index" class="break-inside-avoid mb-4">
+      <li v-for="(plugin, index) in records.plugins" :key="index" class="break-inside-avoid mb-4">
         <div class="flex shadow-sm rounded-md">
           <div class="flex-shrink-0 flex items-start justify-center border-t border-l border-gray-200 w-16 text-white text-sm font-medium rounded-tl-md z-10 bg-white p-2">
             <img :src="plugin.icons.icon_svg || plugin.icons.icon_2x || plugin.icons.icon_1x" />
@@ -64,14 +64,10 @@ const pluginEnabled = ref({});
 const pluginSearch = ref("");
 
 defineProps({
-  data: Object,
+  records: Object,
 });
 
 watch(pluginSearch, debounce(function (query) {
-  console.log($routes)
-  // for (let idx in props.filters) {
-  //   filterData[filter[idx].name] = filter[idx].value;
-  // }
-  // Inertia.get($route, filterData, { preserveState: true, replace: true, only: ['records'] });
+  Inertia.get(route('slacks.plugins'), { search: pluginSearch.value }, { preserveState: true, replace: true, only: ['records'] });
 }, 300));
 </script>

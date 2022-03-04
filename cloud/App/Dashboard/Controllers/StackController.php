@@ -12,7 +12,14 @@ class StackController extends Controller
     public function plugins(PluginSearchRequest $searchRequest): \Inertia\Response
     {
         return Inertia::render('Dashboard/Stacks/Plugins', [
-            'data' => ApiWordPress::plugins($searchRequest->validated('search')),
+            'records' => ApiWordPress::plugins($searchRequest->validated('search')),
+            'search'  => $searchRequest->validated('search'),
+        ]);
+    }
+
+    public function plans(): \Inertia\Response
+    {
+        return Inertia::render('Dashboard/Stacks/Plans', [
         ]);
     }
 }

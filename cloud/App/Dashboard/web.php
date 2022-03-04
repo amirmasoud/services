@@ -41,5 +41,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         Route::post('sites/{site}/restart', 'restart');
     });
 
-    Route::get('stacks/plugins', [StackController::class, 'plugins'])->name('slacks.plugins');
+    Route::controller(StackController::class)->group(function () {
+        Route::get('stacks/plugins', 'plugins')->name('slacks.plugins');
+        Route::get('stacks/plans', 'plans')->name('slacks.plans');
+    });
 });
