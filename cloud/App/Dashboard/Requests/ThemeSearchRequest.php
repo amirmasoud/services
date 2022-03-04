@@ -4,7 +4,7 @@ namespace App\Dashboard\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PluginSearchRequest extends FormRequest
+class ThemeSearchRequest extends FormRequest
 {
     public function authorize()
     {

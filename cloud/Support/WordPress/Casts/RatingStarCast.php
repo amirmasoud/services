@@ -4,9 +4,8 @@ namespace Support\WordPress\Casts;
 
 use Exception;
 use Spatie\DataTransferObject\Caster;
-use Support\WordPress\DataTransferObjects\PluginData;
 
-class PluginRatingStarCast implements Caster
+class RatingStarCast implements Caster
 {
     /**
      * @throws Exception

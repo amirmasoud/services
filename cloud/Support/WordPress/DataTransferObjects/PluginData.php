@@ -6,8 +6,8 @@ use Spatie\DataTransferObject\Attributes\CastWith;
 use Spatie\DataTransferObject\Attributes\MapFrom;
 use Spatie\DataTransferObject\DataTransferObject;
 use Support\WordPress\Casts\NumberFormatCast;
-use Support\WordPress\Casts\PluginActiveInstallsCast;
-use Support\WordPress\Casts\PluginRatingStarCast;
+use Support\WordPress\Casts\ActiveInstallsCast;
+use Support\WordPress\Casts\RatingStarCast;
 
 class PluginData extends DataTransferObject
 {
@@ -36,7 +36,7 @@ class PluginData extends DataTransferObject
     public string|bool $requires_php;
 
     #[MapFrom('rating')]
-    #[CastWith(PluginRatingStarCast::class)]
+    #[CastWith(RatingStarCast::class)]
     public int $rating;
 
     #[MapFrom('num_ratings')]
@@ -50,7 +50,7 @@ class PluginData extends DataTransferObject
     public int $support_threads_resolved;
 
     #[MapFrom('active_installs')]
-    #[CastWith(PluginActiveInstallsCast::class)]
+    #[CastWith(ActiveInstallsCast::class)]
     public string $active_installs;
 
     #[MapFrom('downloaded')]

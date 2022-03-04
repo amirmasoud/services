@@ -5,7 +5,7 @@ namespace Support\WordPress\Casts;
 use Exception;
 use Spatie\DataTransferObject\Caster;
 
-class PluginActiveInstallsCast implements Caster
+class ActiveInstallsCast implements Caster
 {
     /**
      * @throws Exception

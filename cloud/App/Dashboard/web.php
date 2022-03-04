@@ -43,6 +43,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
     Route::controller(StackController::class)->group(function () {
         Route::get('stacks/plugins', 'plugins')->name('slacks.plugins');
+        Route::get('stacks/themes', 'themes')->name('slacks.themes');
         Route::get('stacks/plans', 'plans')->name('slacks.plans');
     });
 });
