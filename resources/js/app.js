@@ -19,6 +19,7 @@ createInertiaApp({
     },
 
     setup({ el, App, props, plugin }) {
+        app.config.globalProperties.$route = route;
         hljs.registerLanguage('bash', bash);
         createApp({ render: () => h(App, props) })
             .use(plugin)

@@ -3,11 +3,11 @@
 
   <DashboardMain>
     <template #header>Plugin</template>
-    <div class="mb-10 flex justify-center max-w-screen-xl">
-      <div class="w-full max-w-md">
+    <div class="mb-10 grid grid-cols-1 sm:grid-cols-4 xl:grid-cols-3 gap-0 max-w-screen-xl">
+      <div class="w-full sm:col-start-2 sm:col-span-2 xl:col-start-2 xl:col-end-3">
         <label for="search" class="block text-sm font-medium text-gray-700">Search</label>
         <div class="mt-1 relative rounded-md shadow-sm w-full">
-          <input type="text" name="search" id="search" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 sm:text-sm border-gray-300 rounded-md" placeholder="search" />
+          <input v-model="pluginSearch" type="search" name="search" id="search" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 sm:text-sm border-gray-300 rounded-md" placeholder="search" />
         </div>
       </div>
     </div>
@@ -30,8 +30,8 @@
                     </div>
                   </SwitchDescription>
                 </span>
-                <Switch v-model="enabled[plugin.slug]" :class="[enabled[plugin.slug] ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500']">
-                  <span aria-hidden="true" :class="[enabled[plugin.slug] ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200']" />
+                <Switch v-model="pluginEnabled[plugin.slug]" :class="[pluginEnabled[plugin.slug] ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500']">
+                  <span aria-hidden="true" :class="[pluginEnabled[plugin.slug] ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200']" />
                 </Switch>
               </SwitchGroup>
               <p class="w-full w-2 whitespace-normal" v-html="plugin.short_description"></p>
@@ -50,17 +50,28 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { Switch, SwitchDescription, SwitchGroup, SwitchLabel } from '@headlessui/vue';
 import AppHead from "@/Components/AppHead";
 import DashboardMain from "@/Components/DashboardMain";
 import { StarIcon, TrendingUpIcon, ShieldCheckIcon, UserIcon } from "@heroicons/vue/solid";
+import debounce from "lodash/debounce";
+import { Inertia } from "@inertiajs/inertia";
 
 let rating = 5;
 
-const enabled = ref({});
+const pluginEnabled = ref({});
+const pluginSearch = ref("");
 
 defineProps({
   data: Object,
 });
+
+watch(pluginSearch, debounce(function (query) {
+  console.log($routes)
+  // for (let idx in props.filters) {
+  //   filterData[filter[idx].name] = filter[idx].value;
+  // }
+  // Inertia.get($route, filterData, { preserveState: true, replace: true, only: ['records'] });
+}, 300));
 </script>
