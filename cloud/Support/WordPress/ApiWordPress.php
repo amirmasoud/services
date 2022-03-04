@@ -10,9 +10,10 @@ class ApiWordPress
     public static function plugins()
     {
         try {
-            $response = Http::get('https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[page]=1&request[per_page]=400')->json();
+            $response = Http::get('https://api.wordpress.org/plugins/info/1.2/?action=query_plugins&request[page]=1&request[per_page]=20')->json();
+            $data = new PluginsData($response);
 
-            return response()->json(new PluginsData($response));
+            return $data->all();
         } catch (\Exception $e) {
             return [
                 'plugins' => [],

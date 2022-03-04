@@ -2,8 +2,12 @@
 
 namespace Support\WordPress\DataTransferObjects;
 
+use Spatie\DataTransferObject\Attributes\CastWith;
 use Spatie\DataTransferObject\Attributes\MapFrom;
 use Spatie\DataTransferObject\DataTransferObject;
+use Support\WordPress\Casts\NumberFormatCast;
+use Support\WordPress\Casts\PluginActiveInstallsCast;
+use Support\WordPress\Casts\PluginRatingStarCast;
 
 class PluginData extends DataTransferObject
 {
@@ -32,10 +36,12 @@ class PluginData extends DataTransferObject
     public string|bool $requires_php;
 
     #[MapFrom('rating')]
+    #[CastWith(PluginRatingStarCast::class)]
     public int $rating;
 
     #[MapFrom('num_ratings')]
-    public int $num_ratings;
+    #[CastWith(NumberFormatCast::class)]
+    public string $num_ratings;
 
     #[MapFrom('support_threads')]
     public int $support_threads;
@@ -44,7 +50,8 @@ class PluginData extends DataTransferObject
     public int $support_threads_resolved;
 
     #[MapFrom('active_installs')]
-    public int $active_installs;
+    #[CastWith(PluginActiveInstallsCast::class)]
+    public string $active_installs;
 
     #[MapFrom('downloaded')]
     public int $downloaded;

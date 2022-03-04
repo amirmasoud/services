@@ -2,7 +2,6 @@
 
 namespace App\Dashboard\Controllers;
 
-use App\Dashboard\Jobs\StopSite;
 use App\Dashboard\Requests\SiteRequest;
 use App\Dashboard\Requests\SiteSearchRequest;
 use App\Dashboard\Resources\SiteResource;
@@ -84,7 +83,7 @@ class SiteController extends Controller
     {
         return Inertia::render('Dashboard/Sites/Cli', [
             'record' => new SiteResource($site),
-            'output' => ProcessContainer::for($site)->exec($command ?? 'wordpress-cli wp core update'),
+            'output' => ProcessContainer::for($site)->exec($command ?? 'wordpress-cli wp --info'),
         ]);
     }
 

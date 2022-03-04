@@ -3,6 +3,7 @@
 use App\Dashboard\Controllers\OauthController;
 use App\Dashboard\Controllers\SettingController;
 use App\Dashboard\Controllers\SiteController;
+use App\Dashboard\Controllers\StackController;
 use App\Dashboard\Controllers\UserController;
 use Domain\Sites\Models\Site;
 use Inertia\Inertia;
@@ -40,7 +41,5 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         Route::post('sites/{site}/restart', 'restart');
     });
 
-    Route::get('/wp-cli', function () {
-
-    });
+    Route::get('stacks/plugins', [StackController::class, 'plugins'])->name('slacks.plugins');
 });

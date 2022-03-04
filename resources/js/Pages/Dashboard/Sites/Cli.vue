@@ -2,10 +2,11 @@
   <AppHead title="CLI" />
 
   <DashboardMain>
+    <template #header>Cli - {{ record.data.name }}</template>
+
     <div class="my-y rounded-xl shadow overflow-hidden">
       <highlightjs language='bash' :code="output" />
     </div>
-
   </DashboardMain>
 </template>
 
