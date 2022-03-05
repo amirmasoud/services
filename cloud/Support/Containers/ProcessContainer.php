@@ -4,11 +4,12 @@ namespace Support\Containers;
 use Domain\Sites\Models\Site;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
+use Support\Containers\Contracts\DockerContainer;
 use Support\Containers\DataTransferObjects\RunningContainerData;
 use Support\Containers\Enums\ContainerState;
 use Touhidurabir\StubGenerator\Facades\StubGenerator;
 
-class ProcessContainer
+class ProcessContainer implements DockerContainer
 {
     public static Site $site;
 
