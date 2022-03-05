@@ -4,7 +4,7 @@
   <DashboardMain>
     <template #header>Install New WordPress Site</template>
 
-    <TabGroup>
+    <TabGroup as="div" class="max-w-screen-xl">
       <TabList class="flex flex-wrap relative z-0 justify-center space-y-2 sm:space-y-0 space-x-0 sm:space-x-2 mb-4">
         <Tab v-slot="{ selected }">
           <button :class="[selected ? 'text-indigo-600 bg-gray-50 border border-indigo-500 hover:bg-gray-100' : 'text-gray-500 hover:text-gray-700 border border-gray-300 bg-white hover:bg-gray-50', 'flex items-center justify-center shadow-sm group relative w-full sm:w-32 overflow-hidden p-2 text-sm font-medium text-center focus:z-10 rounded-lg']">
@@ -28,10 +28,18 @@
         </Tab>
       </TabList>
       <TabPanels>
-        <TabPanel>Choose your config</TabPanel>
-        <TabPanel>Choose your plugin</TabPanel>
-        <TabPanel>Choose your theme</TabPanel>
-        <TabPanel>Extra commands</TabPanel>
+        <TabPanel>
+          <Plans />
+        </TabPanel>
+        <TabPanel>
+          <Plugins :records="plugins" />
+        </TabPanel>
+        <TabPanel>
+          <Themes :records="themes" />
+        </TabPanel>
+        <TabPanel>
+          <!-- <Advance /> -->
+        </TabPanel>
       </TabPanels>
     </TabGroup>
   </DashboardMain>
@@ -40,6 +48,15 @@
 <script setup>
 import AppHead from "@/Components/AppHead";
 import DashboardMain from "@/Components/DashboardMain";
+import Plans from "@/Components/Stacks/WordPress/Plans";
+import Plugins from "@/Components/Stacks/WordPress/Plugins";
+import Themes from "@/Components/Stacks/WordPress/Themes";
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue';
-import { ServerIcon, PuzzleIcon, ViewBoardsIcon, TerminalIcon } from '@heroicons/vue/solid'
+import { ServerIcon, PuzzleIcon, ViewBoardsIcon, TerminalIcon } from '@heroicons/vue/solid';
+
+defineProps({
+  plugins: Object,
+  themes: Object,
+  // 2 more props
+});
 </script>

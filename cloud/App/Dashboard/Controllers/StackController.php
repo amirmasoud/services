@@ -4,6 +4,7 @@ namespace App\Dashboard\Controllers;
 
 use App\Dashboard\Requests\PluginSearchRequest;
 use App\Dashboard\Requests\ThemeSearchRequest;
+use App\Dashboard\Requests\WordPressFiltersRequest;
 use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use Support\WordPress\ApiWordPress;
@@ -32,9 +33,14 @@ class StackController extends Controller
         ]);
     }
 
-    public function newWordPressSite(): \Inertia\Response
+    public function newWordPressSite(WordPressFiltersRequest $request): \Inertia\Response
     {
+        // @todo resources
         return Inertia::render('Dashboard/Stacks/WordPress/New', [
+            'plugins' => fn () => ApiWordPress::plugins($request->validated('plugin_search')),
+            'themes' => fn () => ApiWordPress::themes($request->validated('theme_search')),
+            'plans' => fn () => [],
+            'filters' => $request->validated(),
         ]);
     }
 }
