@@ -31,4 +31,10 @@ class StackController extends Controller
         return Inertia::render('Dashboard/Stacks/Plans', [
         ]);
     }
+
+    public function newWordPressSite(): \Inertia\Response
+    {
+        return Inertia::render('Dashboard/Stacks/WordPress/New', [
+        ]);
+    }
 }

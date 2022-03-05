@@ -17,7 +17,7 @@
         Selected Theme
       </RadioGroupLabel>
       <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-        <RadioGroupOption as="template" v-for="theme in records.themes" :key="theme.slug" :value="theme" v-slot="{ active, checked }">
+        <RadioGroupOption as="template" v-for="theme in records.themes" :key="theme.slug" :value="theme.slug" v-slot="{ active, checked }">
           <div :class="[active ? 'ring-1 ring-offset-2 ring-indigo-500' : '', 'relative block rounded-lg border border-gray-300 bg-white shadow-sm cursor-pointer hover:border-gray-400 sm:flex sm:justify-between focus:outline-none']">
             <div class="flex items-center flex-col">
               <img :src="theme.screenshot_url" class="rounded-t-lg" />
@@ -44,11 +44,11 @@
 <script setup>
 import AppHead from "@/Components/AppHead";
 import DashboardMain from "@/Components/DashboardMain";
-import { computed, ref, watch } from 'vue'
-import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
+import { ref, watch } from 'vue'
+import { RadioGroup, RadioGroupLabel, RadioGroupOption, SwitchDescription } from '@headlessui/vue'
 import debounce from "lodash/debounce";
 import { Inertia } from "@inertiajs/inertia";
-import { StarIcon, TrendingUpIcon, ShieldCheckIcon, UserIcon } from "@heroicons/vue/solid";
+import { StarIcon } from "@heroicons/vue/solid";
 
 let rating = 5;
 
