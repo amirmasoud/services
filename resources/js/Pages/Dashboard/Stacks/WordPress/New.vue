@@ -3,6 +3,9 @@
 
   <DashboardMain>
     <template #header>Install New WordPress Site</template>
+    <template #buttons>
+      <Button color="green" @click.prevent="deploy"><PaperAirplaneIcon class="w-4 h-4 mr-2" /> Deploy</Button>
+    </template>
 
     <TabGroup as="div" class="max-w-screen-xl">
       <TabList class="flex flex-col sm:flex-row flex-wrap relative z-0 justify-center space-y-2 sm:space-y-0 space-x-0 sm:space-x-2 mb-4">
@@ -53,8 +56,9 @@ import Plugins from "@/Components/Stacks/WordPress/Plugins";
 import Themes from "@/Components/Stacks/WordPress/Themes";
 import Advance from "@/Components/Stacks/WordPress/Advance";
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue';
-import { ServerIcon, PuzzleIcon, ViewBoardsIcon, TerminalIcon } from '@heroicons/vue/solid';
+import { ServerIcon, PuzzleIcon, ViewBoardsIcon, TerminalIcon, PaperAirplaneIcon } from '@heroicons/vue/solid';
 import {ref} from "vue";
+import Button from "@/Components/Button";
 
 const selectedConfig = ref("");
 const selectedPlan = ref("");
@@ -67,4 +71,14 @@ defineProps({
   themes: Object,
   // 2 more props
 });
+
+const deploy = () => {
+  console.log("Deploying...");
+  console.log(selectedConfig.value);
+  console.log(selectedPlan.value);
+  console.log(selectedPlugins.value);
+  console.log(selectedTheme.value);
+  console.log(enteredCommands.value);
+  console.log('Deployed!');
+};
 </script>
