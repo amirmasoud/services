@@ -1,11 +1,11 @@
 <template>
   <h3 class="text-lg leading-6 font-medium text-gray-900 mb-6">Server Size</h3>
-  <RadioGroup v-model="selectedPlan">
+  <RadioGroup v-model="selectedPlan" @update:modelValue="(plan) => $emit('update:selected-plan', plan)">
     <RadioGroupLabel class="sr-only">
       Server size
     </RadioGroupLabel>
     <div class="space-y-4">
-      <RadioGroupOption as="template" v-for="plan in plans" :key="plan.name" :value="plan" v-slot="{ active, checked }">
+      <RadioGroupOption as="div" v-for="plan in plans" :key="plan.name" :value="plan.name" v-slot="{ active, checked }">
         <div :class="[active ? 'ring-1 ring-offset-2 ring-indigo-500' : '', 'relative block rounded-lg border border-gray-300 bg-white shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between focus:outline-none']">
           <div class="flex items-center">
             <div class="text-sm">
@@ -32,12 +32,12 @@
   </RadioGroup>
 
   <h3 class="text-lg leading-6 font-medium text-gray-900 my-6">Configs</h3>
-  <RadioGroup v-model="selectedConfig">
+  <RadioGroup v-model="selectedConfig" @update:modelValue="(config) => $emit('update:selected-config', config)">
     <RadioGroupLabel class="sr-only">
       Server Config
     </RadioGroupLabel>
     <div class="space-y-4">
-      <RadioGroupOption as="template" v-for="config in configs" :key="config.name" :value="config" v-slot="{ active, checked }">
+      <RadioGroupOption as="template" v-for="config in configs" :key="config.name" :value="config.name" v-slot="{ active, checked }">
         <div :class="[active ? 'ring-1 ring-offset-2 ring-indigo-500' : '', 'relative block rounded-lg border border-gray-300 bg-white shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between focus:outline-none']">
           <div class="flex items-center">
             <div class="text-sm">
@@ -65,9 +65,6 @@
 </template>
 
 <script setup>
-import AppHead from "@/Components/AppHead";
-import DashboardMain from "@/Components/DashboardMain";
-import { ref } from 'vue'
 import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 
 const configs = [
@@ -84,6 +81,10 @@ const plans = [
   { name: 'docker.4', ram: '4GB', cpus: '4 CPUs', disk: '20 GB SSD disk', price: '$13.99' },
 ]
 
-const selectedPlan = ref(plans[0])
-const selectedConfig = ref(configs[0])
+defineProps({
+  selectedPlan: String,
+  selectedConfig: String,
+});
+
+defineEmits(['onUpdate:selected-plan', 'onUpdate:selected-config'])
 </script>

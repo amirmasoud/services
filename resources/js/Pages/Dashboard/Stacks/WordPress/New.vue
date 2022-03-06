@@ -29,7 +29,7 @@
       </TabList>
       <TabPanels>
         <TabPanel>
-          <Plans />
+          <Plans v-model:selected-config="selectedConfig" v-model:selected-plan="selectedPlan" />
         </TabPanel>
         <TabPanel>
           <Plugins :records="plugins" />
@@ -53,6 +53,10 @@ import Plugins from "@/Components/Stacks/WordPress/Plugins";
 import Themes from "@/Components/Stacks/WordPress/Themes";
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue';
 import { ServerIcon, PuzzleIcon, ViewBoardsIcon, TerminalIcon } from '@heroicons/vue/solid';
+import {ref} from "vue";
+
+const selectedConfig = ref("");
+const selectedPlan = ref("");
 
 defineProps({
   plugins: Object,

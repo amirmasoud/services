@@ -3,9 +3,9 @@
 namespace Domain\Sites\Subscribers;
 
 use Domain\Sites\Models\Site;
-use Illuminate\Contracts\Queue\ShouldBeUniqueUntilProcessing;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Support\Containers\ProcessContainer;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Contracts\Queue\ShouldBeUniqueUntilProcessing;
 
 class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
 {
