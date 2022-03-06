@@ -85,6 +85,4 @@ defineProps({
   selectedPlan: String,
   selectedConfig: String,
 });
-
-defineEmits(['onUpdate:selected-plan', 'onUpdate:selected-config'])
 </script>

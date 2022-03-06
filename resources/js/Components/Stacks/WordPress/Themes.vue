@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <RadioGroup v-model="selectedTheme" class="mb-10 max-w-screen-xl">
+  <RadioGroup v-model="selectedTheme" class="mb-10 max-w-screen-xl" @update:modelValue="(theme) => $emit('update:selected-theme', selectedTheme)">
     <RadioGroupLabel class="sr-only">
       Selected Theme
     </RadioGroupLabel>
@@ -45,11 +45,11 @@ import { StarIcon } from "@heroicons/vue/solid";
 
 let rating = 5;
 
-const selectedTheme = ref("");
 const themeSearch = ref("");
 
 defineProps({
   records: Object,
+  selectedTheme: String,
 });
 
 watch(themeSearch, debounce(function (query) {
