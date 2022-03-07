@@ -18,7 +18,8 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->string('name');
-            $table->json('configs')->nullable();
+            $table->json('properties')->nullable();
+            $table->string('type');
             $table->softDeletes();
             $table->timestamps();
         });

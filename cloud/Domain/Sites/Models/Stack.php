@@ -1,7 +1,8 @@
 <?php
 
-namespace Domain\Stacks\Models;
+namespace Domain\Sites\Models;
 
+use Domain\Sites\Enums\StackTypesEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,10 +16,11 @@ class Stack extends Model
     use LogsActivity;
 
     protected $casts = [
-        'configs' => 'collection',
+        'properties' => 'collection',
+        'type' => StackTypesEnum::class,
     ];
 
-    protected $fillable = ['name', 'configs'];
+    protected $fillable = ['name', 'properties', 'type'];
 
     public function getActivitylogOptions(): LogOptions
     {

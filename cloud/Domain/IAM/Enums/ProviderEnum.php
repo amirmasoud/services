@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums;
+namespace Domain\IAM\Enums;
 
 enum ProviderEnum: string
 {

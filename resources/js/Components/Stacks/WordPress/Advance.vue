@@ -6,7 +6,16 @@
           <button type="button" @click.prevent="(c) => $emit('update:entered-commands', enteredCommands + '\n' + cmd.command)">{{ cmd.display }}</button>
         </span>
       </div>
-      <textarea v-model="enteredCommands" @update:modelValue="(commands) => $emit('update:entered-commands', enteredCommands)" rows="3" class="mt-6 shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"></textarea>
+      <textarea
+        v-model="enteredCommands"
+        @update:modelValue="(commands) => $emit('update:entered-commands', enteredCommands)"
+        spellcheck="false"
+        data-gramm="false"
+        data-gramm_editor="false"
+        data-enable-grammarly="false"
+        rows="3"
+        class="mt-6 shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
+      ></textarea>
     </div>
   </div>
 </template>
