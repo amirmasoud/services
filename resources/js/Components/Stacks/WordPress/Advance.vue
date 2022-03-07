@@ -21,7 +21,6 @@
 </template>
 
 <script setup>
-
 const sampleCommands = [
   {
     'display': '10 random posts',
@@ -40,7 +39,6 @@ const sampleCommands = [
     'command': "wp post create --post_type=page --post_title='A sample page'",
   }
 ];
-
 
 let props = defineProps({
   enteredCommands: String,

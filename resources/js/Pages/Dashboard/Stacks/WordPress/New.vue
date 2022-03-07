@@ -45,6 +45,8 @@
         </TabPanel>
       </TabPanels>
     </TabGroup>
+
+    <Notification :title="notificationTitle" :message="notificationMessage" :show="notificationShow" />
   </DashboardMain>
 </template>
 
@@ -59,6 +61,7 @@ import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue';
 import { ServerIcon, PuzzleIcon, ViewBoardsIcon, TerminalIcon, PaperAirplaneIcon } from '@heroicons/vue/solid';
 import {ref} from "vue";
 import Button from "@/Components/Button";
+import Notification from "@/Components/Notification";
 
 const selectedConfig = ref("");
 const selectedPlan = ref("");
@@ -72,13 +75,32 @@ defineProps({
   // 2 more props
 });
 
+let notificationTitle = ref("");
+let notificationMessage = ref("");
+let notificationShow = ref(false);
+
 const deploy = () => {
-  console.log("Deploying...");
-  console.log(selectedConfig.value);
-  console.log(selectedPlan.value);
-  console.log(selectedPlugins.value);
-  console.log(selectedTheme.value);
-  console.log(enteredCommands.value);
-  console.log('Deployed!');
+  if (selectedPlan.value === "") {
+    notificationTitle.value = "Error";
+    notificationMessage.value = "Please select a plan";
+    notificationShow.value = true;
+    return;
+  }
+
+  if (selectedConfig.value === "") {
+    notificationTitle.value = "Error";
+    notificationMessage.value = "Please select a configuration";
+    notificationShow.value = true;
+    return;
+  }
+
+  if (selectedTheme.value === "") {
+    notificationTitle.value = "Error";
+    notificationMessage.value = "Please select a theme";
+    notificationShow.value = true;
+    return;
+  }
+
+  notificationShow.value = false;
 };
 </script>
