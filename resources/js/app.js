@@ -20,11 +20,15 @@ createInertiaApp({
 
     setup({ el, App, props, plugin }) {
         hljs.registerLanguage('bash', bash);
-        createApp({ render: () => h(App, props) })
-            .use(plugin)
-            .use(hljsVuePlugin)
-            .component("Link", Link)
-            .mount(el);
+
+      const app = createApp({ render: () => h(App, props) });
+
+      app.config.globalProperties.$route = route;
+
+      const rootComponent = app.use(plugin)
+        .use(hljsVuePlugin)
+        .component("Link", Link)
+        .mount(el);
     },
 });
 

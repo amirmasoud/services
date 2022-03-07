@@ -18,7 +18,7 @@ Route::middleware('guest')->group(function () {
 });
 Route::post('logout', [OauthController::class, 'logout'])->middleware('auth')->name('logout');
 
-Route::prefix('dashboard')->middleware('auth')->group(function () {
+Route::prefix('dashboard')->middleware('auth')->name('dashboard.')->group(function () {
     Route::get('/', function () {
         return Inertia::render('Dashboard/Home', [
             'stats' => [
@@ -27,7 +27,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
                 [ 'name' => 'Stopped Sites', 'stat' => Site::whereStatus(ContainerState::STOPPED)->count(), 'previousStat' => '28.62%', 'change' => '4.05%', 'changeType' => 'decrease' ],
             ],
         ]);
-    });
+    })->name('index');
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
 
@@ -41,6 +41,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         Route::post('sites/{site}/restart', 'restart');
     });
 
+    Route::resource('stacks', StackController::class);
     Route::controller(StackController::class)->group(function () {
         Route::get('stacks/wordpress/new', 'newWordPressSite')->name('slacks.wordpress.new');
         Route::get('stacks/plugins', 'plugins')->name('slacks.plugins');

@@ -5,12 +5,25 @@ namespace App\Dashboard\Controllers;
 use App\Dashboard\Requests\PluginSearchRequest;
 use App\Dashboard\Requests\ThemeSearchRequest;
 use App\Dashboard\Requests\WordPressFiltersRequest;
+use App\Dashboard\Resources\StackResource;
+use App\Dashboard\Resources\UI\StackFilterResource;
+use App\Dashboard\Resources\UI\StackTableResource;
 use App\Http\Controllers\Controller;
+use Domain\Sites\Models\Stack;
 use Inertia\Inertia;
 use Support\WordPress\ApiWordPress;
 
 class StackController extends Controller
 {
+    public function index()
+    {
+        return Inertia::render('Dashboard/Stacks/Index', [
+            'records' => StackResource::collection(Stack::all()),
+            'table'   => fn () => new StackTableResource(),
+            'filters' => fn () => new StackFilterResource(),
+        ]);
+    }
+
     public function themes(ThemeSearchRequest $searchRequest): \Inertia\Response
     {
         return Inertia::render('Dashboard/Stacks/Themes', [
