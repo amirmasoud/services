@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Site::class);
             $table->string('name')->index();
+            $table->unsignedBigInteger('price')->default(0);
             $table->json('properties')->nullable();
             $table->string('type')->index();
             $table->softDeletes();
