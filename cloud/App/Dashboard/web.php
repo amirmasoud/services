@@ -1,6 +1,7 @@
 <?php
 
 use App\Dashboard\Controllers\OauthController;
+use App\Dashboard\Controllers\ServerController;
 use App\Dashboard\Controllers\SettingController;
 use App\Dashboard\Controllers\SiteController;
 use App\Dashboard\Controllers\StackController;
@@ -33,15 +34,20 @@ Route::prefix('dashboard')->middleware('auth')->name('dashboard.')->group(functi
 
     Route::resource('users', UserController::class)->except('show');
 
-    Route::resource('sites', SiteController::class);
-    Route::controller(SiteController::class)->group(function () {
-        Route::get('sites/{site}/cli/{command?}', 'cli');
-        Route::post('sites/{site}/start', 'start');
-        Route::post('sites/{site}/stop', 'stop');
-        Route::post('sites/{site}/restart', 'restart');
-    });
+    Route::controller(SiteController::class)
+        ->name('sites.')
+        ->prefix('sites')
+        ->group(function () {
+            Route::resource('servers', ServerController::class);
+            Route::resource('stacks', StackController::class);
 
-    Route::resource('stacks', StackController::class);
+            Route::get('{site}/cli/{command?}', 'cli');
+            Route::post('{site}/start', 'start');
+            Route::post('{site}/stop', 'stop');
+            Route::post('{site}/restart', 'restart');
+    });
+    Route::resource('sites', SiteController::class);
+
     Route::controller(StackController::class)->group(function () {
         Route::get('stacks/wordpress/new', 'newWordPressSite')->name('slacks.wordpress.new');
         Route::get('stacks/plugins', 'plugins')->name('slacks.plugins');

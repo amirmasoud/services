@@ -13,11 +13,11 @@ use Domain\Sites\Models\Stack;
 use Inertia\Inertia;
 use Support\WordPress\ApiWordPress;
 
-class StackController extends Controller
+class ServerController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Dashboard/Sites/Stacks/Index', [
+        return Inertia::render('Dashboard/Sites/Servers/Index', [
             'records' => StackResource::collection(Stack::all()),
             'table'   => fn () => new StackTableResource(),
             'filters' => fn () => new StackFilterResource(),

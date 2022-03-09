@@ -116,26 +116,46 @@
               </MenuItems>
             </transition>
           </Menu>
-          <!-- Navigation -->
           <nav class="px-3 mt-6">
             <div class="space-y-1">
-              <Link
+              <div
                 v-for="item in navigation"
                 :key="item.name"
-                :href="item.href"
-                :class="[$page.component.startsWith(item.component) ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']"
-                :aria-current="$page.component.startsWith(item.component) ? 'page' : undefined"
-              >
-                <component
-                  :is="item.icon"
-                  :class="[$page.component.startsWith(item.component) ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-3 flex-shrink-0 h-6 w-6']"
-                  aria-hidden="true"
-                />
-                {{ item.name }}
-              </Link>
+                >
+                  <Link
+                    :href="item.href"
+                    :class="[$page.component.startsWith(item.component) ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']"
+                    :aria-current="$page.component.startsWith(item.component) ? 'page' : undefined"
+                  >
+                    <component
+                      :is="item.icon"
+                      :class="[$page.component.startsWith(item.component) ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-3 flex-shrink-0 h-6 w-6']"
+                      aria-hidden="true"
+                    />
+                    {{ item.name }}
+                  </Link>
+                  <div class="flex flex-col space-y-1 my-2 ml-6">
+                    <Link
+                      v-for="subItem in item.submenu"
+                      :key="subItem.name"
+                      :href="subItem.href"
+                      :class="[
+                        $page.component.startsWith(subItem.component) ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
+                        'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
+                    ]"
+                      :aria-current="$page.component.startsWith(subItem.component) ? 'page' : undefined"
+                    >
+                      <component
+                        :is="subItem.icon"
+                        :class="[$page.component.startsWith(subItem.component) ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-3 flex-shrink-0 h-5 w-5']"
+                        aria-hidden="true"
+                      />
+                      {{ subItem.name }}
+                    </Link>
+                  </div>
+              </div>
             </div>
             <div class="mt-8">
-              <!-- Secondary navigation -->
               <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="desktop-teams-headline">
                 Departments
               </h3>
@@ -152,9 +172,7 @@
         </div>
       </div>
     </div>
-    <!-- Main column -->
     <div class="flex flex-col w-0 flex-1 overflow-hidden">
-      <!-- Search header -->
       <div class="relative z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200 lg:hidden">
         <button type="button" class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden" @click="sidebarOpen = true">
           <span class="sr-only">Open sidebar</span>
@@ -232,15 +250,19 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
-import { GlobeAltIcon, HomeIcon, MenuAlt1Icon, XIcon } from '@heroicons/vue/outline'
-import { CogIcon, SearchIcon, SelectorIcon, UserIcon, CubeTransparentIcon } from '@heroicons/vue/solid'
+import { GlobeAltIcon, HomeIcon, MenuAlt1Icon, XIcon, ServerIcon, CubeIcon } from '@heroicons/vue/outline'
+import { CogIcon, SearchIcon, SelectorIcon, UserIcon } from '@heroicons/vue/solid'
 import Logo from "@/Shared/Logo";
 
 const navigation = [
   { name: 'Dashboard', href: route('dashboard.index'), icon: HomeIcon, component: 'Dashboard/Home' },
   { name: 'Users', href: route('dashboard.users.index'), icon: UserIcon, component: 'Dashboard/Users' },
-  { name: 'Sites', href: route('dashboard.sites.index'), icon: GlobeAltIcon, component: 'Dashboard/Sites' },
-  { name: 'Stacks', href: route('dashboard.stacks.index'), icon: CubeTransparentIcon, component: 'Dashboard/Stacks' },
+  { name: 'Sites', href: route('dashboard.sites.index'), icon: GlobeAltIcon, component: 'Dashboard/Sites',
+    submenu: [
+      { name: 'Servers', href: route('dashboard.sites.servers.index'), icon: ServerIcon, component: 'Dashboard/Sites/Servers' },
+      { name: 'Stacks', href: route('dashboard.sites.stacks.index'), icon: CubeIcon, component: 'Dashboard/Sites/Stacks' },
+    ]
+  },
   { name: 'Settings', href: route('dashboard.settings.index'), icon: CogIcon, component: 'Dashboard/Settings' },
 ]
 const teams = [

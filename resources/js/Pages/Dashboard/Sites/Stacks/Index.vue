@@ -17,7 +17,7 @@
     <Table
       :records="records"
       :filters="filters"
-      :endpoint="$route('dashboard.stacks.index')"
+      :endpoint="$route('dashboard.sites.stacks.index')"
       :fields="table.fields"
       :actions="table.actions"
     />
