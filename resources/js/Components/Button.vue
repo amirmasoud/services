@@ -1,7 +1,9 @@
 <template>
-  <button
-    :type="type"
-    :disabled="processing"
+  <component
+    :is="href ? 'Link' : 'button'"
+    :type="href ? null : type"
+    :disabled="href ? null : processing"
+    :href="href ? href : null"
     :class="`inline-flex items-center py-2 px-3 text-sm font-medium leading-4 text-white bg-${color}-600 hover:bg-${color}-700 rounded-md border border-transparent focus:ring-2 focus:ring-${color}-500 focus:ring-offset-2 shadow-sm disabled:opacity-50 disabled:cursor-wait focus:outline-none`"
   >
     <TransitionRoot
@@ -19,7 +21,7 @@
       />
     </TransitionRoot>
     <slot />
-  </button>
+  </component>
 </template>
 
 <script setup>
@@ -38,6 +40,10 @@ let props = defineProps({
   color: {
     type: String,
     default: 'indigo',
+  },
+  href: {
+    type: String,
+    default: null,
   },
 });
 </script>

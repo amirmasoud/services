@@ -16,8 +16,7 @@
               </div>
             </TransitionChild>
             <div class="flex-shrink-0 flex items-center px-4">
-              <Logo class="h-8 w-auto text-indigo-600" alt="WordPress Cloud" />
-              <span class="pl-2 font-thin font-sans text-indigo-800">WordPress</span>
+              <Logo class="h-8 w-auto text-indigo-600" alt="Cloud" />
               <span class="pl-1 font-semibold font-sans text-indigo-800">Cloud</span>
             </div>
             <div class="mt-5 flex-1 h-0 overflow-y-auto">
@@ -86,9 +85,8 @@
     <!-- Static sidebar for desktop -->
     <div class="hidden lg:flex lg:flex-shrink-0">
       <div class="flex flex-col w-64 pt-5 pb-4 bg-gray-100">
-        <div class="flex items-center flex-shrink-0 px-6">
-          <Logo class="h-8 w-auto text-indigo-600" alt="WordPress Cloud" />
-          <span class="pl-2 font-thin font-sans text-indigo-800">WordPress</span>
+        <div class="flex items-center justify-center flex-shrink-0 px-6">
+          <Logo class="h-8 w-auto text-indigo-600" alt="Cloud" />
           <span class="pl-1 font-semibold font-sans text-indigo-800">Cloud</span>
         </div>
         <!-- Sidebar component, swap this element with another sidebar if you like -->
@@ -139,14 +137,17 @@
             </transition>
           </Menu>
           <nav class="px-3 mt-6">
-            <div class="space-y-1">
+            <div class="space-y-2">
               <div
                 v-for="item in navigation"
                 :key="item.name"
                 >
                   <Link
                     :href="item.href"
-                    :class="[$page.component.startsWith(item.component) ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']"
+                    :class="[
+                      $page.component.startsWith(item.component) ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
+                      'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
+                    ]"
                     :aria-current="$page.component.startsWith(item.component) ? 'page' : undefined"
                   >
                     <component
@@ -156,7 +157,7 @@
                     />
                     {{ item.name }}
                   </Link>
-                  <div class="flex flex-col space-y-1 my-2 ml-6">
+                  <div v-if="item.submenu || false" class="flex flex-col space-y-2 my-2 ml-6">
                     <Link
                       v-for="subItem in item.submenu"
                       :key="subItem.name"
@@ -200,18 +201,7 @@
           <span class="sr-only">Open sidebar</span>
           <MenuAlt1Icon class="h-6 w-6" aria-hidden="true" />
         </button>
-        <div class="flex-1 flex justify-between px-4 sm:px-6 lg:px-8">
-          <div class="flex-1 flex">
-            <form class="w-full flex md:ml-0" action="#" method="GET">
-              <label for="search-field" class="sr-only">Search</label>
-              <div class="relative w-full text-gray-400 focus-within:text-gray-600">
-                <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none">
-                  <SearchIcon class="h-5 w-5" aria-hidden="true" />
-                </div>
-                <input id="search-field" name="search-field" class="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent focus:placeholder-gray-400 sm:text-sm" placeholder="Search" type="search" />
-              </div>
-            </form>
-          </div>
+        <div class="flex-1 flex justify-end px-4 sm:px-6 lg:px-8">
           <div class="flex items-center">
             <!-- Profile dropdown -->
             <Menu as="div" class="ml-3 relative">
