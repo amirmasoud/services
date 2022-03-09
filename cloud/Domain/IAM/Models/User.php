@@ -5,6 +5,7 @@ namespace Domain\IAM\Models;
 use Domain\IAM\QueryBuilders\UserQueryBuilder;
 use Domain\Sites\Models\Server;
 use Domain\Sites\Models\Site;
+use Domain\Sites\Models\Stack;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -36,6 +37,11 @@ class User extends Authenticatable
     public function servers(): HasMany
     {
         return $this->hasMany(Server::class);
+    }
+
+    public function stacks(): HasMany
+    {
+        return $this->hasMany(Stack::class);
     }
 
     public function sites(): HasMany
