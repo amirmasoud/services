@@ -4,11 +4,11 @@ namespace App\Dashboard\Resources\UI;
 
 use App\Dashboard\UI\Table\ActionTableUI;
 use App\Dashboard\UI\Table\FieldTableUI;
-use Domain\Sites\Models\Stack;
+use Domain\Sites\Models\Site;
 
-class StackTableResource extends BaseUI
+class ServerTableResource extends BaseUI
 {
-    public function __construct(public Stack $site = new Stack())
+    public function __construct(public Site $site = new Site)
     {
         parent::__construct($site);
     }
@@ -18,14 +18,14 @@ class StackTableResource extends BaseUI
         return [
             'fields' => [
                 new FieldTableUI('name', 'Name'),
-                new FieldTableUI('type', 'Type'),
+                new FieldTableUI('price', 'Host'),
             ],
             'actions' => array_combine(
                 ['edit', 'delete', 'create'],
                 [
-                    new ActionTableUI('edit', 'Edit', 'dashboard.sites.stacks.edit'),
-                    new ActionTableUI('delete', 'Delete', 'dashboard.sites.stacks.destroy'),
-                    new ActionTableUI('create', 'Create', 'dashboard.sites.stacks.create'),
+                    new ActionTableUI('edit', 'Edit', 'dashboard.sites.servers.edit'),
+                    new ActionTableUI('delete', 'Delete', 'dashboard.sites.servers.destroy'),
+                    new ActionTableUI('create', 'Create', 'dashboard.sites.servers.create'),
                 ]
             ),
         ];

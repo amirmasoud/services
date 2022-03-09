@@ -13,12 +13,6 @@ class UserTableResource extends BaseUI
         parent::__construct($user);
     }
 
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
     public function toArray($request)
     {
         return [
@@ -30,9 +24,9 @@ class UserTableResource extends BaseUI
             'actions' => array_combine(
                 ['edit', 'delete', 'create'],
                 [
-                    new ActionTableUI('edit', 'Edit', '/dashboard/users/{id}/edit'),
-                    new ActionTableUI('delete', 'Delete', '/dashboard/users/{id}'),
-                    new ActionTableUI('create', 'Create', '/dashboard/users/create'),
+                    new ActionTableUI('edit', 'Edit', 'dashboard.users.edit'),
+                    new ActionTableUI('delete', 'Delete', 'dashboard.users.destroy'),
+                    new ActionTableUI('create', 'Create', 'dashboard.users.create'),
                 ]
             )
         ];

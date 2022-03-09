@@ -13,12 +13,6 @@ class SiteTableResource extends BaseUI
         parent::__construct($site);
     }
 
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
     public function toArray($request)
     {
         return [
@@ -29,10 +23,10 @@ class SiteTableResource extends BaseUI
             'actions' => array_combine(
                 ['edit', 'delete', 'details', 'create'],
                 [
-                    new ActionTableUI('edit', 'Edit', '/dashboard/sites/{id}/edit'),
-                    new ActionTableUI('delete', 'Delete', '/dashboard/sites/{id}'),
-                    new ActionTableUI('details', 'Details', '/dashboard/sites/{id}'),
-                    new ActionTableUI('create', 'Create', '/dashboard/sites/create'),
+                    new ActionTableUI('edit', 'Edit', 'dashboard.sites.edit'),
+                    new ActionTableUI('delete', 'Delete', 'dashboard.sites.destroy'),
+                    new ActionTableUI('show', 'Details', 'dashboard.sites.show'),
+                    new ActionTableUI('create', 'Create', 'dashboard.sites.create'),
                 ]
             ),
         ];

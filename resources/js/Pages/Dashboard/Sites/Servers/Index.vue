@@ -2,21 +2,17 @@
   <AppHead title="Sites" />
 
   <DashboardMain>
-    <template #header>Sites</template>
+    <template #header>Servers</template>
     <template #buttons>
       <Button>
-        <Link :href="table.actions.create.link">New Site</Link>
+        <Link :href="table.actions.create.link">New server</Link>
       </Button>
-    </template>
-    <template #sub-header></template>
-    <template #sub-header-content>
-      <Stats :stats="stats" />
     </template>
 
     <Table
       :records="records"
       :filters="filters"
-      endpoint="/dashboard/sites"
+      :endpoint="$route('dashboard.sites.servers.index')"
       :fields="table.fields"
       :actions="table.actions"
     />
@@ -27,7 +23,6 @@
 import Table from "@/Components/Table";
 import AppHead from "@/Components/AppHead";
 import DashboardMain from "@/Components/DashboardMain";
-import Stats from "@/Components/stats";
 import Button from "@/Components/Button";
 
 defineProps({ records: Object, filters: Object, table: Object, stats: Object });

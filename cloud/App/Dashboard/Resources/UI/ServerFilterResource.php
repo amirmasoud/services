@@ -4,13 +4,13 @@ namespace App\Dashboard\Resources\UI;
 
 use App\Dashboard\UI\Filter\InputFilterUI;
 use App\Dashboard\UI\Filter\ListFilterUI;
-use Domain\Sites\Models\Site;
+use Domain\Sites\Models\Server;
 
-class SiteFilterResource extends BaseUI
+class ServerFilterResource extends BaseUI
 {
-    public function __construct(public Site $site = new Site)
+    public function __construct(public Server $server = new Server)
     {
-        parent::__construct($site);
+        parent::__construct($server);
     }
 
     public function toArray($request)
