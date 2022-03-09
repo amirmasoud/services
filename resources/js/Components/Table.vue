@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between mb-4">
+  <div class="flex flex-col sm:flex-row justify-between sm:items-end space-y-4 mb-4">
     <div v-for="filter in props.filters">
       <InputFilter v-if="filter.type === 'input'" :filter="filter" />
       <ListFilter v-else-if="filter.type === 'list'" :filter="filter" />
