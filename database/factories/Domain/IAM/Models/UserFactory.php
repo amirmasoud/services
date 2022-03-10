@@ -1,17 +1,16 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Domain\IAM\Models;
 
+use Domain\IAM\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use function now;
 
 class UserFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
+    protected $model = User::class;
+
     public function definition()
     {
         return [
@@ -23,11 +22,6 @@ class UserFactory extends Factory
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
     public function unverified()
     {
         return $this->state(function (array $attributes) {
