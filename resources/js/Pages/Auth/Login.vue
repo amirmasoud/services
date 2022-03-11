@@ -1,19 +1,14 @@
 <template>
   <AppHead title="Login" />
-  <div class="flex flex-col justify-center py-12 sm:px-6 lg:px-8 min-h-screen bg-gray-50">
+  <div class="flex flex-col justify-center py-12 sm:px-6 lg:px-8 min-h-screen bg-gray-50 dark:bg-slate-900">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-      <img
-        class="mx-auto w-auto h-12"
-        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-        alt="Workflow"
-      >
-      <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900">
+      <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900 dark:text-white">
         Sign in to your account
       </h2>
     </div>
 
     <div class="sm:mx-auto mt-8 sm:w-full sm:max-w-md">
-      <div class="py-8 px-4 sm:px-10 bg-white sm:rounded-lg shadow">
+      <div class="py-8 px-4 sm:px-10 bg-white dark:bg-slate-800 sm:rounded-lg shadow">
         <form
           class="space-y-6"
           action="#"
@@ -32,7 +27,7 @@
           <div>
             <label
               for="password"
-              class="block text-sm font-medium text-gray-700"
+              class="block text-sm font-medium text-gray-700 dark:text-slate-300"
             >
               Password
             </label>
@@ -56,11 +51,11 @@
                 v-model="form.remember"
                 name="remember-me"
                 type="checkbox"
-                class="w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"
+                class="w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500 dark:bg-slate-800 dark-border-gray-900 dark:focus:ring-indigo-900"
               >
               <label
                 for="remember-me"
-                class="block ml-2 text-sm text-gray-900"
+                class="block ml-2 text-sm text-gray-900 dark:text-slate-300"
               >
                 Remember me
               </label>
@@ -69,7 +64,7 @@
             <div class="text-sm">
               <a
                 href="#"
-                class="font-medium text-indigo-600 hover:text-indigo-500"
+                class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
               >
                 Forgot your password?
               </a>
@@ -147,10 +142,6 @@
 </template>
 
 <script setup>
-import Facebook from "@/Components/Icons/Facebook";
-import Twitter from "@/Components/Icons/Twitter";
-import GitHub from "@/Components/Icons/GitHub";
-import Google from "@/Components/Icons/Google";
 import { useForm } from "@inertiajs/inertia-vue3";
 import Input from "@/Components/Forms/Inputs/Input";
 import Button from "@/Components/Forms/Buttons/Button";
