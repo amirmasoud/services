@@ -37,6 +37,7 @@ return new class extends Migration
             $table->string('status')->default(ServerStatusEnum::OFFLINE->value);
             $table->string('notes')->nullable();
             // Polymorph tags with Spatie/laravel-tags
+            $table->softDeletes();
             $table->timestamps();
         });
     }
