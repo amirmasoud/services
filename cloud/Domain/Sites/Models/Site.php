@@ -23,6 +23,8 @@ class Site extends Model
         'name',
         'host',
         'status',
+        'server_id',
+        'stack_id',
     ];
 
     protected $casts = [

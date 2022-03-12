@@ -4,9 +4,7 @@
   <DashboardMain>
     <template #header>Sites</template>
     <template #buttons>
-      <Button>
-        <Link :href="table.actions.create.link">New Site</Link>
-      </Button>
+      <Button :href="$route(table.actions.create.link)">New site</Button>
     </template>
     <template #sub-header></template>
     <template #sub-header-content>

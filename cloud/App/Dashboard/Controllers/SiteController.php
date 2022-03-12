@@ -4,7 +4,9 @@ namespace App\Dashboard\Controllers;
 
 use App\Dashboard\Requests\SiteRequest;
 use App\Dashboard\Requests\SiteSearchRequest;
+use App\Dashboard\Resources\ServerResource;
 use App\Dashboard\Resources\SiteResource;
+use App\Dashboard\Resources\StackResource;
 use App\Dashboard\Resources\UI\SiteFilterResource;
 use App\Dashboard\Resources\UI\SiteStatResource;
 use App\Dashboard\Resources\UI\SiteTableResource;
@@ -33,7 +35,10 @@ class SiteController extends Controller
 
     public function create(): Response
     {
-        return Inertia::render('Dashboard/Sites/Create');
+        return Inertia::render('Dashboard/Sites/Create', [
+            'servers' => ServerResource::collection(Auth::user()->servers()->get()),
+            'stacks'  => StackResource::collection(Auth::user()->stacks()->get()),
+        ]);
     }
 
     public function store(SiteRequest $request): RedirectResponse

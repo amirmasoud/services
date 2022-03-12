@@ -92,7 +92,7 @@
     title="No records"
     description="Get started by creating a new record"
     button="New Record"
-    :link="actions.create.link"
+    :link="$route(actions.create.link)"
   />
 </template>
 
