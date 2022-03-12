@@ -39,11 +39,6 @@ class Stack extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function site(): BelongsTo
-    {
-        return $this->belongsTo(Site::class);
-    }
-
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

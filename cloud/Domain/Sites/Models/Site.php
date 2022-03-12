@@ -35,9 +35,14 @@ class Site extends Model
         'restarted',
     ];
 
-    public function stacks(): HasMany
+    public function stack(): belongsTo
     {
-        return $this->hasMany(Stack::class);
+        return $this->belongsTo(Stack::class);
+    }
+
+    public function server(): belongsTo
+    {
+        return $this->belongsTo(Server::class);
     }
 
     public function user(): BelongsTo

@@ -21,8 +21,6 @@ class PropertiesCast implements Castable
                 $data = collect(json_decode($value))->toArray();
 
                 return match (StackTypesEnum::tryFrom($attributes['type'])) {
-                    StackTypesEnum::SERVER => new WordPressServerStackPropertiesData($data),
-                    StackTypesEnum::SERVICE => new WordPressServiceStackPropertiesData($data),
                     StackTypesEnum::WORDPRESS => new WordPressPropertiesData($data),
                     default => throw new Exception('Unexpected match value'),
                 };

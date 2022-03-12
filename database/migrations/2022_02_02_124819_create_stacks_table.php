@@ -18,7 +18,6 @@ return new class extends Migration
         Schema::create('stacks', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Site::class);
             $table->string('name')->index();
             $table->unsignedBigInteger('price')->default(0);
             $table->json('properties')->nullable();

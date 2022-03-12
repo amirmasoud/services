@@ -12,7 +12,7 @@ class WordPressPropertiesData extends DataTransferObject
 
     public string $advance = '';
 
-    public WordPressServiceStackPropertiesData $serviceStack;
+//    public WordPressServiceStackPropertiesData $serviceStack;
 
-    public WordPressServerStackPropertiesData $serverStack;
+//    public WordPressServerStackPropertiesData $serverStack;
 }

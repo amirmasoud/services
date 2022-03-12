@@ -11,6 +11,7 @@ class StackResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'price' => $this->price,
             'type' => $this->type,
             'properties' => $this->properties,
         ];
