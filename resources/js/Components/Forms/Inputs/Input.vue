@@ -1,7 +1,7 @@
 <template>
   <label
     :for="id"
-    class="block text-sm font-medium text-gray-700 dark:text-slate-300"
+    class="block text-sm font-medium text-gray-700"
   >{{ label }}</label>
   <div class="mt-1">
     <input

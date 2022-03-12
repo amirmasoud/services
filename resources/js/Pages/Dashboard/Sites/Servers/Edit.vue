@@ -1,13 +1,10 @@
 <template>
-  <AppHead title="Create new server" />
+  <AppHead :title="`Edit ${ form.name } site`" />
 
   <DashboardMain>
-    <template #header>Servers</template>
-    <template #buttons></template>
-    <template #sub-header></template>
-    <template #sub-header-content></template>
+    <template #header>Edit site {{ resource.data.name }}</template>
 
-    <form @submit.prevent="form.post($route('dashboard.sites.servers.store'))">
+    <form @submit.prevent="form.put($route('dashboard.sites.servers.update', [resource.data]))">
       <div class="overflow-hidden sm:rounded-md shadow">
         <div class="sm:p-6 py-5 px-4 bg-white">
           <div class="grid grid-cols-6 gap-6">
@@ -159,20 +156,9 @@ import Button from "@/Components/Forms/Buttons/Button";
 import AppHead from "@/Components/AppHead";
 import DashboardMain from "@/Components/DashboardMain";
 
-let form = useForm({
-  name: null,
-  price: null,
-  ip: null,
-  port: null,
-  ram: null,
-  ram_unit: null,
-  cpu: null,
-  disk: null,
-  disk_type: null,
-  disk_unit: null,
-  os: null,
-  os_version: null,
-  status: null,
-  notes: null,
+let props = defineProps({
+  resource: Object,
 });
+
+let form = useForm(`EditServer: ${props.resource.id}`, props.resource.data);
 </script>

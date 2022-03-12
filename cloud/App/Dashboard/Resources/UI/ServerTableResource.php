@@ -18,7 +18,7 @@ class ServerTableResource extends BaseUI
         return [
             'fields' => [
                 new FieldTableUI('name', 'Name'),
-                new FieldTableUI('price', 'Host'),
+                new FieldTableUI('price', 'Price'),
             ],
             'actions' => array_combine(
                 ['edit', 'delete', 'create'],

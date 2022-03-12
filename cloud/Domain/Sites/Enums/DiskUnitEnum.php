@@ -4,9 +4,9 @@ namespace Domain\Sites\Enums;
 
 enum DiskUnitEnum: string
 {
-    case MB = 'gb';
-    case GB = 'mb';
-    case TB = 'tb';
+    case MB = 'GB';
+    case GB = 'MB';
+    case TB = 'TB';
 
     public function label(): string
     {

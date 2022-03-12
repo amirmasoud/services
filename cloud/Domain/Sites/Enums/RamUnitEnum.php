@@ -4,8 +4,8 @@ namespace Domain\Sites\Enums;
 
 enum RamUnitEnum: string
 {
-    case MB = 'gb';
-    case GB = 'mb';
+    case MB = 'GB';
+    case GB = 'MB';
 
     public function label(): string
     {

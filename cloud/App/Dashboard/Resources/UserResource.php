@@ -2,8 +2,6 @@
 
 namespace App\Dashboard\Resources;
 
-use App\UI\DashboardHeading\Button as DashboardHeadingButton;
-use App\UI\DashboardHeading\Item as DashboardHeadingItem;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -14,12 +12,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 class UserResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
     public function toArray($request)
     {
         return [

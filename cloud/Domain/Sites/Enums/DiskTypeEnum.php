@@ -4,8 +4,8 @@ namespace Domain\Sites\Enums;
 
 enum DiskTypeEnum: string
 {
-    case SSD = 'ssd';
-    case HDD = 'hdd';
+    case SSD = 'SSD';
+    case HDD = 'HDD';
 
     public function label(): string
     {
