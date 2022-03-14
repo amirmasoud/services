@@ -2,10 +2,12 @@
   <AppHead title="Create new site" />
 
   <DashboardMain>
-    <template #header>Sites</template>
-    <template #buttons></template>
-    <template #sub-header></template>
-    <template #sub-header-content></template>
+    <template #header>
+      Sites
+    </template>
+    <template #buttons />
+    <template #sub-header />
+    <template #sub-header-content />
 
     <form @submit.prevent="form.post($route('dashboard.sites.stacks.store'))">
       <div class="overflow-hidden sm:rounded-md shadow">
@@ -63,7 +65,7 @@
 </template>
 
 <script setup>
-import { useForm } from '@inertiajs/inertia-vue3';
+import { useForm } from "@inertiajs/inertia-vue3";
 import Input from "@/Components/Forms/Inputs/Input";
 import Button from "@/Components/Forms/Buttons/Button";
 import AppHead from "@/Components/AppHead";

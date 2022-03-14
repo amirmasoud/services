@@ -14,8 +14,8 @@
 <script setup>
 import AppHead from "@/Components/AppHead";
 import DashboardMain from "@/Components/DashboardMain";
-import {Inertia} from "@inertiajs/inertia";
-import {onBeforeUnmount, onMounted} from "vue";
+import { Inertia } from "@inertiajs/inertia";
+import { defineProps, onBeforeUnmount, onMounted } from "vue";
 
 defineProps({
   info: Boolean,

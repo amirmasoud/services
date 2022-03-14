@@ -11,6 +11,7 @@ use App\Dashboard\Resources\UI\SiteFilterResource;
 use App\Dashboard\Resources\UI\SiteStatResource;
 use App\Dashboard\Resources\UI\SiteTableResource;
 use App\Http\Controllers\Controller;
+use Domain\Sites\Enums\StackTypesEnum;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
 use Support\Containers\ProcessContainer;
@@ -38,6 +39,7 @@ class SiteController extends Controller
         return Inertia::render('Dashboard/Sites/Create', [
             'servers' => ServerResource::collection(Auth::user()->servers()->get()),
             'stacks'  => StackResource::collection(Auth::user()->stacks()->get()),
+            'types'   => array_map(fn (StackTypesEnum $stack) => ['value' => $stack->value, 'label' => $stack->label(), 'icon' => $stack->icon()], StackTypesEnum::cases()), // @todo refactor to resources
         ]);
     }
 

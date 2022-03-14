@@ -27,7 +27,7 @@ class StackController extends Controller
 
     public function create(): Response
     {
-        return Inertia::render('Dashboard/Sites/Stacks/Create');
+        return Inertia::render('Dashboard/Sites/Stacks/New');
     }
 
     public function store(StackRequest $request): RedirectResponse

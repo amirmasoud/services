@@ -32,6 +32,58 @@
       </TabList>
       <TabPanels>
         <TabPanel>
+          <form @submit.prevent="form.post($route('dashboard.sites.stacks.store'))">
+            <div class="overflow-hidden sm:rounded-md shadow">
+              <div class="sm:p-6 py-5 px-4 bg-white">
+                <div class="grid grid-cols-6 gap-6">
+                  <div class="col-span-6 sm:col-span-4">
+                    <Input
+                      v-model="form.name"
+                      label="Name"
+                      name="name"
+                      :form="form"
+                    />
+                  </div>
+
+                  <div class="col-span-6 sm:col-span-4">
+                    <Input
+                      v-model="form.price"
+                      label="Price"
+                      name="price"
+                      :form="form"
+                    />
+                  </div>
+
+                  <div class="col-span-6 sm:col-span-4">
+                    <Input
+                      v-model="form.properties"
+                      label="Properties"
+                      name="properties"
+                      :form="form"
+                    />
+                  </div>
+
+                  <div class="col-span-6 sm:col-span-4">
+                    <Input
+                      v-model="form.type"
+                      label="Type"
+                      name="type"
+                      :form="form"
+                    />
+                  </div>
+
+                  <div class="col-span-6 sm:col-span-4">
+                    <Button
+                      type="submit"
+                      :form="form"
+                    >
+                      Submit
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
           <Plans v-model:selected-config="selectedConfig" v-model:selected-plan="selectedPlan" />
         </TabPanel>
         <TabPanel>
@@ -62,6 +114,7 @@ import { ServerIcon, PuzzleIcon, ViewBoardsIcon, TerminalIcon, PaperAirplaneIcon
 import {ref} from "vue";
 import Button from "@/Components/Button";
 import Notification from "@/Components/Notification";
+import { useForm } from "@inertiajs/inertia-vue3";
 
 const selectedConfig = ref("");
 const selectedPlan = ref("");
@@ -73,6 +126,13 @@ defineProps({
   plugins: Object,
   themes: Object,
   // 2 more props
+});
+
+let form = useForm({
+  name: null,
+  host: null,
+  server_id: null,
+  stack_id: null,
 });
 
 let notificationTitle = ref("");
