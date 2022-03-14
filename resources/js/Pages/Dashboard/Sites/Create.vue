@@ -2,17 +2,10 @@
   <AppHead title="New site" />
 
   <DashboardMain>
-    <template #header>
-      Sites
-    </template>
+    <template #header> Sites </template>
 
-    <RadioGroup
-      v-model="selectedStack"
-      class="mb-10 max-w-screen-xl"
-    >
-      <RadioGroupLabel class="sr-only">
-        Selected Stack Type
-      </RadioGroupLabel>
+    <RadioGroup v-model="selectedStack" class="mb-10 max-w-screen-xl">
+      <RadioGroupLabel class="sr-only"> Selected Stack Type </RadioGroupLabel>
       <div class="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-6 gap-4">
         <RadioGroupOption
           v-for="type in types"
@@ -21,29 +14,28 @@
           as="template"
           :value="type.value"
         >
-          <div :class="[active ? 'ring-1 ring-offset-2 ring-indigo-500' : '', 'relative block rounded-lg border border-gray-300 bg-white shadow-sm cursor-pointer hover:border-gray-400 sm:flex sm:justify-between focus:outline-none']">
+          <div
+            :class="[
+              active ? 'ring-1 ring-offset-2 ring-indigo-500' : '',
+              'relative block rounded-lg border border-gray-300 bg-white shadow-sm cursor-pointer hover:border-gray-400 sm:flex sm:justify-between focus:outline-none',
+            ]"
+          >
             <div class="flex items-center flex-col">
-              <img
-                :src="type.icon"
-                class="rounded-t-lg p-4"
-              >
+              <img :src="type.icon" class="rounded-t-lg p-4" />
               <div class="block w-full px-4 pt-2 pb-4">
-                <RadioGroupLabel
-                  as="p"
-                  class="font-medium text-gray-900"
-                >
+                <RadioGroupLabel as="p" class="font-medium text-gray-900">
                   <span v-html="type.label" />
                 </RadioGroupLabel>
-                <SwitchDescription
-                  as="span"
-                  class="text-sm text-gray-500"
-                >
+                <SwitchDescription as="span" class="text-sm text-gray-500">
                   LOL
                 </SwitchDescription>
               </div>
             </div>
             <div
-              :class="[checked ? 'border-indigo-500' : 'border-transparent', 'absolute -inset-px rounded-lg border-2 pointer-events-none']"
+              :class="[
+                checked ? 'border-indigo-500' : 'border-transparent',
+                'absolute -inset-px rounded-lg border-2 pointer-events-none',
+              ]"
               aria-hidden="true"
             />
           </div>
@@ -51,11 +43,8 @@
       </div>
     </RadioGroup>
 
-
     <RadioGroup v-model="selectedServer">
-      <RadioGroupLabel class="sr-only">
-        Server size
-      </RadioGroupLabel>
+      <RadioGroupLabel class="sr-only"> Server size </RadioGroupLabel>
       <div class="space-y-4">
         <RadioGroupOption
           v-for="server in servers.data"
@@ -64,30 +53,30 @@
           as="div"
           :value="server.id"
         >
-          <div :class="[active ? 'ring-1 ring-offset-2 ring-indigo-500' : '', 'relative block rounded-lg border border-gray-300 bg-white shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between focus:outline-none']">
+          <div
+            :class="[
+              active ? 'ring-1 ring-offset-2 ring-indigo-500' : '',
+              'relative block rounded-lg border border-gray-300 bg-white shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between focus:outline-none',
+            ]"
+          >
             <div class="flex items-center">
               <div class="text-sm">
-                <RadioGroupLabel
-                  as="p"
-                  class="font-medium text-gray-900"
-                >
+                <RadioGroupLabel as="p" class="font-medium text-gray-900">
                   {{ server.name }}
                 </RadioGroupLabel>
-                <RadioGroupDescription
-                  as="div"
-                  class="text-gray-500"
-                >
+                <RadioGroupDescription as="div" class="text-gray-500">
                   <p class="sm:inline">
-                    {{ server.ram }}{{ server.ram_unit }} / {{ server.cpu }} Core
+                    {{ server.ram }}{{ server.ram_unit }} /
+                    {{ server.cpu }} Core
                   </p>
-                  {{ ' ' }}
-                  <span
-                    class="hidden sm:inline sm:mx-1"
-                    aria-hidden="true"
-                  >&middot;</span>
-                  {{ ' ' }}
+                  {{ " " }}
+                  <span class="hidden sm:inline sm:mx-1" aria-hidden="true"
+                    >&middot;</span
+                  >
+                  {{ " " }}
                   <p class="sm:inline">
-                    {{ server.disk }}{{ server.disk_unit }} {{ server.disk_type }}
+                    {{ server.disk }}{{ server.disk_unit }}
+                    {{ server.disk_type }}
                   </p>
                 </RadioGroupDescription>
               </div>
@@ -97,14 +86,15 @@
               class="mt-2 flex text-sm sm:mt-0 sm:block sm:ml-4 sm:text-right"
             >
               <div class="font-medium text-gray-900">
-                {{ ! server.price ? 'Free' : server.price }}
+                {{ !server.price ? "Free" : server.price }}
               </div>
-              <div class="ml-1 text-gray-500 sm:ml-0">
-                /mo
-              </div>
+              <div class="ml-1 text-gray-500 sm:ml-0">/mo</div>
             </RadioGroupDescription>
             <div
-              :class="[checked ? 'border-indigo-500' : 'border-transparent', 'absolute -inset-px rounded-lg border-2 pointer-events-none']"
+              :class="[
+                checked ? 'border-indigo-500' : 'border-transparent',
+                'absolute -inset-px rounded-lg border-2 pointer-events-none',
+              ]"
               aria-hidden="true"
             />
           </div>
@@ -112,7 +102,7 @@
       </div>
     </RadioGroup>
 
-    <br>
+    <br />
 
     <form @submit.prevent="form.post('/dashboard/sites')">
       <div class="overflow-hidden sm:rounded-md shadow">
@@ -140,7 +130,8 @@
               <label
                 for="servers"
                 class="block text-sm font-medium text-gray-700"
-              >Server</label>
+                >Server</label
+              >
               <select
                 id="servers"
                 v-model="form.server_id"
@@ -161,7 +152,8 @@
               <label
                 for="stacks"
                 class="block text-sm font-medium text-gray-700"
-              >Server</label>
+                >Server</label
+              >
               <select
                 id="stacks"
                 v-model="form.stack_id"
@@ -179,12 +171,7 @@
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-              <Button
-                type="submit"
-                :form="form"
-              >
-                Submit
-              </Button>
+              <Button type="submit" :form="form"> Submit </Button>
             </div>
           </div>
         </div>
@@ -199,7 +186,13 @@ import Input from "@/Components/Forms/Inputs/Input";
 import Button from "@/Components/Forms/Buttons/Button";
 import AppHead from "@/Components/AppHead";
 import DashboardMain from "@/Components/DashboardMain";
-import { RadioGroup, RadioGroupLabel, RadioGroupOption, SwitchDescription, RadioGroupDescription } from "@headlessui/vue";
+import {
+  RadioGroup,
+  RadioGroupLabel,
+  RadioGroupOption,
+  SwitchDescription,
+  RadioGroupDescription,
+} from "@headlessui/vue";
 import { ref, defineProps } from "vue";
 
 let props = defineProps({

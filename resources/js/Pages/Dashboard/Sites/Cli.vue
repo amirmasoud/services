@@ -5,7 +5,7 @@
     <template #header>Cli - {{ record.data.name }}</template>
 
     <div class="my-y rounded-xl shadow overflow-hidden">
-      <highlightjs language='bash' :code="output" />
+      <highlightjs language="bash" :code="output" />
     </div>
   </DashboardMain>
 </template>
@@ -13,8 +13,8 @@
 <script setup>
 import AppHead from "@/Components/AppHead";
 import DashboardMain from "@/Components/DashboardMain";
-import {Inertia} from "@inertiajs/inertia";
-import {onMounted} from "vue";
+import { Inertia } from "@inertiajs/inertia";
+import { onMounted } from "vue";
 
 let props = defineProps({ record: Object, output: String });
 

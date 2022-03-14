@@ -1,51 +1,76 @@
 <template>
-  <div class="flex flex-col sm:flex-row justify-between sm:items-end space-y-4 mb-4">
+  <div
+    class="flex flex-col sm:flex-row justify-between sm:items-end space-y-4 mb-4"
+  >
     <div v-for="filter in props.filters">
       <InputFilter v-if="filter.type === 'input'" :filter="filter" />
       <ListFilter v-else-if="filter.type === 'list'" :filter="filter" />
     </div>
   </div>
-  <div v-if="records.data.length" class="rounded-lg bg-white overflow-hidden shadow">
+  <div
+    v-if="records.data.length"
+    class="rounded-lg bg-white overflow-hidden shadow"
+  >
     <table class="min-w-full divide-y divide-gray-200">
       <thead class="bg-gray-50">
-      <tr>
-        <th
-          v-for="field in fields"
-          :key="field.name"
-          scope="col"
-          class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
-        >
-          {{ field.label }}
-        </th>
-        <th
-          scope="col"
-          class="relative py-3 px-6"
-        >
-          <span class="sr-only">Actions</span>
-        </th>
-      </tr>
+        <tr>
+          <th
+            v-for="field in fields"
+            :key="field.name"
+            scope="col"
+            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+          >
+            {{ field.label }}
+          </th>
+          <th scope="col" class="relative py-3 px-6">
+            <span class="sr-only">Actions</span>
+          </th>
+        </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
-      <tr
-        v-for="record in records.data"
-        :key="record.id"
-      >
-        <td
-          v-for="field in fields"
-          :key="field.name"
-          class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
-        >
-          {{ record[field.name] }}
-        </td>
-        <td class="py-4 px-6 space-x-6 text-sm font-medium text-right whitespace-nowrap">
-          <Link v-if="actions.hasOwnProperty('details')" :href="$route(actions.details.link, record)" method="get" as="button" class="text-indigo-600 hover:text-indigo-900">Details</Link>
-          <Link v-if="actions.hasOwnProperty('edit')" :href="$route(actions.edit.link, record)" method="get" as="button" class="text-indigo-600 hover:text-indigo-900">Edit</Link>
-          <Link v-if="actions.hasOwnProperty('delete')" :href="$route(actions.delete.link, record)" method="delete" as="button" type="button" class="text-indigo-600 hover:text-indigo-900">Delete</Link>
-        </td>
-      </tr>
+        <tr v-for="record in records.data" :key="record.id">
+          <td
+            v-for="field in fields"
+            :key="field.name"
+            class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
+          >
+            {{ record[field.name] }}
+          </td>
+          <td
+            class="py-4 px-6 space-x-6 text-sm font-medium text-right whitespace-nowrap"
+          >
+            <Link
+              v-if="actions.hasOwnProperty('details')"
+              :href="$route(actions.details.link, record)"
+              method="get"
+              as="button"
+              class="text-indigo-600 hover:text-indigo-900"
+              >Details</Link
+            >
+            <Link
+              v-if="actions.hasOwnProperty('edit')"
+              :href="$route(actions.edit.link, record)"
+              method="get"
+              as="button"
+              class="text-indigo-600 hover:text-indigo-900"
+              >Edit</Link
+            >
+            <Link
+              v-if="actions.hasOwnProperty('delete')"
+              :href="$route(actions.delete.link, record)"
+              method="delete"
+              as="button"
+              type="button"
+              class="text-indigo-600 hover:text-indigo-900"
+              >Delete</Link
+            >
+          </td>
+        </tr>
       </tbody>
     </table>
-    <div class="flex justify-between items-center py-3 px-4 sm:px-6 bg-white border-t border-gray-200">
+    <div
+      class="flex justify-between items-center py-3 px-4 sm:px-6 bg-white border-t border-gray-200"
+    >
       <div class="flex sm:hidden flex-1 justify-between">
         <Component
           :is="records.links.prev ? 'Link' : 'span'"
@@ -78,14 +103,14 @@
       </div>
     </div>
   </div>
-<!--  <NoResult-->
-<!--    v-else-if="! records.data.length && ! _.isEmpty(filterData)"-->
-<!--    class="mt-20"-->
-<!--    title="Nothing found"-->
-<!--    description="Remove filters to see all records"-->
-<!--    button="Remove filters"-->
-<!--    @remove-filters="removeFilters"-->
-<!--  />-->
+  <!--  <NoResult-->
+  <!--    v-else-if="! records.data.length && ! _.isEmpty(filterData)"-->
+  <!--    class="mt-20"-->
+  <!--    title="Nothing found"-->
+  <!--    description="Remove filters to see all records"-->
+  <!--    button="Remove filters"-->
+  <!--    @remove-filters="removeFilters"-->
+  <!--  />-->
   <Empty
     v-else
     class="mt-20"
@@ -97,12 +122,12 @@
 </template>
 
 <script setup>
-import { onMounted, watch } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
-import Paginator from '@/Components/Paginator';
+import { onMounted, watch } from "vue";
+import { Inertia } from "@inertiajs/inertia";
+import Paginator from "@/Components/Paginator";
 import debounce from "lodash/debounce";
 import Empty from "@/Components/Empty";
-import { replaceRoute } from '@/Services/route';
+import { replaceRoute } from "@/Services/route";
 import InputFilter from "@/Components/Filters/InputFilter";
 import ListFilter from "@/Components/Filters/ListFilter";
 
@@ -122,10 +147,17 @@ onMounted(() => {
   }
 });
 
-watch(props.filters, debounce(function (filter) {
-  for (let idx in props.filters) {
-    filterData[filter[idx].name] = filter[idx].value;
-  }
-  Inertia.get(props.endpoint, filterData, { preserveState: true, replace: true, only: ['records'] });
-}, 300));
+watch(
+  props.filters,
+  debounce(function (filter) {
+    for (let idx in props.filters) {
+      filterData[filter[idx].name] = filter[idx].value;
+    }
+    Inertia.get(props.endpoint, filterData, {
+      preserveState: true,
+      replace: true,
+      only: ["records"],
+    });
+  }, 300)
+);
 </script>

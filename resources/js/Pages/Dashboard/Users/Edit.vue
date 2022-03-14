@@ -1,5 +1,5 @@
 <template>
-  <AppHead :title="`Edit ${ form.name } user`" />
+  <AppHead :title="`Edit ${form.name} user`" />
 
   <DashboardMain>
     <template #header>Edit user {{ resource.data.name }}</template>
@@ -41,12 +41,7 @@
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-              <Button
-                type="submit"
-                :form="form"
-              >
-                Submit
-              </Button>
+              <Button type="submit" :form="form"> Submit </Button>
             </div>
           </div>
         </div>
@@ -56,7 +51,7 @@
 </template>
 
 <script setup>
-import { useForm } from '@inertiajs/inertia-vue3';
+import { useForm } from "@inertiajs/inertia-vue3";
 import Input from "@/Components/Forms/Inputs/Input";
 import Button from "@/Components/Forms/Buttons/Button";
 import AppHead from "@/Components/AppHead";

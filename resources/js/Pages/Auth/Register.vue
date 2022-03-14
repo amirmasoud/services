@@ -1,12 +1,14 @@
 <template>
   <AppHead title="Register" />
-  <div class="flex flex-col justify-center py-12 sm:px-6 lg:px-8 min-h-screen bg-gray-50">
+  <div
+    class="flex flex-col justify-center py-12 sm:px-6 lg:px-8 min-h-screen bg-gray-50"
+  >
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <img
         class="mx-auto w-auto h-12"
         src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
         alt="Workflow"
-      >
+      />
       <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900">
         Register an account
       </h2>
@@ -20,12 +22,7 @@
           @submit.prevent="form.post('/register')"
         >
           <div>
-            <Input
-              v-model="form.name"
-              :form="form"
-              label="Name"
-              name="name"
-            />
+            <Input v-model="form.name" :form="form" label="Name" name="name" />
           </div>
 
           <div>
@@ -150,8 +147,8 @@ import Button from "@/Components/Forms/Buttons/Button";
 import AppHead from "@/Components/AppHead";
 
 defineProps({
-  'github': String,
-  'google': String,
+  github: String,
+  google: String,
 });
 
 let form = useForm({

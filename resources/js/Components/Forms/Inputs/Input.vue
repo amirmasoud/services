@@ -1,8 +1,7 @@
 <template>
-  <label
-    :for="id"
-    class="block text-sm font-medium text-gray-700"
-  >{{ label }}</label>
+  <label :for="id" class="block text-sm font-medium text-gray-700">{{
+    label
+  }}</label>
   <div class="mt-1">
     <input
       :id="id"
@@ -10,10 +9,14 @@
       :type="type"
       :name="name"
       class="block w-full sm:text-sm rounded-md shadow-sm"
-      :class="[hasError || !!form.errors[name] ? 'border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500' : 'focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 ']"
+      :class="[
+        hasError || !!form.errors[name]
+          ? 'border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500'
+          : 'focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 ',
+      ]"
       :placeholder="placeholder"
       @input="$emit('update:modelValue', $event.target.value)"
-    >
+    />
   </div>
   <TransitionRoot
     :id="`${name}-error`"
@@ -32,8 +35,8 @@
 </template>
 
 <script setup>
-import { TransitionRoot } from '@headlessui/vue';
-defineEmits(['update:modelValue']);
+import { TransitionRoot } from "@headlessui/vue";
+defineEmits(["update:modelValue"]);
 
 defineProps({
   name: String,
@@ -45,17 +48,17 @@ defineProps({
   },
   type: {
     type: String,
-    default: 'text',
+    default: "text",
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
   },
   form: {
     type: Object,
     default() {
       return { errors: {} };
-    }
+    },
   },
   hasError: {
     type: Boolean,
@@ -63,7 +66,7 @@ defineProps({
   },
   errorMessage: {
     type: String,
-    default: '',
-  }
+    default: "",
+  },
 });
 </script>

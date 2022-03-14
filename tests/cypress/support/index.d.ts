@@ -78,7 +78,11 @@ declare namespace Cypress {
          * @example
          * cy.artisan()
          */
-        artisan(command: string, parameters?: object, options?: object): Chainable<any>;
+        artisan(
+            command: string,
+            parameters?: object,
+            options?: object
+        ): Chainable<any>;
 
         /**
          * Execute arbitrary PHP on the server.

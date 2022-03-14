@@ -30,12 +30,7 @@
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-              <Input
-                v-model="form.ip"
-                label="IP"
-                name="ip"
-                :form="form"
-              />
+              <Input v-model="form.ip" label="IP" name="ip" :form="form" />
             </div>
 
             <div class="col-span-6 sm:col-span-4">
@@ -48,12 +43,7 @@
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-              <Input
-                v-model="form.ram"
-                label="RAM"
-                name="ram"
-                :form="form"
-              />
+              <Input v-model="form.ram" label="RAM" name="ram" :form="form" />
             </div>
 
             <div class="col-span-6 sm:col-span-4">
@@ -66,12 +56,7 @@
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-              <Input
-                v-model="form.cpu"
-                label="CPU"
-                name="cpu"
-                :form="form"
-              />
+              <Input v-model="form.cpu" label="CPU" name="cpu" :form="form" />
             </div>
 
             <div class="col-span-6 sm:col-span-4">
@@ -102,12 +87,7 @@
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-              <Input
-                v-model="form.os"
-                label="OS"
-                name="os"
-                :form="form"
-              />
+              <Input v-model="form.os" label="OS" name="os" :form="form" />
             </div>
 
             <div class="col-span-6 sm:col-span-4">
@@ -138,12 +118,7 @@
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-              <Button
-                type="submit"
-                :form="form"
-              >
-                Submit
-              </Button>
+              <Button type="submit" :form="form"> Submit </Button>
             </div>
           </div>
         </div>
@@ -153,7 +128,7 @@
 </template>
 
 <script setup>
-import { useForm } from '@inertiajs/inertia-vue3';
+import { useForm } from "@inertiajs/inertia-vue3";
 import Input from "@/Components/Forms/Inputs/Input";
 import Button from "@/Components/Forms/Buttons/Button";
 import AppHead from "@/Components/AppHead";

@@ -13,7 +13,7 @@
 import AppHead from "@/Components/AppHead";
 import DashboardMain from "@/Components/DashboardMain";
 import Stats from "@/Components/stats";
-import {defineProps} from "vue";
+import { defineProps } from "vue";
 
 defineProps({
   stats: Object,

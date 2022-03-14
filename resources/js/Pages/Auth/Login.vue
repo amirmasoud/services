@@ -1,14 +1,20 @@
 <template>
   <AppHead title="Login" />
-  <div class="flex flex-col justify-center py-12 sm:px-6 lg:px-8 min-h-screen bg-gray-50 dark:bg-slate-900">
+  <div
+    class="flex flex-col justify-center py-12 sm:px-6 lg:px-8 min-h-screen bg-gray-50 dark:bg-slate-900"
+  >
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-      <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900 dark:text-white">
+      <h2
+        class="mt-6 text-3xl font-extrabold text-center text-gray-900 dark:text-white"
+      >
         Sign in to your account
       </h2>
     </div>
 
     <div class="sm:mx-auto mt-8 sm:w-full sm:max-w-md">
-      <div class="py-8 px-4 sm:px-10 bg-white dark:bg-slate-800 sm:rounded-lg shadow">
+      <div
+        class="py-8 px-4 sm:px-10 bg-white dark:bg-slate-800 sm:rounded-lg shadow"
+      >
         <form
           class="space-y-6"
           action="#"
@@ -40,7 +46,7 @@
                 autocomplete="current-password"
                 required=""
                 class="block py-2 px-3 w-full sm:text-sm placeholder-gray-400 rounded-md border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm appearance-none focus:outline-none"
-              >
+              />
             </div>
           </div>
 
@@ -52,7 +58,7 @@
                 name="remember-me"
                 type="checkbox"
                 class="w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500 dark:bg-slate-800 dark-border-gray-900 dark:focus:ring-indigo-900"
-              >
+              />
               <label
                 for="remember-me"
                 class="block ml-2 text-sm text-gray-900 dark:text-slate-300"
@@ -82,60 +88,60 @@
           </div>
         </form>
 
-<!--        <div class="mt-6">-->
-<!--          <div class="relative">-->
-<!--            <div class="flex absolute inset-0 items-center">-->
-<!--              <div class="w-full border-t border-gray-300" />-->
-<!--            </div>-->
-<!--            <div class="flex relative justify-center text-sm">-->
-<!--              <span class="px-2 text-gray-500 bg-white">-->
-<!--                Or continue with-->
-<!--              </span>-->
-<!--            </div>-->
-<!--          </div>-->
+        <!--        <div class="mt-6">-->
+        <!--          <div class="relative">-->
+        <!--            <div class="flex absolute inset-0 items-center">-->
+        <!--              <div class="w-full border-t border-gray-300" />-->
+        <!--            </div>-->
+        <!--            <div class="flex relative justify-center text-sm">-->
+        <!--              <span class="px-2 text-gray-500 bg-white">-->
+        <!--                Or continue with-->
+        <!--              </span>-->
+        <!--            </div>-->
+        <!--          </div>-->
 
-<!--          <div class="grid grid-cols-3 gap-3 mt-6">-->
-<!--            <div>-->
-<!--              <a-->
-<!--                href="#"-->
-<!--                class="inline-flex justify-center py-2 px-4 w-full text-sm font-medium text-gray-500 bg-white hover:bg-gray-50 rounded-md border border-gray-300 shadow-sm"-->
-<!--              >-->
-<!--                <span class="sr-only">Sign in with Facebook</span>-->
-<!--                <Facebook class="w-5 h-5" />-->
-<!--              </a>-->
-<!--            </div>-->
+        <!--          <div class="grid grid-cols-3 gap-3 mt-6">-->
+        <!--            <div>-->
+        <!--              <a-->
+        <!--                href="#"-->
+        <!--                class="inline-flex justify-center py-2 px-4 w-full text-sm font-medium text-gray-500 bg-white hover:bg-gray-50 rounded-md border border-gray-300 shadow-sm"-->
+        <!--              >-->
+        <!--                <span class="sr-only">Sign in with Facebook</span>-->
+        <!--                <Facebook class="w-5 h-5" />-->
+        <!--              </a>-->
+        <!--            </div>-->
 
-<!--            <div>-->
-<!--              <a-->
-<!--                href="#"-->
-<!--                class="inline-flex justify-center py-2 px-4 w-full text-sm font-medium text-gray-500 bg-white hover:bg-gray-50 rounded-md border border-gray-300 shadow-sm"-->
-<!--              >-->
-<!--                <span class="sr-only">Sign in with Twitter</span>-->
-<!--                <Twitter class="w-5 h-5" />-->
-<!--              </a>-->
-<!--            </div>-->
+        <!--            <div>-->
+        <!--              <a-->
+        <!--                href="#"-->
+        <!--                class="inline-flex justify-center py-2 px-4 w-full text-sm font-medium text-gray-500 bg-white hover:bg-gray-50 rounded-md border border-gray-300 shadow-sm"-->
+        <!--              >-->
+        <!--                <span class="sr-only">Sign in with Twitter</span>-->
+        <!--                <Twitter class="w-5 h-5" />-->
+        <!--              </a>-->
+        <!--            </div>-->
 
-<!--            <div>-->
-<!--              <a-->
-<!--                :href="github"-->
-<!--                class="inline-flex justify-center py-2 px-4 w-full text-sm font-medium text-gray-500 bg-white hover:bg-gray-50 rounded-md border border-gray-300 shadow-sm"-->
-<!--              >-->
-<!--                <span class="sr-only">Sign in with GitHub</span>-->
-<!--                <GitHub class="w-5 h-5" />-->
-<!--              </a>-->
-<!--            </div>-->
+        <!--            <div>-->
+        <!--              <a-->
+        <!--                :href="github"-->
+        <!--                class="inline-flex justify-center py-2 px-4 w-full text-sm font-medium text-gray-500 bg-white hover:bg-gray-50 rounded-md border border-gray-300 shadow-sm"-->
+        <!--              >-->
+        <!--                <span class="sr-only">Sign in with GitHub</span>-->
+        <!--                <GitHub class="w-5 h-5" />-->
+        <!--              </a>-->
+        <!--            </div>-->
 
-<!--            <div>-->
-<!--              <a-->
-<!--                :href="google"-->
-<!--                class="inline-flex justify-center py-2 px-4 w-full text-sm font-medium text-gray-500 bg-white hover:bg-gray-50 rounded-md border border-gray-300 shadow-sm"-->
-<!--              >-->
-<!--                <span class="sr-only">Sign in with Google</span>-->
-<!--                <Google class="w-5 h-5" />-->
-<!--              </a>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+        <!--            <div>-->
+        <!--              <a-->
+        <!--                :href="google"-->
+        <!--                class="inline-flex justify-center py-2 px-4 w-full text-sm font-medium text-gray-500 bg-white hover:bg-gray-50 rounded-md border border-gray-300 shadow-sm"-->
+        <!--              >-->
+        <!--                <span class="sr-only">Sign in with Google</span>-->
+        <!--                <Google class="w-5 h-5" />-->
+        <!--              </a>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
       </div>
     </div>
   </div>
@@ -148,8 +154,8 @@ import Button from "@/Components/Forms/Buttons/Button";
 import AppHead from "@/Components/AppHead";
 
 defineProps({
-  'github': String,
-  'google': String,
+  github: String,
+  google: String,
 });
 
 let form = useForm({

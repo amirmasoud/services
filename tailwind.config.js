@@ -1,20 +1,17 @@
 module.exports = {
   content: [
-    './resources/**/*.blade.php',
-    './resources/**/*.js',
-    './resources/**/*.vue',
+    "./resources/**/*.blade.php",
+    "./resources/**/*.js",
+    "./resources/**/*.vue",
   ],
   theme: {
-    extend: {
-    },
+    extend: {},
   },
   variants: {
     extend: {
-      opacity: ['disabled'],
-      cursor: ['disabled'],
+      opacity: ["disabled"],
+      cursor: ["disabled"],
     },
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-  ],
+  plugins: [require("@tailwindcss/forms")],
 };

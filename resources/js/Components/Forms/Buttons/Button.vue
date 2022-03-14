@@ -14,9 +14,7 @@
       leave-from="opacity-100"
       leave-to="opacity-0"
     >
-      <Spinner
-        class="w-4 h-4"
-      />
+      <Spinner class="w-4 h-4" />
     </TransitionRoot>
     <slot />
   </button>
@@ -24,18 +22,18 @@
 
 <script setup>
 import Spinner from "@/Components/Icons/Spinner";
-import { TransitionRoot } from '@headlessui/vue';
+import { TransitionRoot } from "@headlessui/vue";
 
 defineProps({
   type: {
     type: String,
-    default: 'button',
+    default: "button",
   },
   form: {
     type: Object,
     default() {
       return { processing: false };
-    }
-  }
+    },
+  },
 });
 </script>

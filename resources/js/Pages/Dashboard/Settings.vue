@@ -5,8 +5,8 @@
     <template #header>Settings</template>
 
     <ul class="list-inside ...">
-      <li>Docker is <span v-if="! info">not</span> running</li>
-      <li>Traefik proxy is <span v-if="! proxy">not</span> running</li>
+      <li>Docker is <span v-if="!info">not</span> running</li>
+      <li>Traefik proxy is <span v-if="!proxy">not</span> running</li>
     </ul>
   </DashboardMain>
 </template>
