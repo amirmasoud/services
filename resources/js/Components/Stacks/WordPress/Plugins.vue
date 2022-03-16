@@ -4,23 +4,23 @@
       <div
         class="w-full sm:col-start-2 sm:col-span-2 xl:col-start-2 xl:col-end-3"
       >
-        <label for="search" class="block text-sm font-medium text-gray-700"
+        <label class="block text-sm font-medium text-gray-700" for="search"
           >Search</label
         >
         <div class="mt-1 relative rounded-md shadow-sm w-full">
           <input
             id="search"
             v-model="pluginSearch"
-            type="search"
-            name="search"
             class="focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 sm:text-sm border-gray-300 rounded-md"
+            name="search"
             placeholder="search"
+            type="search"
           />
         </div>
       </div>
     </div>
 
-    <ul role="list" class="mb-10 columns-1 sm:columns-2 xl:columns-3 gap-3">
+    <ul class="mb-10 columns-1 sm:columns-2 xl:columns-3 gap-3" role="list">
       <li
         v-for="(plugin, index) in records.plugins"
         :key="index"
@@ -31,12 +31,12 @@
             class="flex-shrink-0 flex items-start justify-center border-t border-l border-gray-200 w-16 text-white text-sm font-medium rounded-tl-md z-10 bg-white p-2"
           >
             <img
+              :alt="`${plugin.name} icon`"
               :src="
                 plugin.icons.icon_svg ||
                 plugin.icons.icon_2x ||
                 plugin.icons.icon_1x
               "
-              :alt="`${plugin.name} icon`"
             />
           </div>
           <div
@@ -90,18 +90,18 @@
                   "
                 >
                   <span
-                    aria-hidden="true"
                     :class="[
                       selectedPlugins[plugin.slug]
                         ? 'translate-x-5'
                         : 'translate-x-0',
                       'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
                     ]"
+                    aria-hidden="true"
                   />
                 </Switch>
               </SwitchGroup>
               <p
-                class="w-full w-2 whitespace-normal"
+                class="w-full whitespace-pre-wrap"
                 v-html="plugin.short_description"
               ></p>
             </div>
@@ -112,17 +112,16 @@
           class="grid grid-cols-1 md:grid-cols-2 text-gray-500 bg-white border-r border-b border-l border-gray-200 p-2 rounded-b-md text-sm"
         >
           <p class="col-span-1 md:col-span-2">
-            <UserIcon class="w-4 h-4 inline mr-1" /><span
-              v-html="plugin.author"
-            ></span>
+            <UserIcon class="w-4 h-4 inline mr-1" />
+            <span v-html="plugin.author"></span>
           </p>
           <p class="md:col-span-1">
-            <TrendingUpIcon class="w-4 h-4 inline mr-1" />{{
-              plugin.active_installs
-            }}
+            <TrendingUpIcon class="w-4 h-4 inline mr-1" />
+            {{ plugin.active_installs }}
           </p>
           <p class="col-span-1">
-            <ShieldCheckIcon class="w-4 h-4 inline mr-1" /> Tested with
+            <ShieldCheckIcon class="w-4 h-4 inline mr-1" />
+            Tested with
             {{ plugin.tested }}
           </p>
         </div>
@@ -132,7 +131,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { defineProps, ref, watch } from "vue";
 import {
   Switch,
   SwitchDescription,
@@ -148,7 +147,7 @@ import {
 import debounce from "lodash/debounce";
 import { Inertia } from "@inertiajs/inertia";
 
-let rating = 5;
+// let rating = 5;
 
 const pluginSearch = ref("");
 

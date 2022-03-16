@@ -3,16 +3,17 @@
 namespace App\Dashboard\Controllers;
 
 use App\Dashboard\Requests\StackRequest;
-use App\Dashboard\Resources\ServerResource;
 use App\Dashboard\Resources\StackResource;
 use App\Dashboard\Resources\UI\StackFilterResource;
 use App\Dashboard\Resources\UI\StackTableResource;
 use App\Http\Controllers\Controller;
+use Domain\Sites\Enums\StackTypesEnum;
 use Domain\Sites\Models\Stack;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
+use Support\WordPress\ApiWordPress;
 
 class StackController extends Controller
 {
@@ -20,14 +21,18 @@ class StackController extends Controller
     {
         return Inertia::render('Dashboard/Sites/Stacks/Index', [
             'records' => StackResource::collection(Stack::paginate()->withQueryString()),
-            'table'   => fn () => new StackTableResource(),
-            'filters' => fn () => new StackFilterResource(),
+            'table' => fn() => new StackTableResource(),
+            'filters' => fn() => new StackFilterResource(),
         ]);
     }
 
     public function create(): Response
     {
-        return Inertia::render('Dashboard/Sites/Stacks/New');
+        return Inertia::render('Dashboard/Sites/Stacks/New', [
+            'plugins' => ApiWordPress::plugins(),
+            'themes' => ApiWordPress::themes(),
+            'types' => array_map(fn(StackTypesEnum $stack) => ['value' => $stack->value, 'label' => $stack->label(), 'icon' => $stack->icon()], StackTypesEnum::cases()), // @todo refactor to resources
+        ]);
     }
 
     public function store(StackRequest $request): RedirectResponse

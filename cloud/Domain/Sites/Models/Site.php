@@ -3,15 +3,14 @@
 namespace Domain\Sites\Models;
 
 use Domain\IAM\Models\User;
-use Domain\Sites\QueryBuilders\SiteQueryBuilder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Support\Containers\Enums\ContainerState;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Domain\Sites\QueryBuilders\SiteQueryBuilder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Site extends Model
 {
@@ -55,7 +54,7 @@ class Site extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-                         ->logOnlyDirty();
+            ->logOnlyDirty();
     }
 
     public function newEloquentBuilder($query): SiteQueryBuilder
