@@ -12,7 +12,15 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
 {
     public function handleSiteCreated(Site $site)
     {
+        $site->load('stack');
+
         $email = $site->user->email;
+        $url = "https://$site->host";
+        $title = "$site->name WordPress Site";
+        $password = "secret";
+
+        $plugins = implode(' ', $site->stack->properties->plugins);
+        $theme = $site->stack->properties->theme;
 
         Bus::chain([
             ProcessContainer::for($site)->init(),
@@ -21,7 +29,10 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
              *  Install WordPress
              * @todo Setting password as "secret" is not a good idea.
              */
-            ProcessContainer::for($site)->exec("wordpress-cli wp core install --url='https://$site->host' --title='$site->name' --admin_user='admin' --admin_email=$email --admin_password='secret'"),
+            ProcessContainer::for($site)->exec("wordpress-cli wp core install --url=$url --title=\"$title\" --admin_user='admin' --admin_email=$email --admin_password=\"$password\""),
+            ProcessContainer::for($site)->exec("wordpress-cli wp core update"),
+            ProcessContainer::for($site)->exec("wordpress-cli wp theme install $theme --activate"),
+            ProcessContainer::for($site)->exec("wordpress-cli wp plugin install $plugins --activate"),
         ]);
     }
 

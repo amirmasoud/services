@@ -6,13 +6,9 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class WordPressPropertiesData extends DataTransferObject
 {
-    public array $plugin = [];
+    public array $plugins = [];
 
     public string $theme;
 
-    public string $advance = '';
-
-//    public WordPressServiceStackPropertiesData $serviceStack;
-
-//    public WordPressServerStackPropertiesData $serverStack;
+    public string $commands = '';
 }

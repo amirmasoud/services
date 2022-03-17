@@ -11,7 +11,10 @@
     </template>
 
     <div class="max-w-screen-xl">
-      <form @submit.prevent="form.post($route('dashboard.sites.stacks.store'))">
+      <form
+        class="space-y-4"
+        @submit.prevent="form.post($route('dashboard.sites.stacks.store'))"
+      >
         <div class="col-span-6 sm:col-span-4">
           <Input v-model="form.name" :form="form" label="Name" name="name" />
         </div>

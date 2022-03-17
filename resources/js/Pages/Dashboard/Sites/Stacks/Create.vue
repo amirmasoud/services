@@ -2,28 +2,28 @@
   <AppHead title="Create new site" />
 
   <DashboardMain>
-    <template #header> Sites </template>
+    <template #header> Sites</template>
 
     <form @submit.prevent="form.post($route('dashboard.sites.stacks.store'))">
       <div class="col-span-6 sm:col-span-4">
-        <Input v-model="form.name" label="Name" name="name" :form="form" />
+        <Input v-model="form.name" :form="form" label="Name" name="name" />
       </div>
 
       <div class="col-span-6 sm:col-span-4">
-        <Input v-model="form.price" label="Price" name="price" :form="form" />
+        <Input v-model="form.price" :form="form" label="Price" name="price" />
       </div>
 
       <div class="col-span-6 sm:col-span-4">
         <Input
           v-model="form.properties"
+          :form="form"
           label="Properties"
           name="properties"
-          :form="form"
         />
       </div>
 
       <div class="col-span-6 sm:col-span-4">
-        <Input v-model="form.type" label="Type" name="type" :form="form" />
+        <Input v-model="form.type" :form="form" label="Type" name="type" />
       </div>
     </form>
   </DashboardMain>
