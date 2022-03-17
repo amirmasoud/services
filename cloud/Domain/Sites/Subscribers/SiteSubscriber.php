@@ -3,6 +3,7 @@
 namespace Domain\Sites\Subscribers;
 
 use Domain\Sites\Models\Site;
+use Illuminate\Support\Facades\Bus;
 use Support\Containers\ProcessContainer;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Contracts\Queue\ShouldBeUniqueUntilProcessing;
@@ -11,7 +12,17 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
 {
     public function handleSiteCreated(Site $site)
     {
-        ProcessContainer::for($site)->init()->start();
+        $email = $site->user->email;
+
+        Bus::chain([
+            ProcessContainer::for($site)->init(),
+            ProcessContainer::for($site)->start(),
+            /**
+             *  Install WordPress
+             * @todo Setting password as "secret" is not a good idea.
+             */
+            ProcessContainer::for($site)->exec("wordpress-cli wp core install --url='https://$site->host' --title='$site->name' --admin_user='admin' --admin_email=$email --admin_password='secret'"),
+        ]);
     }
 
     public function handleSiteDeleted(Site $site)

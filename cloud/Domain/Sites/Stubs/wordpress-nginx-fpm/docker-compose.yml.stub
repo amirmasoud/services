@@ -10,6 +10,10 @@ services:
       MYSQL_DATABASE: ${DATABASE_NAME}
       MYSQL_USER: ${DATABASE_USER}
       MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-u", "${DATABASE_USER}", "-p${DATABASE_PASSWORD}"]
+      timeout: 20s
+      retries: 10
     networks:
       - default
   wordpress:
@@ -32,8 +36,10 @@ services:
   wordpress-cli:
     container_name: "${WORDPRESS_CLI_NAME}"
     depends_on:
-      - database
-      - wordpress
+      database:
+        condition: service_healthy
+      wordpress:
+        condition: service_started
     image: "wordpress:${WORDPRESS_CLI_VERSION}"
     environment:
       WORDPRESS_DB_HOST: "database:3306"
