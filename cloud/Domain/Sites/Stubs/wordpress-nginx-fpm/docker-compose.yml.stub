@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   database:
-    container_name: "${DATABASE_CONTAINER_NAME}"
+    #    container_name: "${DATABASE_CONTAINER_NAME}"
     image: "${DATABASE_VERSION}"
     ports:
       - "3306:3306"
@@ -16,10 +16,20 @@ services:
       retries: 10
     networks:
       - default
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+        reservations:
+          cpus: "0.50"
+          memory: 256M
   wordpress:
-    container_name: "${WORDPRESS_NAME}"
-    depends_on:
-      - database
+    #    container_name: "${WORDPRESS_NAME}"
+    #    depends_on:
+    #      - database
     image: "wordpress:${WORDPRESS_VERSION}"
     environment:
       WORDPRESS_DB_HOST: "database:3306"
@@ -33,13 +43,23 @@ services:
       - wordpress-data:/var/www/html
     networks:
       - default
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 64M
+        reservations:
+          cpus: "0.50"
+          memory: 32M
   wordpress-cli:
-    container_name: "${WORDPRESS_CLI_NAME}"
-    depends_on:
-      database:
-        condition: service_healthy
-      wordpress:
-        condition: service_started
+    #    container_name: "${WORDPRESS_CLI_NAME}"
+    #    depends_on:
+    #      database:
+    #        condition: service_healthy
+    #      wordpress:
+    #        condition: service_started
     image: "wordpress:${WORDPRESS_CLI_VERSION}"
     environment:
       WORDPRESS_DB_HOST: "database:3306"
@@ -48,15 +68,25 @@ services:
       WORDPRESS_DB_NAME: ${DATABASE_NAME}
       WORDPRESS_DEBUG: ${WORDPRESS_DEBUG}
       HOME: /tmp
-    command: "tail -f /dev/null"
+    command: "while ! mysqladmin ping -h database -u \"${DATABASE_USER}\" -p${DATABASE_PASSWORD} --silent; do sleep 1; done && tail -f /dev/null"
     volumes:
       - wordpress-data:/var/www/html
     networks:
       - default
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 64M
+        reservations:
+          cpus: "0.50"
+          memory: 32M
   proxy:
-    container_name: "${PROXY_NAME}"
-    depends_on:
-      - wordpress
+    #    container_name: "${PROXY_NAME}"
+    #    depends_on:
+    #      - wordpress
     image: "nginx:${NGINX_VERSION}"
     volumes:
       - ./config/proxy/conf.d:/etc/nginx/conf.d
@@ -78,6 +108,16 @@ services:
     networks:
       - proxy
       - default
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 128M
+        reservations:
+          cpus: "0.50"
+          memory: 32M
 volumes:
   wordpress-data:
 networks:
