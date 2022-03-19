@@ -2,17 +2,17 @@
 
 namespace Domain\Sites\Models;
 
-use Domain\IAM\Models\User;
-use Domain\Sites\Casts\PropertiesCast;
-use Domain\Sites\Enums\StackTypesEnum;
-use Domain\Sites\QueryBuilders\StackQueryBuilder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Tags\HasTags;
+use Domain\IAM\Models\User;
+use Spatie\Activitylog\LogOptions;
+use Domain\Sites\Enums\StackTypeEnum;
+use Domain\Sites\Casts\PropertiesCast;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Domain\Sites\QueryBuilders\StackQueryBuilder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Stack extends Model
 {
@@ -31,7 +31,7 @@ class Stack extends Model
     protected $casts = [
         'price' => 'integer',
         'properties' => PropertiesCast::class,
-        'type' => StackTypesEnum::class,
+        'type' => StackTypeEnum::class,
     ];
 
     public function user(): BelongsTo

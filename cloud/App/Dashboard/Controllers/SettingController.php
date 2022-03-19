@@ -6,7 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use Support\Containers\Shell\Docker;
 use Support\Containers\ProcessContainer;
-use Support\Containers\Enums\ContainerState;
+use Support\Containers\Enums\ContainerStateEnum;
 
 class SettingController extends Controller
 {
@@ -14,7 +14,7 @@ class SettingController extends Controller
     {
         return Inertia::render('Dashboard/Settings', [
             'info' => Inertia::lazy(fn () => app(Docker::class)->isDockerServiceRunning()),
-            'proxy' => Inertia::lazy(fn () => ProcessContainer::hasState('traefik', ContainerState::RUNNING)),
+            'proxy' => Inertia::lazy(fn () => ProcessContainer::hasState('traefik', ContainerStateEnum::RUNNING)),
         ]);
     }
 }

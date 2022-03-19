@@ -3,7 +3,7 @@
 namespace Support\Containers\Exceptions;
 
 use Exception;
-use Support\Containers\Shell\Shell;
+use Support\Shell\Shell;
 use Support\Containers\Shell\Environment;
 
 class DockerNotAvailableException extends Exception
@@ -18,7 +18,7 @@ class DockerNotAvailableException extends Exception
         $console->line('');
 
         if (in_array(PHP_OS_FAMILY, ['Darwin', 'Linux', 'Windows'])) {
-            $osSpecificHelp = 'helpFor' . ucfirst(PHP_OS_FAMILY);
+            $osSpecificHelp = 'helpFor'.ucfirst(PHP_OS_FAMILY);
             $this->$osSpecificHelp($console);
         }
     }
@@ -40,7 +40,7 @@ class DockerNotAvailableException extends Exception
         $console->line('Start the Docker service:');
         $console->line('  sudo systemctl start docker');
 
-        if (!$environment->userIsInDockerGroup()) {
+        if (! $environment->userIsInDockerGroup()) {
             $console->line('');
             $console->line($shell->formatErrorMessage('You are not in the docker group.'));
             $console->line('');

@@ -2,6 +2,7 @@
 
 namespace Support\Containers\Shell;
 
+use Support\Shell\Shell;
 use Domain\Sites\Models\Site;
 use Illuminate\Support\Collection;
 use Symfony\Component\Console\Output\ConsoleOutput;

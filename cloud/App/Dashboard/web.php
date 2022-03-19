@@ -1,14 +1,14 @@
 <?php
 
+use Inertia\Inertia;
+use Domain\Sites\Models\Site;
+use App\Dashboard\Controllers\SiteController;
+use App\Dashboard\Controllers\UserController;
+use App\Dashboard\Controllers\StackController;
 use App\Dashboard\Controllers\OauthController;
 use App\Dashboard\Controllers\ServerController;
 use App\Dashboard\Controllers\SettingController;
-use App\Dashboard\Controllers\SiteController;
-use App\Dashboard\Controllers\StackController;
-use App\Dashboard\Controllers\UserController;
-use Domain\Sites\Models\Site;
-use Inertia\Inertia;
-use Support\Containers\Enums\ContainerState;
+use Support\Containers\Enums\ContainerStateEnum;
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [OauthController::class, 'loginForm'])->name('login');
@@ -23,9 +23,9 @@ Route::prefix('dashboard')->middleware('auth')->name('dashboard.')->group(functi
     Route::get('/', function () {
         return Inertia::render('Dashboard/Home', [
             'stats' => [
-                [ 'name' => 'Total Sites', 'stat' => Site::count(), 'previousStat' => '70,946', 'change' => '12%', 'changeType' => 'increase' ],
-                [ 'name' => 'Running Sites', 'stat' => Site::whereStatus(ContainerState::STARTED)->count(), 'previousStat' => '56.14%', 'change' => '2.02%', 'changeType' => 'increase' ],
-                [ 'name' => 'Stopped Sites', 'stat' => Site::whereStatus(ContainerState::STOPPED)->count(), 'previousStat' => '28.62%', 'change' => '4.05%', 'changeType' => 'decrease' ],
+                ['name' => 'Total Sites', 'stat' => Site::count(), 'previousStat' => '70,946', 'change' => '12%', 'changeType' => 'increase'],
+                ['name' => 'Running Sites', 'stat' => Site::whereStatus(ContainerStateEnum::STARTED)->count(), 'previousStat' => '56.14%', 'change' => '2.02%', 'changeType' => 'increase'],
+                ['name' => 'Stopped Sites', 'stat' => Site::whereStatus(ContainerStateEnum::STOPPED)->count(), 'previousStat' => '28.62%', 'change' => '4.05%', 'changeType' => 'decrease'],
             ],
         ]);
     })->name('index');
@@ -45,7 +45,7 @@ Route::prefix('dashboard')->middleware('auth')->name('dashboard.')->group(functi
             Route::post('{site}/start', 'start');
             Route::post('{site}/stop', 'stop');
             Route::post('{site}/restart', 'restart');
-    });
+        });
     Route::resource('sites', SiteController::class);
 
     Route::controller(StackController::class)->group(function () {

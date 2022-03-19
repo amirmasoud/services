@@ -2,6 +2,7 @@
 
 namespace Support\Containers\Shell;
 
+use Support\Shell\Shell;
 use Illuminate\Support\Str;
 
 class Environment
@@ -34,7 +35,7 @@ class Environment
         $process = $this->shell->execQuietly("{$netstatCmd} -vanp tcp | grep '{$portText}' | grep -v 'TIME_WAIT' | grep -v 'CLOSE_WAIT' | grep -v 'FIN_WAIT'");
 
         // A successful netstat command means a port in use was found
-        return !$process->isSuccessful();
+        return ! $process->isSuccessful();
     }
 
     public function isLinuxOs(): bool

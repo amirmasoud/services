@@ -2,18 +2,18 @@
 
 namespace App\Dashboard\Controllers;
 
-use App\Dashboard\Requests\StackRequest;
-use App\Dashboard\Resources\StackResource;
-use App\Dashboard\Resources\UI\StackFilterResource;
-use App\Dashboard\Resources\UI\StackTableResource;
-use App\Http\Controllers\Controller;
-use Domain\Sites\Enums\StackTypesEnum;
-use Domain\Sites\Models\Stack;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
+use Domain\Sites\Models\Stack;
 use Support\WordPress\ApiWordPress;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Domain\Sites\Enums\StackTypeEnum;
+use Illuminate\Http\RedirectResponse;
+use App\Dashboard\Requests\StackRequest;
+use App\Dashboard\Resources\StackResource;
+use App\Dashboard\Resources\UI\StackTableResource;
+use App\Dashboard\Resources\UI\StackFilterResource;
 
 class StackController extends Controller
 {
@@ -21,8 +21,8 @@ class StackController extends Controller
     {
         return Inertia::render('Dashboard/Sites/Stacks/Index', [
             'records' => StackResource::collection(Stack::paginate()->withQueryString()),
-            'table' => fn() => new StackTableResource(),
-            'filters' => fn() => new StackFilterResource(),
+            'table' => fn () => new StackTableResource(),
+            'filters' => fn () => new StackFilterResource(),
         ]);
     }
 
@@ -31,7 +31,7 @@ class StackController extends Controller
         return Inertia::render('Dashboard/Sites/Stacks/New', [
             'plugins' => ApiWordPress::plugins(),
             'themes' => ApiWordPress::themes(),
-            'types' => array_map(fn(StackTypesEnum $stack) => ['value' => $stack->value, 'label' => $stack->label(), 'icon' => $stack->icon()], StackTypesEnum::cases()), // @todo refactor to resources
+            'types' => array_map(fn (StackTypeEnum $stack) => ['value' => $stack->value, 'label' => $stack->label(), 'icon' => $stack->icon()], StackTypeEnum::cases()), // @todo refactor to resources
         ]);
     }
 

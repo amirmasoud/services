@@ -2,11 +2,11 @@
 
 namespace Support\Containers;
 
+use Support\Shell\Shell;
 use Domain\Sites\Models\Site;
-use Support\Containers\Shell\Shell;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
-use Support\Containers\Enums\ContainerState;
+use Support\Containers\Enums\ContainerStateEnum;
 use Support\Containers\Contracts\DockerContainer;
 use Touhidurabir\StubGenerator\Facades\StubGenerator;
 use Support\Containers\DataTransferObjects\RunningContainerData;
@@ -31,7 +31,7 @@ class ProcessContainer implements DockerContainer
     public static function dockerIsRunning(): bool
     {
         try {
-            Http::get ('http://localhost:2375/info');
+            Http::get('http://localhost:2375/info');
 
             return true;
         } catch (\Exception $e) {
@@ -39,37 +39,37 @@ class ProcessContainer implements DockerContainer
         }
     }
 
-    public static function containers(): array
+    // public static function containers(): array
+    // {
+    //     try {
+    //         return Http::get ('http://localhost:2375/containers/json')->json ();
+    //     } catch (\Exception $e) {
+    //         return [];
+    //     }
+    // }
+
+    public static function hasState(string $container, ContainerStateEnum $status): bool
     {
         try {
-            return Http::get ('http://localhost:2375/containers/json')->json ();
-        } catch (\Exception $e) {
-            return [];
-        }
-    }
+            $response = Http::get("http://localhost:2375/containers/json?filters={\"name\": [\"^$container$\"]}")->collect()->first();
 
-    public static function hasState(string $container, ContainerState $status): bool
-    {
-        try {
-            $response = Http::get ("http://localhost:2375/containers/json?filters={\"name\": [\"^$container$\"]}")->collect ()->first ();
-
-            return ContainerState::tryFrom ($response['State']) === $status;
+            return ContainerStateEnum::tryFrom($response['State']) === $status;
         } catch (\Exception $e) {
             return false;
         }
     }
 
-    public static function state(string $container): ?ContainerState
+    public static function state(string $container): ?ContainerStateEnum
     {
-        $response = Http::get ("http://localhost:2375/containers/json?filters={\"name\": [\"^$container$\"]}")->collect ()->first ();
+        $response = Http::get("http://localhost:2375/containers/json?filters={\"name\": [\"^$container$\"]}")->collect()->first();
 
-        return ContainerState::tryFrom ($response['State'] ?? ContainerState::EXITED->value);
+        return ContainerStateEnum::tryFrom($response['State'] ?? ContainerStateEnum::EXITED->value);
     }
 
     public static function details(string $container)
     {
         try {
-            $response = Http::get ('http://localhost:2375/containers/json?limit=1&filters={"name": ["^' . $container . '$"]}')->collect ()->first ();;
+            $response = Http::get('http://localhost:2375/containers/json?limit=1&filters={"name": ["^'.$container.'$"]}')->collect()->first();;
 
             return new RunningContainerData($response);
         } catch (\Exception $e) {
@@ -79,11 +79,11 @@ class ProcessContainer implements DockerContainer
 
     public function init(): static
     {
-        $this->startTraefikContainer ();
-        $this->createDockerComposeFile ();
-        $this->createDotEnvFile ();
-        $this->copyConfigFiles ();
-        $this->generateSelfSignedCertificate ();
+        $this->startTraefikContainer();
+        $this->createDockerComposeFile();
+        $this->createDotEnvFile();
+        $this->copyConfigFiles();
+        $this->generateSelfSignedCertificate();
 
         return $this;
     }
@@ -92,88 +92,88 @@ class ProcessContainer implements DockerContainer
     {
         // @todo check retval and throw exception if not 0
         // @todo refactor to Docker Engine SDK
-        exec ('docker network create proxy', $output, $retval);
-        exec ('cd ' . storage_path ('app/proxy') . ' && docker-compose up -d', $output, $retval);
+        exec('docker network create proxy', $output, $retval);
+        exec('cd '.storage_path('app/proxy').' && docker-compose up -d', $output, $retval);
     }
 
     protected function createDockerComposeFile(): void
     {
-        StubGenerator::from (domain_path ('Sites/Stubs/wordpress-nginx-fpm/docker-compose.yml.stub'), asFullPath: true)
-            ->to (storage_path ('app/sites') . '/' . static::$site->name, createIfNotExist: true, asFullPath: true)
-            ->as ('docker-compose')->ext ('yml')
-            ->withReplacers (['name' => static::$site->name])
-            ->save ();
+        StubGenerator::from(domain_path('Sites/Stubs/wordpress-nginx-fpm/docker-compose.yml.stub'), asFullPath: true)
+            ->to(storage_path('app/sites').'/'.static::$site->name, createIfNotExist: true, asFullPath: true)
+            ->as('docker-compose')->ext('yml')
+            ->withReplacers(['name' => static::$site->name])
+            ->save();
     }
 
     protected function createDotEnvFile(): void
     {
-        StubGenerator::from (domain_path ('Sites/Stubs/wordpress-nginx-fpm/env.stub'), asFullPath: true)
-            ->to (storage_path ('app/sites') . '/' . static::$site->name, createIfNotExist: true, asFullPath: true)
-            ->as ('.env')->noExt ()
-            ->withReplacers ([
+        StubGenerator::from(domain_path('Sites/Stubs/wordpress-nginx-fpm/env.stub'), asFullPath: true)
+            ->to(storage_path('app/sites').'/'.static::$site->name, createIfNotExist: true, asFullPath: true)
+            ->as('.env')->noExt()
+            ->withReplacers([
                 'name' => static::$site->name,
-                'site_url' => 'https://' . static::$site->host,
+                'site_url' => 'https://'.static::$site->host,
                 'host' => static::$site->host,
             ])
-            ->save ();
+            ->save();
     }
 
     protected function copyConfigFiles(): void
     {
         // @todo
-        File::copyDirectory (domain_path ('Sites/Stubs/wordpress-nginx-fpm/config'), storage_path ('app/sites/' . static::$site->name . '/config'));
+        File::copyDirectory(domain_path('Sites/Stubs/wordpress-nginx-fpm/config'), storage_path('app/sites/'.static::$site->name.'/config'));
     }
 
     protected function generateSelfSignedCertificate()
     {
         $site = static::$site->name;
-        shell_exec ('cd ' . storage_path ('app/proxy') . " && mkcert -cert-file certificates/{$site}-cert.pem -key-file certificates/{$site}-key.pem \"{$site}.test\" \"*.{$site}.test\"");
+        shell_exec('cd '.storage_path('app/proxy')." && mkcert -cert-file certificates/{$site}-cert.pem -key-file certificates/{$site}-key.pem \"{$site}.test\" \"*.{$site}.test\"");
     }
 
     public function start(): static
     {
-        shell_exec ('cd ' . storage_path ('app/sites') . '/' . static::$site->name . ' && docker-compose up -d');
+        shell_exec('cd '.storage_path('app/sites').'/'.static::$site->name.' && docker-compose up -d');
 
         return $this;
     }
 
     public function stop(): static
     {
-        shell_exec ('cd ' . storage_path ('app/sites') . '/' . static::$site->name . ' && docker-compose stop');
+        shell_exec('cd '.storage_path('app/sites').'/'.static::$site->name.' && docker-compose stop');
 
         return $this;
     }
 
     public function restart(): static
     {
-        shell_exec ('cd ' . storage_path ('app/sites') . '/' . static::$site->name . ' && docker-compose restart');
+        shell_exec('cd '.storage_path('app/sites').'/'.static::$site->name.' && docker-compose restart');
 
         return $this;
     }
 
     public function remove(): static
     {
-        shell_exec ('cd ' . env ('SITES_PATH') . '/' . static::$site->name . ' && docker-compose down');
+        shell_exec('cd '.env('SITES_PATH').'/'.static::$site->name.' && docker-compose down');
 
         return $this;
     }
 
     public function update(): static
     {
-        shell_exec ('cd ' . env ('SITES_PATH') . '/' . static::$site->name . ' && docker-compose pull');
+        shell_exec('cd '.env('SITES_PATH').'/'.static::$site->name.' && docker-compose pull');
 
         return $this;
     }
 
     public function logs(): static
     {
-        shell_exec ('cd ' . env ('SITES_PATH') . '/' . static::$site->name . ' && docker-compose logs');
+        shell_exec('cd '.env('SITES_PATH').'/'.static::$site->name.' && docker-compose logs');
 
         return $this;
     }
 
     public function exec(string $command): bool|string|null
     {
-        return shell_exec ('cd ' . storage_path ('app/sites') . '/' . static::$site->name . ' && docker-compose exec -T ' . $command);
+        return shell_exec('cd '.storage_path('app/sites').'/'.static::$site->name.' && docker-compose exec -T '.$command);
     }
 }

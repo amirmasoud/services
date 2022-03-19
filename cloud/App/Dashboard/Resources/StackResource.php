@@ -2,11 +2,11 @@
 
 namespace App\Dashboard\Resources;
 
-use Domain\Sites\Enums\StackTypesEnum;
+use Domain\Sites\Enums\StackTypeEnum;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @property StackTypesEnum $type
+ * @property StackTypeEnum $type
  * @property string $type_name
  * @property string $type_value
  * @property string $type_icon

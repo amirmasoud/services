@@ -1,6 +1,6 @@
 <?php
 
-namespace Support\Containers\Shell;
+namespace Support\Shell;
 
 use Symfony\Component\Process\Process;
 use Symfony\Component\Console\Output\ConsoleOutput;

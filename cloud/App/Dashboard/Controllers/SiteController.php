@@ -2,23 +2,23 @@
 
 namespace App\Dashboard\Controllers;
 
+use Inertia\Inertia;
+use Inertia\Response;
+use Domain\Sites\Models\Site;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Domain\Sites\Enums\StackTypeEnum;
+use Illuminate\Http\RedirectResponse;
 use App\Dashboard\Requests\SiteRequest;
-use App\Dashboard\Requests\SiteSearchRequest;
-use App\Dashboard\Resources\ServerResource;
+use Support\Containers\ProcessContainer;
 use App\Dashboard\Resources\SiteResource;
 use App\Dashboard\Resources\StackResource;
-use App\Dashboard\Resources\UI\SiteFilterResource;
+use App\Dashboard\Resources\ServerResource;
+use App\Dashboard\Requests\SiteSearchRequest;
 use App\Dashboard\Resources\UI\SiteStatResource;
+use Support\Containers\Enums\ContainerStateEnum;
 use App\Dashboard\Resources\UI\SiteTableResource;
-use App\Http\Controllers\Controller;
-use Domain\Sites\Enums\StackTypesEnum;
-use Illuminate\Http\RedirectResponse;
-use Inertia\Response;
-use Support\Containers\ProcessContainer;
-use Domain\Sites\Models\Site;
-use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
-use Support\Containers\Enums\ContainerState;
+use App\Dashboard\Resources\UI\SiteFilterResource;
 
 class SiteController extends Controller
 {
@@ -29,8 +29,8 @@ class SiteController extends Controller
         return Inertia::render('Dashboard/Sites/Index', [
             'records' => SiteResource::collection($sites),
             'filters' => fn () => new SiteFilterResource(),
-            'stats'   => fn () => new SiteStatResource(),
-            'table'   => fn () => new SiteTableResource(),
+            'stats' => fn () => new SiteStatResource(),
+            'table' => fn () => new SiteTableResource(),
         ]);
     }
 
@@ -38,8 +38,8 @@ class SiteController extends Controller
     {
         return Inertia::render('Dashboard/Sites/Create', [
             'servers' => ServerResource::collection(Auth::user()->servers()->get()),
-            'stacks'  => StackResource::collection(Auth::user()->stacks()->get()),
-            'types'   => array_map(fn (StackTypesEnum $stack) => ['value' => $stack->value, 'label' => $stack->label(), 'icon' => $stack->icon()], StackTypesEnum::cases()), // @todo refactor to resources
+            'stacks' => StackResource::collection(Auth::user()->stacks()->get()),
+            'types' => array_map(fn (StackTypeEnum $stack) => ['value' => $stack->value, 'label' => $stack->label(), 'icon' => $stack->icon()], StackTypeEnum::cases()), // @todo refactor to resources
         ]);
     }
 
@@ -48,7 +48,7 @@ class SiteController extends Controller
         Auth::user()->sites()->create(
             array_merge(
                 $request->validated(),
-                ['status' => ContainerState::STARTING]
+                ['status' => ContainerStateEnum::STARTING]
             )
         );
 

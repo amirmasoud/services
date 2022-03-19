@@ -2,7 +2,7 @@
 
 namespace Support\Containers\Enums;
 
-enum ContainerState: string
+enum ContainerStateEnum: string
 {
     case STOPPED = 'stopped';
     case STARTED = 'started';
@@ -14,7 +14,7 @@ enum ContainerState: string
 
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             self::STOPPED => 'Stopped',
             self::STARTED => 'Started',
             self::RESTARTING => 'Restarting',

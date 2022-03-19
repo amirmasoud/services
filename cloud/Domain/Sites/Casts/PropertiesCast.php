@@ -3,7 +3,7 @@
 namespace Domain\Sites\Casts;
 
 use Exception;
-use Domain\Sites\Enums\StackTypesEnum;
+use Domain\Sites\Enums\StackTypeEnum;
 use Illuminate\Contracts\Database\Eloquent\Castable;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Domain\Sites\DataTransferObjects\WordPress\WordPressPropertiesData;
@@ -17,8 +17,8 @@ class PropertiesCast implements Castable
             {
                 $data = collect(json_decode($value))->toArray();
 
-                return match (StackTypesEnum::tryFrom($attributes['type'])) {
-                    StackTypesEnum::WORDPRESS => new WordPressPropertiesData($data),
+                return match (StackTypeEnum::tryFrom($attributes['type'])) {
+                    StackTypeEnum::WORDPRESS => new WordPressPropertiesData($data),
                     default => throw new Exception('Unexpected match value'),
                 };
             }
