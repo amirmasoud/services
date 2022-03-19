@@ -5,7 +5,7 @@ namespace Support\Containers\Shell;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
-use App\Exceptions\DockerContainerMissingException;
+use Support\Containers\Exceptions\DockerContainerMissingException;
 
 class Docker
 {
@@ -150,12 +150,10 @@ class Docker
 
     public function downloadImage(string $organization, string $imageName, ?string $tag): void
     {
-        $this->shell->exec(sprintf(
-            'docker pull %s/%s:%s',
-            $organization,
-            $imageName,
-            $tag
-        ));
+        $this->shell->exec($organization === '_' ?
+            sprintf('docker pull %s:%s', $imageName, $tag) :
+            sprintf('docker pull %s/%s:%s', $organization, $imageName, $tag)
+        );
     }
 
     public function bootContainer(string $dockerRunTemplate, array $parameters): void
