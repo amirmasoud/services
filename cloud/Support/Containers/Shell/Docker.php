@@ -9,17 +9,9 @@ use Support\Containers\Exceptions\DockerContainerMissingException;
 
 class Docker
 {
-    protected $shell;
-    protected $formatter;
-    protected $networking;
-    protected $environment;
-
-    public function __construct(Shell $shell, DockerFormatter $formatter, DockerNetworking $networking, Environment $environment)
+    public function __construct(protected Shell $shell, protected DockerFormatter $formatter, protected DockerNetworking $networking, protected Environment $environment)
     {
-        $this->shell = $shell;
-        $this->formatter = $formatter;
-        $this->networking = $networking;
-        $this->environment = $environment;
+        //
     }
 
     public function removeContainer(string $containerId): void
@@ -30,21 +22,21 @@ class Docker
             $this->stopContainer($containerId);
         }
 
-        $process = $this->shell->exec('docker rm ' . $containerId);
+        $process = $this->shell->exec('docker rm '.$containerId);
 
-        if (!$process->isSuccessful()) {
-            throw new Exception('Failed removing container ' . $containerId);
+        if (! $process->isSuccessful()) {
+            throw new Exception('Failed removing container '.$containerId);
         }
     }
 
     public function stoppableTakeoutContainers(): Collection
     {
-        return $this->takeoutContainers()->filter(function ($container) {
+        return $this->containers()->filter(function ($container) {
             return Str::contains($container['status'], 'Up');
         });
     }
 
-    public function takeoutContainers(): Collection
+    public function containers(): Collection
     {
         $process = sprintf(
             'docker ps -a --filter "name=TO-" --format "table %s|%s"',
@@ -64,52 +56,52 @@ class Docker
 
     public function stopContainer(string $containerId): void
     {
-        if (!$this->stoppableTakeoutContainers()->contains(function ($container) use ($containerId) {
+        if (! $this->stoppableTakeoutContainers()->contains(function ($container) use ($containerId) {
             return $container['container_id'] === $containerId;
         })) {
             throw new DockerContainerMissingException($containerId);
         }
 
-        $process = $this->shell->exec('docker stop ' . $containerId);
+        $process = $this->shell->exec('docker stop '.$containerId);
 
-        if (!$process->isSuccessful()) {
-            throw new Exception('Failed stopping container ' . $containerId);
+        if (! $process->isSuccessful()) {
+            throw new Exception('Failed stopping container '.$containerId);
         }
     }
 
     public function logContainer(string $containerId): void
     {
-        if (!$this->stoppableTakeoutContainers()->contains(function ($container) use ($containerId) {
+        if (! $this->stoppableTakeoutContainers()->contains(function ($container) use ($containerId) {
             return $container['container_id'] === $containerId;
         })) {
             throw new DockerContainerMissingException($containerId);
         }
 
-        $process = $this->shell->exec('docker logs -f ' . $containerId);
+        $process = $this->shell->exec('docker logs -f '.$containerId);
 
-        if (!$process->isSuccessful()) {
-            throw new Exception('Failed to log container ' . $containerId);
+        if (! $process->isSuccessful()) {
+            throw new Exception('Failed to log container '.$containerId);
         }
     }
 
     public function startContainer(string $containerId): void
     {
-        if (!$this->startableTakeoutContainers()->contains(function ($container) use ($containerId) {
+        if (! $this->startableTakeoutContainers()->contains(function ($container) use ($containerId) {
             return $container['container_id'] === $containerId;
         })) {
             throw new DockerContainerMissingException($containerId);
         }
 
-        $process = $this->shell->exec('docker start ' . $containerId);
+        $process = $this->shell->exec('docker start '.$containerId);
 
-        if (!$process->isSuccessful()) {
-            throw new Exception('Failed starting container ' . $containerId);
+        if (! $process->isSuccessful()) {
+            throw new Exception('Failed starting container '.$containerId);
         }
     }
 
     public function startableTakeoutContainers(): Collection
     {
-        return $this->takeoutContainers()->reject(function ($container) {
+        return $this->containers()->reject(function ($container) {
             return Str::contains($container['status'], 'Up');
         });
     }
@@ -122,7 +114,7 @@ class Docker
     public function allContainers(): Collection
     {
         return $this->runAndParseTable(
-            'docker ps --format "table {{.ID}}|{{.Names}}|{{.Status}}|{{.Ports}}"'
+            'docker ps --format "table {{.ID}}|{{.Names}}|{{.Status}}|{{.Ports}}|{{.State}}|{{.Size}}|{{.RunningFor}}|{{.CreatedAt}}|{{.Image}}"'
         );
     }
 
@@ -168,8 +160,8 @@ class Docker
 
         $process = $this->shell->exec($command, $parameters);
 
-        if (!$process->isSuccessful()) {
-            throw new Exception('Failed installing ' . $parameters['image_name']);
+        if (! $process->isSuccessful()) {
+            throw new Exception('Failed installing '.$parameters['image_name']);
         }
     }
 
@@ -196,7 +188,7 @@ class Docker
             $this->shell->execQuietly('systemctl stop docker');
         } else {
             // BSD, Solaris, Unknown
-            throw new Exception('Cannot stop Docker in PHP_OS_FAMILY ' . PHP_OS_FAMILY);
+            throw new Exception('Cannot stop Docker in PHP_OS_FAMILY '.PHP_OS_FAMILY);
         }
     }
 }
