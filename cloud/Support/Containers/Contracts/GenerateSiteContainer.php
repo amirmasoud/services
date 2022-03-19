@@ -12,5 +12,5 @@ interface GenerateSiteContainer
 
     public function config(string $from, string $to): void;
 
-    public function certificate(CertificateEnum $certificate, string $site): void;
+    public function certificate(CertificateEnum $certificate, string $domain): void;
 }

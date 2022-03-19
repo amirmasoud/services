@@ -3,6 +3,7 @@
 namespace Support\Containers;
 
 use Illuminate\Support\Facades\File;
+use Support\Certificates\SelfSigned;
 use Support\Containers\Enums\CertificateEnum;
 use Touhidurabir\StubGenerator\Facades\StubGenerator;
 use Support\Containers\Contracts\GenerateSiteContainer;
@@ -32,10 +33,13 @@ class GenerateDockerSiteContainer implements GenerateSiteContainer
         File::copyDirectory($from, $to);
     }
 
-    public function certificate(CertificateEnum $certificate, string $site): void
+    /**
+     * @throws \Support\Certificates\Exceptions\MkcertMissingException
+     */
+    public function certificate(CertificateEnum $certificate, string $domain): void
     {
         match ($certificate) {
-            CertificateEnum::SELF_SIGNED => $this->generateSelfSignedCertificate($site),
+            CertificateEnum::SELF_SIGNED => app(SelfSigned::class)->generate(storage_path('app/proxy'), $domain),
         };
     }
 }
