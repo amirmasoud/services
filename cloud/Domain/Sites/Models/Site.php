@@ -12,6 +12,13 @@ use Domain\Sites\QueryBuilders\SiteQueryBuilder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+/**
+ * @property string $name
+ * @property string $host
+ * @property ContainerState $status
+ * @property ?int $server_id
+ * @property ?int $stack_id
+ */
 class Site extends Model
 {
     use HasFactory;
