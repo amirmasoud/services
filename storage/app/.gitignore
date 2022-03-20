@@ -1,3 +1,5 @@
 *
 !public/
+!proxy/
+!sites/
 !.gitignore
