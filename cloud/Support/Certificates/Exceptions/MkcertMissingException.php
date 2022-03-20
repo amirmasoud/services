@@ -3,7 +3,7 @@
 namespace Support\Certificates\Exceptions;
 
 use Exception;
-use Support\Shell\Shell;
+use Support\Shell;
 
 class MkcertMissingException extends Exception
 {

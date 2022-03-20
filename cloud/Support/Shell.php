@@ -1,7 +1,8 @@
 <?php
 
-namespace Support\Shell;
+namespace Support;
 
+use Illuminate\Support\Collection;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
@@ -60,5 +61,12 @@ class Shell
     public function formatErrorMessage(string $buffer)
     {
         return $this->formatMessage($buffer, true);
+    }
+
+    protected function runAndParseTable(string $command): Collection
+    {
+        return static::$formatter->rawTableOutputToCollection(
+            static::$shell->execQuietly($command)->getOutput()
+        );
     }
 }

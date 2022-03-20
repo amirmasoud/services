@@ -2,7 +2,7 @@
 
 namespace Support\Containers\Shell;
 
-use Support\Shell\Shell;
+use Support\Shell;
 use Illuminate\Support\Collection;
 
 class DockerNetworking
@@ -43,10 +43,10 @@ class DockerNetworking
         return $collection->isNotEmpty();
     }
 
-    public function ensureNetworkCreated($name = 'takeout'): void
+    public function ensureNetworkCreated($name = 'proxy', $driver = 'overlay'): void
     {
         if ($this->listMatchingNetworks()->isEmpty()) {
-            $this->shell->execQuietly('docker network create -d bridge '.$name);
+            $this->shell->execQuietly("docker network create -d {$driver} {$name}");
         }
     }
 

@@ -3,14 +3,13 @@
 namespace Support\Containers\Shell;
 
 use Exception;
-use Support\Shell\Shell;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Support\Containers\Exceptions\DockerContainerMissingException;
 
 class Docker
 {
-    public function __construct(protected Shell $shell, protected DockerFormatter $formatter, protected DockerNetworking $networking, protected Environment $environment)
+    public function __construct(protected \Support\Shell $shell, protected DockerFormatter $formatter, protected DockerNetworking $networking, protected Environment $environment)
     {
         //
     }

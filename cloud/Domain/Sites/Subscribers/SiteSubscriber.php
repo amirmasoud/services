@@ -23,16 +23,16 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
         $theme = $site->stack->properties->theme;
 
         Bus::chain([
-            ProcessContainer::for($site)->init(),
-            ProcessContainer::for($site)->start(),
+            // ProcessContainer::for($site)->init(),
+            // ProcessContainer::for($site)->start(),
             /**
              *  Install WordPress
              * @todo Setting password as "secret" is not a good idea.
              */
-            ProcessContainer::for($site)->exec("wordpress-cli wp core install --url=$url --title=\"$title\" --admin_user='admin' --admin_email=$email --admin_password=\"$password\""),
-            ProcessContainer::for($site)->exec("wordpress-cli wp core update"),
-            ProcessContainer::for($site)->exec("wordpress-cli wp theme install $theme --activate"),
-            ProcessContainer::for($site)->exec("wordpress-cli wp plugin install $plugins --activate"),
+            // ProcessContainer::for($site)->exec("wordpress-cli wp core install --url=$url --title=\"$title\" --admin_user='admin' --admin_email=$email --admin_password=\"$password\""),
+            // ProcessContainer::for($site)->exec("wordpress-cli wp core update"),
+            // ProcessContainer::for($site)->exec("wordpress-cli wp theme install $theme --activate"),
+            // ProcessContainer::for($site)->exec("wordpress-cli wp plugin install $plugins --activate"),
         ]);
     }
 

@@ -3,7 +3,7 @@
 namespace Support\Containers\Exceptions;
 
 use Exception;
-use Support\Shell\Shell;
+use Support\Shell;
 
 class DockerSwarmServiceMissingException extends Exception
 {

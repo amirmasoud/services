@@ -2,7 +2,7 @@
 
 namespace Support\Containers\Exceptions;
 
-use Support\Shell\Shell;
+use Support\Shell;
 
 class DockerComposePathNotDirectoryException extends \Exception
 {

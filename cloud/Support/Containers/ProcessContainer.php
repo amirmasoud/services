@@ -2,7 +2,7 @@
 
 namespace Support\Containers;
 
-use Support\Shell\Shell;
+use Support\Shell;
 use Domain\Sites\Models\Site;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
