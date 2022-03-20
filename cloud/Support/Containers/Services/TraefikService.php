@@ -2,13 +2,35 @@
 
 namespace Support\Containers\Services;
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Support\Containers\Shell\DockerSwarm;
 use Support\Containers\Shell\DockerNetworking;
+use Support\Containers\Exceptions\TraefikServiceAvailableException;
 
 class TraefikService
 {
     const NAME = 'traefik';
+
+    /**
+     * @throws TraefikServiceAvailableException
+     */
+    public static function install($force = false)
+    {
+        if (! $force && File::exists(Storage::disk('proxy')->path('docker-compose.yml'))) {
+            throw new TraefikServiceAvailableException();
+        }
+
+        File::copy(
+            support_path('Containers/Stubs/traefik/docker-compose.yml'),
+            Storage::disk('proxy')->path('/docker-compose.yml')
+        );
+
+        File::copy(
+            support_path('Containers/Stubs/traefik/traefik.yml'),
+            Storage::disk('proxy')->path('/traefik.yml')
+        );
+    }
 
     /**
      * @throws \Support\Containers\Exceptions\DockerComposePathNotDirectoryException
