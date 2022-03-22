@@ -9,9 +9,9 @@ class DockerSwarm extends DockerShell
 {
     public function deploy(): bool
     {
-        // Print docker-compose output and fix quotation marks in the output and deploy the site
         return static::$shell->exec(
             'cd '.static::$path
+            // Print docker-compose output and fix quotation marks in the output and deploy the site
             .' && docker-compose config | sed -E "s/cpus: ([0-9\\.]+)/cpus: \'\\1\'/" | docker stack deploy --compose-file - '.static::$name
         )->isSuccessful();
     }
@@ -47,5 +47,23 @@ class DockerSwarm extends DockerShell
             'cd '.static::$path
             .' && docker stack rm '.static::$name
         )->isSuccessful();
+    }
+
+    /**
+     * @throws DockerSwarmServiceMissingException
+     */
+    public function command(string $service, string $command): string
+    {
+        $service = static::$name.'_'.$service;
+
+        if (! $this->services()->contains(function ($runningService) use ($command, $service) {
+            return $runningService['name'] === $service;
+        })) {
+            throw new DockerSwarmServiceMissingException($service);
+        }
+
+        $serviceId = static::$shell->exec("docker service ps -f name={$service}.1 -f desired-state=running {$service} -q --no-trunc | head -n1")->getOutput();
+
+        return static::$shell->exec("docker exec --tty=false {$service}.1.{$serviceId} {$command}")->getOutput();
     }
 }

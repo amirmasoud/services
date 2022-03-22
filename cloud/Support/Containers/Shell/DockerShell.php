@@ -41,7 +41,9 @@ class DockerShell extends Shell
      */
     protected static function getDockerComposePath(?string $path = null): string
     {
-        if (! $path || ! File::isDirectory($path)) {
+        $path = $path ?? Storage::disk('sites')->path(static::$name);
+
+        if (! File::isDirectory($path)) {
             throw new DockerComposePathNotDirectoryException($path ?? 'NULL');
         }
 
@@ -49,6 +51,6 @@ class DockerShell extends Shell
             throw new DockerComposeMissingException($path.'/docker-compose.yml');
         }
 
-        return $path ?? Storage::disk('sites')->path(static::$name);
+        return $path;
     }
 }

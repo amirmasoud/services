@@ -4,6 +4,7 @@ namespace Support;
 
 use Illuminate\Support\Collection;
 use Symfony\Component\Process\Process;
+use Support\Containers\Shell\DockerFormatter;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 class Shell
@@ -13,6 +14,27 @@ class Shell
     public function __construct(ConsoleOutput $output)
     {
         $this->output = $output;
+    }
+
+    public function formatErrorMessage(string $buffer)
+    {
+        return $this->formatMessage($buffer, true);
+    }
+
+    public function formatMessage(string $buffer, $isError = false): string
+    {
+        $pre = $isError ? '<bg=red;fg=white> ERR </> %s' : '<bg=green;fg=white> OUT </> %s';
+
+        return rtrim(collect(explode("\n", trim($buffer)))->reduce(function ($carry, $line) use ($pre) {
+            return $carry .= trim(sprintf($pre, $line))."\n";
+        }, ''));
+    }
+
+    protected function runAndParseTable(string $command): Collection
+    {
+        return app(DockerFormatter::class)->rawTableOutputToCollection(
+            app(Shell::class)->execQuietly($command)->getOutput()
+        );
     }
 
     public function execQuietly(string $command, array $parameters = []): Process
@@ -47,26 +69,5 @@ class Shell
         $process->setTimeout(null);
 
         return $process;
-    }
-
-    public function formatMessage(string $buffer, $isError = false): string
-    {
-        $pre = $isError ? '<bg=red;fg=white> ERR </> %s' : '<bg=green;fg=white> OUT </> %s';
-
-        return rtrim(collect(explode("\n", trim($buffer)))->reduce(function ($carry, $line) use ($pre) {
-            return $carry .= trim(sprintf($pre, $line))."\n";
-        }, ''));
-    }
-
-    public function formatErrorMessage(string $buffer)
-    {
-        return $this->formatMessage($buffer, true);
-    }
-
-    protected function runAndParseTable(string $command): Collection
-    {
-        return static::$formatter->rawTableOutputToCollection(
-            static::$shell->execQuietly($command)->getOutput()
-        );
     }
 }

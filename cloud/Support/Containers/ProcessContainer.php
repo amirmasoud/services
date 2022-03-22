@@ -77,58 +77,16 @@ class ProcessContainer implements DockerContainer
         }
     }
 
-    public function init(): static
-    {
-        $this->startTraefikContainer();
-        $this->createDockerComposeFile();
-        $this->createDotEnvFile();
-        $this->copyConfigFiles();
-        $this->generateSelfSignedCertificate();
-
-        return $this;
-    }
-
-    protected function startTraefikContainer(): void
-    {
-        // @todo check retval and throw exception if not 0
-        // @todo refactor to Docker Engine SDK
-        exec('docker network create proxy', $output, $retval);
-        exec('cd '.storage_path('app/proxy').' && docker-compose up -d', $output, $retval);
-    }
-
-    protected function createDockerComposeFile(): void
-    {
-        StubGenerator::from(domain_path('Sites/Stubs/wordpress-nginx-fpm/docker-compose.yml.stub'), asFullPath: true)
-            ->to(storage_path('app/sites').'/'.static::$site->name, createIfNotExist: true, asFullPath: true)
-            ->as('docker-compose')->ext('yml')
-            ->withReplacers(['name' => static::$site->name])
-            ->save();
-    }
-
-    protected function createDotEnvFile(): void
-    {
-        StubGenerator::from(domain_path('Sites/Stubs/wordpress-nginx-fpm/env.stub'), asFullPath: true)
-            ->to(storage_path('app/sites').'/'.static::$site->name, createIfNotExist: true, asFullPath: true)
-            ->as('.env')->noExt()
-            ->withReplacers([
-                'name' => static::$site->name,
-                'site_url' => 'https://'.static::$site->host,
-                'host' => static::$site->host,
-            ])
-            ->save();
-    }
-
-    protected function copyConfigFiles(): void
-    {
-        // @todo
-        File::copyDirectory(domain_path('Sites/Stubs/wordpress-nginx-fpm/config'), storage_path('app/sites/'.static::$site->name.'/config'));
-    }
-
-    protected function generateSelfSignedCertificate()
-    {
-        $site = static::$site->name;
-        shell_exec('cd '.storage_path('app/proxy')." && mkcert -cert-file certificates/{$site}-cert.pem -key-file certificates/{$site}-key.pem \"{$site}.test\" \"*.{$site}.test\"");
-    }
+    // public function init(): static
+    // {
+    //     $this->startTraefikContainer();
+    //     $this->createDockerComposeFile();
+    //     $this->createDotEnvFile();
+    //     $this->copyConfigFiles();
+    //     $this->generateSelfSignedCertificate();
+    //
+    //     return $this;
+    // }
 
     public function start(): static
     {
@@ -175,5 +133,47 @@ class ProcessContainer implements DockerContainer
     public function exec(string $command): bool|string|null
     {
         return shell_exec('cd '.storage_path('app/sites').'/'.static::$site->name.' && docker-compose exec -T '.$command);
+    }
+
+    protected function startTraefikContainer(): void
+    {
+        // @todo check retval and throw exception if not 0
+        // @todo refactor to Docker Engine SDK
+        exec('docker network create proxy', $output, $retval);
+        exec('cd '.storage_path('app/proxy').' && docker-compose up -d', $output, $retval);
+    }
+
+    protected function createDockerComposeFile(): void
+    {
+        StubGenerator::from(domain_path('Sites/Stubs/wordpress-nginx-fpm/docker-compose.yml.stub'), asFullPath: true)
+            ->to(storage_path('app/sites').'/'.static::$site->name, createIfNotExist: true, asFullPath: true)
+            ->as('docker-compose')->ext('yml')
+            ->withReplacers(['name' => static::$site->name])
+            ->save();
+    }
+
+    protected function createDotEnvFile(): void
+    {
+        StubGenerator::from(domain_path('Sites/Stubs/wordpress-nginx-fpm/env.stub'), asFullPath: true)
+            ->to(storage_path('app/sites').'/'.static::$site->name, createIfNotExist: true, asFullPath: true)
+            ->as('.env')->noExt()
+            ->withReplacers([
+                'name' => static::$site->name,
+                'site_url' => 'https://'.static::$site->host,
+                'host' => static::$site->host,
+            ])
+            ->save();
+    }
+
+    protected function copyConfigFiles(): void
+    {
+        // @todo
+        File::copyDirectory(domain_path('Sites/Stubs/wordpress-nginx-fpm/config'), storage_path('app/sites/'.static::$site->name.'/config'));
+    }
+
+    protected function generateSelfSignedCertificate()
+    {
+        $site = static::$site->name;
+        shell_exec('cd '.storage_path('app/proxy')." && mkcert -cert-file certificates/{$site}-cert.pem -key-file certificates/{$site}-key.pem \"{$site}.test\" \"*.{$site}.test\"");
     }
 }
