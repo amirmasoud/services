@@ -31,7 +31,7 @@ class TraefikService
             Storage::disk('proxy')->path('/traefik.yml')
         );
 
-        File::put(Storage::disk('proxy')->path('/traefik.yml'), '');
+        File::put(Storage::disk('proxy')->path('/dynamic_conf.yml'), '');
 
         File::ensureDirectoryExists(Storage::disk('proxy')->path('/certificates'));
     }
@@ -45,10 +45,5 @@ class TraefikService
         app(DockerNetworking::class)->ensureNetworkCreated();
 
         return DockerSwarm::for(static::NAME, Storage::disk('proxy')->path('/'))->deploy();
-    }
-
-    public static function status(): bool
-    {
-        // return DockerSwarm::for(static::NAME, Storage::disk('proxy')->path('/'))->status();
     }
 }

@@ -6,10 +6,15 @@ use Domain\Sites\Models\Site;
 use Illuminate\Support\Facades\Bus;
 use Support\Containers\ProcessContainer;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Support\Containers\Services\TraefikService;
 use Illuminate\Contracts\Queue\ShouldBeUniqueUntilProcessing;
 
 class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
 {
+    /**
+     * @throws \Support\Containers\Exceptions\DockerComposePathNotDirectoryException
+     * @throws \Support\Containers\Exceptions\DockerComposeMissingException
+     */
     public function handleSiteCreated(Site $site)
     {
         $site->load('stack');
@@ -23,6 +28,7 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
         $theme = $site->stack->properties->theme;
 
         Bus::chain([
+            TraefikService::deploySwarm(),
             // ProcessContainer::for($site)->init(),
             // ProcessContainer::for($site)->start(),
             /**

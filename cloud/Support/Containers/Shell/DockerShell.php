@@ -24,7 +24,7 @@ class DockerShell extends Shell
      */
     public static function for(string $name, ?string $path = null): static
     {
-        static::$name = $name;
+        static::$name = underscore_slug($name);
         static::$shell = new Shell(new ConsoleOutput());
         static::$formatter = new DockerFormatter();
         static::$networking = new DockerNetworking(static::$shell, self::$formatter);
