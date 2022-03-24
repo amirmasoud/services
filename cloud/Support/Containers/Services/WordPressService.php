@@ -28,18 +28,18 @@ class WordPressService
         //     ->save();
 
         // Create .env
-        // StubGenerator::from($image->path('env.stub'), asFullPath: true)
-        //     ->to($sites->path($host), createIfNotExist: true, asFullPath: true)
-        //     ->as('.env')->noExt()
-        //     ->withReplacers([
-        //         'name' => $host,
-        //         'site_url' => 'https://'.$host,
-        //         'host' => $host,
-        //     ])
-        //     ->save();
+        StubGenerator::from($image->path('env.stub'), asFullPath: true)
+            ->to($sites->path($host), createIfNotExist: true, asFullPath: true)
+            ->as('.env')->noExt()
+            ->withReplacers([
+                'name' => $host,
+                'site_url' => 'https://'.$host,
+                'host' => $host,
+            ])
+            ->save();
 
         // Copy config directory
-        // File::copyDirectory($image->path('/config'), $sites->path("$host/config"));
+        File::copyDirectory($image->path('/config'), $sites->path("$host/config"));
 
         // Generate SSL certificate
         app(SelfSigned::class)->generate($host);
