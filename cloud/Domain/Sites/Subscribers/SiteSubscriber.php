@@ -61,16 +61,10 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
         $theme = $site->stack->properties->theme;
 
         Bus::chain([
-            // TraefikService::deploySwarm(),
+            TraefikService::deploySwarm(),
             WordPressService::install($site->host),
             WordPressService::deploySwarm($site->host),
-            function () use ($site) {
-                sleep(20);
-                // while (WordPressService::execSwarm($site->host, "mysqladmin ping -h database -u \"wordpress\" -ppassword --silent;"))
-                // {
-                //     sleep(1);
-                // }
-            },
+            fn () => sleep(20),
             WordPressService::execSwarm($site->host, "wp core install --url=$url --title=\"$title\" --admin_user='admin' --admin_email=$email --admin_password=\"$password\""),
             WordPressService::execSwarm($site->host, "wp core update"),
             WordPressService::execSwarm($site->host, "wp theme install $theme --activate"),
