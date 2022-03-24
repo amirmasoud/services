@@ -79,4 +79,46 @@ class WordPressService
 
         return true;
     }
+
+    /**
+     * @throws \Support\Containers\Exceptions\DockerComposePathNotDirectoryException
+     * @throws \Support\Containers\Exceptions\DockerComposeMissingException
+     */
+    public static function removeSwarm(string $host): bool
+    {
+        DockerSwarm::for(underscore_slug($host))->removeStack();
+
+        return true;
+    }
+
+    /**
+     * @throws \Support\Containers\Exceptions\DockerComposePathNotDirectoryException
+     * @throws \Support\Containers\Exceptions\DockerComposeMissingException
+     * @throws \Support\Containers\Exceptions\DockerSwarmServiceMissingException
+     */
+    public static function noReplicaSwarm(string $host): bool
+    {
+        DockerSwarm::for(underscore_slug($host))->updateReplicas(underscore_slug($host).'_database', 0);
+        DockerSwarm::for(underscore_slug($host))->updateReplicas(underscore_slug($host).'_wordpress', 0);
+        DockerSwarm::for(underscore_slug($host))->updateReplicas(underscore_slug($host).'_proxy', 0);
+        DockerSwarm::for(underscore_slug($host))->updateReplicas(underscore_slug($host).'_wordpress-cli', 0);
+
+        return true;
+    }
+
+    /**
+     * @throws \Support\Containers\Exceptions\DockerComposePathNotDirectoryException
+     * @throws \Support\Containers\Exceptions\DockerComposeMissingException
+     * @throws \Support\Containers\Exceptions\DockerSwarmServiceMissingException
+     */
+    public static function oneReplicaSwarm(string $host): bool
+    {
+        // Order matters
+        DockerSwarm::for(underscore_slug($host))->updateReplicas(underscore_slug($host).'_database', 1);
+        DockerSwarm::for(underscore_slug($host))->updateReplicas(underscore_slug($host).'_wordpress', 1);
+        DockerSwarm::for(underscore_slug($host))->updateReplicas(underscore_slug($host).'_proxy', 1);
+        DockerSwarm::for(underscore_slug($host))->updateReplicas(underscore_slug($host).'_wordpress-cli', 1);
+
+        return true;
+    }
 }

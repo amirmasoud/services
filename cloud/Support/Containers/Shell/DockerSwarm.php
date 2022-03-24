@@ -22,14 +22,14 @@ class DockerSwarm extends DockerShell
     public function updateReplicas(string $service, int $replicas = 1): bool
     {
         if (! $this->services()->contains(function ($runningService) use ($service) {
-            return $runningService['name'] === static::$name.'_'.$service;
+            return $runningService['name'] === $service;
         })) {
             throw new DockerSwarmServiceMissingException($service);
         }
 
         return static::$shell->exec(
             'cd '.static::$path
-            .' && docker service update --replicas='.$replicas.' '.static::$name.'_'.$service
+            .' && docker service update --replicas='.$replicas.' '.$service
         )->isSuccessful();
     }
 

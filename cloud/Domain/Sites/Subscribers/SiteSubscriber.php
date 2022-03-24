@@ -6,6 +6,8 @@ use Support\Shell;
 use Domain\Sites\Models\Site;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Support\Containers\ProcessContainer;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Support\Containers\Services\TraefikService;
@@ -72,24 +74,63 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
         ]);
     }
 
+    /**
+     * @throws \Support\Containers\Exceptions\DockerComposePathNotDirectoryException
+     * @throws \Support\Containers\Exceptions\DockerComposeMissingException
+     * @throws \Support\Containers\Exceptions\DockerSwarmServiceMissingException
+     */
     public function handleSiteDeleted(Site $site)
     {
-        ProcessContainer::for($site)->stop();
+        Bus::chain([
+            WordPressService::noReplicaSwarm($site->host),
+        ]);
     }
 
+    /**
+     * @throws \Support\Containers\Exceptions\DockerComposePathNotDirectoryException
+     * @throws \Support\Containers\Exceptions\DockerComposeMissingException
+     * @throws \Support\Containers\Exceptions\DockerSwarmServiceMissingException
+     */
     public function handleSiteStarted(Site $site)
     {
-        ProcessContainer::for($site)->start();
+        Bus::chain([
+            WordPressService::oneReplicaSwarm($site->host),
+        ]);
+    }
+
+    /**
+     * @throws \Support\Containers\Exceptions\DockerComposePathNotDirectoryException
+     * @throws \Support\Containers\Exceptions\DockerComposeMissingException
+     * @throws \Support\Containers\Exceptions\DockerSwarmServiceMissingException
+     */
+    public function handleSiteRestored(Site $site)
+    {
+        Bus::chain([
+            WordPressService::oneReplicaSwarm($site->host),
+        ]);
     }
 
     public function handleSiteStopped(Site $site)
     {
-        ProcessContainer::for($site)->stop();
+        Bus::chain([
+            WordPressService::noReplicaSwarm($site->host),
+        ]);
+    }
+
+    public function handleSiteForceDeleted(Site $site)
+    {
+        Bus::chain([
+            WordPressService::removeSwarm($site->host),
+            fn () => File::deleteDirectory(Storage::disk(config('cloud.disks.sites'))->path(underscore_slug($site->host))),
+        ]);
     }
 
     public function handleSiteRestarted(Site $site)
     {
-        ProcessContainer::for($site)->restart();
+        Bus::chain([
+            WordPressService::noReplicaSwarm($site->host),
+            WordPressService::oneReplicaSwarm($site->host),
+        ]);
     }
 
     public function subscribe($events): array
@@ -97,6 +138,8 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
         return [
             'eloquent.created: Domain\Sites\Models\Site' => 'handleSiteCreated',
             'eloquent.deleted: Domain\Sites\Models\Site' => 'handleSiteDeleted',
+            'eloquent.restored: Domain\Sites\Models\Site' => 'handleSiteRestored',
+            'eloquent.forceDelete: Domain\Sites\Models\Site' => 'handleSiteForceDeleted',
             'eloquent.started: Domain\Sites\Models\Site' => 'handleSiteStarted',
             'eloquent.stopped: Domain\Sites\Models\Site' => 'handleSiteStopped',
             'eloquent.restarted: Domain\Sites\Models\Site' => 'handleSiteRestarted',
