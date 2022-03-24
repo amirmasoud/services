@@ -68,7 +68,7 @@ services:
       WORDPRESS_DB_NAME: ${DATABASE_NAME}
       WORDPRESS_DEBUG: ${WORDPRESS_DEBUG}
       HOME: /tmp
-    command: "while ! mysqladmin ping -h database -u \"${DATABASE_USER}\" -p${DATABASE_PASSWORD} --silent; do sleep 1; done && tail -f /dev/null"
+    command: [sh, -c, "while ! mysqladmin ping -h database -u \"${DATABASE_USER}\" -p${DATABASE_PASSWORD} --silent; do sleep 1; done && tail -f /dev/null"]
     volumes:
       - wordpress-data:/var/www/html
     networks:

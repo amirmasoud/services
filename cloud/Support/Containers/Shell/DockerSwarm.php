@@ -12,7 +12,7 @@ class DockerSwarm extends DockerShell
         return static::$shell->exec(
             'cd '.static::$path
             // Print docker-compose output and fix quotation marks in the output and deploy the site
-            .' && docker-compose config | sed -E "s/cpus: ([0-9\\.]+)/cpus: \'\\1\'/" | docker stack deploy --compose-file - '.static::$name
+            .' && docker-compose config | sed -E "s/cpus: ([0-9\\.]+)/cpus: \'\\1\'/" | docker stack deploy --compose-file - '.underscore_slug(static::$name)
         )->isSuccessful();
     }
 

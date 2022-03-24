@@ -24,7 +24,7 @@ class DockerShell extends Shell
      */
     public static function for(string $name, ?string $path = null): static
     {
-        static::$name = underscore_slug($name);
+        static::$name = $name;
         static::$shell = new Shell(new ConsoleOutput());
         static::$formatter = new DockerFormatter();
         static::$networking = new DockerNetworking(static::$shell, self::$formatter);
@@ -41,7 +41,7 @@ class DockerShell extends Shell
      */
     protected static function getDockerComposePath(?string $path = null): string
     {
-        $path = $path ?? Storage::disk('sites')->path(static::$name);
+        $path = $path ?? Storage::disk('sites')->path(underscore_slug(static::$name));
 
         if (! File::isDirectory($path)) {
             throw new DockerComposePathNotDirectoryException($path ?? 'NULL');

@@ -19,30 +19,30 @@ class WordPressService
     public static function install(string $host, ImageEnum $image = ImageEnum::WORDPRESS_NGINX_MARIADB, bool $force = false)
     {
         $sites = Storage::disk(config('cloud.disks.sites'));
+        $dir = underscore_slug($host);
 
         // Create docker-compose.yml
-        // StubGenerator::from($image->path('docker-compose.yml.stub'), asFullPath: true)
-        //     ->to($sites->path($host), createIfNotExist: true, asFullPath: true)
-        //     ->as('docker-compose')->ext('yml')
-        //     ->withReplacers(['name' => $host])
-        //     ->save();
+        StubGenerator::from($image->path('docker-compose.yml.stub'), asFullPath: true)
+            ->to($sites->path($dir), createIfNotExist: true, asFullPath: true)
+            ->as('docker-compose')->ext('yml')
+            ->save();
 
         // Create .env
         StubGenerator::from($image->path('env.stub'), asFullPath: true)
-            ->to($sites->path($host), createIfNotExist: true, asFullPath: true)
+            ->to($sites->path($dir), createIfNotExist: true, asFullPath: true)
             ->as('.env')->noExt()
             ->withReplacers([
-                'name' => $host,
+                'name' => underscore_slug($host),
                 'site_url' => 'https://'.$host,
                 'host' => $host,
             ])
             ->save();
 
         // Copy config directory
-        File::copyDirectory($image->path('/config'), $sites->path("$host/config"));
+        File::copyDirectory($image->path('/config'), $sites->path("$dir/config"));
 
         // Generate SSL certificate
-        app(SelfSigned::class)->generate($host);
+        app(SelfSigned::class)->generate($dir);
     }
 
     /**
@@ -53,6 +53,6 @@ class WordPressService
     {
         app(DockerNetworking::class)->ensureNetworkCreated();
 
-        return DockerSwarm::for($host, Storage::disk(config('cloud.disks.sites'))->path($host))->deploy();
+        return DockerSwarm::for($host, Storage::disk(config('cloud.disks.sites'))->path(underscore_slug($host)))->deploy();
     }
 }
