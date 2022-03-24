@@ -37,7 +37,7 @@ class DockerSwarm extends DockerShell
     {
         return $this->runAndParseTable(
             'cd '.static::$path
-            .' && docker stack services '.static::$name.' --format "table {{.ID}}|{{.Name}}|{{.Mode}}|{{.Replicas}}|{{.Image}}|{{.Ports}}"'
+            .' && docker stack services '.underscore_slug(static::$name).' --format "table {{.ID}}|{{.Name}}|{{.Mode}}|{{.Replicas}}|{{.Image}}|{{.Ports}}"'
         );
     }
 
@@ -45,25 +45,23 @@ class DockerSwarm extends DockerShell
     {
         return static::$shell->exec(
             'cd '.static::$path
-            .' && docker stack rm '.static::$name
+            .' && docker stack rm '.underscore_slug(static::$name)
         )->isSuccessful();
     }
 
     /**
      * @throws DockerSwarmServiceMissingException
      */
-    public function command(string $service, string $command): string
+    public function command(string $service, string $command): \Symfony\Component\Process\Process
     {
-        $service = static::$name.'_'.$service;
-
         if (! $this->services()->contains(function ($runningService) use ($command, $service) {
             return $runningService['name'] === $service;
         })) {
             throw new DockerSwarmServiceMissingException($service);
         }
 
-        $serviceId = static::$shell->exec("docker service ps -f name={$service}.1 -f desired-state=running {$service} -q --no-trunc | head -n1")->getOutput();
+        $serviceId = static::$shell->exec(line("docker service ps -f name={$service}.1 -f desired-state=running {$service} -q --no-trunc | head -n1"))->getOutput();
 
-        return static::$shell->exec("docker exec --tty=false {$service}.1.{$serviceId} {$command}")->getOutput();
+        return static::$shell->exec(line("docker exec --tty=false {$service}.1.{$serviceId} {$command}"));
     }
 }

@@ -3,8 +3,6 @@ services:
   database:
     #    container_name: "${DATABASE_CONTAINER_NAME}"
     image: "${DATABASE_VERSION}"
-    ports:
-      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT}
       MYSQL_DATABASE: ${DATABASE_NAME}

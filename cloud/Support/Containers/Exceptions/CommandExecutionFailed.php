@@ -6,11 +6,11 @@ use Exception;
 use Support\Shell;
 use Symfony\Component\Console\Command\Command;
 
-class DockerSwarmServiceMissingException extends Exception
+class CommandExecutionFailed extends Exception
 {
-    public function __construct(string $service)
+    public function __construct(string $command)
     {
-        parent::__construct("Docker swarm service {$service} not found.");
+        parent::__construct("Command ($command) execution failed.");
     }
 
     public function render($request = null): void

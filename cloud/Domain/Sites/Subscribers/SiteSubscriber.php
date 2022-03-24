@@ -2,18 +2,51 @@
 
 namespace Domain\Sites\Subscribers;
 
+use Support\Shell;
 use Domain\Sites\Models\Site;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Bus;
 use Support\Containers\ProcessContainer;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Support\Containers\Services\TraefikService;
+use Support\Containers\Services\WordPressService;
 use Illuminate\Contracts\Queue\ShouldBeUniqueUntilProcessing;
 
 class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
 {
     /**
+     * The number of times the job may be attempted.
+     *
+     * @var int
+     */
+    public $tries = 3;
+
+    /**
+     * The number of seconds the job can run before timing out.
+     *
+     * @var int
+     */
+    public $timeout = 60 * 10;
+
+    /**
+     * Indicate if the job should be marked as failed on timeout.
+     *
+     * @var bool
+     */
+    public $failOnTimeout = true;
+
+    /**
+     * The number of seconds to wait before retrying the job.
+     *
+     * @var int
+     */
+    public $backoff = 3;
+
+    /**
      * @throws \Support\Containers\Exceptions\DockerComposePathNotDirectoryException
      * @throws \Support\Containers\Exceptions\DockerComposeMissingException
+     * @throws \Support\Certificates\Exceptions\MkcertMissingException
+     * @throws \Support\Containers\Exceptions\DockerSwarmServiceMissingException
      */
     public function handleSiteCreated(Site $site)
     {
@@ -28,17 +61,20 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
         $theme = $site->stack->properties->theme;
 
         Bus::chain([
-            TraefikService::deploySwarm(),
-            // ProcessContainer::for($site)->init(),
-            // ProcessContainer::for($site)->start(),
-            /**
-             *  Install WordPress
-             * @todo Setting password as "secret" is not a good idea.
-             */
-            // ProcessContainer::for($site)->exec("wordpress-cli wp core install --url=$url --title=\"$title\" --admin_user='admin' --admin_email=$email --admin_password=\"$password\""),
-            // ProcessContainer::for($site)->exec("wordpress-cli wp core update"),
-            // ProcessContainer::for($site)->exec("wordpress-cli wp theme install $theme --activate"),
-            // ProcessContainer::for($site)->exec("wordpress-cli wp plugin install $plugins --activate"),
+            // TraefikService::deploySwarm(),
+            WordPressService::install($site->host),
+            WordPressService::deploySwarm($site->host),
+            function () use ($site) {
+                sleep(20);
+                // while (WordPressService::execSwarm($site->host, "mysqladmin ping -h database -u \"wordpress\" -ppassword --silent;"))
+                // {
+                //     sleep(1);
+                // }
+            },
+            WordPressService::execSwarm($site->host, "wp core install --url=$url --title=\"$title\" --admin_user='admin' --admin_email=$email --admin_password=\"$password\""),
+            WordPressService::execSwarm($site->host, "wp core update"),
+            WordPressService::execSwarm($site->host, "wp theme install $theme --activate"),
+            WordPressService::execSwarm($site->host, "wp plugin install $plugins --activate"),
         ]);
     }
 

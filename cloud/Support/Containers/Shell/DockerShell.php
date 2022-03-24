@@ -41,7 +41,7 @@ class DockerShell extends Shell
      */
     protected static function getDockerComposePath(?string $path = null): string
     {
-        $path = $path ?? Storage::disk('sites')->path(underscore_slug(static::$name));
+        $path = $path ?? Storage::disk(config('cloud.disks.sites'))->path(underscore_slug(static::$name));
 
         if (! File::isDirectory($path)) {
             throw new DockerComposePathNotDirectoryException($path ?? 'NULL');

@@ -34,3 +34,16 @@ if (! function_exists('title_from_slug')) {
         return Str::of($string)->replace('_', ' ')->title();
     }
 }
+
+if (! function_exists('line')) {
+    /**
+     * Make sure the $lines don't have any new lines.
+     *
+     * @param  string  $lines
+     * @return string
+     */
+    function line(string $lines): string
+    {
+        return preg_replace('/\s+/', ' ', trim($lines));
+    }
+}
