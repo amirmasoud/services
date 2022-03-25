@@ -1,17 +1,15 @@
 version: "3.9"
 services:
   database:
-    #    container_name: "${DATABASE_CONTAINER_NAME}"
+    # container_name: "${DATABASE_CONTAINER_NAME}"
     image: "${DATABASE_VERSION}"
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT}
       MYSQL_DATABASE: ${DATABASE_NAME}
       MYSQL_USER: ${DATABASE_USER}
       MYSQL_PASSWORD: ${DATABASE_PASSWORD}
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-u", "${DATABASE_USER}", "-p${DATABASE_PASSWORD}"]
-      timeout: 20s
-      retries: 10
+    volumes:
+      - database-data:/var/lib/mysql
     networks:
       - default
     deploy:
@@ -118,6 +116,7 @@ services:
           memory: 32M
 volumes:
   wordpress-data:
+  database-data:
 networks:
   proxy:
     external: true
