@@ -128,7 +128,10 @@
               />
             </TabPanel>
             <TabPanel>
-              <Themes v-model:selected-theme="selectedTheme" :records="themes" />
+              <Themes
+                v-model:selected-theme="selectedTheme"
+                :records="themes"
+              />
             </TabPanel>
             <TabPanel>
               <Advance v-model:entered-commands="enteredCommands" />
@@ -162,7 +165,6 @@ import {
   PuzzleIcon,
   ViewBoardsIcon,
   TerminalIcon,
-  PaperAirplaneIcon,
 } from "@heroicons/vue/solid";
 import { defineProps, ref, watch } from "vue";
 import Button from "@/Components/Button";
@@ -211,29 +213,4 @@ watch(selectedTheme, () => {
 watch(enteredCommands, () => {
   form.properties.commands = enteredCommands.value;
 });
-
-const deploy = () => {
-  if (selectedPlan.value === "") {
-    notificationTitle.value = "Error";
-    notificationMessage.value = "Please select a plan";
-    notificationShow.value = true;
-    return;
-  }
-
-  if (selectedConfig.value === "") {
-    notificationTitle.value = "Error";
-    notificationMessage.value = "Please select a configuration";
-    notificationShow.value = true;
-    return;
-  }
-
-  if (selectedTheme.value === "") {
-    notificationTitle.value = "Error";
-    notificationMessage.value = "Please select a theme";
-    notificationShow.value = true;
-    return;
-  }
-
-  notificationShow.value = false;
-};
 </script>
