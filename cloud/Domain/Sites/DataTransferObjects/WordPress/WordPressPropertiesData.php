@@ -8,7 +8,7 @@ class WordPressPropertiesData extends DataTransferObject
 {
     public array $plugins = [];
 
-    public string $theme;
+    public string $theme = '';
 
-    public string $commands = '';
+    public array|string $commands = [];
 }
