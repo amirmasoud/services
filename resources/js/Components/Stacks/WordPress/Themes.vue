@@ -25,7 +25,7 @@
     v-model="selectedTheme"
     class="mb-10 max-w-screen-xl"
     @update:modelValue="
-      (theme) => $emit('update:selected-theme', theme)
+      (theme) => $emit('update:selected-theme', selectedTheme)
     "
   >
     <RadioGroupLabel class="sr-only"> Selected Theme </RadioGroupLabel>
@@ -91,6 +91,8 @@ import {
 import debounce from "lodash/debounce";
 import { Inertia } from "@inertiajs/inertia";
 import { StarIcon } from "@heroicons/vue/solid";
+
+let rating = 5;
 
 const themeSearch = ref("");
 

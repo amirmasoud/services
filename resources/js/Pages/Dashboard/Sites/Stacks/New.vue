@@ -210,7 +210,6 @@ watch(selectedPlugins.value, () => {
 
 watch(selectedTheme, () => {
   form.properties.theme = selectedTheme.value;
-  console.log(form.properties);
 });
 
 watch(enteredCommands, () => {

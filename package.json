@@ -24,7 +24,7 @@
         "vue-loader": "^16.2.0"
     },
     "dependencies": {
-        "@headlessui/vue": "^1.4.3",
+        "@headlessui/vue": "^1.5.0",
         "@heroicons/vue": "^1.0.5",
         "@highlightjs/vue-plugin": "^2.1.0",
         "@inertiajs/inertia": "^0.11.0",
