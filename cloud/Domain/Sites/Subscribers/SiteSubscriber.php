@@ -121,7 +121,7 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
     {
         Bus::chain([
             WordPressService::removeSwarm($site->host),
-            fn () => File::deleteDirectory(Storage::disk(config('cloud.disks.sites'))->path(underscore_slug($site->host))),
+            fn () => File::deleteDirectory(Storage::disk(config('cloud.disks.sites'))->path(underscore_slug($site->host))), // Not working!
         ]);
     }
 
