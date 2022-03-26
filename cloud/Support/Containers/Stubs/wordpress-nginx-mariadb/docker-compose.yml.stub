@@ -17,11 +17,11 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: "1.0"
-          memory: 512M
-        reservations:
-          cpus: "0.50"
+          cpus: "0.10"
           memory: 256M
+        reservations:
+          cpus: "0.01"
+          memory: 128M
   wordpress:
     #    container_name: "${WORDPRESS_NAME}"
     #    depends_on:
@@ -44,10 +44,10 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: "0.50"
+          cpus: "0.10"
           memory: 64M
         reservations:
-          cpus: "0.50"
+          cpus: "0.01"
           memory: 32M
   wordpress-cli:
     #    container_name: "${WORDPRESS_CLI_NAME}"
@@ -74,10 +74,10 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: "0.50"
-          memory: 64M
+          cpus: "0.10"
+          memory: 32M
         reservations:
-          cpus: "0.50"
+          cpus: "0.01"
           memory: 32M
   proxy:
     #    container_name: "${PROXY_NAME}"
@@ -109,10 +109,10 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: "0.50"
-          memory: 128M
+          cpus: "0.10"
+          memory: 32M
         reservations:
-          cpus: "0.50"
+          cpus: "0.01"
           memory: 32M
 volumes:
   wordpress-data:
