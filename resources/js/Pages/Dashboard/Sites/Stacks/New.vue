@@ -134,7 +134,9 @@
               />
             </TabPanel>
             <TabPanel>
-              <Advance v-model:entered-commands="enteredCommands" />
+              <Advance
+                v-model:entered-commands="enteredCommands"
+              />
             </TabPanel>
           </TabPanels>
         </TabGroup>
@@ -208,6 +210,7 @@ watch(selectedPlugins.value, () => {
 
 watch(selectedTheme, () => {
   form.properties.theme = selectedTheme.value;
+  console.log(form.properties);
 });
 
 watch(enteredCommands, () => {
