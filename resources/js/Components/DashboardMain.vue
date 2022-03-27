@@ -25,3 +25,45 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { TransitionRoot } from "@headlessui/vue";
+
+defineEmits(["update:modelValue"]);
+
+defineProps({
+  name: String,
+  label: String,
+  modelValue: String,
+  id: {
+    type: String,
+    default: (props) => props.name,
+  },
+  type: {
+    type: String,
+    default: "text",
+  },
+  placeholder: {
+    type: String,
+    default: "",
+  },
+  form: {
+    type: Object,
+    default() {
+      return { errors: {} };
+    },
+  },
+  hasError: {
+    type: Boolean,
+    default: null,
+  },
+  errorMessage: {
+    type: String,
+    default: "",
+  },
+  help: {
+    type: String,
+    default: "",
+  },
+});
+</script>

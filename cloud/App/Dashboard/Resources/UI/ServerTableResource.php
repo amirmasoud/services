@@ -2,9 +2,9 @@
 
 namespace App\Dashboard\Resources\UI;
 
-use App\Dashboard\UI\Table\ActionTableUI;
-use App\Dashboard\UI\Table\FieldTableUI;
 use Domain\Sites\Models\Site;
+use App\Dashboard\UI\Table\FieldTableUI;
+use App\Dashboard\UI\Table\ActionTableUI;
 
 class ServerTableResource extends BaseUI
 {
@@ -19,6 +19,13 @@ class ServerTableResource extends BaseUI
             'fields' => [
                 new FieldTableUI('name', 'Name'),
                 new FieldTableUI('price', 'Price'),
+                new FieldTableUI('cpu', 'CPU'),
+                new FieldTableUI('ram', 'RAM'),
+                new FieldTableUI('ram_unit', ''),
+                new FieldTableUI('disk', 'Disk'),
+                new FieldTableUI('disk_unit', ''),
+                new FieldTableUI('disk_type', ''),
+                new FieldTableUI('status', 'Status'),
             ],
             'actions' => array_combine(
                 ['edit', 'delete', 'create'],

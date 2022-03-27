@@ -1,25 +1,24 @@
 <template>
-  <label
-    :for="id"
-    class="block text-sm font-semibold font-medium text-gray-700"
-  >
-    {{ label }}
-  </label>
-  <div class="mt-1">
-    <input
-      :id="id"
-      :class="[
-        hasError || !!form.errors[name]
-          ? 'border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500'
-          : 'focus:ring-indigo-500 focus:border-indigo-500 border-gray-300',
-      ]"
-      :name="name"
-      :placeholder="placeholder"
-      :type="type"
-      :value="modelValue"
-      class="block w-full sm:text-sm rounded-md shadow-sm"
-      @input="$emit('update:modelValue', $event.target.value)"
-    />
+  <div>
+    <label :for="id" class="block text-sm font-semibold text-gray-700">
+      {{ label }}
+    </label>
+    <div class="mt-1">
+      <textarea
+        :id="id"
+        :class="[
+          hasError || !!form.errors[name]
+            ? 'border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500'
+            : 'focus:ring-indigo-500 focus:border-indigo-500 border-gray-300',
+        ]"
+        :name="name"
+        :placeholder="placeholder"
+        :value="modelValue"
+        class="block w-full shadow-sm sm:text-sm border rounded-md"
+        rows="3"
+        @input="$emit('update:modelValue', $event.target.value)"
+      />
+    </div>
   </div>
   <p
     v-if="help !== ''"
@@ -46,7 +45,6 @@
 
 <script setup>
 import { TransitionRoot } from "@headlessui/vue";
-import { defineEmits, defineProps } from "vue";
 
 defineEmits(["update:modelValue"]);
 

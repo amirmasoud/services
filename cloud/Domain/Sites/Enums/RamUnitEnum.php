@@ -4,14 +4,14 @@ namespace Domain\Sites\Enums;
 
 enum RamUnitEnum: string
 {
-    case MB = 'GB';
-    case GB = 'MB';
+    case MB = 'MB';
+    case GB = 'GB';
 
     public function label(): string
     {
-        return match($this) {
-            self::MB => 'MegaBytes',
-            self::GB => 'GigaBytes',
+        return match ($this) {
+            self::GB => 'MegaBytes',
+            self::MB => 'GigaBytes',
         };
     }
 }
