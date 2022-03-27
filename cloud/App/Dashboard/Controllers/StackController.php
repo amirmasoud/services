@@ -29,8 +29,8 @@ class StackController extends Controller
     public function create(): Response
     {
         return Inertia::render('Dashboard/Sites/Stacks/New', [
-            'plugins' => ApiWordPress::plugins(),
-            'themes' => ApiWordPress::themes(),
+            'plugins' => fn () => ApiWordPress::plugins(),
+            'themes' => fn () => ApiWordPress::themes(),
             'types' => array_map(fn (StackTypeEnum $stack) => ['value' => $stack->value, 'label' => $stack->label(), 'icon' => $stack->icon()], StackTypeEnum::cases()), // @todo refactor to resources
         ]);
     }

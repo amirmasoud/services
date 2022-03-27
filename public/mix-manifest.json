@@ -1,6 +1,6 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/js/manifest.js": "/js/manifest.js",
-    "/css/app.css": "/css/app.css",
-    "/js/vendor.js": "/js/vendor.js"
+    "/js/app.js": "/js/app.js?id=a704f36d12eaba6bca7e",
+    "/js/manifest.js": "/js/manifest.js?id=3529bafb82f61b771c18",
+    "/css/app.css": "/css/app.css?id=3e0c62953fce7eeda047",
+    "/js/vendor.js": "/js/vendor.js?id=5b700625230e250ba1d1"
 }

@@ -5,37 +5,35 @@
     <div
       class="w-full sm:col-start-2 sm:col-span-2 xl:col-start-2 xl:col-end-3"
     >
-      <label for="search" class="block text-sm font-medium text-gray-700"
+      <label class="block text-sm font-medium text-gray-700" for="search"
         >Search</label
       >
       <div class="mt-1 relative rounded-md shadow-sm w-full">
         <input
           id="search"
           v-model="themeSearch"
-          type="search"
-          name="search"
           class="focus:ring-indigo-500 focus:border-indigo-500 block w-full px-4 sm:text-sm border-gray-300 rounded-md"
+          name="search"
           placeholder="search"
+          type="search"
         />
       </div>
     </div>
   </div>
 
   <RadioGroup
-    v-model="selectedTheme"
+    v-model="theme"
     class="mb-10 max-w-screen-xl"
-    @update:modelValue="
-      (theme) => $emit('update:selected-theme', selectedTheme)
-    "
+    @update:modelValue="(t) => $emit('update:selected-theme', theme)"
   >
-    <RadioGroupLabel class="sr-only"> Selected Theme </RadioGroupLabel>
+    <RadioGroupLabel class="sr-only"> Selected Theme</RadioGroupLabel>
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
       <RadioGroupOption
         v-for="theme in records.themes"
         :key="theme.slug"
         v-slot="{ active, checked }"
-        as="template"
         :value="theme.slug"
+        as="template"
       >
         <div
           :class="[
@@ -81,7 +79,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, defineProps } from "vue";
 import {
   RadioGroup,
   RadioGroupLabel,
@@ -92,22 +90,26 @@ import debounce from "lodash/debounce";
 import { Inertia } from "@inertiajs/inertia";
 import { StarIcon } from "@heroicons/vue/solid";
 
-let rating = 5;
-
 const themeSearch = ref("");
 
-defineProps({
+let props = defineProps({
   records: Object,
   selectedTheme: String,
 });
+
+let theme = ref(props.selectedTheme);
 
 watch(
   themeSearch,
   debounce(function (query) {
     Inertia.get(
-      route("slacks.themes"),
+      route("dashboard.sites.stacks.create"),
       { search: themeSearch.value },
-      { preserveState: true, replace: true, only: ["records"] }
+      {
+        preserveState: true,
+        replace: true,
+        only: ["themes"],
+      }
     );
   }, 300)
 );
