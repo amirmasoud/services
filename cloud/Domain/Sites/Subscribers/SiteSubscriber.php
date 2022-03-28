@@ -2,13 +2,10 @@
 
 namespace Domain\Sites\Subscribers;
 
-use Support\Shell;
 use Domain\Sites\Models\Site;
-use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Support\Containers\ProcessContainer;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Support\Containers\Services\TraefikService;
 use Support\Containers\Services\WordPressService;
@@ -49,6 +46,8 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
      * @throws \Support\Containers\Exceptions\DockerComposeMissingException
      * @throws \Support\Certificates\Exceptions\MkcertMissingException
      * @throws \Support\Containers\Exceptions\DockerSwarmServiceMissingException
+     * @throws \Support\Containers\Exceptions\DockerComposeFailedException
+     * @throws \Support\Containers\Exceptions\CommandExecutionFailed
      */
     public function handleSiteCreated(Site $site)
     {
@@ -63,14 +62,20 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
         $theme = $site->stack->properties->theme;
 
         Bus::chain([
-            TraefikService::deploySwarm(),
+            // TraefikService::deploySwarm(),
+            TraefikService::deployCompose(),
             WordPressService::install($site->host),
-            WordPressService::deploySwarm($site->host),
+            // WordPressService::deploySwarm($site->host),
+            WordPressService::deployCompose($site->host),
             fn () => sleep(20),
-            WordPressService::execSwarm($site->host, "wp core install --url=$url --title=\"$title\" --admin_user='admin' --admin_email=$email --admin_password=\"$password\""),
-            WordPressService::execSwarm($site->host, "wp core update"),
-            WordPressService::execSwarm($site->host, "wp theme install $theme --activate"),
-            WordPressService::execSwarm($site->host, "wp plugin install $plugins --activate"),
+            // WordPressService::execSwarm($site->host, "wp core install --url=$url --title=\"$title\" --admin_user='admin' --admin_email=$email --admin_password=\"$password\""),
+            // WordPressService::execSwarm($site->host, "wp core update"),
+            // WordPressService::execSwarm($site->host, "wp theme install $theme --activate"),
+            // WordPressService::execSwarm($site->host, "wp plugin install $plugins --activate"),
+            WordPressService::execCompose($site->host, "wp core install --url=$url --title=\"$title\" --admin_user='admin' --admin_email=$email --admin_password=\"$password\""),
+            WordPressService::execCompose($site->host, "wp core update"),
+            WordPressService::execCompose($site->host, "wp theme install $theme --activate"),
+            WordPressService::execCompose($site->host, "wp plugin install $plugins --activate"),
         ]);
     }
 

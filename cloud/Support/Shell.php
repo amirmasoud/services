@@ -23,7 +23,7 @@ class Shell
 
     public function formatMessage(string $buffer, $isError = false): string
     {
-        $pre = $isError ? '<bg=red;fg=white> ERR </> %s' : '<bg=green;fg=white> OUT </> %s';
+        $pre = ''; // $isError ? '<bg=red;fg=white> ERR </> %s' : '<bg=green;fg=white> OUT </> %s';
 
         return rtrim(collect(explode("\n", trim($buffer)))->reduce(function ($carry, $line) use ($pre) {
             return $carry .= trim(sprintf($pre, $line))."\n";

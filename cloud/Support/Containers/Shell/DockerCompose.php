@@ -14,11 +14,9 @@ class DockerCompose extends DockerShell
     /**
      * @throws DockerComposeFailedException
      */
-    public function up(): static
+    public function up(): bool
     {
-        return static::$shell->exec('cd '.static::$path.' && docker-compose up -d')->isSuccessful()
-            ? $this
-            : throw new DockerComposeFailedException('up', static::$path);
+        return static::$shell->exec('cd '.static::$path.' && docker-compose up -d')->isSuccessful();
     }
 
     /**

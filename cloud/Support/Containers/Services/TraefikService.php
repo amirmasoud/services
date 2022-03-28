@@ -5,6 +5,7 @@ namespace Support\Containers\Services;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Support\Containers\Shell\DockerSwarm;
+use Support\Containers\Shell\DockerCompose;
 use Support\Containers\Shell\DockerNetworking;
 use Support\Containers\Exceptions\TraefikServiceAvailableException;
 
@@ -45,5 +46,17 @@ class TraefikService
         app(DockerNetworking::class)->ensureNetworkCreated();
 
         return DockerSwarm::for(static::NAME, Storage::disk('proxy')->path('/'))->deploy();
+    }
+
+    /**
+     * @throws \Support\Containers\Exceptions\DockerComposePathNotDirectoryException
+     * @throws \Support\Containers\Exceptions\DockerComposeMissingException
+     * @throws \Support\Containers\Exceptions\DockerComposeFailedException
+     */
+    public static function deployCompose(): bool
+    {
+        app(DockerNetworking::class)->ensureNetworkCreated('proxy', 'bridge');
+
+        return DockerCompose::for(static::NAME, Storage::disk('proxy')->path('/'))->up();
     }
 }
