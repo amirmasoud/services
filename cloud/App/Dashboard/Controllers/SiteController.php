@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Domain\Sites\Enums\StackTypeEnum;
 use Illuminate\Http\RedirectResponse;
+use Domain\Sites\Enums\SiteStatusEnum;
 use App\Dashboard\Requests\SiteRequest;
 use Support\Containers\ProcessContainer;
 use App\Dashboard\Resources\SiteResource;
@@ -16,7 +17,6 @@ use App\Dashboard\Resources\StackResource;
 use App\Dashboard\Resources\ServerResource;
 use App\Dashboard\Requests\SiteSearchRequest;
 use App\Dashboard\Resources\UI\SiteStatResource;
-use Support\Containers\Enums\ContainerStateEnum;
 use App\Dashboard\Resources\UI\SiteTableResource;
 use App\Dashboard\Resources\UI\SiteFilterResource;
 
@@ -48,7 +48,7 @@ class SiteController extends Controller
         Auth::user()->sites()->create(
             array_merge(
                 $request->validated(),
-                ['status' => ContainerStateEnum::STARTING]
+                ['status' => SiteStatusEnum::INSTALLING]
             )
         );
 
