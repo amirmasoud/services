@@ -12,6 +12,7 @@ class SiteResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'host' => $this->host,
+            'status' => $this->status->label(),
             'deleted_at' => $this->deleted_at,
             'servers' => ServerResource::collection($this->whenLoaded('server')),
             'stacks' => StackResource::collection($this->whenLoaded('stack')),

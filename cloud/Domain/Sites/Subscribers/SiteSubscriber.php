@@ -2,9 +2,10 @@
 
 namespace Domain\Sites\Subscribers;
 
+use Throwable;
 use Domain\Sites\Models\Site;
+use Domain\Sites\ChangeSiteStatus;
 use Illuminate\Support\Facades\Bus;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Support\Containers\Services\TraefikService;
 use Support\Containers\Services\WordPressService;
@@ -61,6 +62,7 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
         $theme = $site->stack->properties->theme;
 
         Bus::chain([
+            ChangeSiteStatus::installing($site),
             // TraefikService::deploySwarm(),
             TraefikService::deployCompose(),
             WordPressService::install($site->host),
@@ -75,7 +77,10 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
             WordPressService::execCompose($site->host, "wp core update"),
             WordPressService::execCompose($site->host, "wp theme install $theme --activate"),
             WordPressService::execCompose($site->host, "wp plugin install $plugins --activate"),
-        ]);
+            ChangeSiteStatus::up($site),
+        ])->catch(function (Throwable $e) use ($site) {
+            ChangeSiteStatus::failed($site);
+        });
     }
 
     /**
@@ -86,8 +91,10 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
     public function handleSiteDeleted(Site $site)
     {
         Bus::chain([
+            ChangeSiteStatus::stopped($site),
             // WordPressService::noReplicaSwarm($site->host),
             WordPressService::stopCompose($site->host),
+            ChangeSiteStatus::stopped($site),
         ]);
     }
 
@@ -112,17 +119,23 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
     public function handleSiteRestored(Site $site)
     {
         Bus::chain([
+            ChangeSiteStatus::starting($site),
             // WordPressService::oneReplicaSwarm($site->host),
             WordPressService::startCompose($site->host),
+            ChangeSiteStatus::up($site),
         ]);
     }
 
     public function handleSiteStopped(Site $site)
     {
         Bus::chain([
+            ChangeSiteStatus::stopping($site),
             // WordPressService::noReplicaSwarm($site->host),
             WordPressService::stopCompose($site->host),
-        ]);
+            ChangeSiteStatus::stopped($site),
+        ])->catch(function (Throwable $e) use ($site) {
+            ChangeSiteStatus::failed($site);
+        });
     }
 
     public function handleSiteForceDeleted(Site $site)
@@ -146,7 +159,6 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
 
     public function subscribe($events): array
     {
-        Event::listen('eloquent.*', fn ($event, $model) => logger($event));
         return [
             'eloquent.created: Domain\Sites\Models\Site' => 'handleSiteCreated',
             'eloquent.deleting: Domain\Sites\Models\Site' => 'handleSiteDeleted',

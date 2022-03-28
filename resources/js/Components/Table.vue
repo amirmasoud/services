@@ -154,12 +154,11 @@
 </template>
 
 <script setup>
-import { onMounted, watch } from "vue";
+import { onMounted, watch, defineProps } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import Paginator from "@/Components/Paginator";
 import debounce from "lodash/debounce";
 import Empty from "@/Components/Empty";
-import { replaceRoute } from "@/Services/route";
 import InputFilter from "@/Components/Filters/InputFilter";
 import ListFilter from "@/Components/Filters/ListFilter";
 
@@ -178,6 +177,10 @@ onMounted(() => {
     filterData[props.filters[idx].name] = props.filters[idx].value;
   }
 });
+
+setInterval(() => {
+  Inertia.reload({ data: filterData, only: ["records"] });
+}, 10000);
 
 watch(
   props.filters,

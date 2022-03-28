@@ -4,6 +4,7 @@ namespace Domain\Sites\Models;
 
 use Domain\IAM\Models\User;
 use Spatie\Activitylog\LogOptions;
+use Domain\Sites\Enums\SiteStatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,7 +35,7 @@ class Site extends Model
     ];
 
     protected $casts = [
-        'status' => ContainerStateEnum::class,
+        'status' => SiteStatusEnum::class,
     ];
 
     protected $observables = [
