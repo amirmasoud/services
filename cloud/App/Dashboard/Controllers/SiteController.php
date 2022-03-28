@@ -24,7 +24,7 @@ class SiteController extends Controller
 {
     public function index(SiteSearchRequest $request): Response
     {
-        $sites = Site::search($request->validated('search'))->paginate($request->input('per_page'))->withQueryString();
+        $sites = Site::withTrashed()->search($request->validated('search'))->paginate($request->input('per_page'))->withQueryString();
 
         return Inertia::render('Dashboard/Sites/Index', [
             'records' => SiteResource::collection($sites),
@@ -82,6 +82,20 @@ class SiteController extends Controller
     public function destroy(Site $site): RedirectResponse
     {
         $site->delete();
+
+        return redirect()->back();
+    }
+
+    public function forceDestroy(int $site): RedirectResponse
+    {
+        Site::withTrashed()->findOrFail($site)->forceDelete();
+
+        return redirect()->back();
+    }
+
+    public function restore(int $site): RedirectResponse
+    {
+        Site::withTrashed()->findOrFail($site)->restore();
 
         return redirect()->back();
     }

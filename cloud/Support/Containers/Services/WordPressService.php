@@ -131,7 +131,7 @@ class WordPressService
     {
         app(DockerNetworking::class)->ensureNetworkCreated('proxy', 'bridge');
 
-        return DockerCompose::for($host, Storage::disk(config('cloud.disks.sites'))->path(underscore_slug($host)))->up();
+        return DockerCompose::for($host)->up();
     }
 
     /**
@@ -144,6 +144,48 @@ class WordPressService
         if (! DockerCompose::for($host)->command("$service $command")) {
             throw new CommandExecutionFailed("docker-compose exec -T $service $command");
         }
+
+        return true;
+    }
+
+    /**
+     * @throws \Support\Containers\Exceptions\DockerComposePathNotDirectoryException
+     * @throws \Support\Containers\Exceptions\DockerComposeMissingException
+     * @throws \Support\Containers\Exceptions\DockerComposeFailedException
+     */
+    public static function stopCompose(string $host): bool
+    {
+        return DockerCompose::for($host)->stop();
+    }
+
+    /**
+     * @throws \Support\Containers\Exceptions\DockerComposePathNotDirectoryException
+     * @throws \Support\Containers\Exceptions\DockerComposeMissingException
+     * @throws \Support\Containers\Exceptions\DockerComposeFailedException
+     */
+    public static function startCompose(string $host): bool
+    {
+        return DockerCompose::for($host)->up();
+    }
+
+    /**
+     * @throws \Support\Containers\Exceptions\DockerComposePathNotDirectoryException
+     * @throws \Support\Containers\Exceptions\DockerComposeMissingException
+     */
+    public static function restartCompose(string $host): bool
+    {
+        return DockerCompose::for($host)->restart();
+    }
+
+    /**
+     * @throws \Support\Containers\Exceptions\DockerComposePathNotDirectoryException
+     * @throws \Support\Containers\Exceptions\DockerComposeMissingException
+     */
+    public static function removeCompose(string $host): bool
+    {
+        DockerCompose::for($host)->down();
+
+        File::deleteDirectory(Storage::disk(config('cloud.disks.sites'))->path(underscore_slug($host))); // This should not be here :/
 
         return true;
     }

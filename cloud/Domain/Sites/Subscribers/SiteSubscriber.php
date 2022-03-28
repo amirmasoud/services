@@ -4,8 +4,7 @@ namespace Domain\Sites\Subscribers;
 
 use Domain\Sites\Models\Site;
 use Illuminate\Support\Facades\Bus;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Support\Containers\Services\TraefikService;
 use Support\Containers\Services\WordPressService;
@@ -87,7 +86,8 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
     public function handleSiteDeleted(Site $site)
     {
         Bus::chain([
-            WordPressService::noReplicaSwarm($site->host),
+            // WordPressService::noReplicaSwarm($site->host),
+            WordPressService::stopCompose($site->host),
         ]);
     }
 
@@ -99,7 +99,8 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
     public function handleSiteStarted(Site $site)
     {
         Bus::chain([
-            WordPressService::oneReplicaSwarm($site->host),
+            // WordPressService::oneReplicaSwarm($site->host),
+            WordPressService::startCompose($site->host),
         ]);
     }
 
@@ -111,40 +112,46 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
     public function handleSiteRestored(Site $site)
     {
         Bus::chain([
-            WordPressService::oneReplicaSwarm($site->host),
+            // WordPressService::oneReplicaSwarm($site->host),
+            WordPressService::startCompose($site->host),
         ]);
     }
 
     public function handleSiteStopped(Site $site)
     {
         Bus::chain([
-            WordPressService::noReplicaSwarm($site->host),
+            // WordPressService::noReplicaSwarm($site->host),
+            WordPressService::stopCompose($site->host),
         ]);
     }
 
     public function handleSiteForceDeleted(Site $site)
     {
+        $host = $site->host;
+
         Bus::chain([
-            WordPressService::removeSwarm($site->host),
-            fn () => File::deleteDirectory(Storage::disk(config('cloud.disks.sites'))->path(underscore_slug($site->host))), // Not working!
+            // WordPressService::removeSwarm($site->host),
+            WordPressService::removeCompose($site->host),
         ]);
     }
 
     public function handleSiteRestarted(Site $site)
     {
         Bus::chain([
-            WordPressService::noReplicaSwarm($site->host),
-            WordPressService::oneReplicaSwarm($site->host),
+            // WordPressService::noReplicaSwarm($site->host),
+            // WordPressService::oneReplicaSwarm($site->host),
+            WordPressService::restartCompose($site->host),
         ]);
     }
 
     public function subscribe($events): array
     {
+        Event::listen('eloquent.*', fn ($event, $model) => logger($event));
         return [
             'eloquent.created: Domain\Sites\Models\Site' => 'handleSiteCreated',
-            'eloquent.deleted: Domain\Sites\Models\Site' => 'handleSiteDeleted',
+            'eloquent.deleting: Domain\Sites\Models\Site' => 'handleSiteDeleted',
             'eloquent.restored: Domain\Sites\Models\Site' => 'handleSiteRestored',
-            'eloquent.forceDelete: Domain\Sites\Models\Site' => 'handleSiteForceDeleted',
+            'eloquent.forceDeleted: Domain\Sites\Models\Site' => 'handleSiteForceDeleted',
             'eloquent.started: Domain\Sites\Models\Site' => 'handleSiteStarted',
             'eloquent.stopped: Domain\Sites\Models\Site' => 'handleSiteStopped',
             'eloquent.restarted: Domain\Sites\Models\Site' => 'handleSiteRestarted',

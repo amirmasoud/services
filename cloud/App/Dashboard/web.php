@@ -47,6 +47,8 @@ Route::prefix('dashboard')->middleware('auth')->name('dashboard.')->group(functi
             Route::post('{site}/restart', 'restart');
         });
     Route::resource('sites', SiteController::class);
+    Route::delete('sites/{site}/force-delete', [SiteController::class, 'forceDestroy'])->name('sites.force-destroy');
+    Route::post('sites/{site}/restore', [SiteController::class, 'restore'])->name('sites.restore');
 
     Route::controller(StackController::class)->group(function () {
         Route::get('stacks/wordpress/new', 'newWordPressSite')->name('slacks.wordpress.new');

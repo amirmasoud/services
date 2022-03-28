@@ -17,12 +17,12 @@
           <th
             v-for="field in fields"
             :key="field.name"
-            scope="col"
             class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+            scope="col"
           >
             {{ field.label }}
           </th>
-          <th scope="col" class="relative py-3 px-6">
+          <th class="relative py-3 px-6" scope="col">
             <span class="sr-only">Actions</span>
           </th>
         </tr>
@@ -42,28 +42,60 @@
             <Link
               v-if="actions.hasOwnProperty('details')"
               :href="$route(actions.details.link, record)"
-              method="get"
               as="button"
               class="text-indigo-600 hover:text-indigo-900"
-              >Details</Link
-            >
+              method="get"
+              >Details
+            </Link>
             <Link
               v-if="actions.hasOwnProperty('edit')"
               :href="$route(actions.edit.link, record)"
+              as="button"
+              class="text-indigo-600 hover:text-indigo-900"
               method="get"
-              as="button"
-              class="text-indigo-600 hover:text-indigo-900"
-              >Edit</Link
-            >
+              >Edit
+            </Link>
             <Link
-              v-if="actions.hasOwnProperty('delete')"
+              v-if="
+                (record.hasOwnProperty('deleted_at') &&
+                  !record.deleted_at &&
+                  actions.hasOwnProperty('delete')) ||
+                (!record.hasOwnProperty('deleted_at') &&
+                  actions.hasOwnProperty('delete'))
+              "
               :href="$route(actions.delete.link, record)"
-              method="delete"
               as="button"
-              type="button"
               class="text-indigo-600 hover:text-indigo-900"
-              >Delete</Link
-            >
+              method="delete"
+              type="button"
+              >Delete
+            </Link>
+            <Link
+              v-if="
+                record.hasOwnProperty('deleted_at') &&
+                record.deleted_at &&
+                actions.hasOwnProperty('restore')
+              "
+              :href="$route(actions.restore.link, record)"
+              as="button"
+              class="text-indigo-600 hover:text-indigo-900"
+              method="post"
+              type="button"
+              >Restore
+            </Link>
+            <Link
+              v-if="
+                record.hasOwnProperty('deleted_at') &&
+                record.deleted_at &&
+                actions.hasOwnProperty('force_delete')
+              "
+              :href="$route(actions.force_delete.link, record)"
+              as="button"
+              class="text-indigo-600 hover:text-indigo-900"
+              method="delete"
+              type="button"
+              >Force delete
+            </Link>
           </td>
         </tr>
       </tbody>
@@ -113,11 +145,11 @@
   <!--  />-->
   <Empty
     v-else
-    class="mt-20"
-    title="No records"
-    description="Get started by creating a new record"
-    button="New Record"
     :link="$route(actions.create.link)"
+    button="New Record"
+    class="mt-20"
+    description="Get started by creating a new record"
+    title="No records"
   />
 </template>
 
