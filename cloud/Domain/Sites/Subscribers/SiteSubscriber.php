@@ -39,7 +39,7 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
      *
      * @var int
      */
-    public $backoff = 3;
+    public $backoff = 60;
 
     /**
      * @throws \Support\Containers\Exceptions\DockerComposePathNotDirectoryException
@@ -68,7 +68,7 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
             WordPressService::install($site->host),
             // WordPressService::deploySwarm($site->host),
             WordPressService::deployCompose($site->host),
-            sleep(32), // Handle it better (waiting for MariaDB to start)
+            // sleep(32), // Handle it better (waiting for MariaDB to start)
             // WordPressService::execSwarm($site->host, "wp core install --url=$url --title=\"$title\" --admin_user='admin' --admin_email=$email --admin_password=\"$password\""),
             // WordPressService::execSwarm($site->host, "wp core update"),
             // WordPressService::execSwarm($site->host, "wp theme install $theme --activate"),
