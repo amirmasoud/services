@@ -1,13 +1,13 @@
 <template>
   <div
-    class="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 max-w-screen-lg"
+    class="border-b border-gray-200 px-4 py-4 flex items-center justify-between sm:px-6 lg:px-8 max-w-screen-lg"
   >
     <div class="flex-1 min-w-0">
       <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">
         <slot name="header"></slot>
       </h1>
     </div>
-    <div class="mt-4 flex sm:mt-0 sm:ml-4">
+    <div class="flex-shrink-0 sm:mt-0 sm:ml-4">
       <slot name="buttons"></slot>
     </div>
   </div>
@@ -20,15 +20,13 @@
   </div>
 
   <div class="px-4 mt-6 sm:px-6 lg:px-8 max-w-screen-lg">
-    <div class="align-middle inline-block min-w-full">
+    <div class="align-middle">
       <slot />
     </div>
   </div>
 </template>
 
 <script setup>
-import { TransitionRoot } from "@headlessui/vue";
-
 defineEmits(["update:modelValue"]);
 
 defineProps({
