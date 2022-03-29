@@ -20,4 +20,9 @@ class SiteQueryBuilder extends Builder
     {
         return $this->where('status', SiteStatusEnum::UP->value);
     }
+
+    public function unhealthy(): SiteQueryBuilder
+    {
+        return $this->where('status', '<>', SiteStatusEnum::UP->value);
+    }
 }

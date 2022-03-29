@@ -17,9 +17,9 @@ class SiteStatResource extends BaseUI
         $total = Site::withTrashed()->count();
 
         return [
-            new StatUI('Total Sites', '71,897', $total, '12%', 'increase'),
+            new StatUI('Total Sites', $total, $total, '12%', 'increase'),
             new StatUI('Healthy Sites', Site::healthy()->count(), $total, '12%', 'decrease'),
-            new StatUI('Unhealthy Sites', '71,897', $total, '12%', 'decrease'),
+            new StatUI('Unhealthy Sites', Site::unhealthy()->count(), $total, '12%', 'decrease'),
         ];
     }
 }

@@ -2,16 +2,21 @@
 
 namespace Domain\IAM\Models;
 
-use Domain\IAM\QueryBuilders\UserQueryBuilder;
-use Domain\Sites\Models\Server;
 use Domain\Sites\Models\Site;
 use Domain\Sites\Models\Stack;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Domain\Sites\Models\Server;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Domain\IAM\QueryBuilders\UserQueryBuilder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * @method static withTrashed()
+ * @method static verified()
+ * @method static unverified()
+ */
 class User extends Authenticatable
 {
     use HasApiTokens;

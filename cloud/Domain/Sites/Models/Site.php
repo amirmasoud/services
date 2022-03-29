@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property ?int $server_id
  * @property ?int $stack_id
  * @method static healthy()
+ * @method static unhealthy()
  */
 class Site extends Model
 {

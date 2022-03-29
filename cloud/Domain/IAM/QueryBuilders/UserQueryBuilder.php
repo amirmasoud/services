@@ -14,4 +14,14 @@ class UserQueryBuilder extends Builder
             )
         );
     }
+
+    public function verified(): UserQueryBuilder
+    {
+        return $this->whereNotNull('verified');
+    }
+
+    public function unverified(): UserQueryBuilder
+    {
+        return $this->whereNull('verified');
+    }
 }
