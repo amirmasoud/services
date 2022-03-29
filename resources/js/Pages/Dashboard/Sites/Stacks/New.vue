@@ -36,8 +36,8 @@
 
         <RadioGroup v-model="form.type" class="mb-10 max-w-screen-xl">
           <RadioGroupLabel class="sr-only">
-            Selected Stack Type</RadioGroupLabel
-          >
+            Selected Stack Type
+          </RadioGroupLabel>
           <div class="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-6 gap-4">
             <RadioGroupOption
               v-for="type in types"
@@ -142,11 +142,6 @@
         </TabGroup>
       </form>
     </div>
-    <Notification
-      :message="notificationMessage"
-      :show="notificationShow"
-      :title="notificationTitle"
-    />
   </DashboardMain>
 </template>
 
@@ -167,7 +162,6 @@ import { PuzzleIcon, ViewBoardsIcon, TerminalIcon } from "@heroicons/vue/solid";
 import { defineProps, ref, watch } from "vue";
 import Button from "@/Components/Button";
 import Input from "@/Components/Forms/Inputs/Input";
-import Notification from "@/Components/Notification";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 const selectedPlugins = ref({});
@@ -178,7 +172,6 @@ defineProps({
   plugins: Object,
   themes: Object,
   types: Object,
-  // 2 more props
 });
 
 let form = useForm({
@@ -191,10 +184,6 @@ let form = useForm({
   },
   type: null,
 });
-
-let notificationTitle = ref("");
-let notificationMessage = ref("");
-let notificationShow = ref(false);
 
 watch(selectedPlugins.value, () => {
   /* eslint-disable no-unused-vars */

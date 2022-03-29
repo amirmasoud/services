@@ -23,6 +23,7 @@ class StackResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'price' => $this->price,
+            'type' => $this->type->value,
             'type_name' => $this->type->label(),
             'type_value' => $this->type->value,
             'type_icon' => $this->type->icon(),

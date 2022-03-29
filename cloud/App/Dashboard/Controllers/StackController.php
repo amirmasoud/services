@@ -46,6 +46,9 @@ class StackController extends Controller
     {
         return Inertia::render('Dashboard/Sites/Stacks/Edit', [
             'resource' => new StackResource($stack),
+            'plugins' => fn () => ApiWordPress::plugins(),
+            'themes' => fn () => ApiWordPress::themes(),
+            'types' => array_map(fn (StackTypeEnum $stack) => ['value' => $stack->value, 'label' => $stack->label(), 'icon' => $stack->icon()], StackTypeEnum::cases()), // @todo refactor to resources
         ]);
     }
 
