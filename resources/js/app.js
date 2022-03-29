@@ -1,15 +1,15 @@
 // Application
-import { createApp, h } from "vue";
-import { createInertiaApp, Link } from "@inertiajs/inertia-vue3";
-import { InertiaProgress } from "@inertiajs/progress";
 import Dashboard from "@/Shared/Dashboard";
 import Empty from "@/Shared/Empty";
+import hljsVuePlugin from "@highlightjs/vue-plugin";
+import { createInertiaApp, Link } from "@inertiajs/inertia-vue3";
+import { InertiaProgress } from "@inertiajs/progress";
+import hljs from "highlight.js/lib/core";
+import bash from "highlight.js/lib/languages/bash";
 
 // Highlight.js Vue plugin
 import "highlight.js/styles/stackoverflow-light.css";
-import hljs from "highlight.js/lib/core";
-import bash from "highlight.js/lib/languages/bash";
-import hljsVuePlugin from "@highlightjs/vue-plugin";
+import { createApp, h } from "vue";
 
 createInertiaApp({
   resolve: async (name) => {
@@ -23,6 +23,7 @@ createInertiaApp({
 
     const app = createApp({ render: () => h(App, props) });
 
+    // eslint-disable-next-line no-undef
     app.config.globalProperties.$route = route;
     app.use(plugin).use(hljsVuePlugin).component("Link", Link).mount(el);
   },
