@@ -141,6 +141,8 @@ class WordPressService
      */
     public static function execCompose(string $host, string $command, string $service = 'wordpress-cli'): bool
     {
+        $command = line($command);
+
         if (! DockerCompose::for($host)->command("$service $command")) {
             throw new CommandExecutionFailed("docker-compose exec -T $service $command");
         }

@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property ContainerStateEnum $status
  * @property ?int $server_id
  * @property ?int $stack_id
+ * @method static healthy()
  */
 class Site extends Model
 {

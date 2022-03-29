@@ -2,6 +2,7 @@
 
 namespace Domain\Sites\QueryBuilders;
 
+use Domain\Sites\Enums\SiteStatusEnum;
 use Illuminate\Database\Eloquent\Builder;
 
 class SiteQueryBuilder extends Builder
@@ -13,5 +14,10 @@ class SiteQueryBuilder extends Builder
                 fn ($query) => $query->where('name', 'like', "%{$search}%")->orWhere('host', 'like', "%{$search}%")
             )
         );
+    }
+
+    public function healthy(): SiteQueryBuilder
+    {
+        return $this->where('status', SiteStatusEnum::UP->value);
     }
 }

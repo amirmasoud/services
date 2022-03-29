@@ -61,6 +61,9 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
         $plugins = implode(' ', $site->stack->properties->plugins);
         $theme = $site->stack->properties->theme;
 
+        $commands = preg_split('/\r\n|\r|\n/', Site::first()->stack->properties->commands); // @todo Not good
+        $commands = implode(' && ', $commands);
+
         Bus::chain([
             ChangeSiteStatus::installing($site),
             // TraefikService::deploySwarm(),
@@ -68,7 +71,7 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
             WordPressService::install($site->host),
             // WordPressService::deploySwarm($site->host),
             WordPressService::deployCompose($site->host),
-            // sleep(32), // Handle it better (waiting for MariaDB to start)
+            sleep(32), // Handle it better (waiting for MariaDB to start)
             // WordPressService::execSwarm($site->host, "wp core install --url=$url --title=\"$title\" --admin_user='admin' --admin_email=$email --admin_password=\"$password\""),
             // WordPressService::execSwarm($site->host, "wp core update"),
             // WordPressService::execSwarm($site->host, "wp theme install $theme --activate"),
@@ -77,6 +80,7 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
             WordPressService::execCompose($site->host, "wp core update"),
             WordPressService::execCompose($site->host, "wp theme install $theme --activate"),
             WordPressService::execCompose($site->host, "wp plugin install $plugins --activate"),
+            WordPressService::execCompose($site->host, line($commands)),
             ChangeSiteStatus::up($site),
         ])->catch(function (Throwable $e) use ($site) {
             ChangeSiteStatus::failed($site);

@@ -14,10 +14,12 @@ class SiteStatResource extends BaseUI
 
     public function toArray($request)
     {
+        $total = Site::withTrashed()->count();
+
         return [
-            new StatUI('Total Subscribers', '71,897', '70,946', '12%', 'increase'),
-            new StatUI('Total Subscribers', '71,897', '70,946', '12%', 'decrease'),
-            new StatUI('Total Subscribers', '71,897', '70,946', '12%', 'decrease'),
+            new StatUI('Total Sites', '71,897', $total, '12%', 'increase'),
+            new StatUI('Healthy Sites', Site::healthy()->count(), $total, '12%', 'decrease'),
+            new StatUI('Unhealthy Sites', '71,897', $total, '12%', 'decrease'),
         ];
     }
 }
