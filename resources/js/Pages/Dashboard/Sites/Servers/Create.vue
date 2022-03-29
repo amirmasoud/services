@@ -9,7 +9,7 @@
         <div class="sm:p-6 py-5 px-4 bg-white">
           <div class="">
             <div class="grid grid-cols-6 gap-6">
-              <div class="col-span-4">
+              <div class="col-span-6 sm:col-span-4">
                 <Input
                   v-model="form.name"
                   :form="form"
@@ -18,7 +18,7 @@
                 />
               </div>
 
-              <div class="col-span-2">
+              <div class="col-span-6 sm:col-span-2">
                 <Input
                   v-model="form.price"
                   :form="form"
@@ -28,11 +28,11 @@
                 />
               </div>
 
-              <div class="col-span-4">
+              <div class="col-span-6 sm:col-span-4">
                 <Input v-model="form.ip" :form="form" label="IP" name="ip" />
               </div>
 
-              <div class="col-span-2">
+              <div class="col-span-6 sm:col-span-2">
                 <Input
                   v-model="form.port"
                   :form="form"
@@ -42,11 +42,11 @@
                 />
               </div>
 
-              <div class="col-span-4">
+              <div class="col-span-6 sm:col-span-4">
                 <Input v-model="form.ram" :form="form" label="RAM" name="ram" />
               </div>
 
-              <div class="col-span-2">
+              <div class="col-span-6 sm:col-span-2">
                 <Option
                   v-model="form.ram_unit"
                   :form="form"
@@ -60,7 +60,7 @@
                 <Input v-model="form.cpu" :form="form" label="CPU" name="cpu" />
               </div>
 
-              <div class="col-span-2">
+              <div class="col-span-6 sm:col-span-2">
                 <Input
                   v-model="form.disk"
                   :form="form"
@@ -69,7 +69,7 @@
                 />
               </div>
 
-              <div class="col-span-2">
+              <div class="col-span-6 sm:col-span-2">
                 <Option
                   v-model="form.disk_type"
                   :form="form"
@@ -79,7 +79,7 @@
                 />
               </div>
 
-              <div class="col-span-2">
+              <div class="col-span-6 sm:col-span-2">
                 <Option
                   v-model="form.disk_unit"
                   :form="form"
@@ -89,7 +89,7 @@
                 />
               </div>
 
-              <div class="col-span-4">
+              <div class="col-span-6 sm:col-span-4">
                 <Option
                   v-model="form.os"
                   :form="form"
@@ -99,7 +99,7 @@
                 />
               </div>
 
-              <div class="col-span-2">
+              <div class="col-span-6 sm:col-span-2">
                 <Input
                   v-model="form.os_version"
                   :form="form"
