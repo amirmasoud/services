@@ -100,7 +100,7 @@
       </table>
     </div>
     <div
-      class="fixed sm:relative justify-between items-center py-3 px-4 sm:px-6 bg-white border-t border-gray-200 w-full sm:w-full mt-4 rounded-lg bg-white shadow"
+      class="fixed sm:relative justify-between items-center py-3 px-4 sm:px-6 bg-white border-t border-gray-200 w-[calc(100%_-_2rem)] sm:w-full mt-4 rounded-lg bg-white shadow"
     >
       <div class="flex sm:hidden flex-1 justify-between">
         <Component
