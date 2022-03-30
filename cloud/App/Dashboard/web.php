@@ -23,14 +23,15 @@ Route::prefix('dashboard')->middleware('auth')->name('dashboard.')->group(functi
     Route::get('/', function () {
         return Inertia::render('Dashboard/Home', [
             'stats' => [
-                ['name' => 'Total Sites', 'stat' => Site::count(), 'previousStat' => '70,946', 'change' => '12%', 'changeType' => 'increase'],
-                ['name' => 'Running Sites', 'stat' => Site::whereStatus(ContainerStateEnum::STARTED)->count(), 'previousStat' => '56.14%', 'change' => '2.02%', 'changeType' => 'increase'],
-                ['name' => 'Stopped Sites', 'stat' => Site::whereStatus(ContainerStateEnum::STOPPED)->count(), 'previousStat' => '28.62%', 'change' => '4.05%', 'changeType' => 'decrease'],
+                ['name' => 'Total Sites', 'stat' => Site::count(), 'previousStat' => '70,946'],
+                ['name' => 'Running Sites', 'stat' => Site::whereStatus(ContainerStateEnum::STARTED)->count(), 'previousStat' => '56.14%'],
+                ['name' => 'Stopped Sites', 'stat' => Site::whereStatus(ContainerStateEnum::STOPPED)->count(), 'previousStat' => '28.62%'],
             ],
         ]);
     })->name('index');
 
-    Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::get('/settings', [SettingController::class, 'general'])->name('settings.general');
+    Route::get('/settings/system-status', [SettingController::class, 'systemStatus'])->name('settings.system-status');
 
     Route::resource('users', UserController::class)->except('show');
 

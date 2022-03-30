@@ -4,10 +4,6 @@
   <DashboardMain>
     <template #header>Settings</template>
 
-    <!--<ul class="list-inside ...">-->
-    <!--  <li>Docker is <span v-if="!info">not</span> running</li>-->
-    <!--  <li>Traefik proxy is <span v-if="!proxy">not</span> running</li>-->
-    <!--</ul>-->
     <div class="px-0">
       <div class="py-6">
         <!-- Tabs -->
@@ -26,7 +22,7 @@
         <div class="hidden lg:block">
           <div class="border-b border-gray-200">
             <nav class="-mb-px flex space-x-8">
-              <a
+              <Link
                 v-for="tab in tabs"
                 :key="tab.name"
                 :class="[
@@ -38,7 +34,7 @@
                 :href="tab.href"
               >
                 {{ tab.name }}
-              </a>
+              </Link>
             </nav>
           </div>
         </div>
@@ -255,44 +251,24 @@
 <script setup>
 import AppHead from "@/Components/AppHead";
 import DashboardMain from "@/Components/DashboardMain";
-import { Inertia } from "@inertiajs/inertia";
-import { defineProps, onBeforeUnmount, onMounted } from "vue";
 import { ref } from "vue";
 import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
 
 const tabs = [
-  { name: "General", href: "#", current: true },
+  {
+    name: "General",
+    href: route("dashboard.settings.general"),
+    current: true,
+  },
   { name: "Password", href: "#", current: false },
   { name: "Notifications", href: "#", current: false },
-  { name: "System Status", href: "#", current: false },
+  {
+    name: "System Status",
+    href: route("dashboard.settings.system-status"),
+    current: false,
+  },
 ];
 
 const automaticTimezoneEnabled = ref(true);
 const autoUpdateApplicantDataEnabled = ref(false);
-
-defineProps({
-  info: Boolean,
-  proxy: Boolean,
-});
-
-const fetchData = () => {
-  Inertia.reload({
-    preserveState: true,
-    preserveScroll: true,
-    only: ["info", "proxy"],
-  });
-};
-
-// Fetch data on mount (Lazy loaded)
-onMounted(() => {
-  fetchData();
-});
-
-const reloadInterval = setInterval(() => {
-  fetchData();
-}, 10000);
-
-onBeforeUnmount(() => {
-  clearInterval(reloadInterval);
-});
 </script>

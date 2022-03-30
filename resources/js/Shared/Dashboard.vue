@@ -1,6 +1,6 @@
 <template>
   <div class="relative h-screen flex overflow-hidden bg-gray-100">
-    <TransitionRoot as="template" :show="sidebarOpen">
+    <TransitionRoot :show="sidebarOpen" as="template">
       <Dialog
         as="div"
         class="fixed inset-0 flex z-40 lg:hidden"
@@ -40,17 +40,17 @@
             >
               <div class="absolute top-0 right-0 -mr-12 pt-2">
                 <button
-                  type="button"
                   class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                  type="button"
                   @click="sidebarOpen = false"
                 >
                   <span class="sr-only">Close sidebar</span>
-                  <XIcon class="h-6 w-6 text-white" aria-hidden="true" />
+                  <XIcon aria-hidden="true" class="h-6 w-6 text-white" />
                 </button>
               </div>
             </TransitionChild>
             <div class="flex-shrink-0 flex items-center px-4">
-              <Logo class="h-8 w-auto text-indigo-600" alt="Cloud" />
+              <Logo alt="Cloud" class="h-8 w-auto text-indigo-600" />
               <span class="pl-1 font-semibold font-sans text-indigo-800"
                 >Cloud</span
               >
@@ -60,18 +60,18 @@
                 <div class="space-y-1">
                   <div v-for="item in navigation" :key="item.name">
                     <Link
-                      :href="item.href"
+                      :aria-current="
+                        $page.component.startsWith(item.component)
+                          ? 'page'
+                          : undefined
+                      "
                       :class="[
                         $page.component.startsWith(item.component)
                           ? 'bg-gray-100 text-gray-900'
                           : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
                         'group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md',
                       ]"
-                      :aria-current="
-                        $page.component.startsWith(item.component)
-                          ? 'page'
-                          : undefined
-                      "
+                      :href="item.href"
                     >
                       <component
                         :is="item.icon"
@@ -89,18 +89,18 @@
                       <Link
                         v-for="subItem in item.submenu"
                         :key="subItem.name"
-                        :href="subItem.href"
+                        :aria-current="
+                          $page.component.startsWith(subItem.component)
+                            ? 'page'
+                            : undefined
+                        "
                         :class="[
                           $page.component.startsWith(subItem.component)
                             ? 'bg-gray-200 text-gray-900'
                             : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
                           'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
                         ]"
-                        :aria-current="
-                          $page.component.startsWith(subItem.component)
-                            ? 'page'
-                            : undefined
-                        "
+                        :href="subItem.href"
                       >
                         <component
                           :is="subItem.icon"
@@ -125,9 +125,9 @@
                     Teams
                   </h3>
                   <div
+                    aria-labelledby="mobile-teams-headline"
                     class="space-y-1"
                     role="group"
-                    aria-labelledby="mobile-teams-headline"
                   >
                     <a
                       v-for="team in teams"
@@ -152,7 +152,7 @@
             </div>
           </div>
         </TransitionChild>
-        <div class="flex-shrink-0 w-14" aria-hidden="true">
+        <div aria-hidden="true" class="flex-shrink-0 w-14">
           <!-- Dummy element to force sidebar to shrink to fit close icon -->
         </div>
       </Dialog>
@@ -162,7 +162,7 @@
     <div class="hidden lg:flex lg:flex-shrink-0">
       <div class="flex flex-col w-64 pt-5 pb-4 bg-gray-100">
         <div class="flex items-center justify-center flex-shrink-0 px-6">
-          <Logo class="h-8 w-auto text-indigo-600" alt="Cloud" />
+          <Logo alt="Cloud" class="h-8 w-auto text-indigo-600" />
           <span class="pl-1 font-semibold font-sans text-indigo-800"
             >Cloud</span
           >
@@ -180,9 +180,9 @@
                     class="flex min-w-0 items-center justify-between space-x-3"
                   >
                     <img
+                      alt=""
                       class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
                       src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
-                      alt=""
                     />
                     <span class="flex-1 flex flex-col min-w-0">
                       <span
@@ -195,8 +195,8 @@
                     </span>
                   </span>
                   <SelectorIcon
-                    class="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true"
+                    class="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                   />
                 </span>
               </MenuButton>
@@ -215,31 +215,31 @@
                 <div class="py-1">
                   <MenuItem v-slot="{ active }">
                     <a
-                      href="#"
                       :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
+                      href="#"
                       >View profile</a
                     >
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
                     <a
-                      href="#"
                       :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
+                      href="#"
                       >Settings</a
                     >
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
                     <a
-                      href="#"
                       :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
+                      href="#"
                       >Notifications</a
                     >
                   </MenuItem>
@@ -247,21 +247,21 @@
                 <div class="py-1">
                   <MenuItem v-slot="{ active }">
                     <a
-                      href="#"
                       :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
+                      href="#"
                       >Get desktop app</a
                     >
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
                     <a
-                      href="#"
                       :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
+                      href="#"
                       >Support</a
                     >
                   </MenuItem>
@@ -269,11 +269,11 @@
                 <div class="py-1">
                   <MenuItem v-slot="{ active }">
                     <a
-                      href="#"
                       :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
+                      href="#"
                       >Logout</a
                     >
                   </MenuItem>
@@ -285,18 +285,18 @@
             <div class="space-y-2">
               <div v-for="item in navigation" :key="item.name">
                 <Link
-                  :href="item.href"
+                  :aria-current="
+                    $page.component.startsWith(item.component)
+                      ? 'page'
+                      : undefined
+                  "
                   :class="[
                     $page.component.startsWith(item.component)
                       ? 'bg-gray-200 text-gray-900'
                       : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
                     'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
                   ]"
-                  :aria-current="
-                    $page.component.startsWith(item.component)
-                      ? 'page'
-                      : undefined
-                  "
+                  :href="item.href"
                 >
                   <component
                     :is="item.icon"
@@ -317,18 +317,18 @@
                   <Link
                     v-for="subItem in item.submenu"
                     :key="subItem.name"
-                    :href="subItem.href"
+                    :aria-current="
+                      $page.component.startsWith(subItem.component)
+                        ? 'page'
+                        : undefined
+                    "
                     :class="[
                       $page.component.startsWith(subItem.component)
                         ? 'bg-gray-200 text-gray-900'
                         : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
                       'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
                     ]"
-                    :aria-current="
-                      $page.component.startsWith(subItem.component)
-                        ? 'page'
-                        : undefined
-                    "
+                    :href="subItem.href"
                   >
                     <component
                       :is="subItem.icon"
@@ -353,9 +353,9 @@
                 Departments
               </h3>
               <div
+                aria-labelledby="desktop-teams-headline"
                 class="mt-1 space-y-1"
                 role="group"
-                aria-labelledby="desktop-teams-headline"
               >
                 <a
                   v-for="team in teams"
@@ -385,12 +385,12 @@
         class="relative z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200 lg:hidden"
       >
         <button
-          type="button"
           class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden"
+          type="button"
           @click="sidebarOpen = true"
         >
           <span class="sr-only">Open sidebar</span>
-          <MenuAlt1Icon class="h-6 w-6" aria-hidden="true" />
+          <MenuAlt1Icon aria-hidden="true" class="h-6 w-6" />
         </button>
         <div class="flex-1 flex justify-end px-4 sm:px-6 lg:px-8">
           <div class="flex items-center">
@@ -402,9 +402,9 @@
                 >
                   <span class="sr-only">Open user menu</span>
                   <img
+                    alt=""
                     class="h-8 w-8 rounded-full"
                     src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
                   />
                 </MenuButton>
               </div>
@@ -422,37 +422,37 @@
                   <div class="py-1">
                     <MenuItem v-slot="{ active }">
                       <a
-                        href="#"
                         :class="[
                           active
                             ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-700',
                           'block px-4 py-2 text-sm',
                         ]"
+                        href="#"
                         >View profile</a
                       >
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
                       <a
-                        href="#"
                         :class="[
                           active
                             ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-700',
                           'block px-4 py-2 text-sm',
                         ]"
+                        href="#"
                         >Settings</a
                       >
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
                       <a
-                        href="#"
                         :class="[
                           active
                             ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-700',
                           'block px-4 py-2 text-sm',
                         ]"
+                        href="#"
                         >Notifications</a
                       >
                     </MenuItem>
@@ -460,25 +460,25 @@
                   <div class="py-1">
                     <MenuItem v-slot="{ active }">
                       <a
-                        href="#"
                         :class="[
                           active
                             ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-700',
                           'block px-4 py-2 text-sm',
                         ]"
+                        href="#"
                         >Get desktop app</a
                       >
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
                       <a
-                        href="#"
                         :class="[
                           active
                             ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-700',
                           'block px-4 py-2 text-sm',
                         ]"
+                        href="#"
                         >Support</a
                       >
                     </MenuItem>
@@ -486,13 +486,13 @@
                   <div class="py-1">
                     <MenuItem v-slot="{ active }">
                       <a
-                        href="#"
                         :class="[
                           active
                             ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-700',
                           'block px-4 py-2 text-sm',
                         ]"
+                        href="#"
                         >Logout</a
                       >
                     </MenuItem>
@@ -573,7 +573,7 @@ const navigation = [
   },
   {
     name: "Settings",
-    href: route("dashboard.settings.index"),
+    href: route("dashboard.settings.general"),
     icon: CogIcon,
     component: "Dashboard/Settings",
   },
