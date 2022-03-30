@@ -17,6 +17,16 @@ use App\Dashboard\Resources\UI\StackFilterResource;
 
 class StackController extends Controller
 {
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Stack::class, 'stack');
+    }
+
     public function index(): Response
     {
         return Inertia::render('Dashboard/Sites/Stacks/Index', [

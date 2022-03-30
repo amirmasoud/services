@@ -12,6 +12,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.4",
         "inertiajs/inertia-laravel": "^0.5.4",
+        "itsgoingd/clockwork": "^5.1",
         "laravel/framework": "^9.0",
         "laravel/horizon": "^5.9",
         "laravel/sanctum": "^2.11",

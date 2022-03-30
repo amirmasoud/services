@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
+use Domain\Sites\Models\Stack;
+use Domain\Sites\Policies\StackPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Stack::class => StackPolicy::class,
     ];
 
     /**

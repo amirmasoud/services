@@ -14,7 +14,7 @@ class ActionTableUI implements JsonSerializable
     {
         return [
             'label' => $this->label,
-            'link'  => $this->link,
+            'link' => $this->link,
         ];
     }
 }

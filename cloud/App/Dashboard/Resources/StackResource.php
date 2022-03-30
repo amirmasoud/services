@@ -28,6 +28,7 @@ class StackResource extends JsonResource
             'type_value' => $this->type->value,
             'type_icon' => $this->type->icon(),
             'properties' => $this->properties,
+            'can_delete' => auth()->user()->can('delete', $this->resource),
         ];
     }
 }

@@ -2,15 +2,15 @@
 
 namespace App\Dashboard\Resources\UI;
 
-use App\Dashboard\UI\Table\ActionTableUI;
-use App\Dashboard\UI\Table\FieldTableUI;
 use Domain\Sites\Models\Stack;
+use App\Dashboard\UI\Table\FieldTableUI;
+use App\Dashboard\UI\Table\ActionTableUI;
 
 class StackTableResource extends BaseUI
 {
-    public function __construct(public Stack $site = new Stack())
+    public function __construct(public Stack $stack = new Stack())
     {
-        parent::__construct($site);
+        parent::__construct($stack);
     }
 
     public function toArray($request)

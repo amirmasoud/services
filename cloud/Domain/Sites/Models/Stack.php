@@ -11,9 +11,13 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Domain\Sites\QueryBuilders\StackQueryBuilder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+/**
+ * @property array<Site> $sites
+ */
 class Stack extends Model
 {
     use HasFactory;
@@ -37,6 +41,11 @@ class Stack extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function sites(): HasMany
+    {
+        return $this->hasMany(Site::class);
     }
 
     public function getActivitylogOptions(): LogOptions

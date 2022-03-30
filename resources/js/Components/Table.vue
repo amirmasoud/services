@@ -61,9 +61,14 @@
                   (!record.hasOwnProperty('deleted_at') &&
                     actions.hasOwnProperty('delete'))
                 "
+                :disabled="
+                  record.hasOwnProperty('can_delete') && !record.can_delete
+                    ? true
+                    : false
+                "
                 :href="$route(actions.delete.link, record)"
                 as="button"
-                class="text-indigo-600 hover:text-indigo-900"
+                class="text-indigo-600 hover:text-indigo-900 disabled:opacity-50 disabled:cursor-not-allowed"
                 method="delete"
                 type="button"
                 >Delete
