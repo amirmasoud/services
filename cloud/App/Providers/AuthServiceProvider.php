@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Domain\Sites\Models\Site;
 use Domain\Sites\Models\Stack;
+use Domain\Sites\Policies\SitePolicy;
 use Domain\Sites\Policies\StackPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -14,8 +16,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         Stack::class => StackPolicy::class,
+        Site::class => SitePolicy::class,
     ];
 
     /**

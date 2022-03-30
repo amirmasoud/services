@@ -22,6 +22,11 @@ use App\Dashboard\Resources\UI\SiteFilterResource;
 
 class SiteController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Site::class, 'site');
+    }
+
     public function index(SiteSearchRequest $request): Response
     {
         $sites = Site::withTrashed()->search($request->validated('search'))->paginate($request->input('per_page'))->withQueryString();
@@ -31,6 +36,7 @@ class SiteController extends Controller
             'filters' => fn () => new SiteFilterResource(),
             'stats' => fn () => new SiteStatResource(),
             'table' => fn () => new SiteTableResource(),
+            'canCreate' => auth()->user()->stacks()->count() && auth()->user()->servers()->count(),
         ]);
     }
 

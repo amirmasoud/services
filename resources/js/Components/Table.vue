@@ -142,21 +142,13 @@
       </div>
     </div>
   </div>
-  <!--  <NoResult-->
-  <!--    v-else-if="! records.data.length && ! _.isEmpty(filterData)"-->
-  <!--    class="mt-20"-->
-  <!--    title="Nothing found"-->
-  <!--    description="Remove filters to see all records"-->
-  <!--    button="Remove filters"-->
-  <!--    @remove-filters="removeFilters"-->
-  <!--  />-->
   <Empty
     v-else
-    :link="$route(actions.create.link)"
-    button="New Record"
+    :button="canCreate ? button : cannotCreateButton"
+    :description="canCreate ? description : cannotCreateDescription"
+    :link="canCreate ? $route(actions.create.link) : null"
+    :title="canCreate ? title : cannotCreateTitle"
     class="mt-20"
-    description="Get started by creating a new record"
-    title="No records"
   />
 </template>
 
@@ -175,6 +167,34 @@ let props = defineProps({
   endpoint: String,
   fields: Object,
   actions: Object,
+  title: {
+    type: String,
+    default: "No records",
+  },
+  description: {
+    type: String,
+    default: "Get started by creating a new record",
+  },
+  button: {
+    type: String,
+    default: "New Record",
+  },
+  canCreate: {
+    type: Boolean,
+    default: true,
+  },
+  cannotCreateTitle: {
+    type: String,
+    default: "No records",
+  },
+  cannotCreateDescription: {
+    type: String,
+    default: "You do not have permission to create new records",
+  },
+  cannotCreateButton: {
+    type: String,
+    default: "New Record",
+  },
 });
 
 let filterData = {};

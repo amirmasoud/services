@@ -1,7 +1,7 @@
 <template>
   <component
     :is="href ? 'Link' : 'button'"
-    :disabled="href ? null : processing"
+    :disabled="disabled || href ? null : processing"
     :href="href ? href : null"
     :type="href ? null : type"
     class="inline-flex items-center py-2 px-3 text-sm font-medium leading-4 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md border border-transparent focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 shadow-sm disabled:opacity-50 disabled:cursor-wait focus:outline-none"
