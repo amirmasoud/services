@@ -117,37 +117,6 @@
                     </div>
                   </div>
                 </div>
-                <div class="mt-8">
-                  <h3
-                    id="mobile-teams-headline"
-                    class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider"
-                  >
-                    Teams
-                  </h3>
-                  <div
-                    aria-labelledby="mobile-teams-headline"
-                    class="space-y-1"
-                    role="group"
-                  >
-                    <a
-                      v-for="team in teams"
-                      :key="team.name"
-                      :href="team.href"
-                      class="group flex items-center px-3 py-2 text-base leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
-                    >
-                      <span
-                        :class="[
-                          team.bgColorClass,
-                          'w-2.5 h-2.5 mr-4 rounded-full',
-                        ]"
-                        aria-hidden="true"
-                      />
-                      <span class="truncate">
-                        {{ team.name }}
-                      </span>
-                    </a>
-                  </div>
-                </div>
               </nav>
             </div>
           </div>
@@ -345,37 +314,6 @@
                 </div>
               </div>
             </div>
-            <div class="mt-8">
-              <h3
-                id="desktop-teams-headline"
-                class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider"
-              >
-                Departments
-              </h3>
-              <div
-                aria-labelledby="desktop-teams-headline"
-                class="mt-1 space-y-1"
-                role="group"
-              >
-                <a
-                  v-for="team in teams"
-                  :key="team.name"
-                  :href="team.href"
-                  class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:text-gray-900 hover:bg-gray-50"
-                >
-                  <span
-                    :class="[
-                      team.bgColorClass,
-                      'w-2.5 h-2.5 mr-4 rounded-full',
-                    ]"
-                    aria-hidden="true"
-                  />
-                  <span class="truncate">
-                    {{ team.name }}
-                  </span>
-                </a>
-              </div>
-            </div>
           </nav>
         </div>
       </div>
@@ -530,12 +468,7 @@ import {
   ServerIcon,
   CubeIcon,
 } from "@heroicons/vue/outline";
-import {
-  CogIcon,
-  SearchIcon,
-  SelectorIcon,
-  UserIcon,
-} from "@heroicons/vue/solid";
+import { CogIcon, SelectorIcon, UserIcon } from "@heroicons/vue/solid";
 import Logo from "@/Shared/Logo";
 
 const navigation = [
@@ -577,11 +510,6 @@ const navigation = [
     icon: CogIcon,
     component: "Dashboard/Settings",
   },
-];
-const teams = [
-  { name: "Engineering", href: "#", bgColorClass: "bg-indigo-500" },
-  { name: "Human Resources", href: "#", bgColorClass: "bg-green-500" },
-  { name: "Legal", href: "#", bgColorClass: "bg-yellow-500" },
 ];
 
 const sidebarOpen = ref(false);
