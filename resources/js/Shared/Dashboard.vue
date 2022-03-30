@@ -149,9 +149,12 @@
                     class="flex min-w-0 items-center justify-between space-x-3"
                   >
                     <img
+                      :src="
+                        $page.props.auth.user.profile ||
+                        'https://images.unsplash.com/photo-1607785330196-fdbe6f36c8fa?ixlib=rb-1.2.1&q=80&fm=jpg&cs=tinysrgb&w=256&h=256&fit=facearea'
+                      "
                       alt=""
                       class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
-                      src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
                     />
                     <span class="flex-1 flex flex-col min-w-0">
                       <span
@@ -183,47 +186,37 @@
               >
                 <div class="py-1">
                   <MenuItem v-slot="{ active }">
-                    <a
+                    <Link
                       :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
-                      href="#"
-                      >View profile</a
-                    >
+                      :href="$route('dashboard.settings.general')"
+                      >View profile
+                    </Link>
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
-                    <a
+                    <Link
                       :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
-                      href="#"
-                      >Settings</a
-                    >
+                      :href="$route('dashboard.settings.general')"
+                      >Settings
+                    </Link>
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
-                    <a
+                    <Link
                       :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
-                      href="#"
-                      >Notifications</a
-                    >
+                      :href="$route('dashboard.settings.general')"
+                      >Notifications
+                    </Link>
                   </MenuItem>
                 </div>
                 <div class="py-1">
-                  <MenuItem v-slot="{ active }">
-                    <a
-                      :class="[
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-sm',
-                      ]"
-                      href="#"
-                      >Get desktop app</a
-                    >
-                  </MenuItem>
                   <MenuItem v-slot="{ active }">
                     <a
                       :class="[
@@ -237,14 +230,15 @@
                 </div>
                 <div class="py-1">
                   <MenuItem v-slot="{ active }">
-                    <a
+                    <Link
                       :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
-                      href="#"
-                      >Logout</a
-                    >
+                      :href="$route('logout')"
+                      method="post"
+                      >Logout
+                    </Link>
                   </MenuItem>
                 </div>
               </MenuItems>
@@ -340,9 +334,12 @@
                 >
                   <span class="sr-only">Open user menu</span>
                   <img
+                    :src="
+                      $page.props.auth.user.profile ||
+                      'https://images.unsplash.com/photo-1607785330196-fdbe6f36c8fa?ixlib=rb-1.2.1&q=80&fm=jpg&cs=tinysrgb&w=256&h=256&fit=facearea'
+                    "
                     alt=""
                     class="h-8 w-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                   />
                 </MenuButton>
               </div>
@@ -359,28 +356,28 @@
                 >
                   <div class="py-1">
                     <MenuItem v-slot="{ active }">
-                      <a
+                      <Link
                         :class="[
                           active
                             ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-700',
                           'block px-4 py-2 text-sm',
                         ]"
-                        href="#"
-                        >View profile</a
-                      >
+                        :href="$route('dashboard.settings.general')"
+                        >View profile
+                      </Link>
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
-                      <a
+                      <Link
                         :class="[
                           active
                             ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-700',
                           'block px-4 py-2 text-sm',
                         ]"
-                        href="#"
-                        >Settings</a
-                      >
+                        :href="$route('dashboard.settings.general')"
+                        >Settings
+                      </Link>
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
                       <a
@@ -405,34 +402,23 @@
                           'block px-4 py-2 text-sm',
                         ]"
                         href="#"
-                        >Get desktop app</a
-                      >
-                    </MenuItem>
-                    <MenuItem v-slot="{ active }">
-                      <a
-                        :class="[
-                          active
-                            ? 'bg-gray-100 text-gray-900'
-                            : 'text-gray-700',
-                          'block px-4 py-2 text-sm',
-                        ]"
-                        href="#"
                         >Support</a
                       >
                     </MenuItem>
                   </div>
                   <div class="py-1">
                     <MenuItem v-slot="{ active }">
-                      <a
+                      <Link
                         :class="[
                           active
                             ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-700',
                           'block px-4 py-2 text-sm',
                         ]"
-                        href="#"
-                        >Logout</a
-                      >
+                        :href="$route('logout')"
+                        method="post"
+                        >Logout
+                      </Link>
                     </MenuItem>
                   </div>
                 </MenuItems>
