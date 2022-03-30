@@ -6,7 +6,9 @@ use Domain\Sites\Models\Site;
 use Domain\Sites\Models\Stack;
 use Domain\Sites\Models\Server;
 use Laravel\Sanctum\HasApiTokens;
+use Domain\IAM\Casts\SettingsCast;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Domain\IAM\QueryBuilders\UserQueryBuilder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,11 +24,14 @@ class User extends Authenticatable
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',
         'email',
         'password',
+        'profile',
+        'settings',
     ];
 
     protected $hidden = [
@@ -36,6 +41,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'settings' => SettingsCast::class,
     ];
 
     public function servers(): HasMany

@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="records.data.length"
     class="flex flex-col sm:flex-row justify-between sm:items-end space-y-4 mb-4"
   >
     <div v-for="(filter, index) in props.filters" :key="index">

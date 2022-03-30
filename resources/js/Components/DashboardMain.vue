@@ -19,7 +19,7 @@
     <slot name="sub-header-content"></slot>
   </div>
 
-  <div class="px-4 mt-6 sm:px-6 lg:px-8 max-w-screen-lg">
+  <div class="px-4 my-6 sm:px-6 lg:px-8 max-w-screen-lg">
     <div class="align-middle">
       <slot />
     </div>

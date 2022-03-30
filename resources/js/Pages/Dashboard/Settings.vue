@@ -59,7 +59,9 @@
                 <dd
                   class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2"
                 >
-                  <span class="flex-grow">Chelsea Hagon</span>
+                  <span class="flex-grow">
+                    {{ $page.props.auth.user.name }}
+                  </span>
                   <span class="ml-4 flex-shrink-0">
                     <button
                       class="font-semibold text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
@@ -79,9 +81,12 @@
                 >
                   <span class="flex-grow">
                     <img
+                      :src="
+                        $page.props.auth.user.profile ||
+                        'https://images.unsplash.com/photo-1607785330196-fdbe6f36c8fa?ixlib=rb-1.2.1&q=80&fm=jpg&cs=tinysrgb&w=256&h=256&fit=facearea'
+                      "
                       alt=""
                       class="h-8 w-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
                     />
                   </span>
                   <span class="ml-4 flex-shrink-0 flex items-start space-x-4">
@@ -93,7 +98,8 @@
                     </button>
                     <span aria-hidden="true" class="text-gray-300">|</span>
                     <button
-                      class="font-semibold text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                      :disabled="!$page.props.auth.user.profile"
+                      class="font-semibold text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed"
                       type="button"
                     >
                       Remove
@@ -106,7 +112,9 @@
                 <dd
                   class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2"
                 >
-                  <span class="flex-grow">chelsea.hagon@example.com</span>
+                  <span class="flex-grow">
+                    {{ $page.props.auth.user.email }}
+                  </span>
                   <span class="ml-4 flex-shrink-0">
                     <button
                       class="font-semibold text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
@@ -135,7 +143,9 @@
                 <dd
                   class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2"
                 >
-                  <span class="flex-grow">English</span>
+                  <span class="flex-grow">
+                    {{ $page.props.auth.user.settings.languageLabel }}
+                  </span>
                   <span class="ml-4 flex-shrink-0">
                     <button
                       class="font-semibold text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
@@ -151,20 +161,15 @@
                 <dd
                   class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2"
                 >
-                  <span class="flex-grow">DD-MM-YYYY</span>
+                  <span class="flex-grow">
+                    {{ $page.props.auth.user.settings.dateFormatLabel }}
+                  </span>
                   <span class="ml-4 flex-shrink-0 flex items-start space-x-4">
                     <button
                       class="font-semibold text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
                       type="button"
                     >
                       Update
-                    </button>
-                    <span aria-hidden="true" class="text-gray-300">|</span>
-                    <button
-                      class="font-semibold text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                      type="button"
-                    >
-                      Remove
                     </button>
                   </span>
                 </dd>
@@ -178,7 +183,7 @@
                   class="text-sm font-medium text-gray-500"
                   passive
                 >
-                  Automatic timezone
+                  Swarm mode
                 </SwitchLabel>
                 <dd
                   class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2"
@@ -213,7 +218,7 @@
                   class="text-sm font-medium text-gray-500"
                   passive
                 >
-                  Auto-update applicant data
+                  Auto-update application
                 </SwitchLabel>
                 <dd
                   class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2"
