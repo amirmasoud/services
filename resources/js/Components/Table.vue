@@ -63,8 +63,6 @@
                 "
                 :disabled="
                   record.hasOwnProperty('can_delete') && !record.can_delete
-                    ? true
-                    : false
                 "
                 :href="$route(actions.delete.link, record)"
                 as="button"
@@ -162,7 +160,7 @@
 </template>
 
 <script setup>
-import { onMounted, watch, defineProps } from "vue";
+import { onMounted, watch, defineProps, onUnmounted } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import Paginator from "@/Components/Paginator";
 import debounce from "lodash/debounce";
@@ -186,9 +184,13 @@ onMounted(() => {
   }
 });
 
-setInterval(() => {
+let interval = setInterval(() => {
   Inertia.reload({ data: filterData, only: ["records"] });
 }, 10000);
+
+onUnmounted(() => {
+  clearInterval(interval);
+});
 
 watch(
   props.filters,
