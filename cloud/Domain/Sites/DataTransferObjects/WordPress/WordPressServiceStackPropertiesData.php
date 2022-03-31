@@ -6,7 +6,7 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class WordPressServiceStackPropertiesData extends DataTransferObject
 {
-    public string $php = '8.1';
+    public string $php = '8.0';
 
     public string $database = 'mariadb';
 
