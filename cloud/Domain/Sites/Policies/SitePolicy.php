@@ -3,7 +3,7 @@
 namespace Domain\Sites\Policies;
 
 use Domain\IAM\Models\User;
-use Domain\Sites\Models\Stack;
+use Domain\Sites\Models\Site;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SitePolicy
@@ -15,7 +15,7 @@ class SitePolicy
         return true;
     }
 
-    public function view(User $user, Stack $stack)
+    public function view(User $user, Site $site)
     {
         return true;
     }
@@ -25,22 +25,22 @@ class SitePolicy
         return $user->stacks()->count() && $user->servers()->count();
     }
 
-    public function update(User $user, Stack $stack)
+    public function update(User $user, Site $site)
     {
         return true;
     }
 
-    public function delete(User $user, Stack $stack)
+    public function delete(User $user, Site $site)
     {
         return true;
     }
 
-    public function restore(User $user, Stack $stack)
+    public function restore(User $user, Site $site)
     {
         return true;
     }
 
-    public function forceDelete(User $user, Stack $stack)
+    public function forceDelete(User $user, Site $site)
     {
         return true;
     }

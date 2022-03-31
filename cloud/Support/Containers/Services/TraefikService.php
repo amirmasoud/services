@@ -15,11 +15,12 @@ class TraefikService
 
     /**
      * @throws TraefikServiceAvailableException
+     * @throws \Throwable
      */
-    public static function install($force = false)
+    public static function install($force = false): bool
     {
-        if (! $force && File::exists(Storage::disk('proxy')->path('docker-compose.yml'))) {
-            throw new TraefikServiceAvailableException();
+        if (File::exists(Storage::disk('proxy')->path('docker-compose.yml'))) {
+            throw_unless($force, new TraefikServiceAvailableException());
         }
 
         File::copy(
@@ -35,6 +36,8 @@ class TraefikService
         File::put(Storage::disk('proxy')->path('/dynamic_conf.yml'), '');
 
         File::ensureDirectoryExists(Storage::disk('proxy')->path('/certificates'));
+
+        return true;
     }
 
     /**

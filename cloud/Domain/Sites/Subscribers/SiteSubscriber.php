@@ -67,6 +67,7 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
         Bus::chain([
             ChangeSiteStatus::installing($site),
             // TraefikService::deploySwarm(),
+            TraefikService::install(force: true),
             TraefikService::deployCompose(),
             WordPressService::install($site->host),
             // WordPressService::deploySwarm($site->host),
