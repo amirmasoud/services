@@ -15,6 +15,7 @@ use Support\Containers\ProcessContainer;
 use App\Dashboard\Resources\SiteResource;
 use App\Dashboard\Resources\StackResource;
 use App\Dashboard\Resources\ServerResource;
+use Support\Containers\Shell\DockerCompose;
 use App\Dashboard\Requests\SiteSearchRequest;
 use App\Dashboard\Resources\UI\SiteStatResource;
 use App\Dashboard\Resources\UI\SiteTableResource;
@@ -37,6 +38,7 @@ class SiteController extends Controller
             'stats' => fn () => new SiteStatResource(),
             'table' => fn () => new SiteTableResource(),
             'canCreate' => auth()->user()->stacks()->count() && auth()->user()->servers()->count(),
+            'status' => fn () => DockerCompose::for($sites->first()->host)->status(),
         ]);
     }
 

@@ -2,6 +2,10 @@
 
 namespace Support\Containers\Shell;
 
+use Support\Containers\DataTransferObjects\ContainerData;
+use Support\Containers\DataTransferObjects\ContainersData;
+use Support\Containers\DataTransferObjects\RunningContainerData;
+
 class DockerCompose extends DockerShell
 {
     public static function isInstalled(): bool
@@ -41,5 +45,12 @@ class DockerCompose extends DockerShell
     public function command(string $command): bool
     {
         return static::$shell->exec('cd '.static::$path.' && docker-compose exec -T '.$command)->isSuccessful();
+    }
+
+    public function status()
+    {
+        $output = static::$shell->exec('cd '.static::$path.' && docker compose ps --format json')->getOutput();
+
+        return new ContainersData(collect(['containers' => json_decode($output)])->toArray());
     }
 }

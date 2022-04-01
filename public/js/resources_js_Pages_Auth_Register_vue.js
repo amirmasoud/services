@@ -35,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Components_Icons_Spinner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/Icons/Spinner */ "./resources/js/Components/Icons/Spinner.vue");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/transitions/transition.esm.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/headlessui.esm.js");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -80,7 +80,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/transitions/transition.esm.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/headlessui.esm.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -114,6 +114,10 @@ __webpack_require__.r(__webpack_exports__);
       "default": null
     },
     errorMessage: {
+      type: String,
+      "default": ""
+    },
+    help: {
       type: String,
       "default": ""
     }
@@ -289,15 +293,16 @@ var _hoisted_2 = {
   "class": "mt-1"
 };
 var _hoisted_3 = ["id", "name", "placeholder", "type", "value"];
+var _hoisted_4 = ["id"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": $props.id,
-    "class": "block text-sm font-medium text-gray-700"
+    "class": "block text-sm font-semibold font-medium text-gray-700"
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.label), 9
   /* TEXT, PROPS */
   , _hoisted_1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     id: $props.id,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([[$props.hasError || !!$props.form.errors[$props.name] ? 'border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500' : 'focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 '], "block w-full sm:text-sm rounded-md shadow-sm"]),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([[$props.hasError || !!$props.form.errors[$props.name] ? 'border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500' : 'focus:ring-indigo-500 focus:border-indigo-500 border-gray-300'], "block w-full sm:text-sm rounded-md shadow-sm"]),
     name: $props.name,
     placeholder: $props.placeholder,
     type: $props.type,
@@ -307,7 +312,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 42
   /* CLASS, PROPS, HYDRATE_EVENTS */
-  , _hoisted_3)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["TransitionRoot"], {
+  , _hoisted_3)]), $props.help !== '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", {
+    key: 0,
+    id: "".concat($props.name, "-description"),
+    "class": "mt-2 text-sm text-gray-500"
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.help), 9
+  /* TEXT, PROPS */
+  , _hoisted_4)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["TransitionRoot"], {
     id: "".concat($props.name, "-error"),
     show: $props.hasError || !!$props.form.errors[$props.name],
     as: "p",

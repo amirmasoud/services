@@ -9,8 +9,8 @@ use Spatie\DataTransferObject\Attributes\CastWith;
 
 class RunningContainerData extends DataTransferObject
 {
-    #[MapFrom('Id')]
-    public ?string $id;
+    #[MapFrom('ID')]
+    public string $id;
 
     #[MapFrom('Names.0')]
     public ?string $name;

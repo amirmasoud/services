@@ -10,3 +10,4 @@ A WordPress Cloud Platform with Docker.
 1. Install [Docker](https://www.docker.com/products/docker-desktop)
 2. Install [Docker Compose](https://docs.docker.com/compose/install/)
 3. Install [Mkcert](https://github.com/FiloSottile/mkcert)
+4. Install [Docker Compose V2](https://docs.docker.com/compose/cli-command/)
