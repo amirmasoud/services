@@ -2,9 +2,10 @@
 
 namespace App\Console;
 
+use Domain\Sites\Models\Site;
+use Domain\Sites\Jobs\ContainerStatusJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Spatie\Health\Commands\RunHealthChecksCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,7 +17,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(RunHealthChecksCommand::class)->everyMinute();
+        $schedule->command('inspire')->everyMinute();
+        $schedule->call(fn () => ContainerStatusJob::dispatch(Site::first()))->everyMinute();
     }
 
     /**

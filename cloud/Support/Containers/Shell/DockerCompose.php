@@ -47,10 +47,18 @@ class DockerCompose extends DockerShell
         return static::$shell->exec('cd '.static::$path.' && docker-compose exec -T '.$command)->isSuccessful();
     }
 
+    /**
+     * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
+     */
     public function status()
     {
-        $output = static::$shell->exec('cd '.static::$path.' && docker compose ps --format json')->getOutput();
+        $output = static::$shell->execQuietly('cd '.static::$path.' && docker compose ps --format json')->getOutput();
 
         return new ContainersData(collect(['containers' => json_decode($output)])->toArray());
+    }
+
+    public function isRunning(): bool
+    {
+        return static::$shell->execQuietly('cd '.static::$path.' && docker-compose ps')->isSuccessful();
     }
 }
