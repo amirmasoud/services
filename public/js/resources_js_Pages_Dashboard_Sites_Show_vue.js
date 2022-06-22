@@ -35,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Components_Icons_Spinner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/Icons/Spinner */ "./resources/js/Components/Icons/Spinner.vue");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/headlessui.esm.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/transitions/transition.js");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -148,10 +148,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_AppHead__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/AppHead */ "./resources/js/Components/AppHead.vue");
 /* harmony import */ var _Components_DashboardMain__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/DashboardMain */ "./resources/js/Components/DashboardMain.vue");
 /* harmony import */ var _Components_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Components/Button */ "./resources/js/Components/Button.vue");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/index.js");
-/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/index.js");
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/UserIcon.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/ThumbUpIcon.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/CheckIcon.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/ClockIcon.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/TerminalIcon.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/EyeOffIcon.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/GlobeIcon.js");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/StatusOnlineIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/PlayIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/StopIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/RefreshIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/DatabaseIcon.js");
+/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/TerminalIcon.js");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 
 
@@ -220,15 +231,15 @@ __webpack_require__.r(__webpack_exports__);
     }];
     var eventTypes = {
       applied: {
-        icon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__.UserIcon,
+        icon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_5__["default"],
         bgColorClass: "bg-gray-400"
       },
       advanced: {
-        icon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__.ThumbUpIcon,
+        icon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_6__["default"],
         bgColorClass: "bg-blue-500"
       },
       completed: {
-        icon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__.CheckIcon,
+        icon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_7__["default"],
         bgColorClass: "bg-green-500"
       }
     };
@@ -274,10 +285,10 @@ __webpack_require__.r(__webpack_exports__);
       body: "Expedita consequatur sit ea voluptas quo ipsam recusandae. Ab sint et voluptatem repudiandae voluptatem et eveniet. Nihil quas consequatur autem. Perferendis rerum et."
     }];
     var currentState = props.state;
-    var processing = (0,vue__WEBPACK_IMPORTED_MODULE_6__.ref)(false);
+    var processing = (0,vue__WEBPACK_IMPORTED_MODULE_4__.ref)(false);
 
     var fetchData = function fetchData() {
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__.Inertia.reload({
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__.Inertia.reload({
         preserveState: true,
         preserveScroll: true,
         onSuccess: function onSuccess(page) {
@@ -291,23 +302,23 @@ __webpack_require__.r(__webpack_exports__);
 
     var start = function start() {
       processing.value = true;
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__.Inertia.post("/dashboard/sites/".concat(props.record.data.id, "/start"));
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__.Inertia.post("/dashboard/sites/".concat(props.record.data.id, "/start"));
     };
 
     var stop = function stop() {
       processing.value = true;
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__.Inertia.post("/dashboard/sites/".concat(props.record.data.id, "/stop"));
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__.Inertia.post("/dashboard/sites/".concat(props.record.data.id, "/stop"));
     };
 
     var restart = function restart() {
       processing.value = true;
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__.Inertia.post("/dashboard/sites/".concat(props.record.data.id, "/restart"));
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__.Inertia.post("/dashboard/sites/".concat(props.record.data.id, "/restart"));
     };
 
     var reloadInterval = setInterval(function () {
       fetchData();
     }, 10000);
-    (0,vue__WEBPACK_IMPORTED_MODULE_6__.onBeforeUnmount)(function () {
+    (0,vue__WEBPACK_IMPORTED_MODULE_4__.onBeforeUnmount)(function () {
       clearInterval(reloadInterval);
     });
     var __returned__ = {
@@ -330,23 +341,23 @@ __webpack_require__.r(__webpack_exports__);
       AppHead: _Components_AppHead__WEBPACK_IMPORTED_MODULE_0__["default"],
       DashboardMain: _Components_DashboardMain__WEBPACK_IMPORTED_MODULE_1__["default"],
       Button: _Components_Button__WEBPACK_IMPORTED_MODULE_2__["default"],
-      CheckIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__.CheckIcon,
-      ThumbUpIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__.ThumbUpIcon,
-      UserIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__.UserIcon,
-      ClockIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__.ClockIcon,
-      TerminalIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__.TerminalIcon,
-      EyeOffIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__.EyeOffIcon,
-      GlobeIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__.GlobeIcon,
-      StatusOnlineIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_3__.StatusOnlineIcon,
-      PlayIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_4__.PlayIcon,
-      StopIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_4__.StopIcon,
-      RefreshIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_4__.RefreshIcon,
-      DatabaseIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_4__.DatabaseIcon,
-      WPTerminalIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_4__.TerminalIcon,
-      Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__.Inertia,
-      onBeforeUnmount: vue__WEBPACK_IMPORTED_MODULE_6__.onBeforeUnmount,
-      reactive: vue__WEBPACK_IMPORTED_MODULE_6__.reactive,
-      ref: vue__WEBPACK_IMPORTED_MODULE_6__.ref
+      CheckIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_7__["default"],
+      ThumbUpIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_6__["default"],
+      UserIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_5__["default"],
+      ClockIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_8__["default"],
+      TerminalIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_9__["default"],
+      EyeOffIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_10__["default"],
+      GlobeIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_11__["default"],
+      StatusOnlineIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_12__["default"],
+      PlayIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_13__["default"],
+      StopIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_14__["default"],
+      RefreshIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_15__["default"],
+      DatabaseIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_16__["default"],
+      WPTerminalIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_17__["default"],
+      Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__.Inertia,
+      onBeforeUnmount: vue__WEBPACK_IMPORTED_MODULE_4__.onBeforeUnmount,
+      reactive: vue__WEBPACK_IMPORTED_MODULE_4__.reactive,
+      ref: vue__WEBPACK_IMPORTED_MODULE_4__.ref
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,

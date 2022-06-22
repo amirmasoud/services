@@ -35,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Components_Icons_Spinner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/Icons/Spinner */ "./resources/js/Components/Icons/Spinner.vue");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/headlessui.esm.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/transitions/transition.js");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -145,7 +145,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/headlessui.esm.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/transitions/transition.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -218,10 +218,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Forms_Inputs_Input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/Forms/Inputs/Input */ "./resources/js/Components/Forms/Inputs/Input.vue");
 /* harmony import */ var _Components_AppHead__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Components/AppHead */ "./resources/js/Components/AppHead.vue");
 /* harmony import */ var _Components_DashboardMain__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/DashboardMain */ "./resources/js/Components/DashboardMain.vue");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/headlessui.esm.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/radio-group/radio-group.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/switch/switch.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/index.js");
-/* harmony import */ var _Components_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Components/Button */ "./resources/js/Components/Button.vue");
+/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/PaperAirplaneIcon.js");
+/* harmony import */ var _Components_Button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Components/Button */ "./resources/js/Components/Button.vue");
 
 
 
@@ -257,14 +258,14 @@ __webpack_require__.r(__webpack_exports__);
       Input: _Components_Forms_Inputs_Input__WEBPACK_IMPORTED_MODULE_1__["default"],
       AppHead: _Components_AppHead__WEBPACK_IMPORTED_MODULE_2__["default"],
       DashboardMain: _Components_DashboardMain__WEBPACK_IMPORTED_MODULE_3__["default"],
-      RadioGroup: _headlessui_vue__WEBPACK_IMPORTED_MODULE_7__.RadioGroup,
-      RadioGroupLabel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_7__.RadioGroupLabel,
-      RadioGroupOption: _headlessui_vue__WEBPACK_IMPORTED_MODULE_7__.RadioGroupOption,
+      RadioGroup: _headlessui_vue__WEBPACK_IMPORTED_MODULE_6__.RadioGroup,
+      RadioGroupLabel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_6__.RadioGroupLabel,
+      RadioGroupOption: _headlessui_vue__WEBPACK_IMPORTED_MODULE_6__.RadioGroupOption,
       SwitchDescription: _headlessui_vue__WEBPACK_IMPORTED_MODULE_7__.SwitchDescription,
-      RadioGroupDescription: _headlessui_vue__WEBPACK_IMPORTED_MODULE_7__.RadioGroupDescription,
+      RadioGroupDescription: _headlessui_vue__WEBPACK_IMPORTED_MODULE_6__.RadioGroupDescription,
       ref: vue__WEBPACK_IMPORTED_MODULE_4__.ref,
-      PaperAirplaneIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_5__.PaperAirplaneIcon,
-      Button: _Components_Button__WEBPACK_IMPORTED_MODULE_6__["default"]
+      PaperAirplaneIcon: _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_8__["default"],
+      Button: _Components_Button__WEBPACK_IMPORTED_MODULE_5__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,

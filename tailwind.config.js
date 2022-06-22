@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 module.exports = {
   content: [
     "./resources/**/*.blade.php",
@@ -8,11 +7,5 @@ module.exports = {
   theme: {
     extend: {},
   },
-  variants: {
-    extend: {
-      opacity: ["disabled"],
-      cursor: ["disabled"],
-    },
-  },
-  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
-};
+  plugins: [],
+}

@@ -102,7 +102,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_AppHead__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/AppHead */ "./resources/js/Components/AppHead.vue");
 /* harmony import */ var _Components_DashboardMain__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/DashboardMain */ "./resources/js/Components/DashboardMain.vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/headlessui.esm.js");
+/* harmony import */ var _headlessui_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @headlessui/vue */ "./node_modules/@headlessui/vue/dist/components/switch/switch.js");
 
 
 

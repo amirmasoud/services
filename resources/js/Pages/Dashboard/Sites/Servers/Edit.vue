@@ -150,7 +150,6 @@ import Input from "@/Components/Forms/Inputs/Input";
 import Button from "@/Components/Forms/Buttons/Button";
 import AppHead from "@/Components/AppHead";
 import DashboardMain from "@/Components/DashboardMain";
-import { defineProps } from "vue";
 
 let props = defineProps({
   resource: Object,

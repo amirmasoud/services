@@ -159,7 +159,7 @@ import {
   SwitchDescription,
 } from "@headlessui/vue";
 import { PuzzleIcon, ViewBoardsIcon, TerminalIcon } from "@heroicons/vue/solid";
-import { defineProps, ref, watch } from "vue";
+import { ref, watch } from "vue";
 import Button from "@/Components/Button";
 import Input from "@/Components/Forms/Inputs/Input";
 import { useForm } from "@inertiajs/inertia-vue3";

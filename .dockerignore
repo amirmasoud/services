@@ -6,16 +6,15 @@ storage/framework/sessions/*
 storage/framework/views/*
 storage/logs/*
 
-vendor
+vendor/
+node_modules/
 
-node_modules
 
 **.git
 .idea
 **.gitignore
-**.gitattributes
-**.sass-cache
 *.env*
 
 readme.md
 Dockerfile
+docker-compose.yml
