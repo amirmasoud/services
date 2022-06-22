@@ -25,7 +25,6 @@
 <script setup>
 import Spinner from "@/Components/Icons/Spinner";
 import { TransitionRoot } from "@headlessui/vue";
-import { defineProps } from "vue";
 
 defineProps({
   type: {

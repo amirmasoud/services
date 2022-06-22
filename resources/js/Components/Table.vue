@@ -153,7 +153,7 @@
 </template>
 
 <script setup>
-import { onMounted, watch, defineProps, onUnmounted } from "vue";
+import { onMounted, watch, onUnmounted } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import Paginator from "@/Components/Paginator";
 import debounce from "lodash/debounce";

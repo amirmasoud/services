@@ -71,7 +71,7 @@ import AppHead from "@/Components/AppHead";
 import DashboardMain from "@/Components/DashboardMain";
 import Pauls from "@/Components/Paulse";
 import { Inertia } from "@inertiajs/inertia";
-import { defineProps, onBeforeUnmount, onMounted } from "vue";
+import { onBeforeUnmount, onMounted } from "vue";
 
 const tabs = [
   {

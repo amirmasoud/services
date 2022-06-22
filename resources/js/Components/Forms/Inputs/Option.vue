@@ -49,7 +49,6 @@
 
 <script setup>
 import { TransitionRoot } from "@headlessui/vue";
-import { defineEmits, defineProps } from "vue";
 
 defineEmits(["update:modelValue"]);
 
