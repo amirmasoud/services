@@ -1,5 +1,4 @@
 bootstrap/cache/services.php
-
 /public/hot
 /public/storage
 /storage/*.key
@@ -11,21 +10,17 @@ yarn-error.log
 /.idea
 /.vscode
 .DS_Store
-
 storage/app/*
 storage/framework/cache/*
 storage/framework/sessions/*
 storage/framework/views/*
 storage/logs/*
-
 vendor/
 node_modules/
-
 **.git
 .idea
 **.gitignore
 *.env*
-
 readme.md
 Dockerfile
 docker-compose.yml
