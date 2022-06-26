@@ -7,6 +7,7 @@ use Domain\Sites\Models\Stack;
 use Domain\Sites\Models\Server;
 use Laravel\Sanctum\HasApiTokens;
 use Domain\IAM\Casts\SettingsCast;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Domain\IAM\QueryBuilders\UserQueryBuilder;
@@ -25,6 +26,7 @@ class User extends Authenticatable
     use HasFactory;
     use Notifiable;
     use SoftDeletes;
+    use HasRoles;
 
     protected $fillable = [
         'name',
