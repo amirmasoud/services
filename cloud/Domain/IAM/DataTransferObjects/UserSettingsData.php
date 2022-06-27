@@ -8,13 +8,13 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class UserSettingsData extends DataTransferObject
 {
-    public LocaleEnum $language;
+    public ?LocaleEnum $language;
 
-    public string $languageLabel;
+    public ?string $languageLabel;
 
-    public DateFormatEnum $dateFormat;
+    public ?DateFormatEnum $dateFormat;
 
-    public string $dateFormatLabel;
+    public ?string $dateFormatLabel;
 
     public function __construct(...$args)
     {

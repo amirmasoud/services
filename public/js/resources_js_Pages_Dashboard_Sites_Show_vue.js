@@ -39,6 +39,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'Button',
   props: {
     type: {
       type: String,
@@ -81,6 +82,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'DashboardMain',
   props: {
     name: String,
     label: String,
@@ -171,6 +173,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'Show',
   props: {
     record: Object,
     wordpress: Object,
@@ -1418,16 +1421,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         key: 0
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.wordpress.publicPort.port) + " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.wordpress.publicPort.type) + ") ", 1
       /* TEXT */
-      )], 2112
-      /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
+      )], 64
+      /* STABLE_FRAGMENT */
       )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_48, "Not exposed"))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("dt", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["EyeOffIcon"], {
         "class": "inline-block h-4 w-4 text-gray-400"
       }), _hoisted_51]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("dd", _hoisted_52, [$props.wordpress.privatePort ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         key: 0
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.wordpress.privatePort.port) + " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.wordpress.publicPort.type) + ") ", 1
       /* TEXT */
-      )], 2112
-      /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
+      )], 64
+      /* STABLE_FRAGMENT */
       )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_53, "Not exposed"))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_54, [_hoisted_55, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("dd", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["StatusOnlineIcon"], {
         "class": "inline-block h-4 w-4 text-green-400"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.wordpress.state), 1
@@ -1509,16 +1512,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         key: 0
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.database.publicPort.port) + " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.database.publicPort.type) + ") ", 1
       /* TEXT */
-      )], 2112
-      /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
+      )], 64
+      /* STABLE_FRAGMENT */
       )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_151, "Not exposed"))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_152, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("dt", _hoisted_153, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["EyeOffIcon"], {
         "class": "inline-block h-4 w-4 text-gray-400"
       }), _hoisted_154]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("dd", _hoisted_155, [$props.database.privatePort ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         key: 0
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.database.privatePort.port) + " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.database.publicPort.type) + ") ", 1
       /* TEXT */
-      )], 2112
-      /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
+      )], 64
+      /* STABLE_FRAGMENT */
       )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_156, "Not exposed"))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_157, [_hoisted_158, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("dd", _hoisted_159, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["StatusOnlineIcon"], {
         "class": "inline-block h-4 w-4 text-green-400"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.database.state), 1
