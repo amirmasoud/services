@@ -3,7 +3,7 @@
     filter.label
   }}</label>
   <div class="relative rounded-md shadow-sm">
-    <input
+    <Input
       :id="filter.name"
       v-model="filter.value"
       type="text"
@@ -15,6 +15,8 @@
 </template>
 
 <script setup>
+import Input from "@/Components/Forms/Inputs/Input";
+
 defineProps({
   filter: Object,
 });

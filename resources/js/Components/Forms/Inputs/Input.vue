@@ -17,7 +17,7 @@
       :placeholder="placeholder"
       :type="type"
       :value="modelValue"
-      class="block w-full sm:text-sm rounded-md shadow-sm"
+      class="block w-full sm:text-sm rounded-md shadow-sm p-2"
       @input="$emit('update:modelValue', $event.target.value)"
     />
   </div>
