@@ -5,26 +5,26 @@ namespace App\Dashboard\Controllers;
 use Inertia\Inertia;
 use Inertia\Response;
 use Domain\IAM\Models\User;
+use Domain\IAM\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Dashboard\Requests\UserRequest;
 use App\Dashboard\Resources\UserResource;
+use App\Dashboard\Resources\RoleResource;
 use App\Dashboard\Requests\UserSearchRequest;
-use App\Dashboard\Resources\UI\UserStatResource;
-use App\Dashboard\Resources\UI\UserTableResource;
-use App\Dashboard\Resources\UI\UserFilterResource;
+use App\Dashboard\Resources\UI\RoleTableResouce;
+use App\Dashboard\Resources\UI\RoleFilterResouce;
 
 class RoleController extends Controller
 {
     public function index(UserSearchRequest $request): Response
     {
-        $users = User::search($request->validated('search'))->paginate($request->validated('per_page'))->withQueryString();
+        $users = Role::search($request->validated('search'))->paginate($request->validated('per_page'))->withQueryString();
 
-        return Inertia::render('Dashboard/Users/Index', [
-            'records' => UserResource::collection($users),
-            'filters' => fn () => new UserFilterResource(),
-            'stats' => fn () => new UserStatResource(),
-            'table' => fn () => new UserTableResource(),
+        return Inertia::render('Dashboard/Users/Roles/Index', [
+            'records' => RoleResource::collection($users),
+            'filters' => fn () => new RoleFilterResouce(),
+            'table' => fn () => new RoleTableResouce(),
         ]);
     }
 
