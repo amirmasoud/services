@@ -4,6 +4,7 @@ use Inertia\Inertia;
 use Domain\Sites\Models\Site;
 use App\Dashboard\Controllers\SiteController;
 use App\Dashboard\Controllers\UserController;
+use App\Dashboard\Controllers\RoleController;
 use App\Dashboard\Controllers\StackController;
 use App\Dashboard\Controllers\OauthController;
 use App\Dashboard\Controllers\ServerController;
@@ -33,7 +34,13 @@ Route::prefix('dashboard')->middleware('auth')->name('dashboard.')->group(functi
     Route::get('/settings', [SettingController::class, 'general'])->name('settings.general');
     Route::get('/settings/system-status', [SettingController::class, 'systemStatus'])->name('settings.system-status');
 
-    Route::resource('users', UserController::class)->except('show');
+    Route::name('users.')
+        ->prefix('users')
+        ->group(function () {
+            Route::resource('/', UserController::class)->except('show');
+            Route::resource('roles', RoleController::class)->except('show');
+        });
+
 
     Route::controller(SiteController::class)
         ->name('sites.')

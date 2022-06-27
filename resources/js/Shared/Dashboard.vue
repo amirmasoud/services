@@ -453,6 +453,7 @@ import {
   XIcon,
   ServerIcon,
   CubeIcon,
+  KeyIcon,
 } from "@heroicons/vue/outline";
 import { CogIcon, SelectorIcon, UserIcon } from "@heroicons/vue/solid";
 import Logo from "@/Shared/Logo";
@@ -463,6 +464,20 @@ const navigation = [
     href: route("dashboard.index"),
     icon: HomeIcon,
     component: "Dashboard/Home",
+    submenu: [
+      {
+        name: "Roles",
+        href: route("dashboard.users.roles.index"),
+        icon: KeyIcon,
+        component: "Dashboard/Users/Roles",
+      },
+//      {
+//        name: "Permissions",
+//        href: route("dashboard.sites.servers.index"),
+//        icon: KeyIcon,
+//        component: "Dashboard/Sites/Servers",
+//      },
+    ],
   },
   {
     name: "Users",
