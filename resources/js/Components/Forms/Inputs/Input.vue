@@ -11,13 +11,13 @@
       :class="[
         hasError || !!form.errors[name]
           ? 'border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500'
-          : 'focus:ring-indigo-500 focus:border-indigo-500 border-gray-300',
+          : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500',
       ]"
       :name="name"
       :placeholder="placeholder"
       :type="type"
       :value="modelValue"
-      class="block w-full sm:text-sm rounded-md shadow-sm p-2"
+      class="block w-full sm:text-sm rounded-md shadow-sm p-2 border"
       @input="$emit('update:modelValue', $event.target.value)"
     />
   </div>
