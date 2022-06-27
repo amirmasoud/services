@@ -4,7 +4,7 @@
   <DashboardMain>
     <template #header>Users</template>
     <template #buttons>
-      <Button :href="$route(table.actions.create.link)">New user</Button>
+      <Button :href="$route(table.actions.create.link)">New role</Button>
     </template>
     <template #sub-header></template>
     <template #sub-header-content>

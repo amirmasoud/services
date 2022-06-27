@@ -30,7 +30,7 @@ class RoleController extends Controller
 
     public function create(): Response
     {
-        return Inertia::render('Dashboard/Users/Create');
+        return Inertia::render('Dashboard/Users/Roles/Create');
     }
 
     public function store(UserRequest $request): RedirectResponse
