@@ -3,15 +3,15 @@
 namespace Domain\Sites\Models;
 
 use Domain\IAM\Models\User;
-use Spatie\Activitylog\LogOptions;
 use Domain\Sites\Enums\SiteStatusEnum;
-use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Support\Containers\Enums\ContainerStateEnum;
 use Domain\Sites\QueryBuilders\SiteQueryBuilder;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Support\Containers\Enums\ContainerStateEnum;
 
 /**
  * @property string $name
@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property ContainerStateEnum $status
  * @property ?int $server_id
  * @property ?int $stack_id
+ *
  * @method static healthy()
  * @method static unhealthy()
  */

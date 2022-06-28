@@ -2,8 +2,8 @@
 
 namespace App\Dashboard\Resources\UI;
 
-use Domain\IAM\Models\User;
 use App\Dashboard\UI\StatUI;
+use Domain\IAM\Models\User;
 
 class UserStatResource extends BaseUI
 {

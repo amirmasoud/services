@@ -3,8 +3,8 @@
 namespace Support\Containers\Exceptions;
 
 use Exception;
-use Support\Shell;
 use Support\Containers\Shell\Environment;
+use Support\Shell;
 
 class DockerNotAvailableException extends Exception
 {

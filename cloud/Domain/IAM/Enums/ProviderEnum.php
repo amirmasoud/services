@@ -11,7 +11,7 @@ enum ProviderEnum: string
 
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             self::EMAIL => 'Email',
             self::GITHUB => 'GitHub',
             self::GOOGLE => 'Google',

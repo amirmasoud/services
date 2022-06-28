@@ -2,18 +2,19 @@
 
 namespace Support\Containers;
 
-use Support\Shell;
 use Domain\Sites\Models\Site;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
-use Support\Containers\Enums\ContainerStateEnum;
 use Support\Containers\Contracts\DockerContainer;
-use Touhidurabir\StubGenerator\Facades\StubGenerator;
 use Support\Containers\DataTransferObjects\RunningContainerData;
+use Support\Containers\Enums\ContainerStateEnum;
+use Support\Shell;
+use Touhidurabir\StubGenerator\Facades\StubGenerator;
 
 class ProcessContainer implements DockerContainer
 {
     public static Site $site;
+
     public Shell $shell;
 
     public function __construct(Shell $shell)
@@ -69,7 +70,7 @@ class ProcessContainer implements DockerContainer
     public static function details(string $container)
     {
         try {
-            $response = Http::get('http://localhost:2375/containers/json?limit=1&filters={"name": ["^'.$container.'$"]}')->collect()->first();;
+            $response = Http::get('http://localhost:2375/containers/json?limit=1&filters={"name": ["^'.$container.'$"]}')->collect()->first();
 
             return new RunningContainerData($response);
         } catch (\Exception $e) {

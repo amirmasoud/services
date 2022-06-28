@@ -2,9 +2,9 @@
 
 namespace App\Exceptions;
 
-use Throwable;
-use Inertia\Inertia;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Inertia\Inertia;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +46,7 @@ class Handler extends ExceptionHandler
      * @param $request
      * @param  \Throwable  $e
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|object|\Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Throwable
      */
     public function render($request, Throwable $e)

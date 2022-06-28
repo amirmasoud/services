@@ -2,20 +2,25 @@
 
 namespace Support\Containers\Shell;
 
-use Support\Shell;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\Console\Output\ConsoleOutput;
 use Support\Containers\Exceptions\DockerComposeMissingException;
 use Support\Containers\Exceptions\DockerComposePathNotDirectoryException;
+use Support\Shell;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class DockerShell extends Shell
 {
     protected static string $name;
+
     protected static Shell $shell;
+
     protected static DockerFormatter $formatter;
+
     protected static DockerNetworking $networking;
+
     protected static Environment $environment;
+
     protected static string $path;
 
     /**

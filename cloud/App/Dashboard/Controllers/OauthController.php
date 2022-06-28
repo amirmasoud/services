@@ -25,8 +25,9 @@ class OauthController extends Controller
     }
 
     /**
-     * @param  \App\Http\Requests\CallbackProviderRequest $request
+     * @param  \App\Http\Requests\CallbackProviderRequest  $request
      * @return \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
+     *
      * @throws \Exception
      */
     public function callback(CallbackProviderRequest $request): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse

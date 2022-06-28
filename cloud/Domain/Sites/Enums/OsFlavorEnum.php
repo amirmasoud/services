@@ -12,7 +12,7 @@ enum OsFlavorEnum: string
 
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             self::ALPINE => 'Alpine',
             self::UBUNTU => 'Ubuntu',
             self::CENTOS => 'CentOS',

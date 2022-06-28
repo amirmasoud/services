@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -52,7 +52,7 @@ class CallbackProviderRequest extends FormRequest
     public function rules()
     {
         return [
-            'provider' => 'in:google,github'
+            'provider' => 'in:google,github',
         ];
     }
 }

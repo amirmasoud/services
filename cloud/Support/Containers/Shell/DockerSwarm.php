@@ -54,7 +54,7 @@ class DockerSwarm extends DockerShell
      */
     public function command(string $service, string $command): \Symfony\Component\Process\Process
     {
-        if (! $this->services()->contains(function ($runningService) use ($command, $service) {
+        if (! $this->services()->contains(function ($runningService) use ($service) {
             return $runningService['name'] === $service;
         })) {
             throw new DockerSwarmServiceMissingException($service);

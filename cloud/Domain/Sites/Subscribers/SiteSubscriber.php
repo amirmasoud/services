@@ -2,14 +2,14 @@
 
 namespace Domain\Sites\Subscribers;
 
-use Throwable;
-use Domain\Sites\Models\Site;
 use Domain\Sites\ChangeSiteStatus;
-use Illuminate\Support\Facades\Bus;
+use Domain\Sites\Models\Site;
+use Illuminate\Contracts\Queue\ShouldBeUniqueUntilProcessing;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Bus;
 use Support\Containers\Services\TraefikService;
 use Support\Containers\Services\WordPressService;
-use Illuminate\Contracts\Queue\ShouldBeUniqueUntilProcessing;
+use Throwable;
 
 class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
 {
@@ -56,7 +56,7 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
         $email = $site->user->email;
         $url = "https://$site->host";
         $title = "$site->name WordPress Site";
-        $password = "secret";
+        $password = 'secret';
 
         $plugins = implode(' ', $site->stack->properties->plugins);
         $theme = $site->stack->properties->theme;
@@ -78,7 +78,7 @@ class SiteSubscriber implements ShouldQueue, ShouldBeUniqueUntilProcessing
             // WordPressService::execSwarm($site->host, "wp theme install $theme --activate"),
             // WordPressService::execSwarm($site->host, "wp plugin install $plugins --activate"),
             WordPressService::execCompose($site->host, "wp core install --url=$url --title=\"$title\" --admin_user='admin' --admin_email=$email --admin_password=\"$password\""),
-            WordPressService::execCompose($site->host, "wp core update"),
+            WordPressService::execCompose($site->host, 'wp core update'),
             WordPressService::execCompose($site->host, "wp theme install $theme --activate"),
             WordPressService::execCompose($site->host, "wp plugin install $plugins --activate"),
             WordPressService::execCompose($site->host, line($commands)),

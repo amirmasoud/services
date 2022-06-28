@@ -2,8 +2,8 @@
 
 namespace App\Console;
 
-use Domain\Sites\Models\Site;
 use Domain\Sites\Jobs\ContainerStatusJob;
+use Domain\Sites\Models\Site;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 

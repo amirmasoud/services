@@ -2,8 +2,8 @@
 
 namespace Domain\Sites;
 
-use Domain\Sites\Models\Site;
 use Domain\Sites\Enums\SiteStatusEnum;
+use Domain\Sites\Models\Site;
 
 /**
  * @method static up(Site $site)

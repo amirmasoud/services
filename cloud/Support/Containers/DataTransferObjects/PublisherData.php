@@ -2,8 +2,8 @@
 
 namespace Support\Containers\DataTransferObjects;
 
-use Spatie\DataTransferObject\DataTransferObject;
 use Spatie\DataTransferObject\Attributes\MapFrom;
+use Spatie\DataTransferObject\DataTransferObject;
 
 class PublisherData extends DataTransferObject
 {

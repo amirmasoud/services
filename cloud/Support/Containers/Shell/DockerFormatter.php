@@ -15,18 +15,18 @@ class DockerFormatter
      */
     public function rawTableOutputToCollection($output): Collection
     {
-        $containers = collect (explode ("\n", trim ($output)))->map (function ($line) {
-            return explode ('|', $line);
-        })->filter ();
+        $containers = collect(explode("\n", trim($output)))->map(function ($line) {
+            return explode('|', $line);
+        })->filter();
 
-        $keys = array_map ('underscore_slug', $containers->shift ());
+        $keys = array_map('underscore_slug', $containers->shift());
 
-        if ($containers->isEmpty ()) {
+        if ($containers->isEmpty()) {
             return $containers;
         }
 
-        return $containers->map (function ($container) use ($keys) {
-            return array_combine ($keys, $container);
+        return $containers->map(function ($container) use ($keys) {
+            return array_combine($keys, $container);
         });
     }
 }

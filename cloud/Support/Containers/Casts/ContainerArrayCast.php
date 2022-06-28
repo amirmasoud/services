@@ -14,7 +14,7 @@ class ContainerArrayCast implements Caster
     public function cast(mixed $value): array
     {
         if (! is_array($value)) {
-            throw new Exception("Can only cast arrays to Container");
+            throw new Exception('Can only cast arrays to Container');
         }
 
         return array_map(

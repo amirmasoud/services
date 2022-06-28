@@ -14,7 +14,7 @@ class ThemeArrayCaster implements Caster
     public function cast(mixed $value): array
     {
         if (! is_array($value)) {
-            throw new Exception("Can only cast arrays to Theme");
+            throw new Exception('Can only cast arrays to Theme');
         }
 
         return array_map(

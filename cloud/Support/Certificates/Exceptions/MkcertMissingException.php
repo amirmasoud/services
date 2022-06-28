@@ -9,7 +9,7 @@ class MkcertMissingException extends Exception
 {
     public function __construct()
     {
-        parent::__construct("Mkcert command not found.");
+        parent::__construct('Mkcert command not found.');
     }
 
     public function render($request = null): void

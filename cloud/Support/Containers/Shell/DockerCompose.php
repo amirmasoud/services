@@ -2,9 +2,7 @@
 
 namespace Support\Containers\Shell;
 
-use Support\Containers\DataTransferObjects\ContainerData;
 use Support\Containers\DataTransferObjects\ContainersData;
-use Support\Containers\DataTransferObjects\RunningContainerData;
 
 class DockerCompose extends DockerShell
 {
@@ -17,7 +15,6 @@ class DockerCompose extends DockerShell
     {
         return static::$shell->exec('cd '.static::$path.' && docker-compose up -d')->isSuccessful();
     }
-
 
     /**
      * @param  string  $rmi options: all, local

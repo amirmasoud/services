@@ -3,8 +3,8 @@
 namespace Support\Containers\Shell;
 
 use Exception;
-use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Support\Containers\Exceptions\DockerContainerMissingException;
 
 class Docker

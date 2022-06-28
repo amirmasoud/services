@@ -2,8 +2,8 @@
 
 namespace Support\Containers\Shell;
 
-use Support\Shell;
 use Illuminate\Support\Str;
+use Support\Shell;
 
 class Environment
 {

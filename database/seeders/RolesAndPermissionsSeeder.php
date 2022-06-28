@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use Domain\IAM\Models\Permission;
 use Domain\IAM\Models\Role;
 use Illuminate\Database\Seeder;
-use Domain\IAM\Models\Permission;
 use Spatie\Permission\PermissionRegistrar;
 
 class RolesAndPermissionsSeeder extends Seeder

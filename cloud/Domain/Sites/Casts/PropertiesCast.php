@@ -2,17 +2,18 @@
 
 namespace Domain\Sites\Casts;
 
-use Exception;
+use Domain\Sites\DataTransferObjects\WordPress\WordPressPropertiesData;
 use Domain\Sites\Enums\StackTypeEnum;
+use Exception;
 use Illuminate\Contracts\Database\Eloquent\Castable;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
-use Domain\Sites\DataTransferObjects\WordPress\WordPressPropertiesData;
 
 class PropertiesCast implements Castable
 {
     public static function castUsing(array $arguments): CastsAttributes
     {
-        return new class implements CastsAttributes {
+        return new class implements CastsAttributes
+        {
             public function get($model, $key, $value, $attributes)
             {
                 $data = collect(json_decode($value))->toArray();

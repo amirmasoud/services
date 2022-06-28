@@ -2,18 +2,18 @@
 
 namespace App\Dashboard\Controllers;
 
-use Inertia\Inertia;
-use Inertia\Response;
-use Domain\Sites\Models\Stack;
-use Support\WordPress\ApiWordPress;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Domain\Sites\Enums\StackTypeEnum;
-use Illuminate\Http\RedirectResponse;
 use App\Dashboard\Requests\StackRequest;
 use App\Dashboard\Resources\StackResource;
-use App\Dashboard\Resources\UI\StackTableResource;
 use App\Dashboard\Resources\UI\StackFilterResource;
+use App\Dashboard\Resources\UI\StackTableResource;
+use App\Http\Controllers\Controller;
+use Domain\Sites\Enums\StackTypeEnum;
+use Domain\Sites\Models\Stack;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Inertia\Response;
+use Support\WordPress\ApiWordPress;
 
 class StackController extends Controller
 {

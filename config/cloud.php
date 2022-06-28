@@ -8,5 +8,5 @@ return [
         'sites' => 'sites',
 
         'proxy' => 'proxy',
-    ]
+    ],
 ];

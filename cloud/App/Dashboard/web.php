@@ -1,14 +1,14 @@
 <?php
 
-use Inertia\Inertia;
-use Domain\Sites\Models\Site;
-use App\Dashboard\Controllers\SiteController;
-use App\Dashboard\Controllers\UserController;
-use App\Dashboard\Controllers\RoleController;
-use App\Dashboard\Controllers\StackController;
 use App\Dashboard\Controllers\OauthController;
+use App\Dashboard\Controllers\RoleController;
 use App\Dashboard\Controllers\ServerController;
 use App\Dashboard\Controllers\SettingController;
+use App\Dashboard\Controllers\SiteController;
+use App\Dashboard\Controllers\StackController;
+use App\Dashboard\Controllers\UserController;
+use Domain\Sites\Models\Site;
+use Inertia\Inertia;
 use Support\Containers\Enums\ContainerStateEnum;
 
 Route::middleware('guest')->group(function () {
@@ -40,7 +40,6 @@ Route::prefix('dashboard')->middleware('auth')->name('dashboard.')->group(functi
             Route::resource('/', UserController::class)->except('show');
             Route::resource('roles', RoleController::class)->except('show');
         });
-
 
     Route::controller(SiteController::class)
         ->name('sites.')

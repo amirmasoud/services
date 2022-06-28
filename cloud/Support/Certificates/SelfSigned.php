@@ -2,9 +2,9 @@
 
 namespace Support\Certificates;
 
-use Support\Shell;
 use Illuminate\Support\Facades\Storage;
 use Support\Certificates\Exceptions\MkcertMissingException;
+use Support\Shell;
 
 class SelfSigned implements Certificate
 {

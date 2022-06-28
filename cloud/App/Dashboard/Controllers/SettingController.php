@@ -2,12 +2,12 @@
 
 namespace App\Dashboard\Controllers;
 
+use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use Inertia\Response;
-use App\Http\Controllers\Controller;
-use Support\Containers\Shell\Docker;
-use Support\Containers\ProcessContainer;
 use Support\Containers\Enums\ContainerStateEnum;
+use Support\Containers\ProcessContainer;
+use Support\Containers\Shell\Docker;
 
 class SettingController extends Controller
 {

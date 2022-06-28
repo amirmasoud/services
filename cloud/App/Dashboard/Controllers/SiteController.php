@@ -2,24 +2,24 @@
 
 namespace App\Dashboard\Controllers;
 
-use Inertia\Inertia;
-use Inertia\Response;
-use Domain\Sites\Models\Site;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Domain\Sites\Enums\StackTypeEnum;
-use Illuminate\Http\RedirectResponse;
-use Domain\Sites\Enums\SiteStatusEnum;
 use App\Dashboard\Requests\SiteRequest;
-use Support\Containers\ProcessContainer;
+use App\Dashboard\Requests\SiteSearchRequest;
+use App\Dashboard\Resources\ServerResource;
 use App\Dashboard\Resources\SiteResource;
 use App\Dashboard\Resources\StackResource;
-use App\Dashboard\Resources\ServerResource;
-use Support\Containers\Shell\DockerCompose;
-use App\Dashboard\Requests\SiteSearchRequest;
+use App\Dashboard\Resources\UI\SiteFilterResource;
 use App\Dashboard\Resources\UI\SiteStatResource;
 use App\Dashboard\Resources\UI\SiteTableResource;
-use App\Dashboard\Resources\UI\SiteFilterResource;
+use App\Http\Controllers\Controller;
+use Domain\Sites\Enums\SiteStatusEnum;
+use Domain\Sites\Enums\StackTypeEnum;
+use Domain\Sites\Models\Site;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Inertia\Response;
+use Support\Containers\ProcessContainer;
+use Support\Containers\Shell\DockerCompose;
 
 class SiteController extends Controller
 {
@@ -118,21 +118,21 @@ class SiteController extends Controller
 
     public function start(Site $site): RedirectResponse
     {
-        event("eloquent.started: ".Site::class, $site);
+        event('eloquent.started: '.Site::class, $site);
 
         return redirect()->back();
     }
 
     public function stop(Site $site): RedirectResponse
     {
-        event("eloquent.stopped: ".Site::class, $site);
+        event('eloquent.stopped: '.Site::class, $site);
 
         return redirect()->back();
     }
 
     public function restart(Site $site): RedirectResponse
     {
-        event("eloquent.restarted: ".Site::class, $site);
+        event('eloquent.restarted: '.Site::class, $site);
 
         return redirect()->back();
     }

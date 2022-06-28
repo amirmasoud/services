@@ -17,8 +17,8 @@ class SiteRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'unique:sites,name,' . $this->site?->id],
-            'host' => ['required', 'unique:sites,host,' . $this->site?->id],
+            'name' => ['required', 'unique:sites,name,'.$this->site?->id],
+            'host' => ['required', 'unique:sites,host,'.$this->site?->id],
             'server_id' => ['required', 'exists:servers,id'],
             'stack_id' => ['required', 'exists:stacks,id'],
         ];

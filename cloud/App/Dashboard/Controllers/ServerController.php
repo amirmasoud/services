@@ -2,21 +2,21 @@
 
 namespace App\Dashboard\Controllers;
 
-use Inertia\Inertia;
-use Inertia\Response;
-use Domain\Sites\Models\Server;
-use Domain\Sites\Enums\RamUnitEnum;
+use App\Dashboard\Requests\ServerRequest;
+use App\Dashboard\Resources\ServerResource;
+use App\Dashboard\Resources\UI\ServerFilterResource;
+use App\Dashboard\Resources\UI\ServerTableResource;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Domain\Sites\Enums\DiskTypeEnum;
 use Domain\Sites\Enums\DiskUnitEnum;
 use Domain\Sites\Enums\OsFlavorEnum;
-use Illuminate\Http\RedirectResponse;
+use Domain\Sites\Enums\RamUnitEnum;
 use Domain\Sites\Enums\ServerStatusEnum;
-use App\Dashboard\Requests\ServerRequest;
-use App\Dashboard\Resources\ServerResource;
-use App\Dashboard\Resources\UI\ServerTableResource;
-use App\Dashboard\Resources\UI\ServerFilterResource;
+use Domain\Sites\Models\Server;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class ServerController extends Controller
 {

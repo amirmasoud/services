@@ -13,7 +13,7 @@ class RatingStarCast implements Caster
     public function cast(mixed $value): int
     {
         if (! is_numeric($value)) {
-            throw new Exception("Can only cast numbers");
+            throw new Exception('Can only cast numbers');
         }
 
         return floor($value / 20);

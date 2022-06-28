@@ -2,9 +2,9 @@
 
 namespace App\Dashboard\Resources\UI;
 
-use Domain\Sites\Models\Stack;
-use App\Dashboard\UI\Table\FieldTableUI;
 use App\Dashboard\UI\Table\ActionTableUI;
+use App\Dashboard\UI\Table\FieldTableUI;
+use Domain\Sites\Models\Stack;
 
 class StackTableResource extends BaseUI
 {

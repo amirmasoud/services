@@ -19,7 +19,7 @@ class UserTableResource extends BaseUI
             'fields' => [
                 new FieldTableUI('name', 'Name'),
                 new FieldTableUI('email', 'Email'),
-                new FieldTableUI('email_verified_at', 'Email Verified At')
+                new FieldTableUI('email_verified_at', 'Email Verified At'),
             ],
             'actions' => array_combine(
                 ['edit', 'delete', 'create'],
@@ -28,7 +28,7 @@ class UserTableResource extends BaseUI
                     new ActionTableUI('delete', 'Delete', 'dashboard.users.destroy'),
                     new ActionTableUI('create', 'Create', 'dashboard.users.create'),
                 ]
-            )
+            ),
         ];
     }
 }

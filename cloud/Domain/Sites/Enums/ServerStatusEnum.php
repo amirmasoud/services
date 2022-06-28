@@ -12,7 +12,7 @@ enum ServerStatusEnum: string
 
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             self::IDLE => 'Idle',
             self::OFFLINE => 'Offline',
             self::ONLINE => 'Online',

@@ -5,8 +5,8 @@ namespace Support\WordPress\DataTransferObjects;
 use Spatie\DataTransferObject\Attributes\CastWith;
 use Spatie\DataTransferObject\Attributes\MapFrom;
 use Spatie\DataTransferObject\DataTransferObject;
-use Support\WordPress\Casts\NumberFormatCast;
 use Support\WordPress\Casts\ActiveInstallsCast;
+use Support\WordPress\Casts\NumberFormatCast;
 use Support\WordPress\Casts\RatingStarCast;
 
 class PluginData extends DataTransferObject

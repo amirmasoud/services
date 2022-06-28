@@ -14,7 +14,7 @@ class PluginArrayCaster implements Caster
     public function cast(mixed $value): array
     {
         if (! is_array($value)) {
-            throw new Exception("Can only cast arrays to Plugin");
+            throw new Exception('Can only cast arrays to Plugin');
         }
 
         return array_map(

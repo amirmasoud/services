@@ -3,8 +3,8 @@
 namespace Database\Factories\Domain\IAM\Models;
 
 use Domain\IAM\Models\User;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 use function now;
 
 class UserFactory extends Factory

@@ -2,18 +2,18 @@
 
 namespace Domain\Sites\Models;
 
-use Spatie\Tags\HasTags;
 use Domain\IAM\Models\User;
-use Spatie\Activitylog\LogOptions;
-use Domain\Sites\Enums\StackTypeEnum;
 use Domain\Sites\Casts\PropertiesCast;
-use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Domain\Sites\Enums\StackTypeEnum;
 use Domain\Sites\QueryBuilders\StackQueryBuilder;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Tags\HasTags;
 
 /**
  * @property array<Site> $sites

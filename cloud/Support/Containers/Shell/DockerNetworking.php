@@ -2,12 +2,13 @@
 
 namespace Support\Containers\Shell;
 
-use Support\Shell;
 use Illuminate\Support\Collection;
+use Support\Shell;
 
 class DockerNetworking
 {
     protected $shell;
+
     protected $formatter;
 
     public function __construct(Shell $shell, DockerFormatter $formatter)

@@ -26,7 +26,7 @@ class RoleTableResouce extends BaseUI
                     new ActionTableUI('delete', 'Delete', 'dashboard.users.roles.destroy'),
                     new ActionTableUI('create', 'Create', 'dashboard.users.roles.create'),
                 ]
-            )
+            ),
         ];
     }
 }

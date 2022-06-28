@@ -3,9 +3,9 @@
 namespace Support;
 
 use Illuminate\Support\Collection;
-use Symfony\Component\Process\Process;
 use Support\Containers\Shell\DockerFormatter;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Process\Process;
 
 class Shell
 {

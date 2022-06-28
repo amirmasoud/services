@@ -2,8 +2,8 @@
 
 namespace Domain\IAM\DataTransferObjects;
 
-use Domain\IAM\Enums\LocaleEnum;
 use Domain\IAM\Enums\DateFormatEnum;
+use Domain\IAM\Enums\LocaleEnum;
 use Spatie\DataTransferObject\DataTransferObject;
 
 class UserSettingsData extends DataTransferObject

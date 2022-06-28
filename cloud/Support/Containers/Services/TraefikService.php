@@ -4,10 +4,10 @@ namespace Support\Containers\Services;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Support\Containers\Shell\DockerSwarm;
+use Support\Containers\Exceptions\TraefikServiceAvailableException;
 use Support\Containers\Shell\DockerCompose;
 use Support\Containers\Shell\DockerNetworking;
-use Support\Containers\Exceptions\TraefikServiceAvailableException;
+use Support\Containers\Shell\DockerSwarm;
 
 class TraefikService
 {

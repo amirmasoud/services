@@ -40,12 +40,12 @@ class SiteStatus extends Command
     public function handle()
     {
         if ($site = Site::find($this->option('site'))) {
-            $this->info('Checking site: ' . $site->name);
+            $this->info('Checking site: '.$site->name);
             foreach (DockerCompose::for($site->host)->status()->containerData as $service) {
                 $print = $service->state !== 'running' ? 'error' : 'info';
-                $this->{$print}($service->name . ': ' . $service->state);
+                $this->{$print}($service->name.': '.$service->state);
             }
-            $this->info('Status: ' . $site->status->value);
+            $this->info('Status: '.$site->status->value);
 
             return self::SUCCESS;
         } else {
