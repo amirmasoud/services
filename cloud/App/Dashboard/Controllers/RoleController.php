@@ -9,6 +9,7 @@ use Domain\IAM\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Dashboard\Requests\UserRequest;
+use App\Dashboard\Requests\RoleRequest;
 use App\Dashboard\Resources\UserResource;
 use App\Dashboard\Resources\RoleResource;
 use App\Dashboard\Requests\UserSearchRequest;
@@ -28,16 +29,16 @@ class RoleController extends Controller
         ]);
     }
 
+    public function store(RoleRequest $request): RedirectResponse
+    {
+        Role::create($request->validated());
+
+        return redirect()->to('/dashboard/users/roles');
+    }
+
     public function create(): Response
     {
         return Inertia::render('Dashboard/Users/Roles/Create');
-    }
-
-    public function store(UserRequest $request): RedirectResponse
-    {
-        User::create($request->validated());
-
-        return redirect()->to('/dashboard/users');
     }
 
     public function edit(User $user): Response
