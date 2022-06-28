@@ -456,6 +456,12 @@ const navigation = [
     href: route("dashboard.index"),
     icon: HomeIcon,
     component: "Dashboard/Home",
+  },
+  {
+    name: "Users",
+    href: route("dashboard.users.index"),
+    icon: UserIcon,
+    component: "Dashboard/Users",
     submenu: [
       {
         name: "Roles",
@@ -470,12 +476,6 @@ const navigation = [
         component: "Dashboard/Users/Permissions",
       },
     ],
-  },
-  {
-    name: "Users",
-    href: route("dashboard.users.index"),
-    icon: UserIcon,
-    component: "Dashboard/Users",
   },
   {
     name: "Sites",
