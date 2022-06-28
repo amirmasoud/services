@@ -4,19 +4,18 @@ namespace App\Dashboard\Controllers;
 
 use Inertia\Inertia;
 use Inertia\Response;
-use Domain\IAM\Models\User;
 use Domain\IAM\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Dashboard\Requests\RoleRequest;
 use App\Dashboard\Resources\RoleResource;
-use App\Dashboard\Requests\UserSearchRequest;
+use App\Dashboard\Requests\RoleSearchRequest;
 use App\Dashboard\Resources\UI\RoleTableResouce;
 use App\Dashboard\Resources\UI\RoleFilterResouce;
 
 class RoleController extends Controller
 {
-    public function index(UserSearchRequest $request): Response
+    public function index(RoleSearchRequest $request): Response
     {
         $roles = Role::search($request->validated('search'))->paginate($request->validated('per_page'))->withQueryString();
 
@@ -53,9 +52,9 @@ class RoleController extends Controller
         return redirect()->to('/dashboard/users/roles');
     }
 
-    public function destroy(User $user): RedirectResponse
+    public function destroy(Role $role): RedirectResponse
     {
-        $user->delete();
+        $role->delete();
 
         return redirect()->back();
     }
