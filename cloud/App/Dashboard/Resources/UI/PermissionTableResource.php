@@ -2,11 +2,11 @@
 
 namespace App\Dashboard\Resources\UI;
 
-use App\Dashboard\UI\Table\ActionTableUI;
-use App\Dashboard\UI\Table\FieldTableUI;
 use Domain\IAM\Models\Role;
+use App\Dashboard\UI\Table\FieldTableUI;
+use App\Dashboard\UI\Table\ActionTableUI;
 
-class RoleTableResouce extends BaseUI
+class PermissionTableResource extends BaseUI
 {
     public function __construct(public Role $role = new Role)
     {
@@ -22,9 +22,9 @@ class RoleTableResouce extends BaseUI
             'actions' => array_combine(
                 ['edit', 'delete', 'create'],
                 [
-                    new ActionTableUI('edit', 'Edit', 'dashboard.users.roles.edit'),
-                    new ActionTableUI('delete', 'Delete', 'dashboard.users.roles.destroy'),
-                    new ActionTableUI('create', 'Create', 'dashboard.users.roles.create'),
+                    new ActionTableUI('edit', 'Edit', 'dashboard.users.permissions.edit'),
+                    new ActionTableUI('delete', 'Delete', 'dashboard.users.permissions.destroy'),
+                    new ActionTableUI('create', 'Create', 'dashboard.users.permissions.create'),
                 ]
             ),
         ];

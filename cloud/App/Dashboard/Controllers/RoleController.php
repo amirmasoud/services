@@ -2,16 +2,16 @@
 
 namespace App\Dashboard\Controllers;
 
-use App\Dashboard\Requests\RoleRequest;
-use App\Dashboard\Requests\RoleSearchRequest;
-use App\Dashboard\Resources\RoleResource;
-use App\Dashboard\Resources\UI\RoleFilterResouce;
-use App\Dashboard\Resources\UI\RoleTableResouce;
-use App\Http\Controllers\Controller;
-use Domain\IAM\Models\Role;
-use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
+use Domain\IAM\Models\Role;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use App\Dashboard\Requests\RoleRequest;
+use App\Dashboard\Resources\RoleResource;
+use App\Dashboard\Requests\RoleSearchRequest;
+use App\Dashboard\Resources\UI\RoleFilterResouce;
+use App\Dashboard\Resources\UI\RoleTableResource;
 
 class RoleController extends Controller
 {
@@ -22,7 +22,7 @@ class RoleController extends Controller
         return Inertia::render('Dashboard/Users/Roles/Index', [
             'records' => RoleResource::collection($roles),
             'filters' => fn () => new RoleFilterResouce(),
-            'table' => fn () => new RoleTableResouce(),
+            'table' => fn () => new RoleTableResource(),
         ]);
     }
 

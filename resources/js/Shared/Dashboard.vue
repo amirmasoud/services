@@ -15,7 +15,7 @@
           leave-from="opacity-100"
           leave-to="opacity-0"
         >
-          <DialogOverlay class="fixed inset-0 bg-gray-600 bg-opacity-75" />
+          <DialogOverlay class="fixed inset-0 bg-gray-600 bg-opacity-75"/>
         </TransitionChild>
         <TransitionChild
           as="template"
@@ -45,14 +45,14 @@
                   @click="sidebarOpen = false"
                 >
                   <span class="sr-only">Close sidebar</span>
-                  <XIcon aria-hidden="true" class="h-6 w-6 text-white" />
+                  <XIcon aria-hidden="true" class="h-6 w-6 text-white"/>
                 </button>
               </div>
             </TransitionChild>
             <div class="flex-shrink-0 flex items-center px-4">
-              <Logo alt="Cloud" class="h-8 w-auto text-indigo-600" />
+              <Logo alt="Cloud" class="h-8 w-auto text-indigo-600"/>
               <span class="pl-1 font-semibold font-sans text-indigo-800"
-                >Cloud</span
+              >Cloud</span
               >
             </div>
             <div class="mt-5 flex-1 h-0 overflow-y-auto">
@@ -131,9 +131,9 @@
     <div class="hidden lg:flex lg:flex-shrink-0">
       <div class="flex flex-col w-64 pt-5 pb-4 bg-gray-100">
         <div class="flex items-center justify-center flex-shrink-0 px-6">
-          <Logo alt="Cloud" class="h-8 w-auto text-indigo-600" />
+          <Logo alt="Cloud" class="h-8 w-auto text-indigo-600"/>
           <span class="pl-1 font-semibold font-sans text-indigo-800"
-            >Cloud</span
+          >Cloud</span
           >
         </div>
         <!-- Sidebar component, swap this element with another sidebar if you like -->
@@ -159,10 +159,10 @@
                     <span class="flex-1 flex flex-col min-w-0">
                       <span
                         class="text-gray-900 text-sm font-medium truncate"
-                        >{{ $page.props.auth.user.name }}</span
+                      >{{ $page.props.auth.user.name }}</span
                       >
                       <span class="text-gray-500 text-sm truncate"
-                        >@jessyschwarz</span
+                      >@jessyschwarz</span
                       >
                     </span>
                   </span>
@@ -192,7 +192,7 @@
                         'block px-4 py-2 text-sm',
                       ]"
                       :href="$route('dashboard.settings.general')"
-                      >View profile
+                    >View profile
                     </Link>
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
@@ -202,7 +202,7 @@
                         'block px-4 py-2 text-sm',
                       ]"
                       :href="$route('dashboard.settings.general')"
-                      >Settings
+                    >Settings
                     </Link>
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
@@ -212,7 +212,7 @@
                         'block px-4 py-2 text-sm',
                       ]"
                       :href="$route('dashboard.settings.general')"
-                      >Notifications
+                    >Notifications
                     </Link>
                   </MenuItem>
                 </div>
@@ -224,7 +224,7 @@
                         'block px-4 py-2 text-sm',
                       ]"
                       href="#"
-                      >Support</a
+                    >Support</a
                     >
                   </MenuItem>
                 </div>
@@ -237,7 +237,7 @@
                       ]"
                       :href="$route('logout')"
                       method="post"
-                      >Logout
+                    >Logout
                     </Link>
                   </MenuItem>
                 </div>
@@ -322,7 +322,7 @@
           @click="sidebarOpen = true"
         >
           <span class="sr-only">Open sidebar</span>
-          <MenuAlt1Icon aria-hidden="true" class="h-6 w-6" />
+          <MenuAlt1Icon aria-hidden="true" class="h-6 w-6"/>
         </button>
         <div class="flex-1 flex justify-end px-4 sm:px-6 lg:px-8">
           <div class="flex items-center">
@@ -364,7 +364,7 @@
                           'block px-4 py-2 text-sm',
                         ]"
                         :href="$route('dashboard.settings.general')"
-                        >View profile
+                      >View profile
                       </Link>
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
@@ -376,7 +376,7 @@
                           'block px-4 py-2 text-sm',
                         ]"
                         :href="$route('dashboard.settings.general')"
-                        >Settings
+                      >Settings
                       </Link>
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
@@ -388,7 +388,7 @@
                           'block px-4 py-2 text-sm',
                         ]"
                         href="#"
-                        >Notifications</a
+                      >Notifications</a
                       >
                     </MenuItem>
                   </div>
@@ -402,7 +402,7 @@
                           'block px-4 py-2 text-sm',
                         ]"
                         href="#"
-                        >Support</a
+                      >Support</a
                       >
                     </MenuItem>
                   </div>
@@ -417,7 +417,7 @@
                         ]"
                         :href="$route('logout')"
                         method="post"
-                        >Logout
+                      >Logout
                       </Link>
                     </MenuItem>
                   </div>
@@ -428,14 +428,14 @@
         </div>
       </div>
       <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none">
-        <slot />
+        <slot/>
       </main>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import Logo from "@/Shared/Logo";
 import {
   Dialog,
   DialogOverlay,
@@ -446,17 +446,9 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
-import {
-  GlobeAltIcon,
-  HomeIcon,
-  MenuAlt1Icon,
-  XIcon,
-  ServerIcon,
-  CubeIcon,
-  KeyIcon,
-} from "@heroicons/vue/outline";
+import { CubeIcon, GlobeAltIcon, HomeIcon, KeyIcon, MenuAlt1Icon, ServerIcon, XIcon, } from "@heroicons/vue/outline";
 import { CogIcon, SelectorIcon, UserIcon } from "@heroicons/vue/solid";
-import Logo from "@/Shared/Logo";
+import { ref } from "vue";
 
 const navigation = [
   {
@@ -471,12 +463,12 @@ const navigation = [
         icon: KeyIcon,
         component: "Dashboard/Users/Roles",
       },
-//      {
-//        name: "Permissions",
-//        href: route("dashboard.sites.servers.index"),
-//        icon: KeyIcon,
-//        component: "Dashboard/Sites/Servers",
-//      },
+      {
+        name: "Permissions",
+        href: route("dashboard.users.permissions.index"),
+        icon: KeyIcon,
+        component: "Dashboard/Users/Permissions",
+      },
     ],
   },
   {
