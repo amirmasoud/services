@@ -144,11 +144,11 @@
   </div>
   <NoResult
     v-else-if="! records.data.length && filters.length"
-    :button="'button'"
-    :description="'no result'"
-    :title="'title'"
+    :button="'reset filters'"
+    :description="'Nothing found with the supplied filters, try to change or reset them'"
+    :title="'No Result'"
     class="mt-20"
-    @removeFilters="filterData = {}"
+    @remove-filters="removeFilters()"
   />
   <Empty
     v-else
@@ -217,6 +217,10 @@ onMounted(() => {
 let interval = setInterval(() => {
   Inertia.reload({data: filterData, only: ["records"]});
 }, 10000);
+
+let removeFilters = () => {
+  props.filters.forEach(filter => delete filter.value);
+}
 
 onUnmounted(() => {
   clearInterval(interval);
