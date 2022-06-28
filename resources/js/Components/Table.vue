@@ -104,9 +104,9 @@
       </table>
     </div>
     <div
-      class="fixed sm:relative justify-between items-center py-3 px-4 sm:px-6 bg-white border-t border-gray-200 w-[calc(100%_-_2rem)] sm:w-full mt-4 rounded-lg bg-white shadow"
+      class="relative justify-between items-center py-3 px-4 sm:px-6 bg-white border-t border-gray-200 w-full sm:w-full mt-4 rounded-lg bg-white shadow"
     >
-      <div class="flex sm:hidden flex-1 justify-between">
+      <div class="flex md:hidden flex-1 justify-between content-center">
         <Component
           :is="records.links.prev ? 'Link' : 'button'"
           :class="{ 'cursor-not-allowed': !records.links.prev }"
@@ -126,20 +126,20 @@
           Next
         </Component>
       </div>
-      <div class="hidden sm:flex sm:flex-1 sm:justify-between sm:items-center">
-        <div>
-          <p class="text-sm text-gray-700">
-            Showing
-            <span class="font-medium">{{ records.meta.from }}</span>
-            to
-            <span class="font-medium">{{ records.meta.to }}</span>
-            of
-            <span class="font-medium">{{ records.meta.total }}</span>
-            results
-          </p>
-        </div>
+      <div class="hidden md:flex sm:flex-1 sm:justify-between sm:items-center">
         <Paginator :links="records.meta.links"/>
       </div>
+    </div>
+    <div class="mt-4 text-center">
+      <p class="text-sm text-gray-700">
+        Showing
+        <span class="font-medium">{{ records.meta.from }}</span>
+        to
+        <span class="font-medium">{{ records.meta.to }}</span>
+        of
+        <span class="font-medium">{{ records.meta.total }}</span>
+        results
+      </p>
     </div>
   </div>
   <NoResult
