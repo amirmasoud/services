@@ -8,9 +8,7 @@ use Domain\IAM\Models\User;
 use Domain\IAM\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use App\Dashboard\Requests\UserRequest;
 use App\Dashboard\Requests\RoleRequest;
-use App\Dashboard\Resources\UserResource;
 use App\Dashboard\Resources\RoleResource;
 use App\Dashboard\Requests\UserSearchRequest;
 use App\Dashboard\Resources\UI\RoleTableResouce;
@@ -20,10 +18,10 @@ class RoleController extends Controller
 {
     public function index(UserSearchRequest $request): Response
     {
-        $users = Role::search($request->validated('search'))->paginate($request->validated('per_page'))->withQueryString();
+        $roles = Role::search($request->validated('search'))->paginate($request->validated('per_page'))->withQueryString();
 
         return Inertia::render('Dashboard/Users/Roles/Index', [
-            'records' => RoleResource::collection($users),
+            'records' => RoleResource::collection($roles),
             'filters' => fn () => new RoleFilterResouce(),
             'table' => fn () => new RoleTableResouce(),
         ]);
@@ -41,18 +39,18 @@ class RoleController extends Controller
         return Inertia::render('Dashboard/Users/Roles/Create');
     }
 
-    public function edit(User $user): Response
+    public function edit(Role $role): Response
     {
-        return Inertia::render('Dashboard/Users/Edit', [
-            'resource' => new UserResource($user),
+        return Inertia::render('Dashboard/Users/Roles/Edit', [
+            'resource' => new RoleResource($role),
         ]);
     }
 
-    public function update(User $user, UserRequest $request): RedirectResponse
+    public function update(Role $role, RoleRequest $request): RedirectResponse
     {
-        $user->update($request->validated());
+        $role->update($request->validated());
 
-        return redirect()->to('/dashboard/users');
+        return redirect()->to('/dashboard/users/roles');
     }
 
     public function destroy(User $user): RedirectResponse
