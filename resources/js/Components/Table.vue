@@ -137,7 +137,7 @@
           Next
         </Component>
       </div>
-      <div class="hidden md:flex md:flex-1 justify-center content-center">
+      <div class="hidden md:flex md:flex-1 justify-end content-center">
         <Paginator :links="records.meta.links"/>
       </div>
     </div>
