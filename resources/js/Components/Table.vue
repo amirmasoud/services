@@ -103,8 +103,19 @@
         </tbody>
       </table>
     </div>
+    <div class="mt-2 text-right">
+      <p class="text-xs text-gray-500">
+        <span class="font-italic"> Showing </span>
+        <span class="font-medium">{{ records.meta.from }}</span>
+        <span class="font-italic"> to </span>
+        <span class="font-medium">{{ records.meta.to }}</span>
+        <span class="font-italic"> of </span>
+        <span class="font-medium">{{ records.meta.total }}</span>
+        <span class="font-italic"> results </span>
+      </p>
+    </div>
     <div
-      class="relative justify-between items-center py-3 px-4 sm:px-6 bg-white border-t border-gray-200 w-full sm:w-full mt-4 rounded-lg bg-white shadow"
+      class="relative justify-between items-center py-3 w-full sm:w-full mt-2"
     >
       <div class="flex md:hidden flex-1 justify-between content-center">
         <Component
@@ -126,20 +137,9 @@
           Next
         </Component>
       </div>
-      <div class="hidden md:flex sm:flex-1 sm:justify-between sm:items-center">
+      <div class="hidden md:flex md:flex-1 justify-center content-center">
         <Paginator :links="records.meta.links"/>
       </div>
-    </div>
-    <div class="mt-4 text-center">
-      <p class="text-sm text-gray-700">
-        Showing
-        <span class="font-medium">{{ records.meta.from }}</span>
-        to
-        <span class="font-medium">{{ records.meta.to }}</span>
-        of
-        <span class="font-medium">{{ records.meta.total }}</span>
-        results
-      </p>
     </div>
   </div>
   <NoResult
