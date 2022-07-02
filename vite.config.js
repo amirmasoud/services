@@ -14,16 +14,10 @@ export default defineConfig({
       },
     }),
   ],
-  server: {
-    https: true,
-    hmr: {
-      host: "localhost",
-    },
-  },
   resolve: {
     alias: {
-      "@": "resources/js",
-      ziggy: "vendor/tightenco/ziggy/dist/vue",
+      "@": "/resources/js",
+      ziggy: "/vendor/tightenco/ziggy/dist/vue",
     },
   },
 });

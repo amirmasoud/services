@@ -1,5 +1,5 @@
 <template>
-  <AppHead title="Settings" />
+  <AppHead title="Settings"/>
 
   <DashboardMain>
     <template #header>Settings</template>
@@ -50,12 +50,12 @@
             <ul class="list-inside space-y-2">
               <li>
                 <Pauls :color="dockerStatus ? 'green' : 'red'"
-                  >Docker is {{ dockerStatus ? "running" : "stopped" }}
+                >Docker is {{ dockerStatus ? "running" : "stopped" }}
                 </Pauls>
               </li>
               <li>
                 <Pauls :color="traefikStatus ? 'green' : 'red'"
-                  >Traefik is {{ traefikStatus ? "running" : "stopped" }}
+                >Traefik is {{ traefikStatus ? "running" : "stopped" }}
                 </Pauls>
               </li>
             </ul>
@@ -67,9 +67,9 @@
 </template>
 
 <script setup>
-import AppHead from "@/Components/AppHead";
-import DashboardMain from "@/Components/DashboardMain";
-import Pauls from "@/Components/Paulse";
+import AppHead from "@/Components/AppHead.vue";
+import DashboardMain from "@/Components/DashboardMain.vue";
+import Pauls from "@/Components/Paulse.vue";
 import { Inertia } from "@inertiajs/inertia";
 import { onBeforeUnmount, onMounted } from "vue";
 
@@ -79,8 +79,8 @@ const tabs = [
     href: route("dashboard.settings.general"),
     current: false,
   },
-  { name: "Password", href: "#", current: false },
-  { name: "Notifications", href: "#", current: false },
+  {name: "Password", href: "#", current: false},
+  {name: "Notifications", href: "#", current: false},
   {
     name: "System Status",
     href: route("dashboard.settings.system-status"),

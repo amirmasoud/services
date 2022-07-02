@@ -1,5 +1,5 @@
 <template>
-  <AppHead title="Sites" />
+  <AppHead title="Sites"/>
 
   <DashboardMain>
     <template #header>Servers</template>
@@ -8,20 +8,20 @@
     </template>
 
     <Table
-      :records="records"
-      :filters="filters"
+      :actions="table.actions"
       :endpoint="$route('dashboard.sites.servers.index')"
       :fields="table.fields"
-      :actions="table.actions"
+      :filters="filters"
+      :records="records"
     />
   </DashboardMain>
 </template>
 
 <script setup>
-import Table from "@/Components/Table";
-import AppHead from "@/Components/AppHead";
-import DashboardMain from "@/Components/DashboardMain";
-import Button from "@/Components/Button";
+import AppHead from "@/Components/AppHead.vue";
+import Button from "@/Components/Button.vue";
+import DashboardMain from "@/Components/DashboardMain.vue";
+import Table from "@/Components/Table.vue";
 
-defineProps({ records: Object, filters: Object, table: Object, stats: Object });
+defineProps({records: Object, filters: Object, table: Object, stats: Object});
 </script>

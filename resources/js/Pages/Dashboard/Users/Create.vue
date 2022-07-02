@@ -1,5 +1,5 @@
 <template>
-  <AppHead title="Create new user" />
+  <AppHead title="Create new user"/>
 
   <DashboardMain>
     <template #header>Create a new user</template>
@@ -14,34 +14,34 @@
             <div class="col-span-6 sm:col-span-4">
               <Input
                 v-model="form.name"
+                :form="form"
                 label="Name"
                 name="name"
-                :form="form"
               />
             </div>
 
             <div class="col-span-6 sm:col-span-4">
               <Input
                 v-model="form.email"
+                :form="form"
                 label="Email"
                 name="email"
                 type="email"
-                :form="form"
               />
             </div>
 
             <div class="col-span-6 sm:col-span-4">
               <Input
                 v-model="form.password"
+                :form="form"
                 label="Password"
                 name="password"
                 type="password"
-                :form="form"
               />
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-              <Button type="submit" :form="form"> Submit </Button>
+              <Button :form="form" type="submit"> Submit</Button>
             </div>
           </div>
         </div>
@@ -51,11 +51,11 @@
 </template>
 
 <script setup>
+import AppHead from "@/Components/AppHead.vue";
+import DashboardMain from "@/Components/DashboardMain.vue";
+import Button from "@/Components/Forms/Buttons/Button.vue";
+import Input from "@/Components/Forms/Inputs/Input.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
-import Input from "@/Components/Forms/Inputs/Input";
-import Button from "@/Components/Forms/Buttons/Button";
-import AppHead from "@/Components/AppHead";
-import DashboardMain from "@/Components/DashboardMain";
 
 let form = useForm({
   email: null,

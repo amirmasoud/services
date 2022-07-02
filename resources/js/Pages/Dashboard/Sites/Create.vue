@@ -1,5 +1,5 @@
 <template>
-  <AppHead title="New site" />
+  <AppHead title="New site"/>
 
   <DashboardMain>
     <template #header> Sites</template>
@@ -33,7 +33,7 @@
               <label
                 class="block text-sm font-medium text-gray-700 mb-2"
                 for="servers"
-                >Server</label
+              >Server</label
               >
               <RadioGroup v-model="form.server_id">
                 <RadioGroupLabel class="sr-only"> Server size</RadioGroupLabel>
@@ -68,7 +68,7 @@
                             <span
                               aria-hidden="true"
                               class="hidden sm:inline sm:mx-1"
-                              >&middot;</span
+                            >&middot;</span
                             >
                             {{ " " }}
                             <p class="sm:inline">
@@ -118,7 +118,7 @@
               <label
                 class="block text-sm font-medium text-gray-700 mb-2"
                 for="stacks"
-                >Stack</label
+              >Stack</label
               >
               <RadioGroup v-model="form.stack_id" class="max-w-screen-xl">
                 <RadioGroupLabel class="sr-only">
@@ -142,13 +142,13 @@
                       ]"
                     >
                       <div class="flex items-center flex-col">
-                        <img :src="stack.type_icon" class="rounded-t-lg p-4" />
+                        <img :src="stack.type_icon" class="rounded-t-lg p-4"/>
                         <div class="block w-full px-4 pt-2 pb-4">
                           <RadioGroupLabel
                             as="p"
                             class="font-medium text-gray-900"
                           >
-                            <p class="line-clamp-1" v-html="stack.name" />
+                            <p class="line-clamp-1" v-html="stack.name"/>
                           </RadioGroupLabel>
                           <SwitchDescription
                             as="div"
@@ -193,7 +193,7 @@
 
             <div class="col-span-6 sm:col-span-4">
               <Button color="green" type="submit">
-                <PaperAirplaneIcon class="w-4 h-4 mr-2" />
+                <PaperAirplaneIcon class="w-4 h-4 mr-2"/>
                 Deploy
               </Button>
             </div>
@@ -205,20 +205,20 @@
 </template>
 
 <script setup>
-import { useForm } from "@inertiajs/inertia-vue3";
-import Input from "@/Components/Forms/Inputs/Input";
-import AppHead from "@/Components/AppHead";
-import DashboardMain from "@/Components/DashboardMain";
+import AppHead from "@/Components/AppHead.vue";
+import Button from "@/Components/Button.vue";
+import DashboardMain from "@/Components/DashboardMain.vue";
+import Input from "@/Components/Forms/Inputs/Input.vue";
 import {
   RadioGroup,
+  RadioGroupDescription,
   RadioGroupLabel,
   RadioGroupOption,
   SwitchDescription,
-  RadioGroupDescription,
 } from "@headlessui/vue";
-import { ref, defineProps } from "vue";
 import { PaperAirplaneIcon } from "@heroicons/vue/solid";
-import Button from "@/Components/Button";
+import { useForm } from "@inertiajs/inertia-vue3";
+import { defineProps, ref } from "vue";
 
 let props = defineProps({
   servers: Object,

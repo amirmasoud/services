@@ -1,5 +1,5 @@
 <template>
-  <AppHead title="Sites" />
+  <AppHead title="Sites"/>
 
   <DashboardMain>
     <template #header>Details - {{ record.data.name }}</template>
@@ -13,9 +13,9 @@
             <div class="flex-shrink-0">
               <div class="relative">
                 <img
+                  alt=""
                   class="w-16"
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/WordPress_blue_logo.svg/1024px-WordPress_blue_logo.svg.png"
-                  alt=""
                 />
               </div>
             </div>
@@ -38,8 +38,10 @@
               :processing="processing"
               color="green"
               @click.prevent="start"
-              ><PlayIcon class="w-4 h-4" /><span class="pl-2"
-                >Start</span
+            >
+              <PlayIcon class="w-4 h-4"/>
+              <span class="pl-2"
+              >Start</span
               ></Button
             >
             <Button
@@ -47,32 +49,38 @@
               :processing="processing"
               color="red"
               @click.prevent="stop"
-              ><StopIcon class="w-4 h-4" /><span class="pl-2"
-                >Stop</span
+            >
+              <StopIcon class="w-4 h-4"/>
+              <span class="pl-2"
+              >Stop</span
               ></Button
             >
             <Button
               :processing="processing"
               color="orange"
               @click.prevent="restart"
-              ><RefreshIcon class="w-4 h-4" /><span class="pl-2"
-                >Restart</span
+            >
+              <RefreshIcon class="w-4 h-4"/>
+              <span class="pl-2"
+              >Restart</span
               ></Button
             >
             <Link
-              as="button"
               :href="`/dashboard/sites/${record.data.id}/cli`"
-              type="button"
+              as="button"
               class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
+              type="button"
             >
-              <WPTerminalIcon class="w-4 h-4" /><span class="pl-2">WP CLI</span>
+              <WPTerminalIcon class="w-4 h-4"/>
+              <span class="pl-2">WP CLI</span>
             </Link>
             <button
-              type="button"
               class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
+              type="button"
               @click.prevent="backup"
             >
-              <DatabaseIcon class="w-4 h-4" /><span class="pl-2">Backup</span>
+              <DatabaseIcon class="w-4 h-4"/>
+              <span class="pl-2">Backup</span>
             </button>
           </div>
         </div>
@@ -141,7 +149,7 @@
                     </div>
                     <div class="sm:col-span-1">
                       <dt class="text-sm font-medium text-gray-500 truncate">
-                        <ClockIcon class="inline-block h-4 w-4 text-gray-400" />
+                        <ClockIcon class="inline-block h-4 w-4 text-gray-400"/>
                         Created
                       </dt>
                       <dd class="mt-1 text-sm text-gray-900 truncate">
@@ -150,7 +158,7 @@
                     </div>
                     <div class="sm:col-span-1">
                       <dt class="text-sm font-medium text-gray-500 truncate">
-                        <GlobeIcon class="inline-block h-4 w-4 text-gray-400" />
+                        <GlobeIcon class="inline-block h-4 w-4 text-gray-400"/>
                         Public Port
                       </dt>
                       <dd class="mt-1 text-sm text-gray-900 truncate">
@@ -195,7 +203,7 @@
                     </div>
                     <div class="sm:col-span-1">
                       <dt class="text-sm font-medium text-gray-500 truncate">
-                        <ClockIcon class="inline-block h-4 w-4 text-gray-400" />
+                        <ClockIcon class="inline-block h-4 w-4 text-gray-400"/>
                         Status
                       </dt>
                       <dd class="mt-1 text-sm text-gray-900 truncate">
@@ -242,7 +250,7 @@
                         {{
                           wordpress.labels[
                             "com.docker.compose.project.working_dir"
-                          ]
+                            ]
                         }}
                       </dd>
                     </div>
@@ -293,10 +301,10 @@
                       <dd class="mt-1 text-sm text-gray-900 truncate">
                         {{
                           wordpress.labels[
-                            "traefik.http.routers." +
-                              record.data.name +
-                              "-secure.entrypoints"
-                          ]
+                          "traefik.http.routers." +
+                          record.data.name +
+                          "-secure.entrypoints"
+                            ]
                         }}
                       </dd>
                     </div>
@@ -307,10 +315,10 @@
                       <dd class="mt-1 text-sm text-gray-900 truncate">
                         {{
                           wordpress.labels[
-                            "traefik.http.routers." +
-                              record.data.name +
-                              "-secure.tls"
-                          ] === "true"
+                          "traefik.http.routers." +
+                          record.data.name +
+                          "-secure.tls"
+                            ] === "true"
                             ? "Enabled"
                             : "Disabled"
                         }}
@@ -323,23 +331,23 @@
                       <dd class="mt-1 text-sm text-gray-900 truncate">
                         {{
                           wordpress.labels[
-                            "traefik.http.routers." + record.data.name + ".rule"
-                          ]
+                          "traefik.http.routers." + record.data.name + ".rule"
+                            ]
                         }}
                       </dd>
                     </div>
                     <div class="sm:col-span-1">
                       <dt class="text-sm font-medium text-gray-500 truncate">
-                        <ClockIcon class="inline-block h-4 w-4 text-gray-400" />
+                        <ClockIcon class="inline-block h-4 w-4 text-gray-400"/>
                         Load Balancer Port
                       </dt>
                       <dd class="mt-1 text-sm text-gray-900 truncate">
                         {{
                           wordpress.labels[
-                            "traefik.http.services." +
-                              record.data.name +
-                              ".loadbalancer.server.port"
-                          ]
+                          "traefik.http.services." +
+                          record.data.name +
+                          ".loadbalancer.server.port"
+                            ]
                         }}
                       </dd>
                     </div>
@@ -363,13 +371,13 @@
 
               <!-- Activity Feed -->
               <div class="mt-6 flow-root">
-                <ul role="list" class="-mb-8">
+                <ul class="-mb-8" role="list">
                   <li v-for="(item, itemIdx) in timeline" :key="item.id">
                     <div class="relative pb-8">
                       <span
                         v-if="itemIdx !== timeline.length - 1"
-                        class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"
                         aria-hidden="true"
+                        class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"
                       />
                       <div class="relative flex space-x-3">
                         <div>
@@ -381,8 +389,8 @@
                           >
                             <component
                               :is="item.type.icon"
-                              class="w-5 h-5 text-white"
                               aria-hidden="true"
+                              class="w-5 h-5 text-white"
                             />
                           </span>
                         </div>
@@ -392,17 +400,18 @@
                           <div>
                             <p class="text-sm text-gray-500">
                               {{ item.content }}
-                              <a href="#" class="font-medium text-gray-900">{{
-                                item.target
-                              }}</a>
+                              <a class="font-medium text-gray-900" href="#">{{
+                                  item.target
+                                }}</a>
                             </p>
                           </div>
                           <div
                             class="text-right text-sm whitespace-nowrap text-gray-500"
                           >
                             <time :datetime="item.datetime">{{
-                              item.date
-                            }}</time>
+                                item.date
+                              }}
+                            </time>
                           </div>
                         </div>
                       </div>
@@ -426,9 +435,9 @@
             <div class="flex-shrink-0">
               <div class="relative">
                 <img
+                  alt=""
                   class="w-16"
                   src="https://www.mysql.com/common/logos/logo-mysql-170x115.png"
-                  alt=""
                 />
               </div>
             </div>
@@ -509,7 +518,7 @@
                     </div>
                     <div class="sm:col-span-1">
                       <dt class="text-sm font-medium text-gray-500 truncate">
-                        <ClockIcon class="inline-block h-4 w-4 text-gray-400" />
+                        <ClockIcon class="inline-block h-4 w-4 text-gray-400"/>
                         Created
                       </dt>
                       <dd class="mt-1 text-sm text-gray-900 truncate">
@@ -518,7 +527,7 @@
                     </div>
                     <div class="sm:col-span-1">
                       <dt class="text-sm font-medium text-gray-500 truncate">
-                        <GlobeIcon class="inline-block h-4 w-4 text-gray-400" />
+                        <GlobeIcon class="inline-block h-4 w-4 text-gray-400"/>
                         Public Port
                       </dt>
                       <dd class="mt-1 text-sm text-gray-900 truncate">
@@ -563,7 +572,7 @@
                     </div>
                     <div class="sm:col-span-1">
                       <dt class="text-sm font-medium text-gray-500 truncate">
-                        <ClockIcon class="inline-block h-4 w-4 text-gray-400" />
+                        <ClockIcon class="inline-block h-4 w-4 text-gray-400"/>
                         Status
                       </dt>
                       <dd class="mt-1 text-sm text-gray-900 truncate">
@@ -610,7 +619,7 @@
                         {{
                           database.labels[
                             "com.docker.compose.project.working_dir"
-                          ]
+                            ]
                         }}
                       </dd>
                     </div>
@@ -639,13 +648,13 @@
 
               <!-- Activity Feed -->
               <div class="mt-6 flow-root">
-                <ul role="list" class="-mb-8">
+                <ul class="-mb-8" role="list">
                   <li v-for="(item, itemIdx) in timeline" :key="item.id">
                     <div class="relative pb-8">
                       <span
                         v-if="itemIdx !== timeline.length - 1"
-                        class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"
                         aria-hidden="true"
+                        class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200"
                       />
                       <div class="relative flex space-x-3">
                         <div>
@@ -657,8 +666,8 @@
                           >
                             <component
                               :is="item.type.icon"
-                              class="w-5 h-5 text-white"
                               aria-hidden="true"
+                              class="w-5 h-5 text-white"
                             />
                           </span>
                         </div>
@@ -668,17 +677,18 @@
                           <div>
                             <p class="text-sm text-gray-500">
                               {{ item.content }}
-                              <a href="#" class="font-medium text-gray-900">{{
-                                item.target
-                              }}</a>
+                              <a class="font-medium text-gray-900" href="#">{{
+                                  item.target
+                                }}</a>
                             </p>
                           </div>
                           <div
                             class="text-right text-sm whitespace-nowrap text-gray-500"
                           >
                             <time :datetime="item.datetime">{{
-                              item.date
-                            }}</time>
+                                item.date
+                              }}
+                            </time>
                           </div>
                         </div>
                       </div>
@@ -695,28 +705,22 @@
 </template>
 
 <script setup>
-import AppHead from "@/Components/AppHead";
-import DashboardMain from "@/Components/DashboardMain";
-import Button from "@/Components/Button";
+import AppHead from "@/Components/AppHead.vue";
+import Button from "@/Components/Button.vue";
+import DashboardMain from "@/Components/DashboardMain.vue";
+import { DatabaseIcon, PlayIcon, RefreshIcon, StopIcon, TerminalIcon as WPTerminalIcon, } from "@heroicons/vue/outline";
 import {
   CheckIcon,
-  ThumbUpIcon,
-  UserIcon,
   ClockIcon,
-  TerminalIcon,
   EyeOffIcon,
   GlobeIcon,
   StatusOnlineIcon,
+  TerminalIcon,
+  ThumbUpIcon,
+  UserIcon,
 } from "@heroicons/vue/solid";
-import {
-  PlayIcon,
-  StopIcon,
-  RefreshIcon,
-  DatabaseIcon,
-  TerminalIcon as WPTerminalIcon,
-} from "@heroicons/vue/outline";
 import { Inertia } from "@inertiajs/inertia";
-import { onBeforeUnmount, reactive, ref } from "vue";
+import { onBeforeUnmount, ref } from "vue";
 
 const user = {
   name: "Whitney Francis",
@@ -725,29 +729,29 @@ const user = {
     "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Dashboard", href: "#" },
-  { name: "Jobs", href: "#" },
-  { name: "Applicants", href: "#" },
-  { name: "Company", href: "#" },
+  {name: "Dashboard", href: "#"},
+  {name: "Jobs", href: "#"},
+  {name: "Applicants", href: "#"},
+  {name: "Company", href: "#"},
 ];
 const breadcrumbs = [
-  { name: "Jobs", href: "#", current: false },
-  { name: "Front End Developer", href: "#", current: false },
-  { name: "Applicants", href: "#", current: true },
+  {name: "Jobs", href: "#", current: false},
+  {name: "Front End Developer", href: "#", current: false},
+  {name: "Applicants", href: "#", current: true},
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  {name: "Your Profile", href: "#"},
+  {name: "Settings", href: "#"},
+  {name: "Sign out", href: "#"},
 ];
 const attachments = [
-  { name: "resume_front_end_developer.pdf", href: "#" },
-  { name: "coverletter_front_end_developer.pdf", href: "#" },
+  {name: "resume_front_end_developer.pdf", href: "#"},
+  {name: "coverletter_front_end_developer.pdf", href: "#"},
 ];
 const eventTypes = {
-  applied: { icon: UserIcon, bgColorClass: "bg-gray-400" },
-  advanced: { icon: ThumbUpIcon, bgColorClass: "bg-blue-500" },
-  completed: { icon: CheckIcon, bgColorClass: "bg-green-500" },
+  applied: {icon: UserIcon, bgColorClass: "bg-gray-400"},
+  advanced: {icon: ThumbUpIcon, bgColorClass: "bg-blue-500"},
+  completed: {icon: CheckIcon, bgColorClass: "bg-green-500"},
 };
 const timeline = [
   {

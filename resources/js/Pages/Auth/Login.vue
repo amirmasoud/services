@@ -1,5 +1,5 @@
 <template>
-  <AppHead title="Login" />
+  <AppHead title="Login"/>
   <div
     class="flex flex-col justify-center py-12 sm:px-6 lg:px-8 min-h-screen bg-gray-50 dark:bg-slate-900"
   >
@@ -16,24 +16,24 @@
         class="py-8 px-4 sm:px-10 bg-white dark:bg-slate-800 sm:rounded-lg shadow"
       >
         <form
-          class="space-y-6"
           action="#"
+          class="space-y-6"
           @submit.prevent="form.post('/login')"
         >
           <div>
             <Input
               v-model="form.email"
-              type="email"
               :form="form"
               label="Email"
               name="email"
+              type="email"
             />
           </div>
 
           <div>
             <label
-              for="password"
               class="block text-sm font-medium text-gray-700 dark:text-slate-300"
+              for="password"
             >
               Password
             </label>
@@ -41,11 +41,11 @@
               <input
                 id="password"
                 v-model="form.password"
-                name="password"
-                type="password"
                 autocomplete="current-password"
-                required=""
                 class="block py-2 px-3 w-full sm:text-sm placeholder-gray-400 rounded-md border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm appearance-none focus:outline-none"
+                name="password"
+                required=""
+                type="password"
               />
             </div>
           </div>
@@ -55,13 +55,13 @@
               <input
                 id="remember-me"
                 v-model="form.remember"
+                class="w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500 dark:bg-slate-800 dark-border-gray-900 dark:focus:ring-indigo-900"
                 name="remember-me"
                 type="checkbox"
-                class="w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500 dark:bg-slate-800 dark-border-gray-900 dark:focus:ring-indigo-900"
               />
               <label
-                for="remember-me"
                 class="block ml-2 text-sm text-gray-900 dark:text-slate-300"
+                for="remember-me"
               >
                 Remember me
               </label>
@@ -69,8 +69,8 @@
 
             <div class="text-sm">
               <a
-                href="#"
                 class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
+                href="#"
               >
                 Forgot your password?
               </a>
@@ -79,9 +79,9 @@
 
           <div>
             <Button
-              type="submit"
               :form="form"
               class="flex justify-center py-2 px-4 w-full"
+              type="submit"
             >
               Sign in
             </Button>
@@ -148,10 +148,10 @@
 </template>
 
 <script setup>
+import AppHead from "@/Components/AppHead.vue";
+import Button from "@/Components/Forms/Buttons/Button.vue";
+import Input from "@/Components/Forms/Inputs/Input.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
-import Input from "@/Components/Forms/Inputs/Input";
-import Button from "@/Components/Forms/Buttons/Button";
-import AppHead from "@/Components/AppHead";
 
 defineProps({
   github: String,

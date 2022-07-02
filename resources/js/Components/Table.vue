@@ -161,11 +161,11 @@
 </template>
 
 <script setup>
-import Empty from "@/Components/Empty";
-import InputFilter from "@/Components/Filters/InputFilter";
-import ListFilter from "@/Components/Filters/ListFilter";
-import NoResult from "@/Components/NoResult";
-import Paginator from "@/Components/Paginator";
+import Empty from "@/Components/Empty.vue";
+import InputFilter from "@/Components/Filters/InputFilter.vue";
+import ListFilter from "@/Components/Filters/ListFilter.vue";
+import NoResult from "@/Components/NoResult.vue";
+import Paginator from "@/Components/Paginator.vue";
 import { Inertia } from "@inertiajs/inertia";
 import debounce from "lodash/debounce";
 import { onMounted, onUnmounted, watch } from "vue";

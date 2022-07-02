@@ -1,5 +1,5 @@
 <template>
-  <AppHead title="New WordPress Site" />
+  <AppHead title="New WordPress Site"/>
 
   <DashboardMain>
     <template #header>Install New WordPress Site</template>
@@ -14,11 +14,11 @@
         </div>
 
         <div class="col-span-6 sm:col-span-4">
-          <Input v-model="form.name" :form="form" label="Name" name="name" />
+          <Input v-model="form.name" :form="form" label="Name" name="name"/>
         </div>
 
         <div class="col-span-6 sm:col-span-4">
-          <Input v-model="form.price" :form="form" label="Price" name="price" />
+          <Input v-model="form.price" :form="form" label="Price" name="price"/>
         </div>
 
         <div class="col-span-6 sm:col-span-4 hidden">
@@ -31,7 +31,7 @@
         </div>
 
         <div class="col-span-6 sm:col-span-4 hidden">
-          <Input v-model="form.type" :form="form" label="Type" name="type" />
+          <Input v-model="form.type" :form="form" label="Type" name="type"/>
         </div>
 
         <RadioGroup v-model="form.type" class="mb-10 max-w-screen-xl">
@@ -53,10 +53,10 @@
                 ]"
               >
                 <div class="flex items-center flex-col">
-                  <img :src="type.icon" class="rounded-t-lg p-4" />
+                  <img :src="type.icon" class="rounded-t-lg p-4"/>
                   <div class="block w-full px-4 pt-2 pb-4">
                     <RadioGroupLabel as="p" class="font-medium text-gray-900">
-                      <span v-html="type.label" />
+                      <span v-html="type.label"/>
                     </RadioGroupLabel>
                     <SwitchDescription as="span" class="text-sm text-gray-500">
                       1 CPU / 1 GB RAM / 5 GB SSD
@@ -136,7 +136,7 @@
               />
             </TabPanel>
             <TabPanel>
-              <Advance v-model:entered-commands="enteredCommands" />
+              <Advance v-model:entered-commands="enteredCommands"/>
             </TabPanel>
           </TabPanels>
         </TabGroup>
@@ -146,23 +146,27 @@
 </template>
 
 <script setup>
-import AppHead from "@/Components/AppHead";
-import DashboardMain from "@/Components/DashboardMain";
-import Plugins from "@/Components/Stacks/WordPress/Plugins";
-import Themes from "@/Components/Stacks/WordPress/Themes";
-import Advance from "@/Components/Stacks/WordPress/Advance";
-import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/vue";
+import AppHead from "@/Components/AppHead.vue";
+import Button from "@/Components/Button.vue";
+import DashboardMain from "@/Components/DashboardMain.vue";
+import Input from "@/Components/Forms/Inputs/Input.vue";
+import Advance from "@/Components/Stacks/WordPress/Advance.vue";
+import Plugins from "@/Components/Stacks/WordPress/Plugins.vue";
+import Themes from "@/Components/Stacks/WordPress/Themes.vue";
 import {
   RadioGroup,
   RadioGroupLabel,
   RadioGroupOption,
   SwitchDescription,
+  Tab,
+  TabGroup,
+  TabList,
+  TabPanel,
+  TabPanels
 } from "@headlessui/vue";
-import { PuzzleIcon, ViewBoardsIcon, TerminalIcon } from "@heroicons/vue/solid";
-import { ref, watch } from "vue";
-import Button from "@/Components/Button";
-import Input from "@/Components/Forms/Inputs/Input";
+import { PuzzleIcon, TerminalIcon, ViewBoardsIcon } from "@heroicons/vue/solid";
 import { useForm } from "@inertiajs/inertia-vue3";
+import { ref, watch } from "vue";
 
 const selectedPlugins = ref({});
 const selectedTheme = ref("");

@@ -1,5 +1,5 @@
 <template>
-  <AppHead title="Sites" />
+  <AppHead title="Sites"/>
 
   <DashboardMain>
     <template #header>Sites</template>
@@ -8,7 +8,7 @@
     </template>
     <template #sub-header></template>
     <template #sub-header-content>
-      <Stats :stats="stats" />
+      <Stats :stats="stats"/>
     </template>
 
     <Table
@@ -26,11 +26,11 @@
 </template>
 
 <script setup>
-import Table from "@/Components/Table";
-import AppHead from "@/Components/AppHead";
-import DashboardMain from "@/Components/DashboardMain";
-import Stats from "@/Components/stats";
-import Button from "@/Components/Button";
+import AppHead from "@/Components/AppHead.vue";
+import Button from "@/Components/Button.vue";
+import DashboardMain from "@/Components/DashboardMain.vue";
+import Stats from "@/Components/stats.vue";
+import Table from "@/Components/Table.vue";
 
 defineProps({
   records: Object,

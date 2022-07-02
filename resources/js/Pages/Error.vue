@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import Empty from "@/Shared/Empty";
+import Empty from "@/Shared/Empty.vue";
 
 export default {
   layout: Empty,

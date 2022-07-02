@@ -16,14 +16,14 @@
       leave-from="opacity-100"
       leave-to="opacity-0"
     >
-      <Spinner class="w-4 h-4" />
+      <Spinner class="w-4 h-4"/>
     </TransitionRoot>
-    <slot />
+    <slot/>
   </component>
 </template>
 
 <script setup>
-import Spinner from "@/Components/Icons/Spinner";
+import Spinner from "@/Components/Icons/Spinner.vue";
 import { TransitionRoot } from "@headlessui/vue";
 
 defineProps({

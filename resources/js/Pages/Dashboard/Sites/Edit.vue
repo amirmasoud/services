@@ -1,5 +1,5 @@
 <template>
-  <AppHead :title="`Edit ${form.name} site`" />
+  <AppHead :title="`Edit ${form.name} site`"/>
 
   <DashboardMain>
     <template #header>Edit site {{ resource.data.name }}</template>
@@ -16,23 +16,23 @@
             <div class="col-span-6 sm:col-span-4">
               <Input
                 v-model="form.name"
+                :form="form"
                 label="Name"
                 name="name"
-                :form="form"
               />
             </div>
 
             <div class="col-span-6 sm:col-span-4">
               <Input
                 v-model="form.host"
+                :form="form"
                 label="Host"
                 name="host"
-                :form="form"
               />
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-              <Button type="submit" :form="form"> Submit </Button>
+              <Button :form="form" type="submit"> Submit</Button>
             </div>
           </div>
         </div>
@@ -42,11 +42,11 @@
 </template>
 
 <script setup>
+import AppHead from "@/Components/AppHead.vue";
+import DashboardMain from "@/Components/DashboardMain.vue";
+import Button from "@/Components/Forms/Buttons/Button.vue";
+import Input from "@/Components/Forms/Inputs/Input.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
-import Input from "@/Components/Forms/Inputs/Input";
-import Button from "@/Components/Forms/Buttons/Button";
-import AppHead from "@/Components/AppHead";
-import DashboardMain from "@/Components/DashboardMain";
 
 let props = defineProps({
   resource: Object,

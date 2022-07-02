@@ -435,7 +435,7 @@
 </template>
 
 <script setup>
-import Logo from "@/Shared/Logo";
+import Logo from "@/Shared/Logo.vue";
 import {
   Dialog,
   DialogOverlay,

@@ -31,10 +31,10 @@
 </template>
 
 <script setup>
-import AppHead from "@/Components/AppHead";
-import DashboardMain from "@/Components/DashboardMain";
-import Button from "@/Components/Forms/Buttons/Button";
-import Input from "@/Components/Forms/Inputs/Input";
+import AppHead from "@/Components/AppHead.vue";
+import DashboardMain from "@/Components/DashboardMain.vue";
+import Button from "@/Components/Forms/Buttons/Button.vue";
+import Input from "@/Components/Forms/Inputs/Input.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 let form = useForm({

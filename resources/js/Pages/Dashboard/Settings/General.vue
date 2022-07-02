@@ -1,5 +1,5 @@
 <template>
-  <AppHead title="Settings" />
+  <AppHead title="Settings"/>
 
   <DashboardMain>
     <template #header>Settings</template>
@@ -249,10 +249,10 @@
 </template>
 
 <script setup>
-import AppHead from "@/Components/AppHead";
-import DashboardMain from "@/Components/DashboardMain";
-import { ref } from "vue";
+import AppHead from "@/Components/AppHead.vue";
+import DashboardMain from "@/Components/DashboardMain.vue";
 import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
+import { ref } from "vue";
 
 const tabs = [
   {
@@ -260,8 +260,8 @@ const tabs = [
     href: route("dashboard.settings.general"),
     current: true,
   },
-  { name: "Password", href: "#", current: false },
-  { name: "Notifications", href: "#", current: false },
+  {name: "Password", href: "#", current: false},
+  {name: "Notifications", href: "#", current: false},
   {
     name: "System Status",
     href: route("dashboard.settings.system-status"),

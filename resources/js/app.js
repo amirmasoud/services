@@ -1,6 +1,6 @@
 // Application
-import Dashboard from "@/Shared/Dashboard";
-import Empty from "@/Shared/Empty";
+import Dashboard from "@/Shared/Dashboard.vue";
+import Empty from "@/Shared/Empty.vue";
 import hljsVuePlugin from "@highlightjs/vue-plugin";
 import { createInertiaApp, Link } from "@inertiajs/inertia-vue3";
 import { InertiaProgress } from "@inertiajs/progress";
@@ -12,6 +12,8 @@ import "highlight.js/styles/stackoverflow-light.css";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { createApp, h } from "vue";
 
+import "../css/app.css";
+
 createInertiaApp({
   //  resolve: async (name) => {
   //    const page = (await import(`./Pages/${name}.vue`)).default;
@@ -22,8 +24,8 @@ createInertiaApp({
   resolve: async (name) => {
     const page = (
       await resolvePageComponent(
-        `@/Pages/${name}.vue`,
-        import.meta.glob("@/Pages/**/*.vue")
+        `./Pages/${name}.vue`,
+        import.meta.glob("./Pages/**/*.vue")
       )
     ).default;
     console.log(page);

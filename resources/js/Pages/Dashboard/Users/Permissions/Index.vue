@@ -22,11 +22,11 @@
 </template>
 
 <script setup>
-import AppHead from "@/Components/AppHead";
-import Button from "@/Components/Button";
-import DashboardMain from "@/Components/DashboardMain";
-import Stats from "@/Components/stats";
-import Table from "@/Components/Table";
+import AppHead from "@/Components/AppHead.vue";
+import Button from "@/Components/Button.vue";
+import DashboardMain from "@/Components/DashboardMain.vue";
+import Stats from "@/Components/stats.vue";
+import Table from "@/Components/Table.vue";
 
 defineProps({records: Object, filters: Object, table: Object, stats: Object});
 </script>

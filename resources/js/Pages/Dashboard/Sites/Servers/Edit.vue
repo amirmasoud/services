@@ -1,5 +1,5 @@
 <template>
-  <AppHead :title="`Edit ${form.name} site`" />
+  <AppHead :title="`Edit ${form.name} site`"/>
 
   <DashboardMain>
     <template #header>Edit site {{ resource.data.name }}</template>
@@ -33,7 +33,7 @@
               </div>
 
               <div class="col-span-4">
-                <Input v-model="form.ip" :form="form" label="IP" name="ip" />
+                <Input v-model="form.ip" :form="form" label="IP" name="ip"/>
               </div>
 
               <div class="col-span-2">
@@ -47,7 +47,7 @@
               </div>
 
               <div class="col-span-4">
-                <Input v-model="form.ram" :form="form" label="RAM" name="ram" />
+                <Input v-model="form.ram" :form="form" label="RAM" name="ram"/>
               </div>
 
               <div class="col-span-2">
@@ -61,7 +61,7 @@
               </div>
 
               <div class="col-span-6">
-                <Input v-model="form.cpu" :form="form" label="CPU" name="cpu" />
+                <Input v-model="form.cpu" :form="form" label="CPU" name="cpu"/>
               </div>
 
               <div class="col-span-2">
@@ -143,13 +143,13 @@
 </template>
 
 <script setup>
+import AppHead from "@/Components/AppHead.vue";
+import DashboardMain from "@/Components/DashboardMain.vue";
+import Button from "@/Components/Forms/Buttons/Button.vue";
+import Input from "@/Components/Forms/Inputs/Input.vue";
+import Option from "@/Components/Forms/Inputs/Option.vue";
+import Textarea from "@/Components/Forms/Inputs/Textarea.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
-import Option from "@/Components/Forms/Inputs/Option";
-import Textarea from "@/Components/Forms/Inputs/Textarea";
-import Input from "@/Components/Forms/Inputs/Input";
-import Button from "@/Components/Forms/Buttons/Button";
-import AppHead from "@/Components/AppHead";
-import DashboardMain from "@/Components/DashboardMain";
 
 let props = defineProps({
   resource: Object,

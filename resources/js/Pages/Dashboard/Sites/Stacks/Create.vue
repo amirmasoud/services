@@ -1,16 +1,16 @@
 <template>
-  <AppHead title="Create new site" />
+  <AppHead title="Create new site"/>
 
   <DashboardMain>
     <template #header> Sites</template>
 
     <form @submit.prevent="form.post($route('dashboard.sites.stacks.store'))">
       <div class="col-span-6 sm:col-span-4">
-        <Input v-model="form.name" :form="form" label="Name" name="name" />
+        <Input v-model="form.name" :form="form" label="Name" name="name"/>
       </div>
 
       <div class="col-span-6 sm:col-span-4">
-        <Input v-model="form.price" :form="form" label="Price" name="price" />
+        <Input v-model="form.price" :form="form" label="Price" name="price"/>
       </div>
 
       <div class="col-span-6 sm:col-span-4">
@@ -23,17 +23,17 @@
       </div>
 
       <div class="col-span-6 sm:col-span-4">
-        <Input v-model="form.type" :form="form" label="Type" name="type" />
+        <Input v-model="form.type" :form="form" label="Type" name="type"/>
       </div>
     </form>
   </DashboardMain>
 </template>
 
 <script setup>
+import AppHead from "@/Components/AppHead.vue";
+import DashboardMain from "@/Components/DashboardMain.vue";
+import Input from "@/Components/Forms/Inputs/Input.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
-import Input from "@/Components/Forms/Inputs/Input";
-import AppHead from "@/Components/AppHead";
-import DashboardMain from "@/Components/DashboardMain";
 
 let form = useForm({
   name: null,
