@@ -11,7 +11,6 @@ import bash from "highlight.js/lib/languages/bash";
 import "highlight.js/styles/stackoverflow-light.css";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { createApp, h } from "vue";
-
 import "../css/app.css";
 
 createInertiaApp({
