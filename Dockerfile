@@ -4,20 +4,19 @@ WORKDIR /var/www
 
 COPY . .
 
-RUN npm ci
+RUN    npm ci  \
+    && npm run build  \
+    && rm -rf node_modules
 
-RUN npm run production
-
-RUN rm -rf node_modules
-
-FROM php:8.1-fpm-alpine3.15 AS php
+FROM openswoole/swoole:4.11-php8.1-alpine
 
 # Rest of requirements are already installed in the PHP image.
-RUN docker-php-ext-install bcmath pcntl && \
-    apk update && apk add --no-cache supervisor && \
-    rm -rf /var/cache/apk/*
+RUN    docker-php-ext-install bcmath pcntl \
+    && apk update && apk add --no-cache supervisor nginx  \
+#    && adduser -D -g 'www' www \
+    && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /usr/src/php.tar.xz*
 
-COPY build/supervisord.conf /etc/supervisord.conf
+COPY /build/supervisord.conf /etc/supervisor/supervisord.conf
 
 COPY --from=composer:2.3 /usr/bin/composer /usr/local/bin/composer
 
@@ -25,10 +24,10 @@ WORKDIR /var/www
 
 COPY --from=node /var/www .
 
-RUN chown -R www-data:www-data .
+RUN    chown -R www-data:www-data .  \
+    && composer install --no-interaction --no-progress --no-scripts --no-dev  \
+    && php artisan cache:clear
 
-RUN composer install --no-interaction --no-progress --no-scripts --no-dev
+EXPOSE 80
 
-EXPOSE 9000
-
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]

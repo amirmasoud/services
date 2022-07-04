@@ -24,3 +24,4 @@ node_modules/
 readme.md
 Dockerfile
 docker-compose.yml
+bootstrap/cache/*
