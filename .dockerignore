@@ -25,3 +25,5 @@ readme.md
 Dockerfile
 docker-compose.yml
 bootstrap/cache/*
+tests/*
+screenshots/*

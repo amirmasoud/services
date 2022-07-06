@@ -7,6 +7,10 @@ services:
       - .env:/var/www/.env
     ports:
       - "80:80"
+    links:
+      - redis
+  redis:
+    image: redis:7.0-alpine3.15
   # traefik:
   #   image: traefik
   #   ports:
