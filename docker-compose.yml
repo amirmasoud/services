@@ -3,8 +3,8 @@ version: "3"
 services:
   web:
     build: .
-    volumes:
-      - .env:/var/www/.env
+    #    volumes:
+    #      - .env:/var/www/.env
     ports:
       - "80:80"
     links:
