@@ -3,14 +3,23 @@ version: "3"
 services:
   web:
     build: .
-    #    volumes:
-    #      - .env:/var/www/.env
+    volumes:
+      - .env:/var/www/.env
     ports:
       - "80:80"
     links:
       - redis
+      - database
+    entrypoint: /var/www/build/entrypoint.sh
   redis:
     image: redis:7.0-alpine3.15
+  database:
+    image: mariadb:10.8
+    environment:
+      - MARIADB_ROOT_PASSWORD=root
+      - MARIADB_DATABASE=database
+      - MARIADB_USER=user
+      - MARIADB_PASSWORD=password
   # traefik:
   #   image: traefik
   #   ports:
