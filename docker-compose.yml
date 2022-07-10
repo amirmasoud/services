@@ -12,14 +12,9 @@ services:
       - database
       - redis
     entrypoint: /var/www/build/entrypoint.sh
-    networks:
-      - internal
-      - external
   redis:
     image: redis:7.0-alpine3.15
     restart: always
-    networks:
-      - internal
   database:
     image: mariadb:10.8
     environment:
@@ -31,8 +26,6 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-u", "user", "-ppassword"]
       interval: 2s
       retries: 15
-    networks:
-      - internal
   # traefik:
   #   image: traefik
   #   ports:
@@ -88,8 +81,3 @@ services:
   #     - database
   #   ports:
   #     - 8080:8080
-networks:
-  internal:
-  external:
-    external: true
-    name: proxy
