@@ -23,11 +23,14 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - 
+        uses: olegtarasov/get-tag@v2.1
+        id: tagName
       -
         name: Build and push
         uses: docker/build-push-action@v3
         with:
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/services:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/services:${{ steps.tag.outputs.result }}
+            amirmasoud/services:latest
+            amirmasoud/services:$GIT_TAG_NAME
