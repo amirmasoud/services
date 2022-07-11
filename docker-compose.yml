@@ -2,7 +2,7 @@ version: "3"
 
 services:
   web:
-    build: .
+    image: amirmasoud/services:latest
     restart: always
     volumes:
       - .env:/var/www/.env
