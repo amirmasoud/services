@@ -4,7 +4,7 @@ namespace App\Dashboard\Controllers;
 
 use Inertia\Inertia;
 use Inertia\Response;
-use Domain\IAM\Models\Role;
+use Domain\Users\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Dashboard\Requests\RoleRequest;

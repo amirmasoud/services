@@ -1,8 +1,8 @@
 <?php
 
-namespace Domain\IAM\Models;
+namespace Domain\Users\Models;
 
-use Domain\IAM\QueryBuilders\RoleQueryBuilder;
+use Domain\Users\QueryBuilders\RoleQueryBuilder;
 
 class Role extends \Spatie\Permission\Models\Role
 {

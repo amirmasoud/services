@@ -2,9 +2,9 @@
 
 namespace App\Dashboard\Resources\UI;
 
-use App\Dashboard\UI\Filter\InputFilterUI;
+use Domain\Users\Models\Role;
 use App\Dashboard\UI\Filter\ListFilterUI;
-use Domain\IAM\Models\Role;
+use App\Dashboard\UI\Filter\InputFilterUI;
 
 class RoleFilterResouce extends BaseUI
 {

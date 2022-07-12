@@ -1,10 +1,10 @@
 <?php
 
-namespace Database\Factories\Domain\IAM\Models;
+namespace Database\Factories\Domain\Users\Models;
 
-use Domain\IAM\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Domain\Users\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use function now;
 
 class UserFactory extends Factory

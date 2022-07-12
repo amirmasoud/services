@@ -2,9 +2,9 @@
 
 namespace App\Dashboard\Resources\UI;
 
-use App\Dashboard\UI\Filter\InputFilterUI;
+use Domain\Users\Models\User;
 use App\Dashboard\UI\Filter\ListFilterUI;
-use Domain\IAM\Models\User;
+use App\Dashboard\UI\Filter\InputFilterUI;
 
 class UserFilterResource extends BaseUI
 {

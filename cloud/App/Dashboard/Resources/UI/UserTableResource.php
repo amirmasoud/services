@@ -2,9 +2,9 @@
 
 namespace App\Dashboard\Resources\UI;
 
-use App\Dashboard\UI\Table\ActionTableUI;
+use Domain\Users\Models\User;
 use App\Dashboard\UI\Table\FieldTableUI;
-use Domain\IAM\Models\User;
+use App\Dashboard\UI\Table\ActionTableUI;
 
 class UserTableResource extends BaseUI
 {

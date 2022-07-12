@@ -2,16 +2,16 @@
 
 namespace Domain\Sites\Models;
 
-use Domain\IAM\Models\User;
-use Domain\Sites\Enums\SiteStatusEnum;
-use Domain\Sites\QueryBuilders\SiteQueryBuilder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Domain\Users\Models\User;
 use Spatie\Activitylog\LogOptions;
+use Domain\Sites\Enums\SiteStatusEnum;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Domain\Sites\QueryBuilders\SiteQueryBuilder;
 use Support\Containers\Enums\ContainerStateEnum;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property string $name

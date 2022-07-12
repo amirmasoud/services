@@ -1,19 +1,19 @@
 <?php
 
-namespace Domain\IAM\Models;
+namespace Domain\Users\Models;
 
-use Domain\IAM\Casts\SettingsCast;
-use Domain\IAM\QueryBuilders\UserQueryBuilder;
-use Domain\Sites\Models\Server;
 use Domain\Sites\Models\Site;
 use Domain\Sites\Models\Stack;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Domain\Sites\Models\Server;
 use Laravel\Sanctum\HasApiTokens;
+use Domain\Users\Casts\SettingsCast;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Domain\Users\QueryBuilders\UserQueryBuilder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * @method static withTrashed()

@@ -1,8 +1,8 @@
 <?php
 
-namespace Domain\IAM\Models;
+namespace Domain\Users\Models;
 
-use Domain\IAM\QueryBuilders\PermissionQueryBuilder;
+use Domain\Users\QueryBuilders\PermissionQueryBuilder;
 
 class Permission extends \Spatie\Permission\Models\Permission
 {

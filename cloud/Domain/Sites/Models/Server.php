@@ -2,19 +2,19 @@
 
 namespace Domain\Sites\Models;
 
-use Domain\IAM\Models\User;
+use Spatie\Tags\HasTags;
+use Domain\Users\Models\User;
+use Spatie\Activitylog\LogOptions;
+use Domain\Sites\Enums\RamUnitEnum;
 use Domain\Sites\Enums\DiskTypeEnum;
 use Domain\Sites\Enums\DiskUnitEnum;
 use Domain\Sites\Enums\OsFlavorEnum;
-use Domain\Sites\Enums\RamUnitEnum;
-use Domain\Sites\Enums\ServerStatusEnum;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\LogOptions;
+use Domain\Sites\Enums\ServerStatusEnum;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\Tags\HasTags;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Server extends Model
 {

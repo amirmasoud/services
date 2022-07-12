@@ -1,10 +1,10 @@
 <?php
 
-namespace Domain\IAM\QueryBuilders;
+namespace Domain\Users\QueryBuilders;
 
 use Illuminate\Database\Eloquent\Builder;
 
-class RoleQueryBuilder extends Builder
+class PermissionQueryBuilder extends Builder
 {
     public function search(?string $search)
     {

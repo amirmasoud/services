@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\IAM\Enums;
+namespace Domain\Users\Enums;
 
 enum LocaleEnum: string
 {

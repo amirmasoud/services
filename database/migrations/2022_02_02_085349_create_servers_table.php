@@ -1,17 +1,16 @@
 <?php
 
-use Domain\IAM\Models\User;
-use Domain\Sites\Enums\DiskTypeEnum;
+use Domain\Users\Models\User;
+use Domain\Sites\Enums\RamUnitEnum;
 use Domain\Sites\Enums\DiskUnitEnum;
 use Domain\Sites\Enums\OsFlavorEnum;
-use Domain\Sites\Enums\RamUnitEnum;
-use Domain\Sites\Enums\ServerStatusEnum;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Domain\Sites\Enums\DiskTypeEnum;
 use Illuminate\Support\Facades\Schema;
+use Domain\Sites\Enums\ServerStatusEnum;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *

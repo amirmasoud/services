@@ -2,7 +2,7 @@
 
 namespace App\Dashboard\Resources\UI;
 
-use Domain\IAM\Models\Role;
+use Domain\Users\Models\Role;
 use App\Dashboard\UI\Table\FieldTableUI;
 use App\Dashboard\UI\Table\ActionTableUI;
 

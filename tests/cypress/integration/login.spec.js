@@ -13,7 +13,7 @@ describe("Authentication", () => {
   it("Login successfully", () => {
     cy.refreshDatabase();
 
-    cy.create("Domain\\IAM\\Models\\User", { email: "bar@example.com" });
+    cy.create("Domain\\Users\\Models\\User", { email: "bar@example.com" });
     cy.visit("/login");
     cy.get("input[name=email]").type("bar@example.com");
     cy.get("input[name=password]").type("password");

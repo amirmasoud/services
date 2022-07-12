@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\IAM\QueryBuilders;
+namespace Domain\Users\QueryBuilders;
 
 use Illuminate\Database\Eloquent\Builder;
 

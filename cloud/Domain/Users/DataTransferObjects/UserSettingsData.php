@@ -1,9 +1,9 @@
 <?php
 
-namespace Domain\IAM\DataTransferObjects;
+namespace Domain\Users\DataTransferObjects;
 
-use Domain\IAM\Enums\DateFormatEnum;
-use Domain\IAM\Enums\LocaleEnum;
+use Domain\Users\Enums\LocaleEnum;
+use Domain\Users\Enums\DateFormatEnum;
 use Spatie\DataTransferObject\DataTransferObject;
 
 class UserSettingsData extends DataTransferObject

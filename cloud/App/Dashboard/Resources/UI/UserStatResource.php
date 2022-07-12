@@ -3,7 +3,7 @@
 namespace App\Dashboard\Resources\UI;
 
 use App\Dashboard\UI\StatUI;
-use Domain\IAM\Models\User;
+use Domain\Users\Models\User;
 
 class UserStatResource extends BaseUI
 {

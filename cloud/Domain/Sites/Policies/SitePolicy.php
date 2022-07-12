@@ -2,7 +2,7 @@
 
 namespace Domain\Sites\Policies;
 
-use Domain\IAM\Models\User;
+use Domain\Users\Models\User;
 use Domain\Sites\Models\Site;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
