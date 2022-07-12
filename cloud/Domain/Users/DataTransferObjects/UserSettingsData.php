@@ -16,6 +16,9 @@ class UserSettingsData extends DataTransferObject
 
     public ?string $dateFormatLabel;
 
+    /**
+     * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
+     */
     public function __construct(...$args)
     {
         $this->language = $this->language ?? LocaleEnum::tryFrom(app()->getLocale()) ?? LocaleEnum::EN_US;
