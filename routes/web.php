@@ -35,10 +35,10 @@ Route::prefix('dashboard')->middleware('auth')->name('dashboard.')->group(functi
     Route::get('/settings', [SettingController::class, 'general'])->name('settings.general');
     Route::get('/settings/system-status', [SettingController::class, 'systemStatus'])->name('settings.system-status');
 
+    Route::resource('users', UserController::class)->except('show');
     Route::name('users.')
         ->prefix('users')
         ->group(function () {
-            Route::resource('/', UserController::class)->except('show');
             Route::resource('roles', RoleController::class)->except('show');
             Route::resource('permissions', PermissionController::class)->except('show');
         });
