@@ -29,4 +29,8 @@ Setup the environment file.
 docker-compose up [-d]
 ```
 
+## Setup CI/CD
+
+Set your DockerHub username and password (todo on how on GitHub and DockerHub)
+
 ## End user documentation
