@@ -12,16 +12,16 @@
     </div>
   </div>
 
-  <div class="px-4 mt-6 sm:px-6 lg:px-8 max-w-screen-lg">
+  <div v-if="$slots['sub-header-content'] || $slots['sub-header']" class="px-4 mt-6 sm:px-6 lg:px-8 max-w-screen-lg">
     <h2 class="text-gray-500 text-xs font-medium uppercase tracking-wide">
-      <slot name="sub-header"></slot>
+      <slot v-if="$slots['sub-header']" name="sub-header"></slot>
     </h2>
-    <slot name="sub-header-content"></slot>
+    <slot v-if="$slots['sub-header-content']" name="sub-header-content"></slot>
   </div>
 
-  <div class="px-4 my-6 sm:px-6 lg:px-8 max-w-screen-lg">
+  <div class="px-4 mb-6 sm:px-6 lg:px-8 max-w-screen-lg">
     <div class="align-middle">
-      <slot />
+      <slot/>
     </div>
   </div>
 </template>
@@ -48,7 +48,7 @@ defineProps({
   form: {
     type: Object,
     default() {
-      return { errors: {} };
+      return {errors: {}};
     },
   },
   hasError: {

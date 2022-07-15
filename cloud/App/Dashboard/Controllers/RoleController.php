@@ -17,7 +17,9 @@ class RoleController extends Controller
 {
     public function index(RoleSearchRequest $request): Response
     {
-        $roles = Role::search($request->validated('search'))->paginate($request->validated('per_page'))->withQueryString();
+        $roles = Role::search($request->validated('search'))
+            ->paginate($request->validated('per_page'))
+            ->withQueryString();
 
         return Inertia::render('Dashboard/Users/Roles/Index', [
             'records' => RoleResource::collection($roles),

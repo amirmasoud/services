@@ -14,12 +14,6 @@ import { createApp, h } from "vue";
 import "../css/app.css";
 
 createInertiaApp({
-  //  resolve: async (name) => {
-  //    const page = (await import(`./Pages/${name}.vue`)).default;
-  //    page.layout = name.startsWith("Auth/") ? Empty : page.layout || Dashboard;
-  //    return page;
-  //  },
-
   resolve: async (name) => {
     const page = (
       await resolvePageComponent(
@@ -27,14 +21,11 @@ createInertiaApp({
         import.meta.glob("./Pages/**/*.vue")
       )
     ).default;
-    console.log(page);
     page.layout = name.startsWith("Auth/") ? Empty : page.layout || Dashboard;
     return page;
   },
 
   setup({ el, App, props, plugin }) {
-    console.log(el);
-
     hljs.registerLanguage("bash", bash);
 
     const app = createApp({ render: () => h(App, props) });
