@@ -103,6 +103,12 @@ class User extends Authenticatable
         'settings' => SettingsCast::class,
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+    }
+
+
     public function servers(): HasMany
     {
         return $this->hasMany(Server::class);

@@ -5,21 +5,11 @@ use Domain\Sites\Models\Site;
 use App\Dashboard\Controllers\RoleController;
 use App\Dashboard\Controllers\SiteController;
 use App\Dashboard\Controllers\UserController;
-use App\Dashboard\Controllers\OauthController;
 use App\Dashboard\Controllers\StackController;
 use App\Dashboard\Controllers\ServerController;
 use App\Dashboard\Controllers\SettingController;
 use Support\Containers\Enums\ContainerStateEnum;
 use App\Dashboard\Controllers\PermissionController;
-
-Route::middleware('guest')->group(function () {
-    Route::get('login', [OauthController::class, 'loginForm'])->name('login');
-    Route::post('login', [OauthController::class, 'loginWithEmail']);
-    Route::get('register', [OauthController::class, 'registerWithEmailForm'])->name('register');
-    Route::post('register', [OauthController::class, 'registerWithEmail']);
-    Route::get('auth/{provider}/callback', [OauthController::class, 'callback']);
-});
-Route::post('logout', [OauthController::class, 'logout'])->middleware('auth')->name('logout');
 
 Route::prefix('dashboard')->middleware('auth')->name('dashboard.')->group(function () {
     Route::get('/', function () {

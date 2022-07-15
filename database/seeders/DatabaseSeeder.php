@@ -16,15 +16,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        try {
-            User::factory()->create([
-                'name' => 'Admin',
-                'email' => 'admin@cloud.test',
-                'password' => bcrypt('secret'),
-            ]);
-        } catch (QueryException) {
-            $this->command->warn('Admin user already exists, skipping');
-        }
+        app()->environment('production')
+            ?: $this->call(AdminSeeder::class);
 
         try {
             User::factory(100)->create();
