@@ -5,11 +5,20 @@ use Domain\Sites\Models\Site;
 use App\Dashboard\Controllers\RoleController;
 use App\Dashboard\Controllers\SiteController;
 use App\Dashboard\Controllers\UserController;
+use App\Dashboard\Controllers\AuthController;
 use App\Dashboard\Controllers\StackController;
 use App\Dashboard\Controllers\ServerController;
 use App\Dashboard\Controllers\SettingController;
 use Support\Containers\Enums\ContainerStateEnum;
 use App\Dashboard\Controllers\PermissionController;
+
+Route::middleware('guest')->group(function () {
+    Route::get('login', [AuthController::class, 'loginForm'])->name('login');
+    Route::post('login', [AuthController::class, 'loginWithEmail']);
+    Route::get('register', [AuthController::class, 'registerForm'])->name('register');
+    Route::post('register', [AuthController::class, 'registerWithEmail']);
+});
+Route::post('logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 Route::prefix('dashboard')->middleware('auth')->name('dashboard.')->group(function () {
     Route::get('/', function () {
