@@ -1,31 +1,19 @@
 <template>
-  <div class="input-group">
-    <input
-      :id="id"
-      :class="[
-        hasError || form.errors[name]
-          ? 'border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500'
-          : 'w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600',
-      ]"
-      :name="name"
-      :placeholder="placeholder"
-      :value="modelValue"
-      type="checkbox"
-      @input="$emit('update:modelValue', $event.target.value)"
-    >
-    <label
-      :for="id"
-      class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-    >
-      {{ label }}
-    </label>
-    <p
-      v-if="help !== ''"
-      :id="`${name}-description`"
-      class="mt-2 text-sm text-gray-500"
-    >
-      {{ help }}
-    </p>
+  <div class="relative flex items-start">
+    <div class="flex items-center h-5">
+      <input
+        :id="id"
+        :name="name"
+        class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+        type="checkbox"
+        value="modelValue"
+        @change="$emit('update:modelValue', $event.target.checked)"
+      />
+    </div>
+    <div class="ml-3 text-sm">
+      <label :for="id" class="font-medium text-gray-700">{{ label }}</label>
+      <p v-if="help !== ''" id="comments-description" class="text-gray-500">{{ help }}</p>
+    </div>
     <TransitionRoot
       :id="`${name}-error`"
       :show="hasError || !!form.errors[name]"
@@ -51,18 +39,10 @@ defineEmits(["update:modelValue"]);
 defineProps({
   name: String,
   label: String,
-  modelValue: String,
+  modelValue: Boolean,
   id: {
     type: String,
     default: (props) => props.name,
-  },
-  type: {
-    type: String,
-    default: "text",
-  },
-  placeholder: {
-    type: String,
-    default: "",
   },
   form: {
     type: Object,

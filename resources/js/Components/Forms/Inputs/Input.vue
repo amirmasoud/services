@@ -1,8 +1,8 @@
 <template>
-  <div class="input-group">
+  <div>
     <label
       :for="id"
-      class="block text-sm font-semibold font-medium text-gray-700 dark:text-gray-300"
+      class="block text-sm font-medium text-gray-700"
     >
       {{ label }}
     </label>
@@ -12,13 +12,13 @@
         :class="[
         hasError || form.errors[name]
           ? 'border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500'
-          : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 dark:border-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500',
+          : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500',
       ]"
         :name="name"
         :placeholder="placeholder"
         :type="type"
         :value="modelValue"
-        class="block w-full sm:text-sm rounded-md shadow-sm p-2 border dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white"
+        class="shadow-sm block w-full sm:text-sm rounded-md"
         @input="$emit('update:modelValue', $event.target.value)"
       />
     </div>
