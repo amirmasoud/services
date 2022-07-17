@@ -40,208 +40,39 @@
         </div>
 
         <!-- Description list with inline editing -->
-        <div class="mt-10 divide-y divide-gray-200">
-          <div class="space-y-1">
+        <div class="mt-4">
+          <div class="space-y-1 border-b border-gray-200 pb-4">
             <h3 class="text-lg leading-6 font-medium text-gray-900">Profile</h3>
             <p class="max-w-2xl text-sm text-gray-500">
               This information will be displayed publicly so be careful what you
               share.
             </p>
           </div>
-          <div class="mt-6 rounded-lg bg-white shadow px-4">
-            <dl class="divide-y divide-gray-200">
-              <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                <dt class="text-sm font-medium text-gray-500">Name</dt>
-                <dd
-                  class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                >
-                  <span class="flex-grow">
-                    {{ $page.props.auth.user.name }}
-                  </span>
-                  <span class="ml-4 flex-shrink-0">
-                    <button
-                      class="font-semibold text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                      type="button"
-                    >
-                      Update
-                    </button>
-                  </span>
-                </dd>
-              </div>
-              <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
-                <dt class="text-sm font-medium text-gray-500 flex items-center">
-                  Photo
-                </dt>
-                <dd
-                  class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2 items-center"
-                >
-                  <span class="flex-grow">
-                    <img
-                      :src="
-                        $page.props.auth.user.profile ||
-                        'https://images.unsplash.com/photo-1607785330196-fdbe6f36c8fa?ixlib=rb-1.2.1&q=80&fm=jpg&cs=tinysrgb&w=256&h=256&fit=facearea'
-                      "
-                      alt=""
-                      class="h-8 w-8 rounded-full"
-                    />
-                  </span>
-                  <span class="ml-4 flex-shrink-0 flex items-start space-x-4">
-                    <button
-                      class="font-semibold text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                      type="button"
-                    >
-                      Update
-                    </button>
-                    <span aria-hidden="true" class="text-gray-300">|</span>
-                    <button
-                      :disabled="!$page.props.auth.user.profile"
-                      class="font-semibold text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed"
-                      type="button"
-                    >
-                      Remove
-                    </button>
-                  </span>
-                </dd>
-              </div>
-              <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
-                <dt class="text-sm font-medium text-gray-500">Email</dt>
-                <dd
-                  class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                >
-                  <span class="flex-grow">
-                    {{ $page.props.auth.user.email }}
-                  </span>
-                  <span class="ml-4 flex-shrink-0">
-                    <button
-                      class="font-semibold text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                      type="button"
-                    >
-                      Update
-                    </button>
-                  </span>
-                </dd>
-              </div>
-            </dl>
+          <div class="space-y-4 mt-4">
+            <Input
+              v-model="form.name"
+              :form="form"
+              class="md:w-1/2"
+              help="Your name may appear where you contribute or are mentioned. You can remove it at any time."
+              label="Name"
+              name="name"
+              type="text"
+            />
+            <Input
+              v-model="form.email"
+              :form="form"
+              class="md:w-1/2"
+              label="Email"
+              name="email"
+              type="email"
+            />
           </div>
-        </div>
-
-        <div class="mt-10 divide-y divide-gray-200">
-          <div class="space-y-1">
-            <h3 class="text-lg leading-6 font-medium text-gray-900">Account</h3>
-            <p class="max-w-2xl text-sm text-gray-500">
-              Manage how information is displayed on your account.
-            </p>
-          </div>
-          <div class="mt-6 rounded-lg bg-white shadow px-4">
-            <dl class="divide-y divide-gray-200">
-              <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                <dt class="text-sm font-medium text-gray-500">Language</dt>
-                <dd
-                  class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                >
-                  <span class="flex-grow">
-                    {{ $page.props.auth.user.settings.languageLabel }}
-                  </span>
-                  <span class="ml-4 flex-shrink-0">
-                    <button
-                      class="font-semibold text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                      type="button"
-                    >
-                      Update
-                    </button>
-                  </span>
-                </dd>
-              </div>
-              <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
-                <dt class="text-sm font-medium text-gray-500">Date format</dt>
-                <dd
-                  class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                >
-                  <span class="flex-grow">
-                    {{ $page.props.auth.user.settings.dateFormatLabel }}
-                  </span>
-                  <span class="ml-4 flex-shrink-0 flex items-start space-x-4">
-                    <button
-                      class="font-semibold text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                      type="button"
-                    >
-                      Update
-                    </button>
-                  </span>
-                </dd>
-              </div>
-              <SwitchGroup
-                as="div"
-                class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5"
-              >
-                <SwitchLabel
-                  as="dt"
-                  class="text-sm font-medium text-gray-500"
-                  passive
-                >
-                  Swarm mode
-                </SwitchLabel>
-                <dd
-                  class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                >
-                  <Switch
-                    v-model="automaticTimezoneEnabled"
-                    :class="[
-                      automaticTimezoneEnabled
-                        ? 'bg-purple-600'
-                        : 'bg-gray-200',
-                      'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:ml-auto',
-                    ]"
-                  >
-                    <span
-                      :class="[
-                        automaticTimezoneEnabled
-                          ? 'translate-x-5'
-                          : 'translate-x-0',
-                        'inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
-                      ]"
-                      aria-hidden="true"
-                    />
-                  </Switch>
-                </dd>
-              </SwitchGroup>
-              <SwitchGroup
-                as="div"
-                class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-b sm:border-gray-200"
-              >
-                <SwitchLabel
-                  as="dt"
-                  class="text-sm font-medium text-gray-500"
-                  passive
-                >
-                  Auto-update application
-                </SwitchLabel>
-                <dd
-                  class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                >
-                  <Switch
-                    v-model="autoUpdateApplicantDataEnabled"
-                    :class="[
-                      autoUpdateApplicantDataEnabled
-                        ? 'bg-purple-600'
-                        : 'bg-gray-200',
-                      'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:ml-auto',
-                    ]"
-                  >
-                    <span
-                      :class="[
-                        autoUpdateApplicantDataEnabled
-                          ? 'translate-x-5'
-                          : 'translate-x-0',
-                        'inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
-                      ]"
-                      aria-hidden="true"
-                    />
-                  </Switch>
-                </dd>
-              </SwitchGroup>
-            </dl>
-          </div>
+          <Button
+            class="mt-4"
+            type="submit"
+          >
+            Update
+          </Button>
         </div>
       </div>
     </div>
@@ -251,7 +82,9 @@
 <script setup>
 import AppHead from "@/Components/AppHead.vue";
 import DashboardMain from "@/Components/DashboardMain.vue";
-import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
+import Button from "@/Components/Forms/Buttons/Button.vue";
+import Input from "@/Components/Forms/Inputs/Input.vue";
+import { useForm, usePage } from "@inertiajs/inertia-vue3";
 import { ref } from "vue";
 
 const tabs = [
@@ -260,14 +93,24 @@ const tabs = [
     href: route("dashboard.settings.general"),
     current: true,
   },
-  {name: "Password", href: "#", current: false},
-  {name: "Notifications", href: "#", current: false},
+  {
+    name: "Password", href: "#", current: false
+  },
+  {
+    name: "Notifications", href: "#", current: false
+  },
   {
     name: "System Status",
     href: route("dashboard.settings.system-status"),
     current: false,
   },
 ];
+
+
+let form = useForm({
+  name: usePage().props.value.auth.user.name,
+  email: usePage().props.value.auth.user.email,
+});
 
 const automaticTimezoneEnabled = ref(true);
 const autoUpdateApplicantDataEnabled = ref(false);
