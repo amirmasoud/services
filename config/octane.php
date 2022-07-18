@@ -178,7 +178,7 @@ return [
     */
 
     'watch' => [
-        'app',
+        'cloud',
         'bootstrap',
         'config',
         'database',

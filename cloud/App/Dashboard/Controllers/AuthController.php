@@ -3,32 +3,35 @@
 namespace App\Dashboard\Controllers;
 
 use Inertia\Inertia;
-use App\Enums\ProviderEnum;
+use Inertia\Response;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Domain\Users\Models\User;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use Laravel\Socialite\Facades\Socialite;
-use App\Http\Requests\CallbackProviderRequest;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Contracts\Foundation\Application;
 use App\Http\Requests\Auth\RegisterWithEmailRequest;
 
 class AuthController extends Controller
 {
     public string $redirectTo = '/dashboard';
 
-    public function loginForm(): \Inertia\Response
+    public function loginForm(): Response
     {
-        return Inertia::render('Auth/Login', [
-            'github' => Socialite::driver('github')->redirect()->getTargetUrl(),
-            'google' => Socialite::driver('google')->redirect()->getTargetUrl(),
-        ]);
+        return Inertia::render('Auth/Login');
     }
 
-    public function registerForm(Request $request)
+    public function registerForm(Request $request): Response
     {
         return Inertia::render('Auth/Register');
     }
 
-    public function registerWithEmail(RegisterWithEmailRequest $request)
+    public function registerWithEmail(RegisterWithEmailRequest $request): RedirectResponse
     {
         User::create($request->validated());
 
@@ -43,7 +46,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): Redirector|Application|RedirectResponse
     {
         Auth::logout();
 
@@ -54,7 +57,7 @@ class AuthController extends Controller
         return redirect('/login')->with('message', 'Successfully singed out.');
     }
 
-    public function loginWithEmail(Request $request): \Illuminate\Http\RedirectResponse
+    public function loginWithEmail(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -70,5 +73,56 @@ class AuthController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
+    }
+
+    public function forgotPasswordForm(): Response
+    {
+        return Inertia::render('Auth/ForgotPassword');
+    }
+
+    public function forgotPasswordWithEmail(Request $request): RedirectResponse
+    {
+        $request->validate(['email' => 'required', 'email']);
+
+        Password::sendResetLink(
+            $request->only('email')
+        );
+
+        session()->flash('message', __('If there is an account associated with this email, you will receive an email with a link to reset your password.'));
+
+        return back();
+    }
+
+    public function resetPasswordForm(string $token): Response
+    {
+        return Inertia::render('Auth/ResetPassword', ['token' => $token]);
+    }
+
+    public function resetPassword(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password),
+                ])->setRememberToken(Str::random(60));
+
+                $user->save();
+
+                event(new PasswordReset($user));
+            }
+        );
+
+        session()->flash('message', __($status));
+
+        return $status === Password::PASSWORD_RESET
+            ? redirect()->route('login')->with('status', __($status))
+            : back()->withErrors(['email' => [__($status)]]);
     }
 }

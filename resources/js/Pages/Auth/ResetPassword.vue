@@ -3,7 +3,7 @@
     <AppHead title="Login"/>
     <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div class="max-w-md w-full space-y-8">
-        <form class="mt-8 space-y-6" @submit.prevent="form.post($route('login'))">
+        <form class="mt-8 space-y-6" @submit.prevent="form.post($route('password.update'))">
           <Input
             v-model="form.email"
             :form="form"
@@ -22,23 +22,19 @@
             type="password"
           />
 
-          <div class="flex items-center justify-between">
-            <Checkbox
-              id="remember"
-              v-model="form.remember"
-              label="Remember me"
-              name="remember"
-            />
+          <Input
+            v-model="form.password_confirmation"
+            :form="form"
+            label="Password confirmation"
+            name="password_confirmation"
+            placeholder="Password confirmation"
+            type="password"
+          />
 
-            <div class="text-sm">
-              <Link
-                :href="$route('password.request')"
-                class="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                Forgot your password?
-              </Link>
-            </div>
-          </div>
+          <Input
+            v-model="form.token"
+            type="hidden"
+          />
 
           <div>
             <Button
@@ -46,7 +42,7 @@
               :form="form"
               type="submit"
             >
-              Login
+              Reset Password
             </Button>
           </div>
         </form>
@@ -58,13 +54,20 @@
 <script setup>
 import AppHead from "@/Components/AppHead.vue";
 import Button from "@/Components/Forms/Buttons/Button.vue";
-import Checkbox from "@/Components/Forms/Inputs/Checkbox.vue";
 import Input from "@/Components/Forms/Inputs/Input.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
+
+const props = defineProps({
+  token: {
+    type: String,
+    required: true,
+  },
+})
 
 let form = useForm({
   email: null,
   password: null,
-  remember: false,
+  password_confirmation: null,
+  token: props.token,
 });
 </script>
