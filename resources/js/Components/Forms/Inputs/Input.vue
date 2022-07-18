@@ -20,6 +20,7 @@
         :value="modelValue"
         class="shadow-sm block w-full sm:text-sm rounded-md"
         @input="$emit('update:modelValue', $event.target.value)"
+        @keydown="form.clearErrors(name)"
       />
     </div>
     <p
