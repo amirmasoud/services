@@ -17,6 +17,11 @@
 import Input from "@/Components/Forms/Inputs/Input.vue";
 
 defineProps({
+  /**
+   * @property {String} name
+   * @property {String} label
+   * @property {String} value
+   */
   filter: Object,
 });
 </script>
