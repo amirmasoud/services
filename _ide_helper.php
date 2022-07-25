@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.21.0.
+ * Generated for Laravel 9.21.6.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -7333,7 +7333,7 @@
      * @method static \Illuminate\Http\Client\PendingRequest asJson()
      * @method static \Illuminate\Http\Client\PendingRequest asMultipart()
      * @method static \Illuminate\Http\Client\PendingRequest async()
-     * @method static \Illuminate\Http\Client\PendingRequest attach(string|array $name, string $contents = '', string|null $filename = null, array $headers = [])
+     * @method static \Illuminate\Http\Client\PendingRequest attach(string|array $name, string|resource $contents = '', string|null $filename = null, array $headers = [])
      * @method static \Illuminate\Http\Client\PendingRequest baseUrl(string $url)
      * @method static \Illuminate\Http\Client\PendingRequest beforeSending(callable $callback)
      * @method static \Illuminate\Http\Client\PendingRequest bodyFormat(string $format)
@@ -14825,6 +14825,17 @@
                         return $instance->url($path);
         }
                     /**
+         * Determine if temporary URLs can be generated.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function providesTemporaryUrls()
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
+                        return $instance->providesTemporaryUrls();
+        }
+                    /**
          * Get a temporary URL for the file at the given path.
          *
          * @param string $path
@@ -16640,18 +16651,7 @@
      
 }
 
-        namespace Laravel\Horizon { 
-            /**
-     * 
-     *
-     */ 
-        class Horizon {
-         
-    }
-     
-}
-
-    namespace Laravel\Octane\Facades { 
+        namespace Laravel\Octane\Facades { 
             /**
      * 
      *
@@ -16795,138 +16795,6 @@
         {
                         /** @var \Laravel\Octane\Octane $instance */
                         return $instance->tick($key, $callback, $seconds, $immediate);
-        }
-         
-    }
-     
-}
-
-    namespace Laravel\Socialite\Facades { 
-            /**
-     * 
-     *
-     * @see \Laravel\Socialite\SocialiteManager
-     */ 
-        class Socialite {
-                    /**
-         * Get a driver instance.
-         *
-         * @param string $driver
-         * @return mixed 
-         * @static 
-         */ 
-        public static function with($driver)
-        {
-                        /** @var \Laravel\Socialite\SocialiteManager $instance */
-                        return $instance->with($driver);
-        }
-                    /**
-         * Build an OAuth 2 provider instance.
-         *
-         * @param string $provider
-         * @param array $config
-         * @return \Laravel\Socialite\Two\AbstractProvider 
-         * @static 
-         */ 
-        public static function buildProvider($provider, $config)
-        {
-                        /** @var \Laravel\Socialite\SocialiteManager $instance */
-                        return $instance->buildProvider($provider, $config);
-        }
-                    /**
-         * Format the server configuration.
-         *
-         * @param array $config
-         * @return array 
-         * @static 
-         */ 
-        public static function formatConfig($config)
-        {
-                        /** @var \Laravel\Socialite\SocialiteManager $instance */
-                        return $instance->formatConfig($config);
-        }
-                    /**
-         * Forget all of the resolved driver instances.
-         *
-         * @return \Laravel\Socialite\SocialiteManager 
-         * @static 
-         */ 
-        public static function forgetDrivers()
-        {
-                        /** @var \Laravel\Socialite\SocialiteManager $instance */
-                        return $instance->forgetDrivers();
-        }
-                    /**
-         * Set the container instance used by the manager.
-         *
-         * @param \Illuminate\Contracts\Container\Container $container
-         * @return \Laravel\Socialite\SocialiteManager 
-         * @static 
-         */ 
-        public static function setContainer($container)
-        {
-                        /** @var \Laravel\Socialite\SocialiteManager $instance */
-                        return $instance->setContainer($container);
-        }
-                    /**
-         * Get the default driver name.
-         *
-         * @return string 
-         * @throws \InvalidArgumentException
-         * @static 
-         */ 
-        public static function getDefaultDriver()
-        {
-                        /** @var \Laravel\Socialite\SocialiteManager $instance */
-                        return $instance->getDefaultDriver();
-        }
-                    /**
-         * Get a driver instance.
-         *
-         * @param string|null $driver
-         * @return mixed 
-         * @throws \InvalidArgumentException
-         * @static 
-         */ 
-        public static function driver($driver = null)
-        {            //Method inherited from \Illuminate\Support\Manager         
-                        /** @var \Laravel\Socialite\SocialiteManager $instance */
-                        return $instance->driver($driver);
-        }
-                    /**
-         * Register a custom driver creator Closure.
-         *
-         * @param string $driver
-         * @param \Closure $callback
-         * @return \Laravel\Socialite\SocialiteManager 
-         * @static 
-         */ 
-        public static function extend($driver, $callback)
-        {            //Method inherited from \Illuminate\Support\Manager         
-                        /** @var \Laravel\Socialite\SocialiteManager $instance */
-                        return $instance->extend($driver, $callback);
-        }
-                    /**
-         * Get all of the created "drivers".
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function getDrivers()
-        {            //Method inherited from \Illuminate\Support\Manager         
-                        /** @var \Laravel\Socialite\SocialiteManager $instance */
-                        return $instance->getDrivers();
-        }
-                    /**
-         * Get the container instance used by the manager.
-         *
-         * @return \Illuminate\Contracts\Container\Container 
-         * @static 
-         */ 
-        public static function getContainer()
-        {            //Method inherited from \Illuminate\Support\Manager         
-                        /** @var \Laravel\Socialite\SocialiteManager $instance */
-                        return $instance->getContainer();
         }
          
     }
@@ -17305,136 +17173,6 @@
         {
                         /** @var \Spatie\FlareClient\Flare $instance */
                         return $instance->group($groupName, $properties);
-        }
-         
-    }
-     
-}
-
-    namespace Touhidurabir\StubGenerator\Facades { 
-            /**
-     * 
-     *
-     */ 
-        class StubGenerator {
-                    /**
-         * The stub file from which to generate file
-         *
-         * @param string $stubPath
-         * @param bool $asFullPath
-         * @return self 
-         * @static 
-         */ 
-        public static function from($stubPath, $asFullPath = false)
-        {
-                        /** @var \Touhidurabir\StubGenerator\StubGenerator $instance */
-                        return $instance->from($stubPath, $asFullPath);
-        }
-                    /**
-         * The path location to store generated file
-         *
-         * @param string $storePath
-         * @param bool $createIfNotExist
-         * @param bool $asFullPath
-         * @return self 
-         * @static 
-         */ 
-        public static function to($storePath, $createIfNotExist = false, $asFullPath = false)
-        {
-                        /** @var \Touhidurabir\StubGenerator\StubGenerator $instance */
-                        return $instance->to($storePath, $createIfNotExist, $asFullPath);
-        }
-                    /**
-         * The name of the generating file
-         *
-         * @param string $generatingFileName
-         * @return self 
-         * @static 
-         */ 
-        public static function as($generatingFileName)
-        {
-                        /** @var \Touhidurabir\StubGenerator\StubGenerator $instance */
-                        return $instance->as($generatingFileName);
-        }
-                    /**
-         * The name of the generating file
-         *
-         * @param string $generatingFileExtension
-         * @return self 
-         * @static 
-         */ 
-        public static function ext($generatingFileExtension)
-        {
-                        /** @var \Touhidurabir\StubGenerator\StubGenerator $instance */
-                        return $instance->ext($generatingFileExtension);
-        }
-                    /**
-         * Determine if the generated file has no extension
-         *
-         * @return self 
-         * @static 
-         */ 
-        public static function noExt()
-        {
-                        /** @var \Touhidurabir\StubGenerator\StubGenerator $instance */
-                        return $instance->noExt();
-        }
-                    /**
-         * The replaceable key list in the stub file for generating file
-         *
-         * @param array  stubReplacers
-         * @return self 
-         * @static 
-         */ 
-        public static function withReplacers($stubReplacers = [])
-        {
-                        /** @var \Touhidurabir\StubGenerator\StubGenerator $instance */
-                        return $instance->withReplacers($stubReplacers);
-        }
-                    /**
-         * Should replace an existing generating file on new file generation
-         *
-         * @param bool  replace
-         * @return self 
-         * @static 
-         */ 
-        public static function replace($replace)
-        {
-                        /** @var \Touhidurabir\StubGenerator\StubGenerator $instance */
-                        return $instance->replace($replace);
-        }
-                    /**
-         * Save the the generated file
-         *
-         * @return bool 
-         * @static 
-         */ 
-        public static function save()
-        {
-                        /** @var \Touhidurabir\StubGenerator\StubGenerator $instance */
-                        return $instance->save();
-        }
-                    /**
-         * Download the file
-         *
-         * @return \Illuminate\Support\Facades\Response 
-         * @static 
-         */ 
-        public static function download()
-        {
-                        /** @var \Touhidurabir\StubGenerator\StubGenerator $instance */
-                        return $instance->download();
-        }
-                    /**
-         * Get the generated file content
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function toString()
-        {
-                        /** @var \Touhidurabir\StubGenerator\StubGenerator $instance */
-                        return $instance->toString();
         }
          
     }
@@ -21358,11 +21096,8 @@ namespace  {
             class URL extends \Illuminate\Support\Facades\URL {}
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
-            class Horizon extends \Laravel\Horizon\Horizon {}
             class Octane extends \Laravel\Octane\Facades\Octane {}
-            class Socialite extends \Laravel\Socialite\Facades\Socialite {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
-            class ModelRepository extends \Touhidurabir\StubGenerator\Facades\StubGenerator {}
      
 }
 
