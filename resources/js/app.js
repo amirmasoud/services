@@ -28,7 +28,7 @@ const messages = {
   },
 };
 
-createInertiaApp({
+await createInertiaApp({
   resolve: async (name) => {
     const page = (
       await resolvePageComponent(
