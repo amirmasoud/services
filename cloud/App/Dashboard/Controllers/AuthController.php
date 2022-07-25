@@ -15,7 +15,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\Foundation\Application;
-use App\Http\Requests\Auth\RegisterWithEmailRequest;
+use Domain\Users\Requests\RegisterWithEmailRequest;
 
 class AuthController extends Controller
 {

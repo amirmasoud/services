@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace Domain\Users\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,9 +24,9 @@ class RegisterWithEmailRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed',
-            'name' => 'required|max:255',
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'min:6', 'confirmed'],
+            'name' => ['required', 'max:255'],
         ];
     }
 }

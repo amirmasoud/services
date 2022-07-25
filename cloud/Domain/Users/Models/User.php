@@ -3,21 +3,15 @@
 namespace Domain\Users\Models;
 
 use Eloquent;
-use Domain\Sites\Models\Site;
-use Domain\Sites\Models\Stack;
 use Illuminate\Support\Carbon;
-use Domain\Sites\Models\Server;
-use Laravel\Sanctum\HasApiTokens;
 use Domain\Users\Casts\SettingsCast;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\PersonalAccessToken;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Domain\Users\QueryBuilders\UserQueryBuilder;
 use Illuminate\Notifications\DatabaseNotification;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Domain\Users\DataTransferObjects\UserSettingsData;
@@ -47,14 +41,6 @@ use Illuminate\Notifications\DatabaseNotificationCollection;
  * @property-read ?int $permissions_count
  * @property-read Collection|\Spatie\Permission\Models\Role[] $roles
  * @property-read ?int $roles_count
- * @property-read Collection|Server[] $servers
- * @property-read ?int $servers_count
- * @property-read Collection|Site[] $sites
- * @property-read ?int $sites_count
- * @property-read Collection|Stack[] $stacks
- * @property-read ?int $stacks_count
- * @property-read Collection|PersonalAccessToken[] $tokens
- * @property-read ?int $tokens_count
  * @method static UserFactory factory(...$parameters)
  * @method static UserQueryBuilder|User newModelQuery()
  * @method static UserQueryBuilder|User newQuery()
@@ -79,7 +65,6 @@ use Illuminate\Notifications\DatabaseNotificationCollection;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens;
     use HasFactory;
     use Notifiable;
     use SoftDeletes;
@@ -106,22 +91,6 @@ class User extends Authenticatable
     public static function boot()
     {
         parent::boot();
-    }
-
-
-    public function servers(): HasMany
-    {
-        return $this->hasMany(Server::class);
-    }
-
-    public function stacks(): HasMany
-    {
-        return $this->hasMany(Stack::class);
-    }
-
-    public function sites(): HasMany
-    {
-        return $this->hasMany(Site::class);
     }
 
     public function newEloquentBuilder($query): UserQueryBuilder

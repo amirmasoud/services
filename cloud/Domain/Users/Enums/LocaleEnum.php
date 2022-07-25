@@ -9,7 +9,7 @@ enum LocaleEnum: string
     public function label(): string
     {
         return match ($this) {
-            self::EN_US => 'English (US)',
+            self::EN_US => __('English (US)'),
         };
     }
 }
