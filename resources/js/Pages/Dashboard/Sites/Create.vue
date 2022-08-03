@@ -208,7 +208,7 @@
 import AppHead from "@/Components/AppHead.vue";
 import Button from "@/Components/Button.vue";
 import DashboardMain from "@/Components/DashboardMain.vue";
-import Input from "@/Components/Forms/Inputs/Input.vue";
+import Input from "@/Components/Forms/Inputs/InputForm.vue";
 import {
   RadioGroup,
   RadioGroupDescription,

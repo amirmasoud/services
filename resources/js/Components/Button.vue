@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import Spinner from "@/Components/Icons/Spinner.vue";
+import Spinner from "@/Components/Icons/SpinnerIcon.vue";
 import { TransitionRoot } from "@headlessui/vue";
 
 defineProps({

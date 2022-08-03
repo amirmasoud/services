@@ -50,7 +50,7 @@
               </div>
             </TransitionChild>
             <div class="flex-shrink-0 flex items-center px-4">
-              <Logo alt="Cloud" class="h-8 w-auto text-indigo-600"/>
+              <cloud-logo alt="Cloud" class="h-8 w-auto text-indigo-600"/>
               <span class="pl-1 font-semibold font-sans text-indigo-800"
               >Cloud</span
               >
@@ -131,7 +131,7 @@
     <div class="hidden lg:flex lg:flex-shrink-0">
       <div class="flex flex-col w-64 pt-5 pb-4 bg-gray-100">
         <div class="flex items-center justify-center flex-shrink-0 px-6">
-          <Logo alt="Cloud" class="h-8 w-auto text-indigo-600"/>
+          <cloud-logo alt="Cloud" class="h-8 w-auto text-indigo-600"/>
           <span class="pl-1 font-semibold font-sans text-indigo-800"
           >Cloud</span
           >
@@ -435,7 +435,7 @@
 </template>
 
 <script setup>
-import Logo from "@/Shared/Logo.vue";
+import CloudLogo from "@/Components/CloudLogo.vue";
 import {
   Dialog,
   DialogOverlay,

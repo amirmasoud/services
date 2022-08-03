@@ -141,10 +141,10 @@
 <script setup>
 import AppHead from "@/Components/AppHead.vue";
 import DashboardMain from "@/Components/DashboardMain.vue";
-import Button from "@/Components/Forms/Buttons/Button.vue";
-import Input from "@/Components/Forms/Inputs/Input.vue";
-import Option from "@/Components/Forms/Inputs/Option.vue";
-import Textarea from "@/Components/Forms/Inputs/Textarea.vue";
+import Button from "@/Components/Forms/Buttons/ButtonForm.vue";
+import Input from "@/Components/Forms/Inputs/InputForm.vue";
+import Option from "@/Components/Forms/Inputs/OptionForm.vue";
+import Textarea from "@/Components/Forms/Inputs/TextareaForm.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 let form = useForm({

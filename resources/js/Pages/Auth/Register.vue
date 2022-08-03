@@ -138,12 +138,12 @@
 
 <script setup>
 import AppHead from "@/Components/AppHead.vue";
-import Button from "@/Components/Forms/Buttons/Button.vue";
-import Input from "@/Components/Forms/Inputs/Input.vue";
-import Facebook from "@/Components/Icons/Facebook.vue";
-import GitHub from "@/Components/Icons/GitHub.vue";
-import Google from "@/Components/Icons/Google.vue";
-import Twitter from "@/Components/Icons/Twitter.vue";
+import Button from "@/Components/Forms/Buttons/ButtonForm.vue";
+import Input from "@/Components/Forms/Inputs/InputForm.vue";
+import Facebook from "@/Components/Icons/FacebookIcon.vue";
+import GitHub from "@/Components/Icons/GitHubIcon.vue";
+import Google from "@/Components/Icons/GoogleIcon.vue";
+import Twitter from "@/Components/Icons/TwitterIcon.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 defineProps({

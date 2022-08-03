@@ -57,9 +57,9 @@
 
 <script setup>
 import AppHead from "@/Components/AppHead.vue";
-import Button from "@/Components/Forms/Buttons/Button.vue";
-import Checkbox from "@/Components/Forms/Inputs/Checkbox.vue";
-import Input from "@/Components/Forms/Inputs/Input.vue";
+import Button from "@/Components/Forms/Buttons/ButtonForm.vue";
+import Checkbox from "@/Components/Forms/Inputs/CheckboxForm.vue";
+import Input from "@/Components/Forms/Inputs/InputForm.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 let form = useForm({

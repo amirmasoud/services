@@ -32,7 +32,7 @@
 <script setup>
 import AppHead from "@/Components/AppHead.vue";
 import DashboardMain from "@/Components/DashboardMain.vue";
-import Input from "@/Components/Forms/Inputs/Input.vue";
+import Input from "@/Components/Forms/Inputs/InputForm.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 let form = useForm({

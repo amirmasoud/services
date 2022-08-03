@@ -82,8 +82,8 @@
 <script setup>
 import AppHead from "@/Components/AppHead.vue";
 import DashboardMain from "@/Components/DashboardMain.vue";
-import Button from "@/Components/Forms/Buttons/Button.vue";
-import Input from "@/Components/Forms/Inputs/Input.vue";
+import Button from "@/Components/Forms/Buttons/ButtonForm.vue";
+import Input from "@/Components/Forms/Inputs/InputForm.vue";
 import { useForm, usePage } from "@inertiajs/inertia-vue3";
 import { ref } from "vue";
 

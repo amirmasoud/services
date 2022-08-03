@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import Menu from "@/Components/Forms/Inputs/Menu.vue";
+import Menu from "@/Components/Forms/Inputs/MenuForm.vue";
 
 defineProps({
   filter: Object,
