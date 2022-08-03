@@ -2,8 +2,6 @@
 
 namespace App\Console;
 
-use Domain\Sites\Models\Site;
-use Domain\Sites\Jobs\ContainerStatusJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -18,7 +16,6 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('auth:clear-resets')->everyFifteenMinutes();
-        $schedule->call(fn () => ContainerStatusJob::dispatch(Site::first()))->everyMinute();
     }
 
     /**
