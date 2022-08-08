@@ -6,10 +6,10 @@ use Inertia\Inertia;
 use Inertia\Response;
 use App\Http\Controllers\Controller;
 
-class SettingController extends Controller
+class DashboardController extends Controller
 {
     public function general(): Response
     {
-        return Inertia::render('Dashboard/Settings/General');
+        return Inertia::render('Dashboard/Home');
     }
 }

@@ -7,6 +7,9 @@ use App\Dashboard\Controllers\AuthController;
 use App\Dashboard\Controllers\SettingController;
 use App\Dashboard\Controllers\PermissionController;
 
+/**
+ * Auth routes.
+ */
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'loginWithEmail']);
@@ -25,7 +28,6 @@ Route::prefix('dashboard')->middleware('auth')->name('dashboard.')->group(functi
     })->name('index');
 
     Route::get('/settings', [SettingController::class, 'general'])->name('settings.general');
-    Route::get('/settings/system-status', [SettingController::class, 'systemStatus'])->name('settings.system-status');
 
     Route::resource('users', UserController::class)->except('show');
     Route::name('users.')
