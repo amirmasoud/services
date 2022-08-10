@@ -446,7 +446,7 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
-import { CubeIcon, GlobeAltIcon, HomeIcon, KeyIcon, MenuAlt1Icon, ServerIcon, XIcon, } from "@heroicons/vue/outline";
+import { HomeIcon, KeyIcon, MenuAlt1Icon, XIcon, } from "@heroicons/vue/outline";
 import { CogIcon, SelectorIcon, UserIcon } from "@heroicons/vue/solid";
 import { ref } from "vue";
 
@@ -474,26 +474,6 @@ const navigation = [
         href: route("dashboard.users.permissions.index"),
         icon: KeyIcon,
         component: "Dashboard/Users/Permissions",
-      },
-    ],
-  },
-  {
-    name: "Sites",
-    href: route("dashboard.sites.index"),
-    icon: GlobeAltIcon,
-    component: "Dashboard/Sites",
-    submenu: [
-      {
-        name: "Servers",
-        href: route("dashboard.sites.servers.index"),
-        icon: ServerIcon,
-        component: "Dashboard/Sites/Servers",
-      },
-      {
-        name: "Stacks",
-        href: route("dashboard.sites.stacks.index"),
-        icon: CubeIcon,
-        component: "Dashboard/Sites/Stacks",
       },
     ],
   },

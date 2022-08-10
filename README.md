@@ -8,6 +8,11 @@ An opinionated Laravel template, it comes with a few extra:
 
 It uses DDD (Domain Driven Design) principles to create a clean and simple architecture.
 
+## Goals
+
+1. Create a working, testable and maintainable application.
+2. Do not reinvent the wheel.
+
 ## Keep it updated with upstream
 
 ## Helper functions
@@ -30,6 +35,7 @@ if (! function_exists('my_helper_function')) {
 <hr />
 
 References:
+
 1. [Laravel helper function](https://laravel.com/docs/helpers)
 2. [Creating Your Own PHP Helpers in a Laravel Project by Paul Redmond](https://laravel-news.com/creating-helpers)
 

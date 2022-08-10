@@ -1,10 +1,10 @@
 <?php
 
-use Inertia\Inertia;
 use App\Dashboard\Controllers\RoleController;
 use App\Dashboard\Controllers\UserController;
 use App\Dashboard\Controllers\AuthController;
 use App\Dashboard\Controllers\SettingController;
+use App\Dashboard\Controllers\DashboardController;
 use App\Dashboard\Controllers\PermissionController;
 
 /**
@@ -23,9 +23,7 @@ Route::middleware('guest')->group(function () {
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 Route::prefix('dashboard')->middleware('auth')->name('dashboard.')->group(function () {
-    Route::get('/', function () {
-        return Inertia::render('Dashboard/Home');
-    })->name('index');
+    Route::get('/', DashboardController::class)->name('index');
 
     Route::get('/settings', [SettingController::class, 'general'])->name('settings.general');
 

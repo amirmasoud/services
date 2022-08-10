@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
-    public function general(): Response
+    public function __invoke(): Response
     {
         return Inertia::render('Dashboard/Home');
     }

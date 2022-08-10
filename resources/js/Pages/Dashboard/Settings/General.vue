@@ -101,7 +101,6 @@ const tabs = [
   },
   {
     name: "System Status",
-    href: route("dashboard.settings.system-status"),
     current: false,
   },
 ];

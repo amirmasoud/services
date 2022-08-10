@@ -36,8 +36,6 @@ await createInertiaApp({
   setup({ el, App, props, plugin }) {
     const app = createApp({ render: () => h(App, props) });
 
-    console.log(props);
-
     const i18n = createI18n({
       locale: "ja",
       fallbackLocale: "en",
