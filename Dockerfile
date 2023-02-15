@@ -18,13 +18,28 @@ RUN \
 
 FROM php:8.2-cli-alpine3.17
 
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+
 RUN \
     apk update && \
-    apk add --no-cache linux-headers && \
-    docker-php-ext-install bcmath pcntl pdo_mysql sockets && \
+    apk add --no-cache supervisor nginx && \
+    apk add --no-cache --virtual .build-deps $PHPIZE_DEPS linux-headers libstdc++ curl-dev openssl-dev pcre-dev pcre2-dev zlib-dev && \
+    docker-php-ext-install sockets bcmath pcntl pdo_mysql && \
     docker-php-ext-enable pdo_mysql && \
-    rm -rf /var/cache/apk/* /tmp/* /usr/share/man /usr/src/php.tar.xz* && \
-    docker-php-source delete
+    docker-php-source extract && \
+    mkdir /usr/src/php/ext/openswoole && \
+    curl -sfL https://github.com/openswoole/ext-openswoole/archive/refs/tags/v22.0.0.tar.gz -o swoole.tar.gz && \
+    tar xfz swoole.tar.gz --strip-components=1 -C /usr/src/php/ext/openswoole && \
+    docker-php-ext-configure openswoole \
+        --enable-http2 \
+        --enable-mysqlnd \
+        --enable-openssl \
+        --enable-sockets \
+        --enable-hook-curl && \
+    docker-php-ext-install -j$(nproc) --ini-name zzz-docker-php-ext-openswoole.ini openswoole && \
+    rm -rf swoole.tar.gz /var/cache/apk/* /tmp/* /usr/share/man /usr/src/php.tar.xz* && \
+    docker-php-source delete && \
+    apk del .build-deps
 
 COPY /build/web/nginx/default.conf /etc/nginx/http.d/default.conf
 
