@@ -6,6 +6,7 @@ services:
     restart: always
     volumes:
       - .env:/var/www/.env
+      - ./storage:/var/ww/storage
     ports:
       - "8000:80"
     depends_on:
