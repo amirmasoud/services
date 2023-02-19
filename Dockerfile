@@ -18,8 +18,6 @@ RUN \
 
 FROM php:8.2-cli-alpine3.17
 
-COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
-
 RUN \
     apk update && \
     apk add --no-cache supervisor nginx && \
