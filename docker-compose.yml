@@ -6,7 +6,6 @@ services:
     restart: always
     volumes:
       - .env:/var/www/.env
-      - ./storage:/var/ww/storage
     ports:
       - "8000:80"
     depends_on:
@@ -14,10 +13,10 @@ services:
       - redis
     entrypoint: /var/www/build/entrypoint.sh
   redis:
-    image: redis:7.0.8-alpine3.17
+    image: redis:7-alpine3.17
     restart: always
   database:
-    image: mariadb:10.10.3
+    image: mariadb:10.11
     environment:
       - MARIADB_ROOT_PASSWORD=root
       - MARIADB_DATABASE=database
