@@ -48,3 +48,13 @@ Save screenshots of the application in the `screenshots` directory.
 Set your DockerHub username and password (todo on how on GitHub and DockerHub)
 
 ## End user documentation
+
+
+### Bash into container
+
+```bash
+docker run --rm -it \
+	--entrypoint sh \
+	--mount type=bind,source="$(pwd)"/.env,target=/var/www/.env \
+	amirmasoud/services:latest
+```
