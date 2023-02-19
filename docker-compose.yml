@@ -7,23 +7,23 @@ services:
     volumes:
       - .env:/var/www/.env
     ports:
-      - "80:80"
+      - "8000:80"
     depends_on:
       - database
       - redis
     entrypoint: /var/www/build/entrypoint.sh
   redis:
-    image: redis:7.0-alpine3.15
+    image: redis:7.0.8-alpine3.17
     restart: always
   database:
-    image: mariadb:10.8
+    image: mariadb:10.10.3
     environment:
       - MARIADB_ROOT_PASSWORD=root
       - MARIADB_DATABASE=database
       - MARIADB_USER=user
       - MARIADB_PASSWORD=password
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-u", "user", "-ppassword"]
+      test: [ "CMD", "mysqladmin", "ping", "-u", "user", "-ppassword" ]
       interval: 2s
       retries: 15
   # traefik:
