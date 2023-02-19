@@ -14,8 +14,9 @@
         "laravel/framework": "^v10.0",
         "laravel/octane": "^v1.4",
         "laravel/tinker": "^v2.8",
-        "spatie/laravel-data": "^3.1",
+        "predis/predis": "^2.1",
         "spatie/laravel-activitylog": "^4.7",
+        "spatie/laravel-data": "^3.1",
         "spatie/laravel-permission": "^5.9",
         "tightenco/ziggy": "^v1.5"
     },
