@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+php artisan key:generate
+
 php artisan migrate --step --no-interaction
 
 php artisan cache:clear

@@ -13,30 +13,30 @@
           <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 sm:col-span-4">
               <Input
-                v-model="form.name"
-                :form="form"
-                label="Name"
-                name="name"
+                  v-model="form.name"
+                  :form="form"
+                  label="Name"
+                  name="name"
               />
             </div>
 
             <div class="col-span-6 sm:col-span-4">
               <Input
-                v-model="form.email"
-                :form="form"
-                label="Email"
-                name="email"
-                type="email"
+                  v-model="form.email"
+                  :form="form"
+                  label="Email"
+                  name="email"
+                  type="email"
               />
             </div>
 
             <div class="col-span-6 sm:col-span-4">
               <Input
-                v-model="form.password"
-                :form="form"
-                label="Password"
-                name="password"
-                type="password"
+                  v-model="form.password"
+                  :form="form"
+                  label="Password"
+                  name="password"
+                  type="password"
               />
             </div>
 
@@ -55,7 +55,7 @@ import AppHead from "@/Components/AppHead.vue";
 import DashboardMain from "@/Components/DashboardMain.vue";
 import Button from "@/Components/Forms/Buttons/ButtonForm.vue";
 import Input from "@/Components/Forms/Inputs/InputForm.vue";
-import { useForm } from "@inertiajs/inertia-vue3";
+import {useForm} from "@inertiajs/vue3";
 
 let props = defineProps({
   resource: Object,

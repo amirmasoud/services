@@ -1,7 +1,7 @@
 <template>
   <div
-    v-if="records.data.length || props.filters.length"
-    class="flex flex-col sm:flex-row justify-between sm:items-end space-y-4 mb-4"
+      v-if="records.data.length || props.filters.length"
+      class="flex flex-col sm:flex-row justify-between sm:items-end space-y-4 mb-4"
   >
     <div v-for="(filter, index) in props.filters" :key="index">
       <InputFilter v-if="filter.type === 'input'" :filter="filter"/>
@@ -14,10 +14,10 @@
         <thead class="bg-gray-50">
         <tr>
           <th
-            v-for="field in fields"
-            :key="field.name"
-            class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
-            scope="col"
+              v-for="field in fields"
+              :key="field.name"
+              class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+              scope="col"
           >
             {{ field.label }}
           </th>
@@ -29,73 +29,73 @@
         <tbody class="bg-white divide-y divide-gray-200">
         <tr v-for="record in records.data" :key="record.id">
           <td
-            v-for="field in fields"
-            :key="field.name"
-            class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
+              v-for="field in fields"
+              :key="field.name"
+              class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
           >
             {{ record[field.name] }}
           </td>
           <td
-            class="py-4 px-6 space-x-6 text-sm font-medium text-right whitespace-nowrap"
+              class="py-4 px-6 space-x-6 text-sm font-medium text-right whitespace-nowrap"
           >
             <Link
-              v-if="actions.hasOwnProperty('details')"
-              :href="$route(actions.details.link, record)"
-              as="button"
-              class="text-indigo-600 hover:text-indigo-900"
-              method="get"
+                v-if="actions.hasOwnProperty('details')"
+                :href="$route(actions.details.link, record)"
+                as="button"
+                class="text-indigo-600 hover:text-indigo-900"
+                method="get"
             >Details
             </Link>
             <Link
-              v-if="actions.hasOwnProperty('edit')"
-              :href="$route(actions.edit.link, record)"
-              as="button"
-              class="text-indigo-600 hover:text-indigo-900"
-              method="get"
+                v-if="actions.hasOwnProperty('edit')"
+                :href="$route(actions.edit.link, record)"
+                as="button"
+                class="text-indigo-600 hover:text-indigo-900"
+                method="get"
             >Edit
             </Link>
             <Link
-              v-if="
+                v-if="
                   (record.hasOwnProperty('deleted_at') &&
                     !record.deleted_at &&
                     actions.hasOwnProperty('delete')) ||
                   (!record.hasOwnProperty('deleted_at') &&
                     actions.hasOwnProperty('delete'))
                 "
-              :disabled="
+                :disabled="
                   record.hasOwnProperty('can_delete') && !record.can_delete
                 "
-              :href="$route(actions.delete.link, record)"
-              as="button"
-              class="text-indigo-600 hover:text-indigo-900 disabled:opacity-50 disabled:cursor-not-allowed"
-              method="delete"
-              type="button"
+                :href="$route(actions.delete.link, record)"
+                as="button"
+                class="text-indigo-600 hover:text-indigo-900 disabled:opacity-50 disabled:cursor-not-allowed"
+                method="delete"
+                type="button"
             >Delete
             </Link>
             <Link
-              v-if="
+                v-if="
                   record.hasOwnProperty('deleted_at') &&
                   record.deleted_at &&
                   actions.hasOwnProperty('restore')
                 "
-              :href="$route(actions.restore.link, record)"
-              as="button"
-              class="text-indigo-600 hover:text-indigo-900"
-              method="post"
-              type="button"
+                :href="$route(actions.restore.link, record)"
+                as="button"
+                class="text-indigo-600 hover:text-indigo-900"
+                method="post"
+                type="button"
             >Restore
             </Link>
             <Link
-              v-if="
+                v-if="
                   record.hasOwnProperty('deleted_at') &&
                   record.deleted_at &&
                   actions.hasOwnProperty('force_delete')
                 "
-              :href="$route(actions.force_delete.link, record)"
-              as="button"
-              class="text-indigo-600 hover:text-indigo-900"
-              method="delete"
-              type="button"
+                :href="$route(actions.force_delete.link, record)"
+                as="button"
+                class="text-indigo-600 hover:text-indigo-900"
+                method="delete"
+                type="button"
             >Force delete
             </Link>
           </td>
@@ -115,24 +115,24 @@
       </p>
     </div>
     <div
-      class="relative justify-between items-center py-3 w-full sm:w-full mt-2"
+        class="relative justify-between items-center py-3 w-full sm:w-full mt-2"
     >
       <div class="flex md:hidden flex-1 justify-between content-center">
         <Component
-          :is="records.links.prev ? 'Link' : 'button'"
-          :class="{ 'cursor-not-allowed': !records.links.prev }"
-          :disabled="records.links.prev === null"
-          :href="records.links.prev"
-          class="inline-flex relative items-center py-2 px-4 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300 disabled:opacity-10"
+            :is="records.links.prev ? 'Link' : 'button'"
+            :class="{ 'cursor-not-allowed': !records.links.prev }"
+            :disabled="records.links.prev === null"
+            :href="records.links.prev"
+            class="inline-flex relative items-center py-2 px-4 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300 disabled:opacity-10"
         >
           Previous
         </Component>
         <Component
-          :is="records.links.next ? 'Link' : 'button'"
-          :class="{ 'cursor-not-allowed': !records.links.next }"
-          :disabled="records.links.next === null"
-          :href="records.links.next"
-          class="inline-flex relative items-center py-2 px-4 ml-3 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300 disabled:opacity-10"
+            :is="records.links.next ? 'Link' : 'button'"
+            :class="{ 'cursor-not-allowed': !records.links.next }"
+            :disabled="records.links.next === null"
+            :href="records.links.next"
+            class="inline-flex relative items-center py-2 px-4 ml-3 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300 disabled:opacity-10"
         >
           Next
         </Component>
@@ -143,20 +143,20 @@
     </div>
   </div>
   <NoResult
-    v-else-if="! records.data.length && filters.length"
-    :button="'reset filters'"
-    :description="'Nothing found with the supplied filters, try to change or reset them'"
-    :title="'No Result'"
-    class="mt-20"
-    @remove-filters="removeFilters()"
+      v-else-if="! records.data.length && filters.length"
+      :button="'reset filters'"
+      :description="'Nothing found with the supplied filters, try to change or reset them'"
+      :title="'No Result'"
+      class="mt-20"
+      @remove-filters="removeFilters()"
   />
   <Empty
-    v-else
-    :button="canCreate ? button : cannotCreateButton"
-    :description="canCreate ? description : cannotCreateDescription"
-    :link="canCreate ? $route(actions.create.link) : null"
-    :title="canCreate ? title : cannotCreateTitle"
-    class="mt-20"
+      v-else
+      :button="canCreate ? button : cannotCreateButton"
+      :description="canCreate ? description : cannotCreateDescription"
+      :link="canCreate ? $route(actions.create.link) : null"
+      :title="canCreate ? title : cannotCreateTitle"
+      class="mt-20"
   />
 </template>
 
@@ -166,9 +166,9 @@ import InputFilter from "@/Components/Filters/InputFilter.vue";
 import ListFilter from "@/Components/Filters/ListFilter.vue";
 import NoResult from "@/Components/NoResult.vue";
 import Paginator from "@/Components/Paginator.vue";
-import { Inertia } from "@inertiajs/inertia";
+import {router} from '@inertiajs/vue3'
 import debounce from "lodash/debounce";
-import { onMounted, onUnmounted, watch } from "vue";
+import {onMounted, onUnmounted, watch} from "vue";
 
 let props = defineProps({
   records: Object,
@@ -215,7 +215,7 @@ onMounted(() => {
 });
 
 let interval = setInterval(() => {
-  Inertia.reload({data: filterData, only: ["records"]});
+  router.reload({data: filterData, only: ["records"]});
 }, 10000);
 
 let removeFilters = () => {
@@ -227,16 +227,16 @@ onUnmounted(() => {
 });
 
 watch(
-  props.filters,
-  debounce(function (filter) {
-    for (let idx in props.filters) {
-      filterData[filter[idx].name] = filter[idx].value;
-    }
-    Inertia.get(props.endpoint, filterData, {
-      preserveState: true,
-      replace: true,
-      only: ["records"],
-    });
-  }, 300)
+    props.filters,
+    debounce(function (filter) {
+      for (let idx in props.filters) {
+        filterData[filter[idx].name] = filter[idx].value;
+      }
+      Inertia.get(props.endpoint, filterData, {
+        preserveState: true,
+        replace: true,
+        only: ["records"],
+      });
+    }, 300)
 );
 </script>

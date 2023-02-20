@@ -22,27 +22,20 @@ RUN \
     apk update && \
     apk add --no-cache supervisor nginx && \
     apk add --no-cache --virtual .build-deps $PHPIZE_DEPS linux-headers libstdc++ curl-dev openssl-dev pcre-dev pcre2-dev zlib-dev && \
-    pecl install redis && \
+    pecl install redis openswoole && \
     docker-php-ext-install sockets bcmath pcntl pdo_mysql && \
-    docker-php-ext-enable pdo_mysql && \
-    docker-php-ext-enable redis && \
-    docker-php-source extract && \
-    mkdir /usr/src/php/ext/openswoole && \
-    curl -sfL https://github.com/openswoole/ext-openswoole/archive/refs/tags/v22.0.0.tar.gz -o swoole.tar.gz && \
-    tar xfz swoole.tar.gz --strip-components=1 -C /usr/src/php/ext/openswoole && \
-    docker-php-ext-configure openswoole \
-        --enable-http2 \
-        --enable-mysqlnd \
-        --enable-openssl \
-        --enable-sockets \
-        --enable-hook-curl && \
-    docker-php-ext-install -j$(nproc) --ini-name zzz-docker-php-ext-openswoole.ini openswoole && \
-    rm -rf swoole.tar.gz /var/cache/apk/* /tmp/* /usr/share/man /usr/src/php.tar.xz* && \
-    docker-php-source delete && \
+    docker-php-ext-enable pdo_mysql redis openswoole && \
     apk del .build-deps .build-deps $PHPIZE_DEPS linux-headers libstdc++ curl-dev openssl-dev pcre-dev pcre2-dev zlib-dev && \
     rm -rf /tmp/pear
 
+RUN apk add vim
+
+#RUN mkdir -p /var/lib/nginx/tmp /var/log/nginx \
+#    && chown -R www-data:www-data /var/lib/nginx /var/log/nginx \
+#    && chmod -R 755 /var/lib/nginx /var/log/nginx
+
 COPY /build/web/nginx/default.conf /etc/nginx/http.d/default.conf
+COPY /build/web/nginx/nginx.conf /etc/nginx/nginx.conf
 
 COPY /build/web/supervisord.conf /etc/supervisor/supervisord.conf
 
@@ -52,8 +45,10 @@ COPY --from=node --chown=www-data:www-data /var/www /var/www
 
 WORKDIR /var/www
 
-RUN cp .env.example .env
+RUN cp .env.example .env && chmod -R guo+w storage && chmod -R guo+w bootstrap/cache
 
-EXPOSE 80
+#USER www-data
+
+EXPOSE 8000
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]

@@ -5,35 +5,35 @@
       <div class="max-w-md w-full space-y-8">
         <form class="mt-8 space-y-6" @submit.prevent="form.post($route('login'))">
           <Input
-            v-model="form.email"
-            :form="form"
-            label="Email address"
-            name="email"
-            placeholder="Email address"
-            type="email"
+              v-model="form.email"
+              :form="form"
+              label="Email address"
+              name="email"
+              placeholder="Email address"
+              type="email"
           />
 
           <Input
-            v-model="form.password"
-            :form="form"
-            label="Password"
-            name="password"
-            placeholder="Password"
-            type="password"
+              v-model="form.password"
+              :form="form"
+              label="Password"
+              name="password"
+              placeholder="Password"
+              type="password"
           />
 
           <div class="flex items-center justify-between">
             <Checkbox
-              id="remember"
-              v-model="form.remember"
-              label="Remember me"
-              name="remember"
+                id="remember"
+                v-model="form.remember"
+                label="Remember me"
+                name="remember"
             />
 
             <div class="text-sm">
               <Link
-                :href="$route('password.request')"
-                class="font-medium text-indigo-600 hover:text-indigo-500"
+                  :href="$route('password.request')"
+                  class="font-medium text-indigo-600 hover:text-indigo-500"
               >
                 Forgot your password?
               </Link>
@@ -42,9 +42,9 @@
 
           <div>
             <Button
-              :disabled="form.processing"
-              :form="form"
-              type="submit"
+                :disabled="form.processing"
+                :form="form"
+                type="submit"
             >
               Login
             </Button>
@@ -60,7 +60,7 @@ import AppHead from "@/Components/AppHead.vue";
 import Button from "@/Components/Forms/Buttons/ButtonForm.vue";
 import Checkbox from "@/Components/Forms/Inputs/CheckboxForm.vue";
 import Input from "@/Components/Forms/Inputs/InputForm.vue";
-import { useForm } from "@inertiajs/inertia-vue3";
+import {useForm} from "@inertiajs/vue3";
 
 let form = useForm({
   email: null,

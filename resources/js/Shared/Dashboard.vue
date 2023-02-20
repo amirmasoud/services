@@ -2,47 +2,47 @@
   <div class="relative h-screen flex overflow-hidden bg-gray-100">
     <TransitionRoot :show="sidebarOpen" as="template">
       <Dialog
-        as="div"
-        class="fixed inset-0 flex z-40 lg:hidden"
-        @close="sidebarOpen = false"
+          as="div"
+          class="fixed inset-0 flex z-40 lg:hidden"
+          @close="sidebarOpen = false"
       >
         <TransitionChild
-          as="template"
-          enter="transition-opacity ease-linear duration-300"
-          enter-from="opacity-0"
-          enter-to="opacity-100"
-          leave="transition-opacity ease-linear duration-300"
-          leave-from="opacity-100"
-          leave-to="opacity-0"
+            as="template"
+            enter="transition-opacity ease-linear duration-300"
+            enter-from="opacity-0"
+            enter-to="opacity-100"
+            leave="transition-opacity ease-linear duration-300"
+            leave-from="opacity-100"
+            leave-to="opacity-0"
         >
           <DialogOverlay class="fixed inset-0 bg-gray-600 bg-opacity-75"/>
         </TransitionChild>
         <TransitionChild
-          as="template"
-          enter="transition ease-in-out duration-300 transform"
-          enter-from="-translate-x-full"
-          enter-to="translate-x-0"
-          leave="transition ease-in-out duration-300 transform"
-          leave-from="translate-x-0"
-          leave-to="-translate-x-full"
+            as="template"
+            enter="transition ease-in-out duration-300 transform"
+            enter-from="-translate-x-full"
+            enter-to="translate-x-0"
+            leave="transition ease-in-out duration-300 transform"
+            leave-from="translate-x-0"
+            leave-to="-translate-x-full"
         >
           <div
-            class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white"
+              class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white"
           >
             <TransitionChild
-              as="template"
-              enter="ease-in-out duration-300"
-              enter-from="opacity-0"
-              enter-to="opacity-100"
-              leave="ease-in-out duration-300"
-              leave-from="opacity-100"
-              leave-to="opacity-0"
+                as="template"
+                enter="ease-in-out duration-300"
+                enter-from="opacity-0"
+                enter-to="opacity-100"
+                leave="ease-in-out duration-300"
+                leave-from="opacity-100"
+                leave-to="opacity-0"
             >
               <div class="absolute top-0 right-0 -mr-12 pt-2">
                 <button
-                  class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                  type="button"
-                  @click="sidebarOpen = false"
+                    class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                    type="button"
+                    @click="sidebarOpen = false"
                 >
                   <span class="sr-only">Close sidebar</span>
                   <XIcon aria-hidden="true" class="h-6 w-6 text-white"/>
@@ -60,57 +60,57 @@
                 <div class="space-y-1">
                   <div v-for="item in navigation" :key="item.name">
                     <Link
-                      :aria-current="
+                        :aria-current="
                         $page.component.startsWith(item.component)
                           ? 'page'
                           : undefined
                       "
-                      :class="[
+                        :class="[
                         $page.component.startsWith(item.component)
                           ? 'bg-gray-100 text-gray-900'
                           : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
                         'group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md',
                       ]"
-                      :href="item.href"
+                        :href="item.href"
                     >
                       <component
-                        :is="item.icon"
-                        :class="[
+                          :is="item.icon"
+                          :class="[
                           $page.component.startsWith(item.component)
                             ? 'text-gray-500'
                             : 'text-gray-400 group-hover:text-gray-500',
                           'mr-3 flex-shrink-0 h-6 w-6',
                         ]"
-                        aria-hidden="true"
+                          aria-hidden="true"
                       />
                       {{ item.name }}
                     </Link>
                     <div class="flex flex-col space-y-1 my-2 ml-6">
                       <Link
-                        v-for="subItem in item.submenu"
-                        :key="subItem.name"
-                        :aria-current="
+                          v-for="subItem in item.submenu"
+                          :key="subItem.name"
+                          :aria-current="
                           $page.component.startsWith(subItem.component)
                             ? 'page'
                             : undefined
                         "
-                        :class="[
+                          :class="[
                           $page.component.startsWith(subItem.component)
                             ? 'bg-gray-200 text-gray-900'
                             : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
                           'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
                         ]"
-                        :href="subItem.href"
+                          :href="subItem.href"
                       >
                         <component
-                          :is="subItem.icon"
-                          :class="[
+                            :is="subItem.icon"
+                            :class="[
                             $page.component.startsWith(subItem.component)
                               ? 'text-gray-500'
                               : 'text-gray-400 group-hover:text-gray-500',
                             'mr-3 flex-shrink-0 h-5 w-5',
                           ]"
-                          aria-hidden="true"
+                            aria-hidden="true"
                         />
                         {{ subItem.name }}
                       </Link>
@@ -142,23 +142,23 @@
           <Menu as="div" class="px-3 mt-6 relative inline-block text-left">
             <div>
               <MenuButton
-                class="group w-full bg-gray-100 rounded-md px-3.5 py-2 text-sm text-left font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-500"
+                  class="group w-full bg-gray-100 rounded-md px-3.5 py-2 text-sm text-left font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-500"
               >
                 <span class="flex w-full justify-between items-center">
                   <span
-                    class="flex min-w-0 items-center justify-between space-x-3"
+                      class="flex min-w-0 items-center justify-between space-x-3"
                   >
                     <img
-                      :src="
+                        :src="
                         $page.props.auth.user.profile ||
                         'https://images.unsplash.com/photo-1607785330196-fdbe6f36c8fa?ixlib=rb-1.2.1&q=80&fm=jpg&cs=tinysrgb&w=256&h=256&fit=facearea'
                       "
-                      alt=""
-                      class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
+                        alt=""
+                        class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
                     />
                     <span class="flex-1 flex flex-col min-w-0">
                       <span
-                        class="text-gray-900 text-sm font-medium truncate"
+                          class="text-gray-900 text-sm font-medium truncate"
                       >{{ $page.props.auth.user.name }}</span
                       >
                       <span class="text-gray-500 text-sm truncate"
@@ -167,51 +167,51 @@
                     </span>
                   </span>
                   <SelectorIcon
-                    aria-hidden="true"
-                    class="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                      aria-hidden="true"
+                      class="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                   />
                 </span>
               </MenuButton>
             </div>
             <transition
-              enter-active-class="transition ease-out duration-100"
-              enter-from-class="transform opacity-0 scale-95"
-              enter-to-class="transform opacity-100 scale-100"
-              leave-active-class="transition ease-in duration-75"
-              leave-from-class="transform opacity-100 scale-100"
-              leave-to-class="transform opacity-0 scale-95"
+                enter-active-class="transition ease-out duration-100"
+                enter-from-class="transform opacity-0 scale-95"
+                enter-to-class="transform opacity-100 scale-100"
+                leave-active-class="transition ease-in duration-75"
+                leave-from-class="transform opacity-100 scale-100"
+                leave-to-class="transform opacity-0 scale-95"
             >
               <MenuItems
-                class="z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none"
+                  class="z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none"
               >
                 <div class="py-1">
                   <MenuItem v-slot="{ active }">
                     <Link
-                      :class="[
+                        :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
-                      :href="$route('dashboard.settings.general')"
+                        :href="$route('dashboard.settings.general')"
                     >View profile
                     </Link>
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
                     <Link
-                      :class="[
+                        :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
-                      :href="$route('dashboard.settings.general')"
+                        :href="$route('dashboard.settings.general')"
                     >Settings
                     </Link>
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
                     <Link
-                      :class="[
+                        :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
-                      :href="$route('dashboard.settings.general')"
+                        :href="$route('dashboard.settings.general')"
                     >Notifications
                     </Link>
                   </MenuItem>
@@ -219,11 +219,11 @@
                 <div class="py-1">
                   <MenuItem v-slot="{ active }">
                     <a
-                      :class="[
+                        :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
-                      href="#"
+                        href="#"
                     >Support</a
                     >
                   </MenuItem>
@@ -231,12 +231,12 @@
                 <div class="py-1">
                   <MenuItem v-slot="{ active }">
                     <Link
-                      :class="[
+                        :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
-                      :href="$route('logout')"
-                      method="post"
+                        :href="$route('logout')"
+                        method="post"
                     >Logout
                     </Link>
                   </MenuItem>
@@ -248,60 +248,60 @@
             <div class="space-y-2">
               <div v-for="item in navigation" :key="item.name">
                 <Link
-                  :aria-current="
+                    :aria-current="
                     $page.component.startsWith(item.component)
                       ? 'page'
                       : undefined
                   "
-                  :class="[
+                    :class="[
                     $page.component.startsWith(item.component)
                       ? 'bg-gray-200 text-gray-900'
                       : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
                     'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
                   ]"
-                  :href="item.href"
+                    :href="item.href"
                 >
                   <component
-                    :is="item.icon"
-                    :class="[
+                      :is="item.icon"
+                      :class="[
                       $page.component.startsWith(item.component)
                         ? 'text-gray-500'
                         : 'text-gray-400 group-hover:text-gray-500',
                       'mr-3 flex-shrink-0 h-6 w-6',
                     ]"
-                    aria-hidden="true"
+                      aria-hidden="true"
                   />
                   {{ item.name }}
                 </Link>
                 <div
-                  v-if="item.submenu || false"
-                  class="flex flex-col space-y-2 my-2 ml-6"
+                    v-if="item.submenu || false"
+                    class="flex flex-col space-y-2 my-2 ml-6"
                 >
                   <Link
-                    v-for="subItem in item.submenu"
-                    :key="subItem.name"
-                    :aria-current="
+                      v-for="subItem in item.submenu"
+                      :key="subItem.name"
+                      :aria-current="
                       $page.component.startsWith(subItem.component)
                         ? 'page'
                         : undefined
                     "
-                    :class="[
+                      :class="[
                       $page.component.startsWith(subItem.component)
                         ? 'bg-gray-200 text-gray-900'
                         : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
                       'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
                     ]"
-                    :href="subItem.href"
+                      :href="subItem.href"
                   >
                     <component
-                      :is="subItem.icon"
-                      :class="[
+                        :is="subItem.icon"
+                        :class="[
                         $page.component.startsWith(subItem.component)
                           ? 'text-gray-500'
                           : 'text-gray-400 group-hover:text-gray-500',
                         'mr-3 flex-shrink-0 h-5 w-5',
                       ]"
-                      aria-hidden="true"
+                        aria-hidden="true"
                     />
                     {{ subItem.name }}
                   </Link>
@@ -314,12 +314,12 @@
     </div>
     <div class="flex flex-col w-0 flex-1 overflow-hidden">
       <div
-        class="relative z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200 lg:hidden"
+          class="relative z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200 lg:hidden"
       >
         <button
-          class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden"
-          type="button"
-          @click="sidebarOpen = true"
+            class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden"
+            type="button"
+            @click="sidebarOpen = true"
         >
           <span class="sr-only">Open sidebar</span>
           <MenuAlt1Icon aria-hidden="true" class="h-6 w-6"/>
@@ -330,64 +330,64 @@
             <Menu as="div" class="ml-3 relative">
               <div>
                 <MenuButton
-                  class="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                    class="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
                 >
                   <span class="sr-only">Open user menu</span>
                   <img
-                    :src="
+                      :src="
                       $page.props.auth.user.profile ||
                       'https://images.unsplash.com/photo-1607785330196-fdbe6f36c8fa?ixlib=rb-1.2.1&q=80&fm=jpg&cs=tinysrgb&w=256&h=256&fit=facearea'
                     "
-                    alt=""
-                    class="h-8 w-8 rounded-full"
+                      alt=""
+                      class="h-8 w-8 rounded-full"
                   />
                 </MenuButton>
               </div>
               <transition
-                enter-active-class="transition ease-out duration-100"
-                enter-from-class="transform opacity-0 scale-95"
-                enter-to-class="transform opacity-100 scale-100"
-                leave-active-class="transition ease-in duration-75"
-                leave-from-class="transform opacity-100 scale-100"
-                leave-to-class="transform opacity-0 scale-95"
+                  enter-active-class="transition ease-out duration-100"
+                  enter-from-class="transform opacity-0 scale-95"
+                  enter-to-class="transform opacity-100 scale-100"
+                  leave-active-class="transition ease-in duration-75"
+                  leave-from-class="transform opacity-100 scale-100"
+                  leave-to-class="transform opacity-0 scale-95"
               >
                 <MenuItems
-                  class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none"
+                    class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none"
                 >
                   <div class="py-1">
                     <MenuItem v-slot="{ active }">
                       <Link
-                        :class="[
+                          :class="[
                           active
                             ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-700',
                           'block px-4 py-2 text-sm',
                         ]"
-                        :href="$route('dashboard.settings.general')"
+                          :href="$route('dashboard.settings.general')"
                       >View profile
                       </Link>
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
                       <Link
-                        :class="[
+                          :class="[
                           active
                             ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-700',
                           'block px-4 py-2 text-sm',
                         ]"
-                        :href="$route('dashboard.settings.general')"
+                          :href="$route('dashboard.settings.general')"
                       >Settings
                       </Link>
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
                       <a
-                        :class="[
+                          :class="[
                           active
                             ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-700',
                           'block px-4 py-2 text-sm',
                         ]"
-                        href="#"
+                          href="#"
                       >Notifications</a
                       >
                     </MenuItem>
@@ -395,13 +395,13 @@
                   <div class="py-1">
                     <MenuItem v-slot="{ active }">
                       <a
-                        :class="[
+                          :class="[
                           active
                             ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-700',
                           'block px-4 py-2 text-sm',
                         ]"
-                        href="#"
+                          href="#"
                       >Support</a
                       >
                     </MenuItem>
@@ -409,14 +409,14 @@
                   <div class="py-1">
                     <MenuItem v-slot="{ active }">
                       <Link
-                        :class="[
+                          :class="[
                           active
                             ? 'bg-gray-100 text-gray-900'
                             : 'text-gray-700',
                           'block px-4 py-2 text-sm',
                         ]"
-                        :href="$route('logout')"
-                        method="post"
+                          :href="$route('logout')"
+                          method="post"
                       >Logout
                       </Link>
                     </MenuItem>
@@ -446,9 +446,9 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
-import { HomeIcon, KeyIcon, MenuAlt1Icon, XIcon, } from "@heroicons/vue/outline";
-import { CogIcon, SelectorIcon, UserIcon } from "@heroicons/vue/solid";
-import { ref } from "vue";
+import {HomeIcon, KeyIcon, MenuAlt1Icon, XIcon,} from "@heroicons/vue/24/outline";
+import {CogIcon, SelectorIcon, UserIcon} from "@heroicons/vue/24/solid";
+import {ref} from "vue";
 
 const navigation = [
   {

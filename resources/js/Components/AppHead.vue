@@ -1,13 +1,13 @@
 <template>
   <Head
-    :title="title ? `${title} - ${$page.props.app.name}` : $page.props.app.name"
+      :title="title ? `${title} - ${$page.props.app.name}` : $page.props.app.name"
   >
-    <slot />
+    <slot/>
   </Head>
 </template>
 
 <script>
-import { Head } from "@inertiajs/inertia-vue3";
+import {Head} from "@inertiajs/vue3";
 
 export default {
   components: {

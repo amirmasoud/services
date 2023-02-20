@@ -2,14 +2,10 @@ version: "3"
 
 services:
   web:
-    #    image: amirmasoud/services:latest
-    image: amirmasoud/services-redis
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: amirmasoud/services:latest
     restart: always
     ports:
-      - "8000:80"
+      - "80:80"
     depends_on:
       - database
       - redis

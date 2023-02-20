@@ -1,13 +1,13 @@
-import vue from "@vitejs/plugin-vue";
-import laravel from "laravel-vite-plugin";
 import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
+import vue from "@vitejs/plugin-vue";
 
 export default defineConfig({
-  build: {
-    target: "esnext",
-  },
   plugins: [
-    laravel(["resources/js/app.js"]),
+    laravel({
+      input: "resources/js/app.js",
+      refresh: true,
+    }),
     vue({
       template: {
         transformAssetUrls: {
@@ -17,10 +17,17 @@ export default defineConfig({
       },
     }),
   ],
-  resolve: {
-    alias: {
-      "@": "/resources/js",
-      ziggy: "/vendor/tightenco/ziggy/dist/vue",
-    },
-  },
 });
+
+// export default defineConfig({
+//   build: {
+//     target: "esnext",
+//   },
+//   plugins: [laravel(["resources/js/app.js"]), vue()],
+//   resolve: {
+//     alias: {
+//       "@": "/resources/js",
+//       ziggy: "/vendor/tightenco/ziggy/dist/vue",
+//     },
+//   },
+// });
