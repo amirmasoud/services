@@ -2,10 +2,12 @@ version: "3"
 
 services:
   web:
-    image: amirmasoud/services:latest
+    #    image: amirmasoud/services:latest
+    image: amirmasoud/services-redis
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: always
-    volumes:
-      - .env:/var/www/.env
     ports:
       - "8000:80"
     depends_on:

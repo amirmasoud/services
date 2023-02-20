@@ -1,8 +1,7 @@
 #!/bin/sh
 set -e
 
-# @todo Check if database is ready
-php artisan migrate --force
+php artisan migrate --step --no-interaction
 
 php artisan cache:clear
 

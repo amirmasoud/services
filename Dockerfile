@@ -22,8 +22,10 @@ RUN \
     apk update && \
     apk add --no-cache supervisor nginx && \
     apk add --no-cache --virtual .build-deps $PHPIZE_DEPS linux-headers libstdc++ curl-dev openssl-dev pcre-dev pcre2-dev zlib-dev && \
+    pecl install redis && \
     docker-php-ext-install sockets bcmath pcntl pdo_mysql && \
     docker-php-ext-enable pdo_mysql && \
+    docker-php-ext-enable redis && \
     docker-php-source extract && \
     mkdir /usr/src/php/ext/openswoole && \
     curl -sfL https://github.com/openswoole/ext-openswoole/archive/refs/tags/v22.0.0.tar.gz -o swoole.tar.gz && \
@@ -37,7 +39,8 @@ RUN \
     docker-php-ext-install -j$(nproc) --ini-name zzz-docker-php-ext-openswoole.ini openswoole && \
     rm -rf swoole.tar.gz /var/cache/apk/* /tmp/* /usr/share/man /usr/src/php.tar.xz* && \
     docker-php-source delete && \
-    apk del .build-deps
+    apk del .build-deps .build-deps $PHPIZE_DEPS linux-headers libstdc++ curl-dev openssl-dev pcre-dev pcre2-dev zlib-dev && \
+    rm -rf /tmp/pear
 
 COPY /build/web/nginx/default.conf /etc/nginx/http.d/default.conf
 
@@ -48,6 +51,8 @@ COPY --from=composer --chown=www-data:www-data /var/www /var/www
 COPY --from=node --chown=www-data:www-data /var/www /var/www
 
 WORKDIR /var/www
+
+RUN cp .env.example .env
 
 EXPOSE 80
 
