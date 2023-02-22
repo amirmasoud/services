@@ -7,7 +7,7 @@
     <template #sub-header></template>
     <template #sub-header-content></template>
 
-    <form @submit.prevent="form.put($route('dashboard.users.permissions.update', {permission: resource.data.id}))">
+    <form @submit.prevent="form.put(route('dashboard.users.permissions.update', {permission: resource.data.id}))">
       <div class="overflow-hidden sm:rounded-md shadow">
         <div class="sm:p-6 py-5 px-4 bg-white">
           <div class="grid grid-cols-6 gap-6">
@@ -36,6 +36,7 @@ import DashboardMain from "@/Components/DashboardMain.vue";
 import Button from "@/Components/Forms/Buttons/ButtonForm.vue";
 import Input from "@/Components/Forms/Inputs/InputForm.vue";
 import {useForm} from "@inertiajs/vue3";
+import route from "ziggy-js";
 
 let props = defineProps({
   resource: Object,

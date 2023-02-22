@@ -1,9 +1,23 @@
+<script setup>
+import AppHead from "@/Components/AppHead.vue";
+import Button from "@/Components/Forms/Buttons/ButtonForm.vue";
+import Checkbox from "@/Components/Forms/Inputs/CheckboxForm.vue";
+import Input from "@/Components/Forms/Inputs/InputForm.vue";
+import {useForm} from "@inertiajs/vue3";
+import route from "ziggy-js";
+
+let form = useForm({
+  email: null,
+  password: null,
+  remember: false,
+});
+</script>
 <template>
   <section>
     <AppHead title="Login"/>
     <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div class="max-w-md w-full space-y-8">
-        <form class="mt-8 space-y-6" @submit.prevent="form.post($route('login'))">
+        <form class="mt-8 space-y-6" @submit.prevent="form.post(route('login'))">
           <Input
               v-model="form.email"
               :form="form"
@@ -32,7 +46,7 @@
 
             <div class="text-sm">
               <Link
-                  :href="$route('password.request')"
+                  :href="route('password.request')"
                   class="font-medium text-indigo-600 hover:text-indigo-500"
               >
                 Forgot your password?
@@ -54,17 +68,3 @@
     </div>
   </section>
 </template>
-
-<script setup>
-import AppHead from "@/Components/AppHead.vue";
-import Button from "@/Components/Forms/Buttons/ButtonForm.vue";
-import Checkbox from "@/Components/Forms/Inputs/CheckboxForm.vue";
-import Input from "@/Components/Forms/Inputs/InputForm.vue";
-import {useForm} from "@inertiajs/vue3";
-
-let form = useForm({
-  email: null,
-  password: null,
-  remember: false,
-});
-</script>

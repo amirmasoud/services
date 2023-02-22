@@ -86,6 +86,7 @@ import Button from "@/Components/Forms/Buttons/ButtonForm.vue";
 import Input from "@/Components/Forms/Inputs/InputForm.vue";
 import {useForm, usePage} from "@inertiajs/vue3";
 import {ref} from "vue";
+import route from "ziggy-js";
 
 const tabs = [
   {

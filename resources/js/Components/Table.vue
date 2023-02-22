@@ -40,7 +40,7 @@
           >
             <Link
                 v-if="actions.hasOwnProperty('details')"
-                :href="$route(actions.details.link, record)"
+                :href="route(actions.details.link, record)"
                 as="button"
                 class="text-indigo-600 hover:text-indigo-900"
                 method="get"
@@ -48,7 +48,7 @@
             </Link>
             <Link
                 v-if="actions.hasOwnProperty('edit')"
-                :href="$route(actions.edit.link, record)"
+                :href="route(actions.edit.link, record)"
                 as="button"
                 class="text-indigo-600 hover:text-indigo-900"
                 method="get"
@@ -65,7 +65,7 @@
                 :disabled="
                   record.hasOwnProperty('can_delete') && !record.can_delete
                 "
-                :href="$route(actions.delete.link, record)"
+                :href="route(actions.delete.link, record)"
                 as="button"
                 class="text-indigo-600 hover:text-indigo-900 disabled:opacity-50 disabled:cursor-not-allowed"
                 method="delete"
@@ -78,7 +78,7 @@
                   record.deleted_at &&
                   actions.hasOwnProperty('restore')
                 "
-                :href="$route(actions.restore.link, record)"
+                :href="route(actions.restore.link, record)"
                 as="button"
                 class="text-indigo-600 hover:text-indigo-900"
                 method="post"
@@ -91,7 +91,7 @@
                   record.deleted_at &&
                   actions.hasOwnProperty('force_delete')
                 "
-                :href="$route(actions.force_delete.link, record)"
+                :href="route(actions.force_delete.link, record)"
                 as="button"
                 class="text-indigo-600 hover:text-indigo-900"
                 method="delete"
@@ -154,7 +154,7 @@
       v-else
       :button="canCreate ? button : cannotCreateButton"
       :description="canCreate ? description : cannotCreateDescription"
-      :link="canCreate ? $route(actions.create.link) : null"
+      :link="canCreate ? route(actions.create.link) : null"
       :title="canCreate ? title : cannotCreateTitle"
       class="mt-20"
   />
@@ -169,6 +169,7 @@ import Paginator from "@/Components/Paginator.vue";
 import {router} from '@inertiajs/vue3'
 import debounce from "lodash/debounce";
 import {onMounted, onUnmounted, watch} from "vue";
+import route from "ziggy-js";
 
 let props = defineProps({
   records: Object,

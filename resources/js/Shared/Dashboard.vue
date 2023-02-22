@@ -191,7 +191,7 @@
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
-                        :href="$route('dashboard.settings.general')"
+                        :href="route('dashboard.settings.general')"
                     >View profile
                     </Link>
                   </MenuItem>
@@ -201,7 +201,7 @@
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
-                        :href="$route('dashboard.settings.general')"
+                        :href="route('dashboard.settings.general')"
                     >Settings
                     </Link>
                   </MenuItem>
@@ -211,7 +211,7 @@
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
-                        :href="$route('dashboard.settings.general')"
+                        :href="route('dashboard.settings.general')"
                     >Notifications
                     </Link>
                   </MenuItem>
@@ -235,7 +235,7 @@
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
-                        :href="$route('logout')"
+                        :href="route('logout')"
                         method="post"
                     >Logout
                     </Link>
@@ -363,7 +363,7 @@
                             : 'text-gray-700',
                           'block px-4 py-2 text-sm',
                         ]"
-                          :href="$route('dashboard.settings.general')"
+                          :href="route('dashboard.settings.general')"
                       >View profile
                       </Link>
                     </MenuItem>
@@ -375,7 +375,7 @@
                             : 'text-gray-700',
                           'block px-4 py-2 text-sm',
                         ]"
-                          :href="$route('dashboard.settings.general')"
+                          :href="route('dashboard.settings.general')"
                       >Settings
                       </Link>
                     </MenuItem>
@@ -415,7 +415,7 @@
                             : 'text-gray-700',
                           'block px-4 py-2 text-sm',
                         ]"
-                          :href="$route('logout')"
+                          :href="route('logout')"
                           method="post"
                       >Logout
                       </Link>
@@ -449,6 +449,7 @@ import {
 import {HomeIcon, KeyIcon, MenuAlt1Icon, XIcon,} from "@heroicons/vue/24/outline";
 import {CogIcon, SelectorIcon, UserIcon} from "@heroicons/vue/24/solid";
 import {ref} from "vue";
+import route from "ziggy-js";
 
 const navigation = [
   {

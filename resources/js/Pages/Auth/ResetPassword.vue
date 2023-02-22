@@ -3,7 +3,7 @@
     <AppHead title="Login"/>
     <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div class="max-w-md w-full space-y-8">
-        <form class="mt-8 space-y-6" @submit.prevent="form.post($route('password.update'))">
+        <form class="mt-8 space-y-6" @submit.prevent="form.post(route('password.update'))">
           <Input
               v-model="form.email"
               :form="form"
@@ -56,6 +56,7 @@ import AppHead from "@/Components/AppHead.vue";
 import Button from "@/Components/Forms/Buttons/ButtonForm.vue";
 import Input from "@/Components/Forms/Inputs/InputForm.vue";
 import {useForm} from "@inertiajs/vue3";
+import route from "ziggy-js";
 
 const props = defineProps({
   token: {
