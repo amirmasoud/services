@@ -2,33 +2,34 @@
 
 namespace Domain\Users\DataTransferObjects;
 
-use Domain\Users\Enums\LocaleEnum;
 use Domain\Users\Enums\DateFormatEnum;
-use Spatie\DataTransferObject\DataTransferObject;
+use Domain\Users\Enums\LocaleEnum;
+use Spatie\LaravelData\Data;
 
-class UserSettingsData extends DataTransferObject
+class UserSettingsData extends Data
 {
-    public ?LocaleEnum $language;
-
-    public ?string $languageLabel;
-
-    public ?DateFormatEnum $dateFormat;
-
-    public ?string $dateFormatLabel;
-
-    /**
-     * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
-     */
-    public function __construct(...$args)
+    public function __construct(
+        public ?LocaleEnum     $language,
+        public ?string         $languageLabel,
+        public ?DateFormatEnum $dateFormat,
+        public ?string         $dateFormatLabel
+    )
     {
-        $this->language = $this->language ?? LocaleEnum::tryFrom(app()->getLocale()) ?? LocaleEnum::EN_US;
-
-        $this->languageLabel = $this->language->label();
-
-        $this->dateFormat = $this->dateFormat ?? DateFormatEnum::YYYY_MM_DD;
-
-        $this->dateFormatLabel = $this->dateFormat->label();
-
-        parent::__construct(...$args);
     }
+
+    // /**
+    //  * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
+    //  */
+    // public function __construct(...$args)
+    // {
+    //     $this->language = $this->language ?? LocaleEnum::tryFrom(app()->getLocale()) ?? LocaleEnum::EN_US;
+    //
+    //     $this->languageLabel = $this->language->label();
+    //
+    //     $this->dateFormat = $this->dateFormat ?? DateFormatEnum::YYYY_MM_DD;
+    //
+    //     $this->dateFormatLabel = $this->dateFormat->label();
+    //
+    //     parent::__construct(...$args);
+    // }
 }
