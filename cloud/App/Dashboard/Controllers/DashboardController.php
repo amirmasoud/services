@@ -2,14 +2,14 @@
 
 namespace App\Dashboard\Controllers;
 
+use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use Inertia\Response;
-use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
     public function __invoke(): Response
     {
-        return Inertia::render('Dashboard/Home');
+        return Inertia::render('Dashboard/TheHome');
     }
 }

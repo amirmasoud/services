@@ -1,3 +1,33 @@
+<script>
+import Empty from "@/Shared/Empty.vue";
+import route from "ziggy-js";
+
+export default {
+  methods: {route},
+  layout: Empty,
+  props: {
+    status: Number,
+  },
+  computed: {
+    title() {
+      return {
+        503: "Service Unavailable",
+        500: "Server Error",
+        404: "Page Not Found",
+        403: "Forbidden",
+      }[this.status];
+    },
+    description() {
+      return {
+        503: "Sorry, we are doing some maintenance. Please check back soon.",
+        500: "Whoops, something went wrong on our servers.",
+        404: "Sorry, the page you are looking for could not be found.",
+        403: "Sorry, you are forbidden from accessing this page.",
+      }[this.status];
+    },
+  },
+};
+</script>
 <template>
   <div
       class="bg-white min-h-screen px-4 py-16 sm:px-6 sm:py-24 md:grid md:place-items-center lg:px-8"
@@ -39,34 +69,3 @@
     </div>
   </div>
 </template>
-
-<script>
-import Empty from "@/Shared/Empty.vue";
-import route from "ziggy-js";
-
-export default {
-  methods: {route},
-  layout: Empty,
-  props: {
-    status: Number,
-  },
-  computed: {
-    title() {
-      return {
-        503: "Service Unavailable",
-        500: "Server Error",
-        404: "Page Not Found",
-        403: "Forbidden",
-      }[this.status];
-    },
-    description() {
-      return {
-        503: "Sorry, we are doing some maintenance. Please check back soon.",
-        500: "Whoops, something went wrong on our servers.",
-        404: "Sorry, the page you are looking for could not be found.",
-        403: "Sorry, you are forbidden from accessing this page.",
-      }[this.status];
-    },
-  },
-};
-</script>
