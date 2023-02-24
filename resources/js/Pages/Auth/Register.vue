@@ -57,12 +57,12 @@
 
           <div class="flex justify-center items-center">
             <div class="text-sm">
-              <a
+              <Link
+                  :href="route('login')"
                   class="font-medium text-indigo-600 hover:text-indigo-500"
-                  href="#"
               >
                 Already have an account?
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -145,6 +145,7 @@ import GitHub from "@/Components/Icons/GitHubIcon.vue";
 import Google from "@/Components/Icons/GoogleIcon.vue";
 import Twitter from "@/Components/Icons/TwitterIcon.vue";
 import {useForm} from "@inertiajs/vue3";
+import route from "ziggy-js";
 
 defineProps({
   github: String,
