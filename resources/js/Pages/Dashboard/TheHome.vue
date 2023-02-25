@@ -2,6 +2,7 @@
 import AppHead from "@/Components/AppHead.vue";
 import DashboardMain from "@/Components/DashboardMain.vue";
 import Stats from "@/Components/stats.vue";
+import route from "ziggy-js";
 
 defineProps({
   stats: Object,
@@ -15,7 +16,6 @@ defineProps({
     <template #sub-header-content>
       <Stats :stats="stats"/>
     </template>
+    <Link :href="route('logout')" as="button" method="post">Logout</Link>
   </DashboardMain>
-
-  WIP :)
 </template>
