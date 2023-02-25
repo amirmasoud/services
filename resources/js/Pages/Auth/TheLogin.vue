@@ -5,6 +5,7 @@ import Checkbox from "@/Components/Forms/Inputs/CheckboxForm.vue";
 import Input from "@/Components/Forms/Inputs/InputForm.vue";
 import {useForm} from "@inertiajs/vue3";
 import route from "ziggy-js";
+import Alert from "@/Components/Alert.vue";
 
 let form = useForm({
   email: null,
@@ -33,6 +34,7 @@ let form = useForm({
         <div class="py-8 px-4 sm:px-10 bg-white sm:rounded-lg shadow">
 
         <form class="space-y-6" @submit.prevent="form.post(route('login'))">
+          <Alert v-if="$page?.props?.flash?.message">{{ $page.props.flash.message }}</Alert>
           <Input
               v-model="form.email"
               :form="form"
