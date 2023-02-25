@@ -4,6 +4,8 @@ services:
   web:
     image: amirmasoud/services:latest
     restart: always
+    volumes:
+      - .env:/var/www/.env
     ports:
       - "80:80"
     depends_on:
