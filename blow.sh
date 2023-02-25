@@ -89,6 +89,9 @@ updateWebContainer()
 
   echo "Info: Running view cache clear..."
   echo "$(docker-compose exec -T web php artisan view:cache)"
+
+  echo "Info: Running sentry test..."
+  echo "$(docker-compose exec -T web php artisan sentry:test)"
 }
 
 pullLatestVersion
