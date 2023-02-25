@@ -69,6 +69,7 @@
           <div>
             <Button
                 :form="form"
+                :disabled="form.processing"
                 class="flex justify-center py-2 px-4 w-full"
                 type="submit"
             >
