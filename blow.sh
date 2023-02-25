@@ -47,6 +47,16 @@ containerReady()
       echo 'Info: Waiting for web container to start...'
     fi
   done
+
+  while ! [ "$(docker-compose exec -T database mysqladmin ping -u user -ppassword --silent)" ]; do
+      echo "Info: Waiting for Database to get ready..."
+      sleep 1
+  done
+
+  echo 'Info: Database container is running and ready.'
+
+  # Give database an additional grace period to start
+  sleep 1
 }
 
 initDotEnvIfRequired()
