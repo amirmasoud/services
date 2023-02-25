@@ -102,5 +102,8 @@ updateWebContainer
 echo "Info: Prune all unused images..."
 echo "$(docker image prune -a -f)"
 
+echo "Info: Docker compose services status:"
+echo "$(docker-compose ps)"
+
 #export $(grep -v '^#' .env | xargs -0)
 #echo $web_container_id
