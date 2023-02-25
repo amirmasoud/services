@@ -1,4 +1,4 @@
-FROM node:19.6.0-alpine3.17 AS node
+FROM node:19.7-alpine3.17 AS node
 
 COPY . /var/www
 
@@ -8,7 +8,7 @@ RUN \
     npm run build && \
     rm -rf node_modules
 
-FROM composer:2.5.3 AS composer
+FROM composer:2.5.4 AS composer
 
 COPY composer.json composer.lock /var/www/
 
