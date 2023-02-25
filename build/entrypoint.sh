@@ -3,7 +3,7 @@ set -e
 
 php artisan key:generate
 
-php artisan migrate --step --no-interaction
+php artisan migrate --step --no-interaction --force
 
 php artisan cache:clear
 
