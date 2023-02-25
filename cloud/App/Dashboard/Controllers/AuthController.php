@@ -23,12 +23,12 @@ class AuthController extends Controller
 
     public function loginForm(): Response
     {
-        return Inertia::render('Auth/Login');
+        return Inertia::render('Auth/TheLogin');
     }
 
     public function registerForm(Request $request): Response
     {
-        return Inertia::render('Auth/Register');
+        return Inertia::render('Auth/TheRegister');
     }
 
     public function registerWithEmail(RegisterWithEmailRequest $request): RedirectResponse
