@@ -5,6 +5,7 @@ namespace Domain\Users\Models;
 use Database\Factories\Domain\Users\Models\UserFactory;
 use Domain\Users\Casts\SettingsCast;
 use Domain\Users\DataTransferObjects\UserSettingsData;
+use Domain\Users\Notifications\SendResetPasswordNotification;
 use Domain\Users\QueryBuilders\UserQueryBuilder;
 use Eloquent;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -93,6 +94,11 @@ class User extends Authenticatable
     public static function boot()
     {
         parent::boot();
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new SendResetPasswordNotification($token));
     }
 
     public function newEloquentBuilder($query): UserQueryBuilder
