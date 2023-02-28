@@ -1,4 +1,4 @@
-FROM node:19.7-alpine3.17 AS node
+FROM node:19.6-alpine3.17 AS node
 
 COPY . /var/www
 
@@ -8,7 +8,7 @@ RUN \
     npm run build && \
     rm -rf node_modules
 
-FROM composer:2.5.4 AS composer
+FROM composer:2.5 AS composer
 
 COPY composer.json composer.lock /var/www/
 
@@ -29,10 +29,6 @@ RUN \
     rm -rf /tmp/pear
 
 RUN apk add vim
-
-#RUN mkdir -p /var/lib/nginx/tmp /var/log/nginx \
-#    && chown -R www-data:www-data /var/lib/nginx /var/log/nginx \
-#    && chmod -R 755 /var/lib/nginx /var/log/nginx
 
 COPY /build/web/nginx/default.conf /etc/nginx/http.d/default.conf
 COPY /build/web/nginx/nginx.conf /etc/nginx/nginx.conf
