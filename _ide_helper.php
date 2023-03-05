@@ -17522,7 +17522,59 @@
      
 }
 
-        namespace Laravel\Octane\Facades { 
+        namespace Coleus\Calculator\Facades { 
+            /**
+     * 
+     *
+     * @see \Coleus\Calculator\Calculator
+     */ 
+        class Calculator {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function add($x, $y)
+        {
+                        /** @var \Coleus\Calculator\Calculator $instance */
+                        return $instance->add($x, $y);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function subtract($x, $y)
+        {
+                        /** @var \Coleus\Calculator\Calculator $instance */
+                        return $instance->subtract($x, $y);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function multiply($x, $y)
+        {
+                        /** @var \Coleus\Calculator\Calculator $instance */
+                        return $instance->multiply($x, $y);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function divide($x, $y)
+        {
+                        /** @var \Coleus\Calculator\Calculator $instance */
+                        return $instance->divide($x, $y);
+        }
+         
+    }
+     
+}
+
+    namespace Laravel\Octane\Facades { 
             /**
      * 
      *
@@ -22301,6 +22353,7 @@ namespace  {
             class URL extends \Illuminate\Support\Facades\URL {}
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
+            class Calculator extends \Coleus\Calculator\Facades\Calculator {}
             class Octane extends \Laravel\Octane\Facades\Octane {}
             class Sentry extends \Sentry\Laravel\Facade {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}

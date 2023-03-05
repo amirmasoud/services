@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "42b27c772d1acdf8ccd48048bb62499a",
+    "content-hash": "187d3f1deca5eba3d3d1a8981596818b",
     "packages": [
         {
             "name": "brick/math",
@@ -126,6 +126,78 @@
                 }
             ],
             "time": "2022-02-21T13:15:14+00:00"
+        },
+        {
+            "name": "coleus/calculator",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coleusapp/calculator.git",
+                "reference": "69132cf47e840c25e4bfbdbdaefb3d96bf56a181"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coleusapp/calculator/zipball/69132cf47e840c25e4bfbdbdaefb3d96bf56a181",
+                "reference": "69132cf47e840c25e4bfbdbdaefb3d96bf56a181",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.14.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^7.9",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^8.0",
+                "pestphp/pest": "^2.0",
+                "pestphp/pest-plugin-arch": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Coleus\\Calculator\\CalculatorServiceProvider"
+                    ],
+                    "aliases": {
+                        "Calculator": "Coleus\\Calculator\\Facades\\Calculator"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Coleus\\Calculator\\": "src",
+                    "Coleus\\Calculator\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Amirmasoud Sheydaei",
+                    "email": "amirmasood33@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Calculator for the Coleus App",
+            "homepage": "https://github.com/coleus/calculator",
+            "keywords": [
+                "calculator",
+                "coleus",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/coleusapp/calculator/issues",
+                "source": "https://github.com/coleusapp/calculator/tree/1.0.0"
+            },
+            "time": "2023-03-05T00:30:13+00:00"
         },
         {
             "name": "dflydev/dot-access-data",

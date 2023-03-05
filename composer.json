@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "coleus/calculator": "^1.0",
         "guzzlehttp/guzzle": "^7.5",
         "inertiajs/inertia-laravel": "^v0.6",
         "laravel/framework": "^v10.1",
