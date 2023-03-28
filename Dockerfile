@@ -1,4 +1,4 @@
-FROM node:19.6-alpine3.17 AS node
+FROM node:19.8-alpine3.17 AS node
 
 COPY . /var/www
 
@@ -16,7 +16,7 @@ RUN \
     cd /var/www && \
     composer install --no-interaction --no-progress --no-scripts --no-dev --ignore-platform-reqs
 
-FROM php:8.2-cli-alpine3.17
+FROM arm64v8/php:8.2-cli-alpine3.17
 
 RUN \
     apk update && \
@@ -27,8 +27,6 @@ RUN \
     docker-php-ext-enable pdo_mysql redis openswoole && \
     apk del .build-deps .build-deps $PHPIZE_DEPS linux-headers libstdc++ curl-dev openssl-dev pcre-dev pcre2-dev zlib-dev && \
     rm -rf /tmp/pear
-
-RUN apk add vim
 
 COPY /build/web/nginx/default.conf /etc/nginx/http.d/default.conf
 COPY /build/web/nginx/nginx.conf /etc/nginx/nginx.conf
@@ -42,8 +40,6 @@ COPY --from=node --chown=www-data:www-data /var/www /var/www
 WORKDIR /var/www
 
 RUN cp .env.example .env && chmod -R guo+w storage && chmod -R guo+w bootstrap/cache
-
-#USER www-data
 
 EXPOSE 8000
 
