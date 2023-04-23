@@ -1,4 +1,4 @@
-FROM node:19.8-alpine3.17 AS node
+FROM node:20-alpine3.17 AS node
 
 COPY . /var/www
 
