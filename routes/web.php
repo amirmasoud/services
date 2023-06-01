@@ -1,11 +1,12 @@
 <?php
 
-use App\Dashboard\Controllers\RoleController;
-use App\Dashboard\Controllers\UserController;
 use App\Dashboard\Controllers\AuthController;
-use App\Dashboard\Controllers\SettingController;
 use App\Dashboard\Controllers\DashboardController;
 use App\Dashboard\Controllers\PermissionController;
+use App\Dashboard\Controllers\RoleController;
+use App\Dashboard\Controllers\SettingController;
+use App\Dashboard\Controllers\UserController;
+use Carbon\Carbon;
 
 /**
  * Auth routes.
@@ -22,7 +23,7 @@ Route::middleware('guest')->group(function () {
 });
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
-Route::prefix('dashboard')->middleware('auth')->name('dashboard.')->group(function () {
+Route::prefix('home')->middleware('auth')->name('dashboard.')->group(function () {
     Route::get('/', DashboardController::class)->name('index');
 
     Route::get('/settings', [SettingController::class, 'general'])->name('settings.general');
@@ -34,4 +35,13 @@ Route::prefix('dashboard')->middleware('auth')->name('dashboard.')->group(functi
             Route::resource('roles', RoleController::class)->except('show');
             Route::resource('permissions', PermissionController::class)->except('show');
         });
+});
+
+Route::prefix('home/clock')->middleware('auth')->name('home.clock')->group(function () {
+    Route::get('/', function () {
+        return \Inertia\Inertia::render('Clock/Index', [
+            'diff_1' => Carbon::parse('2025-01-10')->diffAsCarbonInterval(now()),
+            'diff_2' => Carbon::parse('2024-05-31')->diffAsCarbonInterval(now()),
+        ]);
+    });
 });

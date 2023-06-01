@@ -1,490 +1,167 @@
 <template>
-  <div class="relative h-screen flex overflow-hidden bg-gray-100">
+  <div>
     <TransitionRoot :show="sidebarOpen" as="template">
-      <Dialog
-          as="div"
-          class="fixed inset-0 flex z-40 lg:hidden"
-          @close="sidebarOpen = false"
-      >
-        <TransitionChild
-            as="template"
-            enter="transition-opacity ease-linear duration-300"
-            enter-from="opacity-0"
-            enter-to="opacity-100"
-            leave="transition-opacity ease-linear duration-300"
-            leave-from="opacity-100"
-            leave-to="opacity-0"
-        >
-          <DialogOverlay class="fixed inset-0 bg-gray-600 bg-opacity-75"/>
+      <Dialog as="div" class="relative z-40 md:hidden" @close="sidebarOpen = false">
+        <TransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0"
+                         enter-to="opacity-100" leave="transition-opacity ease-linear duration-300"
+                         leave-from="opacity-100" leave-to="opacity-0">
+          <div class="fixed inset-0 bg-gray-600 bg-opacity-75"/>
         </TransitionChild>
-        <TransitionChild
-            as="template"
-            enter="transition ease-in-out duration-300 transform"
-            enter-from="-translate-x-full"
-            enter-to="translate-x-0"
-            leave="transition ease-in-out duration-300 transform"
-            leave-from="translate-x-0"
-            leave-to="-translate-x-full"
-        >
-          <div
-              class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white"
-          >
-            <TransitionChild
-                as="template"
-                enter="ease-in-out duration-300"
-                enter-from="opacity-0"
-                enter-to="opacity-100"
-                leave="ease-in-out duration-300"
-                leave-from="opacity-100"
-                leave-to="opacity-0"
-            >
-              <div class="absolute top-0 right-0 -mr-12 pt-2">
-                <button
-                    class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                    type="button"
-                    @click="sidebarOpen = false"
-                >
-                  <span class="sr-only">Close sidebar</span>
-                  <XIcon aria-hidden="true" class="h-6 w-6 text-white"/>
-                </button>
+
+        <div class="fixed inset-0 z-40 flex">
+          <TransitionChild as="template" enter="transition ease-in-out duration-300 transform"
+                           enter-from="-translate-x-full" enter-to="translate-x-0"
+                           leave="transition ease-in-out duration-300 transform" leave-from="translate-x-0"
+                           leave-to="-translate-x-full">
+            <DialogPanel class="relative flex w-full max-w-xs flex-1 flex-col bg-white">
+              <TransitionChild as="template" enter="ease-in-out duration-300" enter-from="opacity-0"
+                               enter-to="opacity-100" leave="ease-in-out duration-300" leave-from="opacity-100"
+                               leave-to="opacity-0">
+                <div class="absolute top-0 right-0 -mr-12 pt-2">
+                  <button
+                      class="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                      type="button"
+                      @click="sidebarOpen = false">
+                    <span class="sr-only">Close sidebar</span>
+                    <XMarkIcon aria-hidden="true" class="h-6 w-6 text-white"/>
+                  </button>
+                </div>
+              </TransitionChild>
+              <div class="h-0 flex-1 overflow-y-auto pt-5 pb-4">
+                <div class="flex flex-shrink-0 items-center px-4">
+                  <img alt="Your Company" class="h-8 w-auto"
+                       src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"/>
+                </div>
+                <nav class="mt-5 space-y-1 px-2">
+                  <a v-for="item in navigation" :key="item.name"
+                     :class="[item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']"
+                     :href="item.href">
+                    <component :is="item.icon"
+                               :class="[item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-4 flex-shrink-0 h-6 w-6']"
+                               aria-hidden="true"/>
+                    {{ item.name }}
+                  </a>
+                </nav>
               </div>
-            </TransitionChild>
-            <div class="flex-shrink-0 flex items-center px-4">
-              <cloud-logo alt="Cloud" class="h-8 w-auto text-indigo-600"/>
-              <span class="pl-1 font-semibold font-sans text-indigo-800"
-              >Cloud</span
-              >
-            </div>
-            <div class="mt-5 flex-1 h-0 overflow-y-auto">
-              <nav class="px-2">
-                <div class="space-y-1">
-                  <div v-for="item in navigation" :key="item.name">
-                    <Link
-                        :aria-current="
-                        $page.component.startsWith(item.component)
-                          ? 'page'
-                          : undefined
-                      "
-                        :class="[
-                        $page.component.startsWith(item.component)
-                          ? 'bg-gray-100 text-gray-900'
-                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
-                        'group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md',
-                      ]"
-                        :href="item.href"
-                    >
-                      <component
-                          :is="item.icon"
-                          :class="[
-                          $page.component.startsWith(item.component)
-                            ? 'text-gray-500'
-                            : 'text-gray-400 group-hover:text-gray-500',
-                          'mr-3 flex-shrink-0 h-6 w-6',
-                        ]"
-                          aria-hidden="true"
-                      />
-                      {{ item.name }}
-                    </Link>
-                    <div class="flex flex-col space-y-1 my-2 ml-6">
-                      <Link
-                          v-for="subItem in item.submenu"
-                          :key="subItem.name"
-                          :aria-current="
-                          $page.component.startsWith(subItem.component)
-                            ? 'page'
-                            : undefined
-                        "
-                          :class="[
-                          $page.component.startsWith(subItem.component)
-                            ? 'bg-gray-200 text-gray-900'
-                            : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
-                          'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
-                        ]"
-                          :href="subItem.href"
-                      >
-                        <component
-                            :is="subItem.icon"
-                            :class="[
-                            $page.component.startsWith(subItem.component)
-                              ? 'text-gray-500'
-                              : 'text-gray-400 group-hover:text-gray-500',
-                            'mr-3 flex-shrink-0 h-5 w-5',
-                          ]"
-                            aria-hidden="true"
-                        />
-                        {{ subItem.name }}
-                      </Link>
+              <div class="flex flex-shrink-0 border-t border-gray-200 p-4">
+                <a class="group block flex-shrink-0" href="#">
+                  <div class="flex items-center">
+                    <div>
+                      <img alt=""
+                           class="inline-block h-10 w-10 rounded-full"
+                           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"/>
+                    </div>
+                    <div class="ml-3">
+                      <p class="text-base font-medium text-gray-700 group-hover:text-gray-900">
+                        {{ $page.props.auth.user.name }}</p>
+                      <p class="text-sm font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
                     </div>
                   </div>
-                </div>
-              </nav>
-            </div>
+                </a>
+              </div>
+            </DialogPanel>
+          </TransitionChild>
+          <div class="w-14 flex-shrink-0">
+            <!-- Force sidebar to shrink to fit close icon -->
           </div>
-        </TransitionChild>
-        <div aria-hidden="true" class="flex-shrink-0 w-14">
-          <!-- Dummy element to force sidebar to shrink to fit close icon -->
         </div>
       </Dialog>
     </TransitionRoot>
-
-    <!-- Static sidebar for desktop -->
-    <div class="hidden lg:flex lg:flex-shrink-0">
-      <div class="flex flex-col w-64 pt-5 pb-4 bg-gray-100">
-        <div class="flex items-center justify-center flex-shrink-0 px-6">
-          <cloud-logo alt="Cloud" class="h-8 w-auto text-indigo-600"/>
-          <span class="pl-1 font-semibold font-sans text-indigo-800"
-          >Cloud</span
-          >
+    <div class="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
+      <div class="flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-white">
+        <div class="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
+          <div class="flex flex-shrink-0 items-center px-4">
+            <img alt="Your Company" class="h-8 w-auto"
+                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"/>
+          </div>
+          <nav class="mt-5 flex-1 space-y-1 bg-white px-2">
+            <a v-for="item in navigation" :key="item.name"
+               :class="[item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']"
+               :href="item.href">
+              <component :is="item.icon"
+                         :class="[item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-3 flex-shrink-0 h-6 w-6']"
+                         aria-hidden="true"/>
+              {{ item.name }}
+            </a>
+          </nav>
         </div>
-        <!-- Sidebar component, swap this element with another sidebar if you like -->
-        <div class="h-0 flex-1 flex flex-col overflow-y-auto">
-          <!-- User account dropdown -->
-          <Menu as="div" class="px-3 mt-6 relative inline-block text-left">
-            <div>
-              <MenuButton
-                  class="group w-full bg-gray-100 rounded-md px-3.5 py-2 text-sm text-left font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-500"
-              >
-                <span class="flex w-full justify-between items-center">
-                  <span
-                      class="flex min-w-0 items-center justify-between space-x-3"
-                  >
-                    <img
-                        :src="
-                        $page.props.auth.user.profile ||
-                        'https://images.unsplash.com/photo-1607785330196-fdbe6f36c8fa?ixlib=rb-1.2.1&q=80&fm=jpg&cs=tinysrgb&w=256&h=256&fit=facearea'
-                      "
-                        alt=""
-                        class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
-                    />
-                    <span class="flex-1 flex flex-col min-w-0">
-                      <span
-                          class="text-gray-900 text-sm font-medium truncate"
-                      >{{ $page.props.auth.user.name }}</span
-                      >
-                      <span class="text-gray-500 text-sm truncate"
-                      >@jessyschwarz</span
-                      >
-                    </span>
-                  </span>
-                  <SelectorIcon
-                      aria-hidden="true"
-                      class="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                  />
-                </span>
-              </MenuButton>
-            </div>
-            <transition
-                enter-active-class="transition ease-out duration-100"
-                enter-from-class="transform opacity-0 scale-95"
-                enter-to-class="transform opacity-100 scale-100"
-                leave-active-class="transition ease-in duration-75"
-                leave-from-class="transform opacity-100 scale-100"
-                leave-to-class="transform opacity-0 scale-95"
-            >
-              <MenuItems
-                  class="z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none"
-              >
-                <div class="py-1">
-                  <MenuItem v-slot="{ active }">
-                    <Link
-                        :class="[
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-sm',
-                      ]"
-                        :href="route('dashboard.settings.general')"
-                    >View profile
-                    </Link>
-                  </MenuItem>
-                  <MenuItem v-slot="{ active }">
-                    <Link
-                        :class="[
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-sm',
-                      ]"
-                        :href="route('dashboard.settings.general')"
-                    >Settings
-                    </Link>
-                  </MenuItem>
-                  <MenuItem v-slot="{ active }">
-                    <Link
-                        :class="[
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-sm',
-                      ]"
-                        :href="route('dashboard.settings.general')"
-                    >Notifications
-                    </Link>
-                  </MenuItem>
-                </div>
-                <div class="py-1">
-                  <MenuItem v-slot="{ active }">
-                    <a
-                        :class="[
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-sm',
-                      ]"
-                        href="#"
-                    >Support</a
-                    >
-                  </MenuItem>
-                </div>
-                <div class="py-1">
-                  <MenuItem v-slot="{ active }">
-                    <Link
-                        :class="[
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-sm',
-                      ]"
-                        :href="route('logout')"
-                        method="post"
-                    >Logout
-                    </Link>
-                  </MenuItem>
-                </div>
-              </MenuItems>
-            </transition>
-          </Menu>
-          <nav class="px-3 mt-6">
-            <div class="space-y-2">
-              <div v-for="item in navigation" :key="item.name">
-                <Link
-                    :aria-current="
-                    $page.component.startsWith(item.component)
-                      ? 'page'
-                      : undefined
-                  "
-                    :class="[
-                    $page.component.startsWith(item.component)
-                      ? 'bg-gray-200 text-gray-900'
-                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
-                    'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
-                  ]"
-                    :href="item.href"
-                >
-                  <component
-                      :is="item.icon"
-                      :class="[
-                      $page.component.startsWith(item.component)
-                        ? 'text-gray-500'
-                        : 'text-gray-400 group-hover:text-gray-500',
-                      'mr-3 flex-shrink-0 h-6 w-6',
-                    ]"
-                      aria-hidden="true"
-                  />
-                  {{ item.name }}
-                </Link>
-                <div
-                    v-if="item.submenu || false"
-                    class="flex flex-col space-y-2 my-2 ml-6"
-                >
-                  <Link
-                      v-for="subItem in item.submenu"
-                      :key="subItem.name"
-                      :aria-current="
-                      $page.component.startsWith(subItem.component)
-                        ? 'page'
-                        : undefined
-                    "
-                      :class="[
-                      $page.component.startsWith(subItem.component)
-                        ? 'bg-gray-200 text-gray-900'
-                        : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
-                      'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
-                    ]"
-                      :href="subItem.href"
-                  >
-                    <component
-                        :is="subItem.icon"
-                        :class="[
-                        $page.component.startsWith(subItem.component)
-                          ? 'text-gray-500'
-                          : 'text-gray-400 group-hover:text-gray-500',
-                        'mr-3 flex-shrink-0 h-5 w-5',
-                      ]"
-                        aria-hidden="true"
-                    />
-                    {{ subItem.name }}
-                  </Link>
-                </div>
+        <div class="flex flex-shrink-0 border-t border-gray-200 p-4">
+          <a class="group block w-full flex-shrink-0" href="#">
+            <div class="flex items-center">
+              <div>
+                <img alt=""
+                     class="inline-block h-9 w-9 rounded-full"
+                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"/>
+              </div>
+              <div class="ml-3">
+                <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">{{
+                    $page.props.auth.user.name
+                  }}</p>
+                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
               </div>
             </div>
-          </nav>
+          </a>
         </div>
       </div>
     </div>
-    <div class="flex flex-col w-0 flex-1 overflow-hidden">
-      <div
-          class="relative z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200 lg:hidden"
-      >
+    <div class="flex flex-1 flex-col md:pl-64">
+      <div class="sticky top-0 z-10 bg-white pl-1 pt-1 sm:pl-3 sm:pt-3 md:hidden">
         <button
-            class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden"
+            class="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
             type="button"
-            @click="sidebarOpen = true"
-        >
+            @click="sidebarOpen = true">
           <span class="sr-only">Open sidebar</span>
-          <MenuAlt1Icon aria-hidden="true" class="h-6 w-6"/>
+          <Bars3Icon aria-hidden="true" class="h-6 w-6"/>
         </button>
-        <div class="flex-1 flex justify-end px-4 sm:px-6 lg:px-8">
-          <div class="flex items-center">
-            <!-- Profile dropdown -->
-            <Menu as="div" class="ml-3 relative">
-              <div>
-                <MenuButton
-                    class="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                >
-                  <span class="sr-only">Open user menu</span>
-                  <img
-                      :src="
-                      $page.props.auth.user.profile ||
-                      'https://images.unsplash.com/photo-1607785330196-fdbe6f36c8fa?ixlib=rb-1.2.1&q=80&fm=jpg&cs=tinysrgb&w=256&h=256&fit=facearea'
-                    "
-                      alt=""
-                      class="h-8 w-8 rounded-full"
-                  />
-                </MenuButton>
-              </div>
-              <transition
-                  enter-active-class="transition ease-out duration-100"
-                  enter-from-class="transform opacity-0 scale-95"
-                  enter-to-class="transform opacity-100 scale-100"
-                  leave-active-class="transition ease-in duration-75"
-                  leave-from-class="transform opacity-100 scale-100"
-                  leave-to-class="transform opacity-0 scale-95"
-              >
-                <MenuItems
-                    class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none"
-                >
-                  <div class="py-1">
-                    <MenuItem v-slot="{ active }">
-                      <Link
-                          :class="[
-                          active
-                            ? 'bg-gray-100 text-gray-900'
-                            : 'text-gray-700',
-                          'block px-4 py-2 text-sm',
-                        ]"
-                          :href="route('dashboard.settings.general')"
-                      >View profile
-                      </Link>
-                    </MenuItem>
-                    <MenuItem v-slot="{ active }">
-                      <Link
-                          :class="[
-                          active
-                            ? 'bg-gray-100 text-gray-900'
-                            : 'text-gray-700',
-                          'block px-4 py-2 text-sm',
-                        ]"
-                          :href="route('dashboard.settings.general')"
-                      >Settings
-                      </Link>
-                    </MenuItem>
-                    <MenuItem v-slot="{ active }">
-                      <a
-                          :class="[
-                          active
-                            ? 'bg-gray-100 text-gray-900'
-                            : 'text-gray-700',
-                          'block px-4 py-2 text-sm',
-                        ]"
-                          href="#"
-                      >Notifications</a
-                      >
-                    </MenuItem>
-                  </div>
-                  <div class="py-1">
-                    <MenuItem v-slot="{ active }">
-                      <a
-                          :class="[
-                          active
-                            ? 'bg-gray-100 text-gray-900'
-                            : 'text-gray-700',
-                          'block px-4 py-2 text-sm',
-                        ]"
-                          href="#"
-                      >Support</a
-                      >
-                    </MenuItem>
-                  </div>
-                  <div class="py-1">
-                    <MenuItem v-slot="{ active }">
-                      <Link
-                          :class="[
-                          active
-                            ? 'bg-gray-100 text-gray-900'
-                            : 'text-gray-700',
-                          'block px-4 py-2 text-sm',
-                        ]"
-                          :href="route('logout')"
-                          method="post"
-                      >Logout
-                      </Link>
-                    </MenuItem>
-                  </div>
-                </MenuItems>
-              </transition>
-            </Menu>
+      </div>
+      <main class="flex-1">
+        <div class="py-6">
+          <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+            <h1 class="text-2xl font-semibold text-gray-900">Home</h1>
+          </div>
+          <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+            <slot/>
           </div>
         </div>
-      </div>
-      <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none">
-        <slot/>
       </main>
     </div>
   </div>
 </template>
 
 <script setup>
-import CloudLogo from "@/Components/CloudLogo.vue";
+import {ref} from 'vue'
+import {Dialog, DialogPanel, TransitionChild, TransitionRoot} from '@headlessui/vue'
 import {
-  Dialog,
-  DialogOverlay,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  TransitionChild,
-  TransitionRoot,
-} from "@headlessui/vue";
-import {HomeIcon, KeyIcon, MenuAlt1Icon, XIcon,} from "@heroicons/vue/24/outline";
-import {CogIcon, SelectorIcon, UserIcon} from "@heroicons/vue/24/solid";
-import {ref} from "vue";
-import route from "ziggy-js";
+  BanknotesIcon,
+  Bars3Icon,
+  CalendarIcon,
+  ClockIcon,
+  CommandLineIcon,
+  EnvelopeIcon,
+  FilmIcon,
+  HomeModernIcon,
+  InboxIcon,
+  KeyIcon,
+  MusicalNoteIcon,
+  PhotoIcon,
+  WrenchScrewdriverIcon,
+  XMarkIcon
+} from '@heroicons/vue/24/outline'
 
 const navigation = [
-  {
-    name: "Dashboard",
-    href: route("dashboard.index"),
-    icon: HomeIcon,
-    component: "Dashboard/Home",
-  },
-  {
-    name: "Users",
-    href: route("dashboard.users.index"),
-    icon: UserIcon,
-    component: "Dashboard/Users",
-    submenu: [
-      {
-        name: "Roles",
-        href: route("dashboard.users.roles.index"),
-        icon: KeyIcon,
-        component: "Dashboard/Users/Roles",
-      },
-      {
-        name: "Permissions",
-        href: route("dashboard.users.permissions.index"),
-        icon: KeyIcon,
-        component: "Dashboard/Users/Permissions",
-      },
-    ],
-  },
-  {
-    name: "Settings",
-    href: route("dashboard.settings.general"),
-    icon: CogIcon,
-    component: "Dashboard/Settings",
-  },
-];
+  {name: 'Home', href: '#', icon: HomeModernIcon, current: true},
+  {name: 'Mail', href: '#', icon: EnvelopeIcon, current: false},
+  {name: 'Calendar', href: '#', icon: CalendarIcon, current: false},
+  {name: 'Documents', href: '#', icon: InboxIcon, current: false},
+  {name: 'Music', href: '#', icon: MusicalNoteIcon, current: false},
+  {name: 'Photos', href: '#', icon: PhotoIcon, current: false},
+  {name: 'Videos', href: '#', icon: FilmIcon, current: false},
+  {name: 'Terminal', href: '#', icon: CommandLineIcon, current: false},
+  {name: 'Secrets', href: '#', icon: KeyIcon, current: false},
+  {name: 'Finance', href: '#', icon: BanknotesIcon, current: false},
+  {name: 'Clock', href: '#', icon: ClockIcon, current: false},
+  {name: 'Settings', href: '#', icon: WrenchScrewdriverIcon, current: false},
+]
 
-const sidebarOpen = ref(false);
+const sidebarOpen = ref(false)
 </script>
