@@ -3,7 +3,7 @@ import '../css/app.css';
 
 import {createApp, h} from 'vue';
 import {createInertiaApp, Link} from '@inertiajs/vue3';
-import Empty from "@/Components/Empty.vue";
+import Empty from "@/Shared/Empty.vue";
 import Dashboard from "@/Shared/Dashboard.vue";
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';

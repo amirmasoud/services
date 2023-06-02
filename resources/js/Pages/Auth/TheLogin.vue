@@ -1,5 +1,4 @@
 <script setup>
-import AppHead from "@/Components/AppHead.vue";
 import Button from "@/Components/Forms/Buttons/ButtonForm.vue";
 import Checkbox from "@/Components/Forms/Inputs/CheckboxForm.vue";
 import Input from "@/Components/Forms/Inputs/InputForm.vue";
@@ -15,7 +14,7 @@ let form = useForm({
 </script>
 <template>
   <section>
-    <AppHead title="Login"/>
+    <!--<AppHead title="Login"/>-->
     <div
         class="flex flex-col justify-center py-12 sm:px-6 lg:px-8 min-h-screen bg-gray-50"
     >
@@ -33,57 +32,57 @@ let form = useForm({
       <div class="sm:mx-auto mt-8 sm:w-full sm:max-w-md">
         <div class="py-8 px-4 sm:px-10 bg-white sm:rounded-lg shadow">
 
-        <form class="space-y-6" @submit.prevent="form.post(route('login'))">
-          <Alert v-if="$page?.props?.flash?.message">{{ $page.props.flash.message }}</Alert>
-          <Input
-              v-model="form.email"
-              :form="form"
-              label="Email address"
-              name="email"
-              placeholder="Email address"
-              type="email"
-          />
-
-          <Input
-              v-model="form.password"
-              :form="form"
-              label="Password"
-              name="password"
-              placeholder="Password"
-              type="password"
-          />
-
-          <div class="flex items-center justify-between">
-            <Checkbox
-                id="remember"
-                v-model="form.remember"
-                label="Remember me"
-                name="remember"
+          <form class="space-y-6" @submit.prevent="form.post(route('login'))">
+            <Alert v-if="$page?.props?.flash?.message">{{ $page.props.flash.message }}</Alert>
+            <Input
+                v-model="form.email"
+                :form="form"
+                label="Email address"
+                name="email"
+                placeholder="Email address"
+                type="email"
             />
 
-            <div class="text-sm">
-              <Link
-                  :href="route('password.request')"
-                  class="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                Forgot your password?
-              </Link>
-            </div>
-          </div>
-
-          <div>
-            <Button
+            <Input
+                v-model="form.password"
                 :form="form"
-                :disabled="form.processing"
-                class="flex justify-center py-2 px-4 w-full"
-                type="submit"
-            >
-              Login
-            </Button>
-          </div>
-        </form>
+                label="Password"
+                name="password"
+                placeholder="Password"
+                type="password"
+            />
+
+            <div class="flex items-center justify-between">
+              <Checkbox
+                  id="remember"
+                  v-model="form.remember"
+                  label="Remember me"
+                  name="remember"
+              />
+
+              <div class="text-sm">
+                <Link
+                    :href="route('password.request')"
+                    class="font-medium text-indigo-600 hover:text-indigo-500"
+                >
+                  Forgot your password?
+                </Link>
+              </div>
+            </div>
+
+            <div>
+              <Button
+                  :disabled="form.processing"
+                  :form="form"
+                  class="flex justify-center py-2 px-4 w-full"
+                  type="submit"
+              >
+                Login
+              </Button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
     </div>
   </section>
 </template>
