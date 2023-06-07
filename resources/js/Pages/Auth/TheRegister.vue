@@ -1,5 +1,5 @@
 <template>
-  <AppHead title="Register"/>
+  <!--<AppHead title="Register"/>-->
   <div
       class="flex flex-col justify-center py-12 sm:px-6 lg:px-8 min-h-screen bg-gray-50"
   >
